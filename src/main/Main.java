@@ -1,5 +1,6 @@
 package main;
 
+import GUIBoxes.ScreenBox;
 import GUIBoxes.TextInputBox;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -15,22 +16,16 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	private static final double FRAMES_PER_SECOND = 1;
-	private static final double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-	private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	private static final Paint BACKGROUND = Color.ANTIQUEWHITE;
-	private static final String PROPERTY_FILENAME = "data/mainmenu.properties";
-	private static final String TITLE_PROPERTY = "title";
-	private static final String WIDTH_PROPERTY = "width";
-	private static final String HEIGHT_PROPERTY = "height";
 	
 	private static String title;
-	private static int screen_height = 300;
-	private static int screen_width = 300;
+	private static double screen_height = 600;
+	private static double screen_width = 800;
 	private static Stage stage;
 //	private static GUIBox textInputBox, newSimChoice, prevSimChoice = null;
 	private static Button runButton;
-	private static TextArea textInput;
+	private static TextInputBox textInput;
+	private static ScreenBox turtleScreen;
 
 	// Additional setup for the main menu
 	private Scene myScene;
@@ -54,10 +49,9 @@ public class Main extends Application {
 
 	private void setupGUIBoxes() {
 
-		textInput = new TextArea();
-		textInput.setMaxHeight(100);
-		textInput.setMaxWidth(100);
-		root.getChildren().add(textInput);
+		textInput = new TextInputBox(root, 25, 475, 110, 650);
+		turtleScreen = new ScreenBox(root, 25, 25, 585, 650);
+		
 		
 //		turtleScreen = new ScreenBox(stage, root);
 //		textInputBox = new TextInputBox(stage, root);
