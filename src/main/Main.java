@@ -1,6 +1,6 @@
 package main;
 
-import GUIBoxes.GUIBox;
+import GUIBoxes.TextInputBox;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
