@@ -4,9 +4,11 @@ package GUIBoxes;
 import javafx.scene.Group;
 import javafx.scene.control.TextArea;
 
-public class TextInputBox {
+public class TextInputBox implements GUIBoxes{
 	
 	private static TextArea textInput;
+	private static Group thisRoot;
+
 	
 	public TextInputBox(Group root, double xPos, double yPos, double height, double width) {
 		textInput = new TextArea();
@@ -30,6 +32,12 @@ public class TextInputBox {
 	
 	public void clear() {
 		textInput.clear();
+	}
+
+	@Override
+	public void updateBox() {
+		thisRoot.getChildren().remove(textInput);
+		thisRoot.getChildren().add(textInput);
 	}
 
 }

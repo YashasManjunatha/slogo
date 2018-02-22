@@ -50,7 +50,7 @@ public class Main extends Application {
 	private void setupGUIBoxes() {
 
 		textInput = new TextInputBox(root, 25, 475, 110, 650);
-		turtleScreen = new ScreenBox(root, 25, 25, 585, 650);
+		turtleScreen = new ScreenBox(root, 25, 25, 425, 650);
 		
 		
 //		turtleScreen = new ScreenBox(stage, root);
