@@ -1,26 +1,26 @@
 package Turtle;
 
-import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 public class Turtle implements TurtleInterface{
-	private Group root;
+	private Pane pane;
 	private Image image;
 	private ImageView turtle = new ImageView();
 	boolean turtleShowing;
 	
-	public Turtle(Group gui_root, Image turtle_image) {
-		root = gui_root;
+	public Turtle(Pane display_pane, Image turtle_image) {
+		pane = display_pane;
 		image = turtle_image;
 		initalizeTurtle();
 	}
 	
 	private void initalizeTurtle() {
 		turtle.setImage(image);
-        turtle.setX(100);//585/2);
-        turtle.setY(100);//650/2);
-        root.getChildren().add(turtle);
+        turtle.setX(585/2);
+        turtle.setY(650/2);
+        pane.getChildren().add(turtle);
         turtleShowing = true;
 	}
 
@@ -65,9 +65,9 @@ public class Turtle implements TurtleInterface{
 	@Override
 	public void setTurtleShowing(boolean should_be_showing) {
 		if (turtleShowing && !should_be_showing)
-			root.getChildren().remove(turtle);
+			pane.getChildren().remove(turtle);
 		if (!turtleShowing && should_be_showing)
-			root.getChildren().add(turtle);
+			pane.getChildren().add(turtle);
 	}
 
 	@Override
