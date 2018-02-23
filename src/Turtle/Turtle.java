@@ -1,17 +1,18 @@
 package Turtle;
 
+import GUIBoxes.ScreenBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class Turtle implements TurtleInterface{
-	private Pane pane;
+	private ScreenBox screen;
 	private Image image;
 	private ImageView turtle = new ImageView();
 	boolean turtleShowing;
 	
-	public Turtle(Pane display_pane, Image turtle_image) {
-		pane = display_pane;
+	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
+		screen = turtle_screen;
 		image = turtle_image;
 		initalizeTurtle();
 	}
@@ -20,7 +21,7 @@ public class Turtle implements TurtleInterface{
 		turtle.setImage(image);
         turtle.setX(585/2);
         turtle.setY(650/2);
-        pane.getChildren().add(turtle);
+        //screen.getChildren().add(turtle);
         turtleShowing = true;
 	}
 
@@ -64,10 +65,10 @@ public class Turtle implements TurtleInterface{
 
 	@Override
 	public void setTurtleShowing(boolean should_be_showing) {
-		if (turtleShowing && !should_be_showing)
-			pane.getChildren().remove(turtle);
-		if (!turtleShowing && should_be_showing)
-			pane.getChildren().add(turtle);
+		//if (turtleShowing && !should_be_showing)
+			//screen.getChildren().remove(turtle);
+		//if (!turtleShowing && should_be_showing)
+			//screen.getChildren().add(turtle);
 	}
 
 	@Override
