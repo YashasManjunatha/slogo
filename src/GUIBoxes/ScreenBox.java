@@ -1,21 +1,21 @@
 package GUIBoxes;
 
 
-import javafx.geometry.Insets;
+import Turtle.Turtle;
 import javafx.scene.Group;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
-public class ScreenBox {
+public class ScreenBox{
 	
-	private static HBox turtleScreen;
+	private Pane turtleScreen;
 	
 	public ScreenBox(Group root, double xPos, double yPos, double height, double width) {
-		turtleScreen = new HBox();
+		turtleScreen = new Pane();
 		setupProperties(xPos, yPos, height, width);
+		turtleScreen.setStyle("-fx-background-color: white;");
 		root.getChildren().add(turtleScreen);
 	}
 
@@ -23,10 +23,24 @@ public class ScreenBox {
 		turtleScreen.setLayoutX(xPos);
 		turtleScreen.setLayoutY(yPos);
 		turtleScreen.setMinWidth(width);
-
 		turtleScreen.setMaxWidth(width);
+		turtleScreen.setMinHeight(height);
 		turtleScreen.setMaxHeight(height);
 		
 	}
+	
+	public void changeColor(String color) {
+		turtleScreen.setStyle("-fx-background-color: " + color + ";");
+	}
+	
+	public Pane getPane() {
+		return this.turtleScreen;
+	}
+
+	public void addTurtle(Turtle turtle) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
