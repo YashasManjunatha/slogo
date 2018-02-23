@@ -6,7 +6,7 @@ import javafx.scene.control.TextArea;
 
 public class TextInputBox implements GUIBoxes{
 	
-	private static TextArea textInput;
+	private TextArea textInput;
 	private static Group thisRoot;
 
 	
