@@ -19,9 +19,9 @@ public class Turtle implements TurtleInterface{
 	
 	private void initalizeTurtle() {
 		turtle.setImage(image);
-        turtle.setX(585/2);
-        turtle.setY(650/2);
-        //screen.getChildren().add(turtle);
+        turtle.setX(650/2);
+        turtle.setY(425/2);
+        screen.addToPane(turtle);
         turtleShowing = true;
 	}
 
@@ -65,10 +65,10 @@ public class Turtle implements TurtleInterface{
 
 	@Override
 	public void setTurtleShowing(boolean should_be_showing) {
-		//if (turtleShowing && !should_be_showing)
-			//screen.getChildren().remove(turtle);
-		//if (!turtleShowing && should_be_showing)
-			//screen.getChildren().add(turtle);
+		if (turtleShowing && !should_be_showing)
+			screen.removeFromPane(turtle);
+		if (!turtleShowing && should_be_showing)
+			screen.addToPane(turtle);
 	}
 
 	@Override

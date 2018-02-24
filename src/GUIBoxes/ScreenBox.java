@@ -2,6 +2,7 @@ package GUIBoxes;
 
 
 import Turtle.Turtle;
+import javafx.scene.Node;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -35,6 +36,14 @@ public class ScreenBox{
 	
 	public Pane getPane() {
 		return this.turtleScreen;
+	}
+	
+	public void addToPane(Node node) {
+		turtleScreen.getChildren().add(node);
+	}
+	
+	public void removeFromPane(Node node) {
+		turtleScreen.getChildren().remove(node);
 	}
 
 	public void addTurtle(Turtle turtle) {
