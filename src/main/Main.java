@@ -64,7 +64,7 @@ public class Main extends Application {
 		textInput = new TextInputBox(root, 25, 475, 110, 650);
 		turtleScreen = new ScreenBox(root, 25, 25, 425, 650);
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream("images/turtle.png"));
-		Turtle turtle = new Turtle(turtleScreen.getPane(), image);
+		Turtle turtle = new Turtle(turtleScreen, image);
 		varTable = new UserDefTable(root);
 		
 		
