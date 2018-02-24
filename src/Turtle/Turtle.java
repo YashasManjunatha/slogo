@@ -1,15 +1,17 @@
 package Turtle;
 
 import GUIBoxes.ScreenBox;
+import Pen.Pen;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 
 public class Turtle implements TurtleInterface{
 	private ScreenBox screen;
 	private Image image;
 	private ImageView turtle = new ImageView();
-	boolean turtleShowing;
+	private boolean turtleShowing;
+	private Pen pen;
+	private boolean penShowing;
 	
 	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
 		screen = turtle_screen;
@@ -23,6 +25,8 @@ public class Turtle implements TurtleInterface{
         turtle.setY(425/2);
         screen.addToPane(turtle);
         turtleShowing = true;
+        pen = new Pen();
+        penShowing = true;
 	}
 
 	@Override
@@ -53,14 +57,15 @@ public class Turtle implements TurtleInterface{
 
 	@Override
 	public void setPenDown(boolean penDown) {
-		// TODO Auto-generated method stub
-		
+		if (penShowing && !penDown)
+			screen.removeFromPane(pen.getPen());
+		if (!penShowing && penDown)
+			screen.addToPane(pen.getPen());
 	}
 
 	@Override
 	public boolean getPenDown() {
-		// TODO Auto-generated method stub
-		return false;
+		return penShowing;
 	}
 
 	@Override
