@@ -12,6 +12,10 @@ public class CommandNode {
 		myChildren = new ArrayList<CommandNode>();
 	}
 	
+	List<CommandNode> getChildren(){
+		return myChildren;
+	}
+	
 	void addChild(CommandNode child) {
 		myChildren.add(child);
 	}
