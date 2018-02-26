@@ -7,7 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class UserDefTable implements GUIBoxes{
+public class UserDefTable extends TableView implements GUIBoxes{
 	
 	private TableView table;
 
@@ -33,6 +33,7 @@ public class UserDefTable implements GUIBoxes{
 		nameCol.setMinWidth(NAMECOLWIDTH);
 		nameCol.setMaxWidth(NAMECOLWIDTH);
 		nameCol.setResizable(false);
+		
 		TableColumn valCol= new TableColumn("Value");
 		valCol.setMinWidth(VALCOLWIDTH);
 		valCol.setResizable(false);
