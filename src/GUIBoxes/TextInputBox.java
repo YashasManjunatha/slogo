@@ -46,4 +46,8 @@ public class TextInputBox implements GUIBoxes {
 		return textInput;
 	}
 
+	public void setText(String currentItemSelected) {
+		textInput.setText(currentItemSelected);		
+	}
+
 }
