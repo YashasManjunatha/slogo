@@ -9,11 +9,6 @@ public class Parser implements ParserObject{
 	public CommandNode parse(String text) throws InvalidCommandException{
 		CommandNode superNode = new CommandNode(new Command());
 		Scanner scan = new Scanner(text);
-//		String command  = scan.next();
-//		int space = text.indexOf(" ");
-//		String command = text.substring(0, space);
-//		CommandObject commandObj = generateCommandInstance(command);
-//		CommandNode root = new CommandNode(commandObj);
 		generateTree(superNode, scan);
 		return superNode;
 	}
@@ -31,21 +26,12 @@ public class Parser implements ParserObject{
 				paramsFilled++;
 			}
 		}
-		
-		
-		root.addChild(child);
-		int params = root.getCommand().getNumberOfParameters();
-		for (int x=0; x<params; x++) {
-			String nextCommand = scan.next();
-			CommandObject child = generateCommandInstance(nextCommand);
-			root.addChild(child);
-		}
 	}
 
 	CommandObject generateCommandInstance(String commandText) throws InvalidCommandException {
 		try {
 			double parsedDouble = Double.parseDouble(commandText);
-			return new ParsedDouble();
+			return new ParsedDouble(parsedDouble);
 		}
 		catch(NumberFormatException e) {	
 		}

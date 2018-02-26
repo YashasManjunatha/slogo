@@ -1,14 +1,15 @@
 package commands;
 
+import java.util.List;
+
 public class ParsedDouble extends Command{
 	private double myDouble;
-	private String myText;
-	private Parser myParser;
 	
-	
+	public ParsedDouble(double parsedDouble) {
+		myDouble = parsedDouble;
+	}
 	@Override
 	public double execute(List<CommandNode> children) {
-//		myParser.parse(myText);
 		return myDouble;
 	}
 	@Override
