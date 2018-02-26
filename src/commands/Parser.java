@@ -7,7 +7,7 @@ public class Parser implements ParserObject{
 
 	@Override
 	public CommandNode parse(String text) throws InvalidCommandException{
-		CommandNode superNode = new CommandNode(new SuperCommand());
+		CommandNode superNode = new CommandNode(new Command());
 		Scanner scan = new Scanner(text);
 //		String command  = scan.next();
 //		int space = text.indexOf(" ");
