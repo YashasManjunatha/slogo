@@ -28,8 +28,8 @@ public class Turtle implements TurtleInterface{
 
 	private void initalizeTurtle() {
 		turtle.setImage(image);
-		turtle.setX(650/2);
-		turtle.setY(425/2);
+		turtle.setX(screen.getWidth()/2 - image.getWidth()/2);
+		turtle.setY(screen.getHeight()/2 - image.getHeight()/2);
 		scaleTurtle();
 		cropTurtle();
 		screen.addToPane(turtle);
