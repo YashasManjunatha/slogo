@@ -1,5 +1,7 @@
 package commands;
 
+import java.util.List;
+
 import Turtle.Turtle;
 
 public class Command implements CommandObject{
@@ -18,10 +20,9 @@ public class Command implements CommandObject{
 		}
 		
 	}
-	@Override
 	public double execute() {
 		for (int x=0; x<superNode.getChildren().size(); x++) {
-			superNode.getChildren().get(x).getCommand().execute();
+			superNode.getChildren().get(x).execute();
 		}
 		return 0;
 	}
@@ -34,9 +35,9 @@ public class Command implements CommandObject{
 	protected Turtle getTurtle() {
 		return myTurtle;
 	}
-	
-	protected CommandNode getNode() {
-		
+	@Override
+	public double execute(List<CommandNode> children) { //had to implement this because it's in the interface
+		return 0;
 	}
 
 }

@@ -26,4 +26,7 @@ public class CommandNode {
 	int getNumberOfParameters() {
 		return this.getCommand().getNumberOfParameters();
 	}
+	double execute() {
+		return this.getCommand().execute(this.getChildren());
+	}
 }
