@@ -69,7 +69,6 @@ public class Main extends Application {
 		// first index = xPos, second = yPos, third = width, fourth = length
 		GUIProperties.put("turtleScreen", new double[] { 25, 25, 650, 425 });
 		GUIProperties.put("textInput", new double[] { 25, 475, 615, 110 });
-		
 		GUIProperties.put("varTable", new double[] { 700, 25, 200, 120 });
 		GUIProperties.put("funcTable", new double[] { 700, 150, 200, 120 });
 		GUIProperties.put("prevCommandBox", new double[] { 700, 275, 200, 125 });
