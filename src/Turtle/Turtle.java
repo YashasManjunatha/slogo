@@ -29,10 +29,10 @@ public class Turtle implements TurtleInterface{
 
 	private void initalizeTurtle() {
 		turtle.setImage(image);
-		turtle.setX(650/2);
-		turtle.setY(425/2);
+		turtle.setX(screen.getWidth()/2);
+		turtle.setY(screen.getHeight()/2);
 		scaleTurtle();
-		cropTurtle();
+		//cropTurtle();
 		screen.addToPane(turtle);
 		turtleShowing = true;
 		pen = new Pen();
