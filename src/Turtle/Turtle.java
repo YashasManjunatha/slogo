@@ -12,7 +12,7 @@ public class Turtle implements TurtleInterface{
     
 	private final static double fixedImageHeight = 50;
     
-	private ScreenBox screen;
+	private static ScreenBox screen;
 	private Image image;
 	private ImageView turtle = new ImageView();
 	private boolean turtleShowing;
@@ -29,10 +29,10 @@ public class Turtle implements TurtleInterface{
 
 	private void initalizeTurtle() {
 		turtle.setImage(image);
-		turtle.setX(screen.getWidth()/2);
-		turtle.setY(screen.getHeight()/2);
+		turtle.setX(screen.getWidth()/2 - image.getWidth()/2);
+		turtle.setY(screen.getHeight()/2 - image.getHeight()/2);
 		scaleTurtle();
-		//cropTurtle();
+		cropTurtle();
 		screen.addToPane(turtle);
 		turtleShowing = true;
 		pen = new Pen();
