@@ -14,17 +14,19 @@ public class Parser implements ParserObject{
 	}
 	
 	private void generateTree(CommandNode root, Scanner scan) throws InvalidCommandException{
-		while (scan.hasNext()) {
+		int paramsFilled = 0;
+		while (scan.hasNext() && paramsFilled < root.getNumberOfParameters()) {
 			String nextCommand = scan.next();
-			CommandNode child = new CommandNode(generateCommandInstance(nextCommand));
-			root.addChild(child);
-			int paramsFilled = 0;
-			while (scan.hasNext() && child.getNumberOfParameters()<paramsFilled) {
-				nextCommand = scan.next();
-				CommandNode grandchild = new CommandNode(generateCommandInstance(nextCommand));
-				child.addChild(grandchild);
-				paramsFilled++;
-			}
+			CommandNode currentChild = new CommandNode(generateCommandInstance(nextCommand));
+			root.addChild(currentChild);
+			generateTree(currentChild, scan);
+			//int paramsFilled = 0;
+//			while (scan.hasNext() && paramsFilled<currentChild.getNumberOfParameters()) {
+//				nextCommand = scan.next();
+//				CommandNode grandchild = new CommandNode(generateCommandInstance(nextCommand));
+//				currentChild.addChild(grandchild);
+//				paramsFilled++;
+//			}
 		}
 	}
 
@@ -36,14 +38,20 @@ public class Parser implements ParserObject{
 		catch(NumberFormatException e) {	
 		}
 		CommandObject generatedCommand;
-		try {
-			Class<?> clazz = Class.forName(commandText);		//find class associated with the command string
-			Object obj = clazz.newInstance();	//creating new instance using default constructor since we don't know the parameters yet 
-			generatedCommand = (CommandObject) obj;
+		if (commandText.equals("fd")) {
+			generatedCommand = new fd();
 		}
-		catch(Exception e) {
+		else {
 			throw new InvalidCommandException(commandText);
 		}
+//		try {
+//			Class<?> clazz = Class.forName(commandText);		//find class associated with the command string
+//			Object obj = clazz.newInstance();	//creating new instance using default constructor since we don't know the parameters yet 
+//			generatedCommand = (CommandObject) obj;
+//		}
+//		catch(Exception e) {
+//			throw new InvalidCommandException(commandText);
+//		}
 		return generatedCommand;
 	}
 }

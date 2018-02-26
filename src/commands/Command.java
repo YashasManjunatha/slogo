@@ -32,7 +32,7 @@ public class Command implements CommandObject{
 
 	@Override
 	public int getNumberOfParameters() {
-		return 0;
+		return (int) Double.POSITIVE_INFINITY;
 	}
 	
 	protected Turtle getTurtle() {
