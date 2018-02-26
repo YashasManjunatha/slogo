@@ -12,13 +12,12 @@ public class Turtle implements TurtleInterface{
     
 	private final static double fixedImageHeight = 50;
     
-	private static ScreenBox screen;
+	private ScreenBox screen;
 	private Image image;
 	private ImageView turtle = new ImageView();
 	private boolean turtleShowing;
 	private Pen pen;
 	private boolean penShowing;
-	private final static double OFFSET = 25;
 	
 	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
 		screen = turtle_screen;
@@ -29,8 +28,8 @@ public class Turtle implements TurtleInterface{
 
 	private void initalizeTurtle() {
 		turtle.setImage(image);
-		turtle.setX(650/2 - image.getWidth()/2);
-		turtle.setY(425/2 - image.getHeight()/2);
+		turtle.setX(650/2);
+		turtle.setY(425/2);
 		scaleTurtle();
 		cropTurtle();
 		screen.addToPane(turtle);
@@ -105,14 +104,15 @@ public class Turtle implements TurtleInterface{
 	public void cropTurtle() {
 		Rectangle crop = new Rectangle(turtle.getX(), turtle.getY(), image.getWidth(), image.getHeight());
 
+		Node pane;
 		if (turtle.getX() < screen.getX()) {
 			crop.setX(screen.getX());
 			crop.setWidth(image.getWidth() - screen.getX());
 		}
 
-		if (turtle.getX() + image.getWidth() > screen.getX() + screen.getWidth()) {
+		if (turtle.getX() + image.getWidth() > screen.getX() + 650) {
 			crop.setX(turtle.getX());
-			crop.setWidth(screen.getX() + (screen.getWidth() - OFFSET) - (turtle.getX()));
+			crop.setWidth(screen.getX() + 625 - (turtle.getX()));
 		}
 
 		if (turtle.getY() < screen.getY()) {
@@ -120,9 +120,9 @@ public class Turtle implements TurtleInterface{
 			crop.setHeight(image.getHeight() - screen.getY());
 		}
 
-		if (turtle.getY() + image.getHeight() > screen.getY() + screen.getHeight()) {
+		if (turtle.getY() + image.getHeight() > screen.getY() + 425) {
 			crop.setY(turtle.getY());
-			crop.setHeight(screen.getY() + (screen.getHeight() - OFFSET) - (turtle.getY()));
+			crop.setHeight(screen.getY() + 400 - (turtle.getY()));
 		}
 		turtle.setClip(crop);
 	}

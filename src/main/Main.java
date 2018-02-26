@@ -1,6 +1,5 @@
 package main;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,25 +11,13 @@ import GUIBoxes.ScreenBox;
 import GUIBoxes.TextInputBox;
 import GUIBoxes.UserDefTable;
 import GUIBoxes.changeImageButton;
-import GUIBoxes.PrevCommandList;
 import Turtle.Turtle;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -73,7 +60,7 @@ public class Main extends Application {
 		GUIProperties.put("funcTable", new double[] { 700, 150, 200, 120 });
 		GUIProperties.put("prevCommandBox", new double[] { 700, 275, 200, 125 });
 		GUIProperties.put("imageButton", new double[] { 700, 405, 200, 15 });
-		GUIProperties.put("backgroundCombo", new double[] { 25, 475, 110, 650 });
+		GUIProperties.put("backgroundCombo", new double[] { 700, 435, 200, 15 });
 		
 		GUIProperties.put("runButton", new double[] { 640, 475, 35, 55 });
 
@@ -91,7 +78,8 @@ public class Main extends Application {
 	}
 
 	private void setupComboboxes() {
-		backgroundColorComboBox = new GUIComboBox(turtleScreen, root);
+		backgroundColorComboBox = new backgroundCombo(root, turtleScreen, GUIProperties.get("backgroundCombo"),
+				"Change Background Color");
 
 	}
 
@@ -104,7 +92,7 @@ public class Main extends Application {
 		turtleList.add(turtle);
 		varTable = new UserDefTable(root, GUIProperties.get("varTable"), "Variable");
 		funcTable = new UserDefTable(root, GUIProperties.get("funcTable"), "Function");
-		prevCommandBox = new PrevCommandList(root, GUIProperties.get("prevCommandBox"));
+		prevCommandBox = new PrevCommandList(root, GUIProperties.get("prevCommandBox"), textInput);
 
 	}
 
