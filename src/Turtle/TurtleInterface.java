@@ -1,7 +1,8 @@
 package Turtle;
 
 interface TurtleInterface {
-	public void move(double diffX, double diffY);
+	public double move(double diff);
+	//public void move(double diffX, double diffY);
     public void turn(double degrees);
     public double getX();
     public double getY();

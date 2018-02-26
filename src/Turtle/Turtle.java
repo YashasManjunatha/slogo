@@ -48,11 +48,15 @@ public class Turtle implements TurtleInterface{
 	}
 
 	@Override
-	public void move(double diffX, double diffY) {
-		turtle.setX(getX() + diffX);
-		turtle.setY(getY() + diffY);
-		cropTurtle();
+	public double move(double diff) {
+		turtle.setY(turtle.getY() + diff);
+		return diff;
 	}
+//	public void move(double diffX, double diffY) {
+//		turtle.setX(getX() + diffX);
+//		turtle.setY(getY() + diffY);
+//		cropTurtle();
+//	}
 
 	@Override
 	public void turn(double degrees) {
