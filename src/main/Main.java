@@ -100,7 +100,7 @@ public class Main extends Application {
 		textInput = new TextInputBox(root, GUIProperties.get("textInput"));
 		turtleScreen = new ScreenBox(root, GUIProperties.get("turtleScreen"));
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream("images/turtle.png"));
-		Turtle turtle = new Turtle(turtleScreen.getPane(), image);
+		Turtle turtle = new Turtle(turtleScreen, image);
 		turtleList.add(turtle);
 		varTable = new UserDefTable(root, GUIProperties.get("varTable"), "Variable");
 		funcTable = new UserDefTable(root, GUIProperties.get("funcTable"), "Function");

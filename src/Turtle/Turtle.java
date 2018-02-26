@@ -2,6 +2,7 @@ package Turtle;
 
 import GUIBoxes.ScreenBox;
 import Pen.Pen;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
@@ -17,6 +18,7 @@ public class Turtle implements TurtleInterface{
 	private boolean turtleShowing;
 	private Pen pen;
 	private boolean penShowing;
+	private final static double OFFSET = 25;
 	
 	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
 		screen = turtle_screen;
@@ -31,7 +33,7 @@ public class Turtle implements TurtleInterface{
 		turtle.setY(425/2);
 		scaleTurtle();
 		cropTurtle();
-		pane.getChildren().add(turtle);
+		screen.addToPane(turtle);
 		turtleShowing = true;
 		pen = new Pen();
         penShowing = true;
@@ -103,24 +105,24 @@ public class Turtle implements TurtleInterface{
 	public void cropTurtle() {
 		Rectangle crop = new Rectangle(turtle.getX(), turtle.getY(), image.getWidth(), image.getHeight());
 
-		if (turtle.getX() < pane.getLayoutX()) {
-			crop.setX(pane.getLayoutX());
-			crop.setWidth(image.getWidth() - pane.getLayoutX());
+		if (turtle.getX() < screen.getX()) {
+			crop.setX(screen.getX());
+			crop.setWidth(image.getWidth() - screen.getX());
 		}
 
-		if (turtle.getX() + image.getWidth() > pane.getLayoutX() + 650) {
+		if (turtle.getX() + image.getWidth() > screen.getX() + screen.getWidth()) {
 			crop.setX(turtle.getX());
-			crop.setWidth(pane.getLayoutX() + 625 - (turtle.getX()));
+			crop.setWidth(screen.getX() + (screen.getWidth() - OFFSET) - (turtle.getX()));
 		}
 
-		if (turtle.getY() < pane.getLayoutY()) {
-			crop.setY(pane.getLayoutY());
-			crop.setHeight(image.getHeight() - pane.getLayoutY());
+		if (turtle.getY() < screen.getY()) {
+			crop.setY(screen.getY());
+			crop.setHeight(image.getHeight() - screen.getY());
 		}
 
-		if (turtle.getY() + image.getHeight() > pane.getLayoutY() + 425) {
+		if (turtle.getY() + image.getHeight() > screen.getY() + screen.getHeight()) {
 			crop.setY(turtle.getY());
-			crop.setHeight(pane.getLayoutY() + 400 - (turtle.getY()));
+			crop.setHeight(screen.getY() + (screen.getHeight() - OFFSET) - (turtle.getY()));
 		}
 		turtle.setClip(crop);
 	}
