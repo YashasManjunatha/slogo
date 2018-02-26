@@ -1,21 +1,25 @@
 package Turtle;
 
+import GUIBoxes.ScreenBox;
+import Pen.Pen;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
-public class Turtle implements TurtleInterface {
-	
+
+public class Turtle implements TurtleInterface{
+    
 	private final static double fixedImageHeight = 50;
-	
-	private Pane pane;
+    
+	private ScreenBox screen;
 	private Image image;
 	private ImageView turtle = new ImageView();
-	boolean turtleShowing;
-
-	public Turtle(Pane display_pane, Image turtle_image) {
-		pane = display_pane;
+	private boolean turtleShowing;
+	private Pen pen;
+	private boolean penShowing;
+	
+	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
+		screen = turtle_screen;
 		image = turtle_image;
 		initalizeTurtle();
 
@@ -23,12 +27,14 @@ public class Turtle implements TurtleInterface {
 
 	private void initalizeTurtle() {
 		turtle.setImage(image);
-		turtle.setX(585 / 2);
-		turtle.setY(650 / 2);
+		turtle.setX(650/2);
+		turtle.setY(425/2);
 		scaleTurtle();
 		cropTurtle();
 		pane.getChildren().add(turtle);
 		turtleShowing = true;
+		pen = new Pen();
+        penShowing = true;
 	}
 
 	private void scaleTurtle() {
@@ -36,6 +42,7 @@ public class Turtle implements TurtleInterface {
 		turtle.setFitHeight(fixedImageHeight);
 		turtle.setFitWidth(fixedImageHeight * imageRatio);
 		turtle.setPreserveRatio(true);
+
 	}
 
 	@Override
@@ -68,22 +75,24 @@ public class Turtle implements TurtleInterface {
 
 	@Override
 	public void setPenDown(boolean penDown) {
-		// TODO Auto-generated method stub
 
+		if (penShowing && !penDown)
+			screen.removeFromPane(pen.getPen());
+		if (!penShowing && penDown)
+			screen.addToPane(pen.getPen());
 	}
 
 	@Override
 	public boolean getPenDown() {
-		// TODO Auto-generated method stub
-		return false;
+		return penShowing;
 	}
 
 	@Override
 	public void setTurtleShowing(boolean should_be_showing) {
 		if (turtleShowing && !should_be_showing)
-			pane.getChildren().remove(turtle);
+			screen.removeFromPane(turtle);
 		if (!turtleShowing && should_be_showing)
-			pane.getChildren().add(turtle);
+			screen.addToPane(turtle);
 	}
 
 	@Override

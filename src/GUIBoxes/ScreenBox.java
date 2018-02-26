@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import Turtle.Turtle;
+import javafx.scene.Node;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -45,6 +46,14 @@ public class ScreenBox{
 	
 	public Pane getPane() {
 		return this.turtleScreen;
+	}
+	
+	public void addToPane(Node node) {
+		turtleScreen.getChildren().add(node);
+	}
+	
+	public void removeFromPane(Node node) {
+		turtleScreen.getChildren().remove(node);
 	}
 
 
