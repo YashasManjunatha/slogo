@@ -45,7 +45,7 @@ public class Parser implements ParserObject{
 	CommandObject generateCommandInstance(String commandText) throws InvalidCommandException {
 		try {
 			double parsedDouble = Double.parseDouble(commandText);
-			return new ParsedDouble(parsedDouble);
+			return new ParsedDouble();
 		}
 		catch(NumberFormatException e) {	
 		}
