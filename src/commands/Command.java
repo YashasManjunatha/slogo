@@ -16,8 +16,10 @@ public class Command implements CommandObject{
 		catch(InvalidCommandException e) {
 			//add pop-up screen
 		}
-		
 	}
+    public Command() {
+	
+    }
 	@Override
 	public double execute() {
 		for (int x=0; x<superNode.getChildren().size(); x++) {
