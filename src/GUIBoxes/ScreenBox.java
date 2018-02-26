@@ -49,11 +49,11 @@ public class ScreenBox {
 	}
 
 	public void addToPane(Node node) {
-		thisRoot.getChildren().add(node);
+		turtleScreen.getChildren().add(node);
 	}
 
 	public void removeFromPane(Node node) {
-		thisRoot.getChildren().remove(node);
+		turtleScreen.getChildren().remove(node);
 	}
 
 	public void replaceImage(String fileName, ArrayList<Turtle> turtleList) {
@@ -85,11 +85,11 @@ public class ScreenBox {
 	}
 	
 	public double getHeight() {
-		return turtleScreen.getHeight();
+		return turtleScreen.getMinHeight();
 	}
 	
 	public double getWidth() {
-		return turtleScreen.getWidth();
+		return turtleScreen.getMinWidth();
 	}
 
 }
