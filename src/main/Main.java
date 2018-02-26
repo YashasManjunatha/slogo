@@ -1,10 +1,21 @@
 package main;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import GUIBoxes.Buttons;
+import GUIBoxes.GUIComboBox;
+import GUIBoxes.PrevCommandList;
+import GUIBoxes.RunButton;
 import GUIBoxes.ScreenBox;
 import GUIBoxes.TextInputBox;
 import GUIBoxes.UserDefTable;
+import GUIBoxes.changeImageButton;
+import GUIBoxes.PrevCommandList;
 import Turtle.Turtle;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,8 +27,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -25,14 +38,21 @@ public class Main extends Application {
 	private static final Paint BACKGROUND = Color.ANTIQUEWHITE;
 
 	private static String title;
-	private final static double screen_height = 600;
-	private final static double screen_width = 915;
+	private final static double SCREEN_HEIGHT = 600;
+	private final static double SCREEN_WIDTH = 915;
 	private static Stage stage;
 	// private static GUIBox textInputBox, newSimChoice, prevSimChoice = null;
-	private static Button runButton;
+	private static Buttons runButton;
+	private static Buttons picButton;
 	private static TextInputBox textInput;
 	private static ScreenBox turtleScreen;
 	private static UserDefTable varTable;
+	private static UserDefTable funcTable;
+	private static GUIComboBox backgroundColorComboBox;
+	private static PrevCommandList prevCommandBox;
+	private static ArrayList<Turtle> turtleList;
+
+	private static final HashMap<String, double[]> GUIProperties = createMap();
 
 	// Additional setup for the main menu
 	private Scene myScene;
@@ -44,70 +64,55 @@ public class Main extends Application {
 		initialize();
 	}
 
+	private static HashMap<String, double[]> createMap() {
+		HashMap<String, double[]> GUIProperties = new HashMap<>();
+		// first index = xPos, second = yPos, third = width, fourth = length
+		GUIProperties.put("turtleScreen", new double[] { 25, 25, 650, 425 });
+		GUIProperties.put("textInput", new double[] { 25, 475, 615, 110 });
+		GUIProperties.put("varTable", new double[] { 700, 25, 200, 120 });
+		GUIProperties.put("funcTable", new double[] { 700, 150, 200, 120 });
+		GUIProperties.put("prevCommandBox", new double[] { 700, 275, 200, 125 });
+		GUIProperties.put("imageButton", new double[] { 700, 405, 200, 15 });
+		GUIProperties.put("backgroundCombo", new double[] { 25, 475, 110, 650 });
+		
+		GUIProperties.put("runButton", new double[] { 640, 475, 35, 55 });
+
+		return GUIProperties;
+	}
+
 	private void initialize() {
 		root = new Group();
-		// setScreenProperties();
-		myScene = new Scene(root, screen_width, screen_height, BACKGROUND);
+		turtleList = new ArrayList<>();
+		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
 		setStage();
 		setupGUIBoxes();
 		setupComboboxes();
-		setupButton();
+		setupButtons();
 	}
 
 	private void setupComboboxes() {
-		
-		
+		backgroundColorComboBox = new GUIComboBox(turtleScreen, root);
+
 	}
 
 	private void setupGUIBoxes() {
 
-		textInput = new TextInputBox(root, 25, 475, 110, 650);
-		turtleScreen = new ScreenBox(root, 25, 25, 425, 650);
+		textInput = new TextInputBox(root, GUIProperties.get("textInput"));
+		turtleScreen = new ScreenBox(root, GUIProperties.get("turtleScreen"));
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream("images/turtle.png"));
-		Turtle turtle = new Turtle(turtleScreen, image);
-		varTable = new UserDefTable(root);
-		
-		
-		ObservableList<String> options = 
-			    FXCollections.observableArrayList(
-			        "white",
-			        "black",
-			        "red", 
-			        "darkgreen", 
-			        "floralwhite", 
-			        "indianred"
-			    );
-		ComboBox<String> backgroundColorComboBox = new ComboBox<>(options);
-		backgroundColorComboBox.valueProperty().addListener(new ChangeListener<String>() {
-	        @Override public void changed(ObservableValue ov, String t, String t1) { 
-	        	turtleScreen.changeColor(t1);
-	        }    
-	    });
-		root.getChildren().add(backgroundColorComboBox);
+		Turtle turtle = new Turtle(turtleScreen.getPane(), image);
+		turtleList.add(turtle);
+		varTable = new UserDefTable(root, GUIProperties.get("varTable"), "Variable");
+		funcTable = new UserDefTable(root, GUIProperties.get("funcTable"), "Function");
+		prevCommandBox = new PrevCommandList(root, GUIProperties.get("prevCommandBox"));
 
-		// thinking of changing it to turtleScreen.addTurtle()... but we need to make
-		// the turtle a node
-
-		// turtleScreen = new ScreenBox(stage, root);
-		// textInputBox = new TextInputBox(stage, root);
-		// showVariablesBox = new VarBox(stage, root);
-		// showFunctionBox = new VarBox(stage, root);
 	}
 
-	private void setupButton() {
-		runButton = new Button("Run");
-		runButton.setLayoutX(50);
-		runButton.setLayoutY(50);
+	private void setupButtons() {
+		runButton = new RunButton(root, GUIProperties.get("runButton"), "Run", textInput, prevCommandBox);
 
-		root.getChildren().add(runButton);
-		runButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				System.out.println(textInput.getText());
-				textInput.clear();
-				// updateGUI();
-			}
-		});
+		picButton = new changeImageButton(root, GUIProperties.get("imageButton"), "Change Turtle Image", turtleScreen,
+				stage, turtleList);
 
 	}
 

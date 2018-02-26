@@ -12,34 +12,43 @@ public class UserDefTable implements GUIBoxes{
 	private TableView table;
 
 	private static Group root;
+	private final static int NAMECOLWIDTH = 65;
+	private final static int VALCOLWIDTH = 133;
+	private String tableType;
 	
-	public UserDefTable(Group root) {
+	public UserDefTable(Group root, double[] properties, String type) {
 		this.root = root;
+		tableType = type;
 		table = new TableView<>();
-		setupTable();
+		setupTableProperties(properties[0], properties[1], properties[2], properties[3]);
+		setupTableColumns();
 		root.getChildren().add(table);
 
 	}
 	
-
-
-	private void setupTable() {
-		table.setEditable(false);
-		table.setLayoutX(700);
-		table.setLayoutY(25);
-		table.setMaxWidth(200);
-		table.setMaxHeight(175);
-		TableColumn nameCol = new TableColumn("Variable Name");
+	
+	private void setupTableColumns() {
+		TableColumn nameCol = new TableColumn(tableType);
 		nameCol.setCellValueFactory(new PropertyValueFactory<TableInsertion, String>("VarName"));
-		nameCol.setMinWidth(75);
-		nameCol.setMaxWidth(150);
-		TableColumn  valCol= new TableColumn("Value");
-		valCol.setMinWidth(75);
-		valCol.setMaxWidth(200-nameCol.getWidth());
+		nameCol.setMinWidth(NAMECOLWIDTH);
+		nameCol.setMaxWidth(NAMECOLWIDTH);
+		nameCol.setResizable(false);
+		TableColumn valCol= new TableColumn("Value");
+		valCol.setMinWidth(VALCOLWIDTH);
+		valCol.setResizable(false);
+
 		valCol.setCellValueFactory(new PropertyValueFactory<TableInsertion, String>("Value"));
 		ObservableList<TableInsertion> data = FXCollections.observableArrayList(new TableInsertion("x", "90"));
 		table.setItems(data);
-		table.getColumns().addAll(nameCol, valCol);
+		table.getColumns().addAll(nameCol, valCol);		
+	}
+
+	private void setupTableProperties(double xPos, double yPos, double width, double height) {
+		table.setEditable(false);
+		table.setLayoutX(xPos);
+		table.setLayoutY(yPos);
+		table.setMaxWidth(width);
+		table.setMaxHeight(height);
 	}
 
 	
