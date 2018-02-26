@@ -1,21 +1,15 @@
 package commands;
 
-public class ParsedDouble implements CommandObject{
+import java.util.List;
+
+public class ParsedDouble extends Command{
 	private double myDouble;
-	private String myText;
-	private Parser myParser;
 	
-	ParsedDouble(double parsedDouble){
+	public ParsedDouble(double parsedDouble) {
 		myDouble = parsedDouble;
-//		myParser = new Parser();
-//		String [] splitText = text.split(" ");
-//		String parsedDouble = splitText[0];
-//		myDouble = Double.parseDouble(parsedDouble);
-//		myText = text.replaceFirst(parsedDouble, "");
 	}
 	@Override
-	public double execute() {
-//		myParser.parse(myText);
+	public double execute(List<CommandNode> children) {
 		return myDouble;
 	}
 	@Override
