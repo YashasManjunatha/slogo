@@ -12,6 +12,7 @@ public class Command implements CommandObject{
 	public Command(String text, Turtle turtle) {
 		myParser = new Parser();
 		myTurtle = turtle;
+		System.out.println("constructor " + myTurtle);
 		try {
 			superNode = myParser.parse(text);
 		}
@@ -25,7 +26,7 @@ public class Command implements CommandObject{
 	
 	public double execute() {
 		for (int x=0; x<superNode.getChildren().size(); x++) {
-			superNode.getChildren().get(x).execute();
+			superNode.getChildren().get(x).execute(myTurtle);
 		}
 		return 0;
 	}
@@ -36,10 +37,12 @@ public class Command implements CommandObject{
 	}
 	
 	protected Turtle getTurtle() {
+		System.out.println("getturtle in command");
+		System.out.println("command " + myTurtle);
 		return myTurtle;
 	}
 	@Override
-	public double execute(List<CommandNode> children) { //had to implement this because it's in the interface
+	public double execute(List<CommandNode> children, Turtle t) { //had to implement this because it's in the interface
 		return 0;
 	}
 

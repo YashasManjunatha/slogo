@@ -3,6 +3,8 @@ package commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import Turtle.Turtle;
+
 public class CommandNode {
 	private List<CommandNode> myChildren;
 	private CommandObject myCommand;
@@ -26,8 +28,8 @@ public class CommandNode {
 	int getNumberOfParameters() {
 		return this.getCommand().getNumberOfParameters();
 	}
-	double execute() {
-		return this.getCommand().execute(this.getChildren());
+	double execute(Turtle t) {
+		return this.getCommand().execute(this.getChildren(), t);
 	}
 	void printTree() {
 		System.out.println(this.getCommand());
