@@ -20,13 +20,15 @@ public class SetXYCommand extends Command {
 		   double y1 =t.getY();
 		   double X=x-x1;
 		   System.out.println(x1+" "+y1);
-		   double Y=y-y1;
+		   double Y=y1-y;
 		   double s =X*X+Y*Y;
 		   dist=Math.sqrt(s);
+		   System.out.println("X " + X + " Y " + Y + " dist " + dist);
 		  // System.out.println(y1+" "+Y);
 		   //for now I am just going to move turtle the distance in y
 		   //x is not implemented yet
-		   return t.move(Y);
+		   t.move(X, Y);
+		   return dist;
 	   }
 
 	   @Override
