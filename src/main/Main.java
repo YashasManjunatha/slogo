@@ -44,7 +44,6 @@ public class Main extends Application {
 	// Additional setup for the main menu
 	private Scene myScene;
 	private Group root;
-
 	@Override
 	public void start(Stage stage) {
 		this.stage = stage;
