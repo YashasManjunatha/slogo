@@ -10,7 +10,7 @@ public class BackCommand extends Command{
    @Override
    public double execute(List<CommandNode> children, Turtle t){
 	   CommandNode child = children.get(0);
-	   step=-1*child.execute(t);
+	   step=child.execute(t);
 		return t.move(step);
    }
 
