@@ -97,7 +97,7 @@ public class Main extends Application {
 	}
 
 	private void setupButtons() {
-		runButton = new RunButton(root, GUIProperties.get("runButton"), "Run", textInput, prevCommandBox);
+		runButton = new RunButton(root, GUIProperties.get("runButton"), "Run", textInput, prevCommandBox, turtleList);
 
 		picButton = new changeImageButton(root, GUIProperties.get("imageButton"), "Change Turtle Image", turtleScreen,
 				stage, turtleList);

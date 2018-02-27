@@ -1,5 +1,8 @@
 package GUIBoxes;
 
+import java.util.ArrayList;
+
+import Turtle.Turtle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -10,10 +13,12 @@ public abstract class Buttons {
 	private Group thisRoot;
 	private String buttonText;
 	private Button thisButton;
+	private static ArrayList<Turtle> thisTurtleList;
 	
-	public Buttons(Group root, double[] properties, String text) {
+	public Buttons(Group root, double[] properties, String text, ArrayList<Turtle> turtleList) {
 		setButton(new Button(text));
 		thisRoot = root;
+		setThisTurtleList(turtleList);
 		setupProperties(properties[0], properties[1], properties[2], properties[3]);
 		setupAction();
 		root.getChildren().add(getButton());
@@ -41,5 +46,17 @@ public abstract class Buttons {
 
 	protected void setButton(Button runButton) {
 		this.thisButton = runButton;
+	}
+
+
+
+	protected static ArrayList<Turtle> getThisTurtleList() {
+		return thisTurtleList;
+	}
+
+
+
+	protected static void setThisTurtleList(ArrayList<Turtle> thisTurtleList) {
+		Buttons.thisTurtleList = thisTurtleList;
 	}
 }
