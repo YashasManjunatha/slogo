@@ -14,12 +14,14 @@ public class Parser implements ParserObject{
 	}
 	
 	private void generateTree(CommandNode root, Scanner scan) throws InvalidCommandException{
+		System.out.println("in tree loop " + root.getCommand());
 		int paramsFilled = 0;
 		while (scan.hasNext() && paramsFilled < root.getNumberOfParameters()) {
 			String nextCommand = scan.next();
 			CommandNode currentChild = new CommandNode(generateCommandInstance(nextCommand));
 			root.addChild(currentChild);
 			generateTree(currentChild, scan);
+			paramsFilled++;
 		}
 	}
 
