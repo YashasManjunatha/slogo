@@ -20,7 +20,7 @@ public class Command implements CommandObject{
 			//add pop-up screen
 		}
 	}
-	
+   
 	public Command() {
 	}
 	
