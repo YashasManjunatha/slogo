@@ -47,17 +47,12 @@ public class Turtle implements TurtleInterface{
 	}
 
 	@Override
-
-	public double move(double diffY) {
+	public void move(double diffX, double diffY) {
+		turtle.setX(getX() + diffX);
 		turtle.setY(getY() + diffY);
 		cropTurtle();
-		return diffY;
 	}
-//	public void move(double diffX, double diffY) {
-//		turtle.setX(getX() + diffX);
-//		turtle.setY(getY() + diffY);
-//		cropTurtle();
-//	}
+	
 
 	@Override
 	public void turn(double degrees) {
@@ -110,7 +105,6 @@ public class Turtle implements TurtleInterface{
 	public void cropTurtle() {
 		Rectangle crop = new Rectangle(turtle.getX(), turtle.getY(), image.getWidth(), image.getHeight());
 
-		Node pane;
 		if (turtle.getX() < screen.getX()) {
 			crop.setX(screen.getX());
 			crop.setWidth(image.getWidth() - screen.getX());

@@ -26,7 +26,8 @@ public class SetXYCommand extends Command {
 		  // System.out.println(y1+" "+Y);
 		   //for now I am just going to move turtle the distance in y
 		   //x is not implemented yet
-		   return t.move(Y);
+		   t.move(X, Y);
+		   return dist;
 	   }
 
 	   @Override
