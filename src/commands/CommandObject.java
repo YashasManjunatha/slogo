@@ -2,8 +2,9 @@ package commands;
 
 import java.util.List;
 
-public interface CommandObject {
+import Turtle.Turtle;
 
-	double execute(List<CommandNode> children);
+public interface CommandObject {
+	double execute(List<CommandNode> children, Turtle t);
 	int getNumberOfParameters();
 }

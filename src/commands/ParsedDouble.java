@@ -2,6 +2,8 @@ package commands;
 
 import java.util.List;
 
+import Turtle.Turtle;
+
 public class ParsedDouble extends Command{
 	private double myDouble;
 	
@@ -9,7 +11,7 @@ public class ParsedDouble extends Command{
 		myDouble = parsedDouble;
 	}
 	@Override
-	public double execute(List<CommandNode> children) {
+	public double execute(List<CommandNode> children, Turtle t) {
 		return myDouble;
 	}
 	@Override

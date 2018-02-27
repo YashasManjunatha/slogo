@@ -17,7 +17,7 @@ public class changeImageButton extends Buttons {
 
 	public changeImageButton(Group root, double[] properties, String text, ScreenBox turtleScreen, Stage stage,
 			ArrayList<Turtle> turtleList) {
-		super(root, properties, text);
+		super(root, properties, text, turtleList);
 		mainStage = stage;
 		mainTurtleScreen = turtleScreen;
 		mainTurtleList = turtleList;

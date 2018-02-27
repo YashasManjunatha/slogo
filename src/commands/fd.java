@@ -2,12 +2,16 @@ package commands;
 
 import java.util.List;
 
+import Turtle.Turtle;
+
 public class fd extends Command{
 	@Override
-	public double execute(List<CommandNode> children) {
+	public double execute(List<CommandNode> children, Turtle t) {
 		CommandNode child = children.get(0);
-		this.getTurtle().move(child.execute(),0);
-		return child.execute();
+		System.out.println();
+		System.out.println(child.execute(t));
+		return t.move(child.execute(t));
+		 
 	}
 	
 	@Override
