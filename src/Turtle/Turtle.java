@@ -47,7 +47,6 @@ public class Turtle implements TurtleInterface{
 	}
 
 	@Override
-
 	public double move(double moveLength) {
 		double degrees = this.getOrientation()%360;
 		double radians = Math.toRadians(degrees);
@@ -67,27 +66,25 @@ public class Turtle implements TurtleInterface{
 		
 		cropTurtle();
 		return moveLength;
+
 	}
-//	public void move(double diffX, double diffY) {
-//		turtle.setX(getX() + diffX);
-//		turtle.setY(getY() + diffY);
-//		cropTurtle();
-//	}
+	
 
 	@Override
-	public void turn(double degrees) {
+	public double turn(double degrees) {
 		turtle.setRotate(turtle.getRotate() + degrees);
 		cropTurtle();
+		return degrees;
 	}
 
 	@Override
 	public double getX() {
-		return turtle.getX();
+		return turtle.getX() - (screen.getWidth()/2 - image.getWidth()/2); 
 	}
 
 	@Override
 	public double getY() {
-		return turtle.getY();
+		return turtle.getY() - (screen.getHeight()/2 - image.getHeight()/2);
 	}
 
 	@Override
@@ -125,7 +122,6 @@ public class Turtle implements TurtleInterface{
 	public void cropTurtle() {
 		Rectangle crop = new Rectangle(turtle.getX(), turtle.getY(), image.getWidth(), image.getHeight());
 
-		Node pane;
 		if (turtle.getX() < screen.getX()) {
 			crop.setX(screen.getX());
 			crop.setWidth(image.getWidth() - screen.getX());

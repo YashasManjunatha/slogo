@@ -9,7 +9,9 @@ public class ForwardCommand extends Command{
    @Override
    public double execute(List<CommandNode> children, Turtle t){
 	   CommandNode child = children.get(0);
-		return t.move(child.execute(t));
+	   double step = child.execute(t);
+	   t.move(0, step);
+	   return step;
    }
 
    @Override

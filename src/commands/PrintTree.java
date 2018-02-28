@@ -4,7 +4,7 @@ public class PrintTree {
 
 	public static void main(String[] args) {
 		Parser myParser = new Parser();
-		String commands = "fd 50 fd 50";
+		String commands = "SumCommand SumCommand 5 5 5";
 		CommandNode superNode;
 		try {
 			superNode = myParser.parse(commands);
