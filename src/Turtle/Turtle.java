@@ -42,6 +42,7 @@ public class Turtle implements TurtleInterface {
 		screen.addToPane(turtle);
 		turtleShowing = true;
 		pen = new Pen();
+		screen.addToPane(pen.getPen());
 		penShowing = true;
 	}
 
@@ -60,17 +61,18 @@ public class Turtle implements TurtleInterface {
 			degrees = 360 + degrees;
 		}
 		double radians = Math.toRadians(degrees);
-		if (degrees <= 90 || degrees >= 270) {
-			turtle.setY(turtle.getY() - moveLength * Math.cos(radians));
-		} else if ((degrees >= 90 && degrees <= 270)) {
-			turtle.setY(turtle.getY() - moveLength * Math.cos(radians));
-		}
-
-		if (degrees >= 0 && degrees <= 180) {
-			turtle.setX(turtle.getX() + moveLength * Math.sin(radians));
-		} else if ((degrees >= 180 && degrees <= 360)) {
-			turtle.setX(turtle.getX() + moveLength * Math.sin(radians));
-		}
+		
+		double startX = turtle.getX();
+		double startY = turtle.getY();
+		
+		turtle.setY(turtle.getY() - moveLength * Math.cos(radians));
+		currentY = turtle.getY() - moveLength * Math.cos(radians);
+		
+		turtle.setX(turtle.getX() + moveLength * Math.sin(radians));
+		currentX = turtle.getX() + moveLength * Math.sin(radians);
+		
+		if (penShowing)
+			pen.draw(startX, startY, currentX, currentY);
 
 		cropTurtle();
 		return moveLength;
@@ -162,11 +164,13 @@ public class Turtle implements TurtleInterface {
 		System.out.println("startingX" + currentX);
 		System.out.println("startingY" + currentY);
 		
+		if (penShowing)
+			pen.draw(currentX, currentY, currentX + x, currentY + y);
+		
 		turtle.setX(x + startingX);
 		turtle.setY(y + startingY);
 		currentX = x + currentX;
 		currentY = y + currentY;
-
 		
 		cropTurtle();
 	}
