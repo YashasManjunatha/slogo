@@ -43,15 +43,15 @@ public class Parser implements ParserObject{
 			FileInputStream input = new FileInputStream(PROPERTY_FILENAME);
 			command_properties.load(input);
 			Map<String, String> commandsToClasses = new HashMap<>();
-			//String [] commands;
+			String [] commands;
 			for (String className: command_properties.stringPropertyNames()) {
 				//System.out.println(command_properties.getProperty(className));
-				//commands = command_properties.getProperty(className).split("|");
-				//for (String command: commands) {
-				//	System.out.println(command);
-				//	commandsToClasses.put(command, className);
-					commandsToClasses.put(command_properties.getProperty(className), className);
-				//}
+				commands = command_properties.getProperty(className).split("\\|");
+				for (String command: commands) {
+					System.out.println(command + " " + className);
+					commandsToClasses.put(command, className);
+				//	commandsToClasses.put(command_properties.getProperty(className), className);
+				}
 			}
 			System.out.println(commandsToClasses.get(commandText));
 			

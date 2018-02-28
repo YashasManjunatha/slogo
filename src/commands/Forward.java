@@ -3,7 +3,7 @@ import java.util.List;
 
 import Turtle.Turtle;
 
-public class ForwardCommand extends Command{
+public class Forward extends Command{
      private int numberOfParameters = 1;
 
    @Override
