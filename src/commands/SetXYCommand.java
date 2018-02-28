@@ -16,6 +16,9 @@ public class SetXYCommand extends Command {
 		   CommandNode child2 = children.get(1);
 		   x=child1.execute(t);
 		   y=child2.execute(t);
+		   System.out.println(x);
+		   System.out.println(y);
+
 		   double x1 =t.getX();
 		   double y1 =t.getY();
 		   double X=x-x1;
@@ -27,7 +30,7 @@ public class SetXYCommand extends Command {
 		  // System.out.println(y1+" "+Y);
 		   //for now I am just going to move turtle the distance in y
 		   //x is not implemented yet
-		   t.move(X, Y);
+		   t.moveTo(x, -y);
 		   return dist;
 	   }
 

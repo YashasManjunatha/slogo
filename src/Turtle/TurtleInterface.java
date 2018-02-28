@@ -2,8 +2,8 @@ package Turtle;
 
 interface TurtleInterface {
 
-	public void move(double diffX, double diffY);
-    public void turn(double degrees);
+	public double move(double movementLength);
+    public double turn(double degrees);
     public double getX();
     public double getY();
     public double getOrientation();
@@ -11,4 +11,6 @@ interface TurtleInterface {
     public boolean getPenDown();
     public void setTurtleShowing(boolean showing);
     public boolean getTurtleShowing();
+	public void moveTo(double x, double y);
+
 }
