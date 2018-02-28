@@ -1,4 +1,4 @@
-package Pen;
+package pen;
 
 import javafx.scene.Group;
 

@@ -1,11 +1,11 @@
 package Turtle;
 
 import GUIBoxes.ScreenBox;
-import Pen.Pen;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
+import pen.Pen;
 
 
 public class Turtle implements TurtleInterface{
