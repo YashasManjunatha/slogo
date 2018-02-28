@@ -4,7 +4,7 @@ import java.util.List;
 
 import Turtle.Turtle;
 
-public class Showing extends Command {
+public class IsShowing extends Command {
 	private int numberOfParameters = 0;
 
 	@Override

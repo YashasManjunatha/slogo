@@ -4,7 +4,7 @@ import java.util.List;
 
 import Turtle.Turtle;
 
-public class YCor extends Command{
+public class YCoordinate extends Command{
 	private int numberOfParameters = 0;
 
 	@Override

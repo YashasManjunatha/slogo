@@ -3,7 +3,7 @@ package commands;
 import java.util.List;
 import Turtle.Turtle;
 
-public class RemainderCommand extends Command {
+public class Quotient extends Command {
 
 	private int numberOfParameters = 2;
 
@@ -13,12 +13,13 @@ public class RemainderCommand extends Command {
 		  CommandNode child2 = children.get(1);
 		   double x=child1.execute(t);
 		   double y=child2.execute(t);
-			return x%y;
+			return x/y;
 	  }
 
 	  @Override
 		public int getNumberOfParameters() {
 			return numberOfParameters;
 		}
+
 
 }

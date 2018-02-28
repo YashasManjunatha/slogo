@@ -60,19 +60,23 @@ public class Turtle implements TurtleInterface {
 		if (degrees < 0) {
 			degrees = 360 + degrees;
 		}
+		
+		double prevX = currentX;
+		double prevY = currentY;
+		
 		double radians = Math.toRadians(degrees);
 		
 		double startX = turtle.getX();
 		double startY = turtle.getY();
 		
 		turtle.setY(turtle.getY() - moveLength * Math.cos(radians));
-		currentY = turtle.getY() - moveLength * Math.cos(radians);
+		currentY = currentY - moveLength * Math.cos(radians);
 		
 		turtle.setX(turtle.getX() + moveLength * Math.sin(radians));
-		currentX = turtle.getX() + moveLength * Math.sin(radians);
+		currentX = currentX + moveLength * Math.sin(radians);
 		
 		if (penShowing)
-			pen.draw(startX, startY, currentX, currentY);
+			pen.draw(prevX + image.getWidth()/2, prevY + image.getHeight()/2, currentX + image.getWidth()/2, currentY + image.getHeight()/2);
 
 		cropTurtle();
 		return moveLength;
@@ -117,10 +121,10 @@ public class Turtle implements TurtleInterface {
 
 	@Override
 	public void setTurtleShowing(boolean should_be_showing) {
-		if (turtleShowing && !should_be_showing)
-			screen.removeFromPane(turtle);
-		if (!turtleShowing && should_be_showing)
-			screen.addToPane(turtle);
+		if (!should_be_showing)
+			turtle.setVisible(false);
+		if (should_be_showing)
+			turtle.setVisible(true);
 	}
 
 	@Override
