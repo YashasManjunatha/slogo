@@ -11,4 +11,6 @@ interface TurtleInterface {
     public boolean getPenDown();
     public void setTurtleShowing(boolean showing);
     public boolean getTurtleShowing();
+	public void moveTo(double x, double y);
+
 }
