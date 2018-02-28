@@ -31,14 +31,17 @@ public class changeImageButton extends Buttons {
 				System.out.println("fasdfas");
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.setTitle("Choose Turtle Image");
+				try {
 				String fileName = fileChooser.showOpenDialog(mainStage).getPath();
-				// String relativePath = parsePath(fileName);
 				mainTurtleScreen.replaceImage(fileName, mainTurtleList);
+				}catch (NullPointerException n) {
+					//do nothing
+				}
 
 			}
 
 		});
 
-	}
+}
 
 }

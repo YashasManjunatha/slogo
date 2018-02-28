@@ -48,10 +48,25 @@ public class Turtle implements TurtleInterface{
 
 	@Override
 
-	public double move(double diffY) {
-		turtle.setY(getY() + diffY);
+	public double move(double moveLength) {
+		double degrees = this.getOrientation()%360;
+		double radians = Math.toRadians(degrees);
+		if (degrees <= 90 || degrees >= 270) {
+			turtle.setY(getY() + moveLength * Math.cos(radians));
+		}
+		else if ((degrees >= 90 && degrees <= 270)) {
+			turtle.setY(getY() - moveLength * Math.cos(radians));
+		}
+		
+		if (degrees >= 0 && degrees <= 180) {
+			turtle.setX(getX() - moveLength * Math.sin(radians));
+		}
+		else if ((degrees >= 180 && degrees <= 360)) {
+			turtle.setX(getX() + moveLength * Math.sin(radians));
+		}
+		
 		cropTurtle();
-		return diffY;
+		return moveLength;
 	}
 //	public void move(double diffX, double diffY) {
 //		turtle.setX(getX() + diffX);
