@@ -3,7 +3,7 @@ import java.util.List;
 
 import Turtle.Turtle;
 
-public class BackCommand extends Command{
+public class Backward extends Command{
      private int numberOfParameters = 1;
      double step;
 

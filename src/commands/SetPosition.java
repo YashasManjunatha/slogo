@@ -4,7 +4,7 @@ import java.util.List;
 
 import Turtle.Turtle;
 
-public class SetXYCommand extends Command {
+public class SetPosition extends Command {
 	private int numberOfParameters = 2;
 	double x;
 	double y;

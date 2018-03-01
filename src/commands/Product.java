@@ -3,7 +3,7 @@ package commands;
 import java.util.List;
 import Turtle.Turtle;
 
-public class ProductCommand extends Command {
+public class Product extends Command {
 	private int numberOfParameters = 2;
 
 	  @Override
