@@ -2,6 +2,7 @@ package commands;
 
 import java.util.List;
 
+import GUIBoxes.ErrorBox;
 import Turtle.Turtle;
 
 public class Command implements CommandObject{
@@ -17,7 +18,7 @@ public class Command implements CommandObject{
 			superNode = myParser.parse(text);
 		}
 		catch(InvalidCommandException e) {
-			//add pop-up screen
+			new ErrorBox("Invalid Command", "Please Write a Valid Command");
 		}
 	}
    

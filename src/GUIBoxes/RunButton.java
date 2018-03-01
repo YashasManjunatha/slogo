@@ -12,10 +12,13 @@ public class RunButton extends Buttons {
 
 	private static TextInputBox mainTextInput;
 	private static PrevCommandList mainPrevCommandBox;
+	private static LanguageCombo mainLanguageComboBox;
+	private static String language = "English";
 
-	public RunButton(Group root, double[] properties, String text, TextInputBox textInput,
+	public RunButton(Group root, GUIComboBox languageComboBox, double[] properties, String text, TextInputBox textInput,
 			PrevCommandList prevCommandBox, ArrayList<Turtle> turtleList) {
 		super(root, properties, text, turtleList);
+		mainLanguageComboBox = (LanguageCombo) languageComboBox;
 		this.mainTextInput = textInput;
 		this.mainPrevCommandBox = prevCommandBox;
 
@@ -23,20 +26,23 @@ public class RunButton extends Buttons {
 
 	@Override
 	void setupAction() {
-		getButton().setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				mainPrevCommandBox.addText(mainTextInput.getText());
-				for (Turtle t : getThisTurtleList()) {
-					System.out.println(mainTextInput.getText());
-					Command test = new Command(mainTextInput.getText(), t);
-					test.execute();
+		
+		getButton().setOnAction((event) -> {
+			mainPrevCommandBox.addText(mainTextInput.getText());
+			for (Turtle t : getThisTurtleList()) {
+				System.out.println(mainTextInput.getText());
+				if (!language.equals("English")) {
+					language = mainLanguageComboBox.getLanguage();
 				}
-				mainTextInput.clear();
-				// new comamndobject(faosdijfasoidfjioasjoi, turtle )
-				// updateGUI();
+
+				Command test = new Command(mainTextInput.getText(), t);
+				test.execute();
 			}
+			mainTextInput.clear();
+
 		});
+		
+		
 
 	}
 
