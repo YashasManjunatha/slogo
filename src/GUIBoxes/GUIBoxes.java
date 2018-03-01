@@ -1,6 +1,5 @@
 package GUIBoxes;
 
-import javafx.scene.Group;
 
 public interface GUIBoxes {
 	/**
