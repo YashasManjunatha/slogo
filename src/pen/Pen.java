@@ -31,4 +31,8 @@ public class Pen {
 	public void changeColor(String pencolor) {
 		color = pencolor;
 	}
+	
+	public void emptyPen() {
+		lines.getChildren().clear();
+	}
 }
