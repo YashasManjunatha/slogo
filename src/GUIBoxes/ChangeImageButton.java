@@ -9,13 +9,13 @@ import javafx.scene.Group;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class changeImageButton extends Buttons {
+public class ChangeImageButton extends Buttons {
 
 	private static Stage mainStage;
 	private static ScreenBox mainTurtleScreen;
 	private static ArrayList<Turtle> mainTurtleList;
 
-	public changeImageButton(Group root, double[] properties, String text, ScreenBox turtleScreen, Stage stage,
+	public ChangeImageButton(Group root, double[] properties, String text, ScreenBox turtleScreen, Stage stage,
 			ArrayList<Turtle> turtleList) {
 		super(root, properties, text, turtleList);
 		mainStage = stage;
@@ -25,9 +25,7 @@ public class changeImageButton extends Buttons {
 
 	@Override
 	void setupAction() {
-		getButton().setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
+		getButton().setOnAction((event) -> {
 				System.out.println("fasdfas");
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.setTitle("Choose Turtle Image");
@@ -38,7 +36,7 @@ public class changeImageButton extends Buttons {
 					//do nothing
 				}
 
-			}
+			
 
 		});
 

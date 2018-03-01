@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import GUIBoxes.Buttons;
+import GUIBoxes.ChangeImageButton;
 import GUIBoxes.GUIComboBox;
 import GUIBoxes.PrevCommandList;
 import GUIBoxes.RunButton;
 import GUIBoxes.ScreenBox;
 import GUIBoxes.TextInputBox;
 import GUIBoxes.UserDefTable;
-import GUIBoxes.changeImageButton;
+import GUIBoxes.backgroundCombo;
+import GUIBoxes.LanguageCombo;
+import GUIBoxes.PenCombo;
 import Turtle.Turtle;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -36,14 +39,18 @@ public class Main extends Application {
 	private static UserDefTable varTable;
 	private static UserDefTable funcTable;
 	private static GUIComboBox backgroundColorComboBox;
+	private static GUIComboBox languageComboBox;
+	private static GUIComboBox penColorComboBox;
 	private static PrevCommandList prevCommandBox;
 	private static ArrayList<Turtle> turtleList;
+	private static String language;
 
 	private static final HashMap<String, double[]> GUIProperties = createMap();
 
 	// Additional setup for the main menu
 	private Scene myScene;
 	private Group root;
+
 	@Override
 	public void start(Stage stage) {
 		this.stage = stage;
@@ -60,7 +67,7 @@ public class Main extends Application {
 		GUIProperties.put("prevCommandBox", new double[] { 700, 275, 200, 125 });
 		GUIProperties.put("imageButton", new double[] { 700, 405, 200, 15 });
 		GUIProperties.put("backgroundCombo", new double[] { 700, 435, 200, 15 });
-		
+		GUIProperties.put("languageCombo", new double[] { 700, 465, 200, 15 });
 		GUIProperties.put("runButton", new double[] { 640, 475, 35, 55 });
 
 		return GUIProperties;
@@ -79,6 +86,9 @@ public class Main extends Application {
 	private void setupComboboxes() {
 		backgroundColorComboBox = new backgroundCombo(root, turtleScreen, GUIProperties.get("backgroundCombo"),
 				"Change Background Color");
+		languageComboBox = new LanguageCombo(root, GUIProperties.get("languageCombo"), "Change Language");
+		language = ((LanguageCombo) languageComboBox).getLanguage();
+		//penColorComboBox = new PenCombo(root, turtleScreen, GUIProperties.get("penCombo"), "Change Pen Color");
 
 	}
 
@@ -98,7 +108,7 @@ public class Main extends Application {
 	private void setupButtons() {
 		runButton = new RunButton(root, GUIProperties.get("runButton"), "Run", textInput, prevCommandBox, turtleList);
 
-		picButton = new changeImageButton(root, GUIProperties.get("imageButton"), "Change Turtle Image", turtleScreen,
+		picButton = new ChangeImageButton(root, GUIProperties.get("imageButton"), "Change Turtle Image", turtleScreen,
 				stage, turtleList);
 
 	}

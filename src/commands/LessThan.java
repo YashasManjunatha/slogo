@@ -1,10 +1,10 @@
 package commands;
 
 import java.util.List;
-
 import Turtle.Turtle;
 
-public class SumCommand extends Command {
+public class LessThan  extends Command{
+	
 	private int numberOfParameters = 2;
 
 	@Override
@@ -13,11 +13,15 @@ public class SumCommand extends Command {
 		CommandNode child2 = children.get(1);
 		double x=child1.execute(t);
 		double y=child2.execute(t);
-		return x+y;
+		if(x<y) return 1;
+		else {
+			return 0;
+		}
 	}
 
 	@Override
 	public int getNumberOfParameters() {
 		return numberOfParameters;
 	}
+
 }

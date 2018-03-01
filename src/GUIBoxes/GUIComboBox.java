@@ -10,15 +10,12 @@ import javafx.scene.layout.Pane;
 
 public class GUIComboBox implements GUIBoxes {
 
-	private ScreenBox mainTurtleScreen;
 	private static Group thisRoot;
 	private ComboBox<String> combobox;
-	private final static ObservableList<String> options = FXCollections.observableArrayList("white", "black", "red",
-			"darkgreen", "floralwhite", "indianred");
+
 	private String boxText;
 
-	public GUIComboBox(Group root, ScreenBox turtleScreen, double[] properties, String text) {
-		mainTurtleScreen = turtleScreen;
+	public GUIComboBox(Group root, double[] properties, String text) {
 		thisRoot = root;
 		boxText = text;
 		setupProperties(properties[0], properties[1], properties[2], properties[3]);
@@ -26,21 +23,13 @@ public class GUIComboBox implements GUIBoxes {
 	}
 
 	private void setupProperties(double xPos, double yPos, double width, double height) {
-		combobox = new ComboBox<>(options);
+		combobox = new ComboBox<>();
 		getCombobox().setPromptText(boxText);
 		getCombobox().setLayoutX(xPos);
 		getCombobox().setLayoutY(yPos);
 		getCombobox().setMinWidth(width);
 		getCombobox().setMinHeight(height);
-		
-		getCombobox().valueProperty().addListener(new ChangeListener<String>() {
-	        @Override public void changed(ObservableValue ov, String t, String t1) { 
-	        	mainTurtleScreen.changeColor(t1);
-	    		getCombobox().setPromptText("Change Background Color");
 
-	        }    
-	    });
-		
 	}
 
 	@Override

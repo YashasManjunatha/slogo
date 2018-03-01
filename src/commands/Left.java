@@ -3,7 +3,7 @@ import java.util.List;
 
 import Turtle.Turtle;
 
-public class LeftCommand extends Command {
+public class Left extends Command {
 	private int numberOfParameters = 1;
 	double step;
 	

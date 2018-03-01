@@ -3,8 +3,8 @@ package commands;
 import java.util.List;
 import Turtle.Turtle;
 
-public class Greater extends Command{
-	
+public class Difference  extends Command{
+
 	private int numberOfParameters = 2;
 
 	@Override
@@ -13,15 +13,12 @@ public class Greater extends Command{
 		CommandNode child2 = children.get(1);
 		double x=child1.execute(t);
 		double y=child2.execute(t);
-		if(x>y) return 1;
-		else {
-			return 0;
-		}
+		return x-y;
 	}
 
 	@Override
 	public int getNumberOfParameters() {
 		return numberOfParameters;
 	}
-
 }
+
