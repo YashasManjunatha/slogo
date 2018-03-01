@@ -19,8 +19,8 @@ public class Turtle implements TurtleInterface {
 	private boolean penShowing;
 	private static final double startingX = 300;
 	private static final double startingY = 187.5;
-	private double currentX;
-	private double currentY;
+	//private double currentX;
+	//private double currentY;
 
 	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
 		screen = turtle_screen;
@@ -30,9 +30,6 @@ public class Turtle implements TurtleInterface {
 
 	private void initalizeTurtle() {
 		turtle.setImage(image);
-		currentX = startingX;
-		currentY = startingY;
-		System.out.println("startingY = " + startingY);
 		turtle.setX(startingX);
 		turtle.setY(startingY);
 		scaleTurtle();
@@ -62,21 +59,20 @@ public class Turtle implements TurtleInterface {
 			degrees = 360 + degrees;
 		}
 
-		double prevX = currentX;
-		double prevY = currentY;
+		double prevX = this.getX() + startingX;
+		double prevY = this.getY() + startingY;
 
 		double radians = Math.toRadians(degrees);
 
-		turtle.setY(turtle.getY() - moveLength * Math.cos(radians));
-		currentY = currentY - moveLength * Math.cos(radians);
-
 		turtle.setX(turtle.getX() + moveLength * Math.sin(radians));
-		currentX = currentX + moveLength * Math.sin(radians);
+		turtle.setY(turtle.getY() - moveLength * Math.cos(radians));
 
-		if (penShowing)
-			pen.draw(prevX + image.getWidth() / 2, prevY + image.getHeight() / 2, currentX + image.getWidth() / 2,
-					currentY + image.getHeight() / 2);
-
+		if (penShowing) {
+			pen.draw(prevX + image.getWidth() / 2, prevY + image.getHeight() / 2,
+					this.getX() + startingX + image.getWidth() / 2,
+					this.getY() + startingY + image.getHeight() / 2);
+		}
+		
 		cropTurtle();
 		return moveLength;
 
@@ -174,19 +170,16 @@ public class Turtle implements TurtleInterface {
 
 	@Override
 	public void moveTo(double x, double y) {
-		System.out.println("x + startingX = " + (x + currentX));
-		System.out.println("y + startingY = " + (y + currentY));
-		System.out.println("startingX" + currentX);
-		System.out.println("startingY" + currentY);
 
-		if (penShowing)
-
-			pen.draw(currentX + image.getWidth()/2, currentY + image.getHeight()/2, currentX + x + image.getWidth()/2, currentY + y + image.getHeight()/2);
+		if (penShowing) {
+			pen.draw(this.getX() + startingX + image.getWidth()/2,
+					this.getY() + startingY + image.getHeight()/2,
+					x + startingX + image.getWidth()/2,
+					y + startingY + image.getHeight()/2);
+		}
 		
 		turtle.setX(x + startingX);
 		turtle.setY(y + startingY);
-		currentX = x + currentX;
-		currentY = y + currentY;
 
 		cropTurtle();
 	}
