@@ -108,10 +108,14 @@ public class Turtle implements TurtleInterface {
 	@Override
 	public void setPenDown(boolean penDown) {
 
-		if (penShowing && !penDown)
+		if (penShowing && !penDown) {
+			//screen.removeFromPane(pen.getPen());
 			penShowing = false;
-		if (!penShowing && penDown)
+		}
+		if (!penShowing && penDown) {
+			//screen.addToPane(pen.getPen());
 			penShowing = true;
+		}
 	}
 
 	@Override
@@ -164,6 +168,10 @@ public class Turtle implements TurtleInterface {
 	public ImageView getImage() {
 		return turtle;
 	}
+	
+	public void changePenColor (String color) {
+		pen.changeColor(color);
+	}
 
 	@Override
 	public void moveTo(double x, double y) {
@@ -183,8 +191,5 @@ public class Turtle implements TurtleInterface {
 		cropTurtle();
 	}
 
-	public void setPenColor(String t1) {
-		pen.setColor(t1);
-	}
 
 }
