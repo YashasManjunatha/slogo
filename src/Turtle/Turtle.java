@@ -159,7 +159,7 @@ public class Turtle implements TurtleInterface {
 
 		if (turtle.getY() + image.getHeight() > screen.getY() + 425) {
 			crop.setY(turtle.getY());
-			crop.setHeight(screen.getY() + 400 - (turtle.getY()));
+			crop.setHeight(screen.getY() + 450 - (turtle.getY()));
 		}
 		turtle.setClip(crop);
 	}
