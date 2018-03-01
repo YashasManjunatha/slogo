@@ -2,7 +2,9 @@ package commands;
 
 import java.io.FileInputStream;
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Scanner;
@@ -23,20 +25,38 @@ public class Parser implements ParserObject{
 		int paramsFilled = 0;
 		while (scan.hasNext() && paramsFilled < root.getNumberOfParameters()) {
 			String nextCommand = scan.next();
-			CommandNode currentChild = new CommandNode(generateCommandInstance(nextCommand));
+			CommandNode currentChild = new CommandNode(generateCommandInstance(nextCommand, scan));
 			root.addChild(currentChild);
 			generateTree(currentChild, scan);
 			paramsFilled++;
 		}
 	}
 
-	CommandObject generateCommandInstance(String commandText) throws InvalidCommandException {
+	CommandObject generateCommandInstance(String commandText, Scanner scan) throws InvalidCommandException {
 		try {
 			double parsedDouble = Double.parseDouble(commandText);
 			return new ParsedDouble(parsedDouble);
 		}
 		catch(NumberFormatException e) {	
 		}
+		
+		if (commandText.equals("[")) {
+			int bracketCount = 1;
+			String toBeParsed;
+			while (bracketCount != 0 && scan.hasNext()) {
+				if ()
+			}
+			String next = scan.next();
+			
+			while (!next.equals("]")) {
+				tobeparsed+=next;
+			}
+			List<CommandNode> bracketedCommands = new ArrayList<>();
+			return new Bracket (bracketedCommands);
+		}
+		
+		
+		
 		CommandObject generatedCommand;
 		Properties command_properties = new Properties();
 		try {
@@ -45,20 +65,13 @@ public class Parser implements ParserObject{
 			Map<String, String> commandsToClasses = new HashMap<>();
 			String [] commands;
 			for (String className: command_properties.stringPropertyNames()) {
-				//System.out.println(command_properties.getProperty(className));
 				commands = command_properties.getProperty(className).split("\\|");
 				for (String command: commands) {
-					System.out.println(command + " " + className);
 					commandsToClasses.put(command, className);
-				//	commandsToClasses.put(command_properties.getProperty(className), className);
 				}
 			}
-			System.out.println(commandsToClasses.get(commandText));
-			
 			String className = commandsToClasses.get(commandText);
-			System.out.println(className);
 			Class<?> clazz = Class.forName("commands." + className);		//find class associated with the command string
-			System.out.println(clazz);
 			Object obj = clazz.newInstance(); 
 			generatedCommand = (CommandObject) obj;
 		}
