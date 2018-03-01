@@ -4,17 +4,17 @@ import java.util.List;
 
 import Turtle.Turtle;
 
-public class SetHeadingCommand extends Command {
-	private int numberOfParameters = 1;
+public class Home extends Command {
+	private int numberOfParameters = 0;
 	double step;
 	
 	  @Override
 	   public double execute(List<CommandNode> children, Turtle t){
-		   CommandNode child = children.get(0);
-		   step=child.execute(t);
-		   double currentHeading = t.getOrientation();
-		   double move =currentHeading-step;
-		   t.turn(move);
+	       double x=t.getX();
+	       double y =t.getY();
+	       double s =x*x+y*y;
+		   double step=Math.round(Math.sqrt(s));
+		   t.moveTo(0, 0);
 		   return step;
 	   }
 
@@ -22,5 +22,5 @@ public class SetHeadingCommand extends Command {
 		public int getNumberOfParameters() {
 			return numberOfParameters;
 		}
-}
 
+}
