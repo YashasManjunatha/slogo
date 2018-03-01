@@ -11,6 +11,7 @@ import GUIBoxes.ErrorBox;
 public class Parser implements ParserObject{
 	
 	private static final String PROPERTY_FILENAME = "src/languages/English.properties";
+	private boolean bool;
 
 	@Override
 	public CommandNode parse(String text) throws InvalidCommandException{
@@ -23,18 +24,22 @@ public class Parser implements ParserObject{
 	private void generateTree(CommandNode root, Scanner scan) throws InvalidCommandException{
 		int paramsFilled = 0;
 		while (scan.hasNext() && paramsFilled < root.getNumberOfParameters()) {
+			bool = false;
 			String nextCommand = scan.next();
-			CommandNode currentChild = new CommandNode(generateCommandInstance(nextCommand, scan));
+			CommandNode currentChild = generateCommandNode(nextCommand,scan);
 			root.addChild(currentChild);
+			if (bool) {
+				return;
+			}
 			generateTree(currentChild, scan);
 			paramsFilled++;
 		}
 	}
-
-	CommandObject generateCommandInstance(String commandText, Scanner scan) throws InvalidCommandException {
+	
+	CommandNode generateCommandNode(String commandText, Scanner scan) throws InvalidCommandException {
 		try {
 			double parsedDouble = Double.parseDouble(commandText);
-			return new ParsedDouble(parsedDouble);
+			return new CommandNode(new ParsedDouble(parsedDouble));
 		}
 		catch(NumberFormatException e) {	
 		}
@@ -53,14 +58,14 @@ public class Parser implements ParserObject{
 					continue;
 				}
 				else {
-					toBeParsed += next;
+					toBeParsed = toBeParsed + " " + next;
 				}
 			}
 			Parser newParser = new Parser();
-			return newParser.parse(toBeParsed).getCommand();
+			CommandNode bracketNode = newParser.parse(toBeParsed);
+			bool = true;
+			return bracketNode;
 		}
-		
-		
 		
 		CommandObject generatedCommand;
 		Properties command_properties = new Properties();
@@ -83,7 +88,7 @@ public class Parser implements ParserObject{
 		catch(Exception e) {
 			throw new InvalidCommandException(commandText);
 		}
-		return generatedCommand;
+		return new CommandNode(generatedCommand);
 	}
 }
 
