@@ -6,10 +6,12 @@ import Turtle.Turtle;
 
 public class Pi extends Command{
 	private int numberOfParameters = 0;
-
+    double retVal = Math.PI;
 	@Override
 	public double execute(List<CommandNode> children, Turtle t){
-		return Math.PI;
+		
+			return retVal;
+		
 	}
 
 	@Override
