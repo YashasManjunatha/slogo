@@ -108,10 +108,14 @@ public class Turtle implements TurtleInterface {
 	@Override
 	public void setPenDown(boolean penDown) {
 
-		if (penShowing && !penDown)
+		if (penShowing && !penDown) {
+			//screen.removeFromPane(pen.getPen());
 			penShowing = false;
-		if (!penShowing && penDown)
+		}
+		if (!penShowing && penDown) {
+			//screen.addToPane(pen.getPen());
 			penShowing = true;
+		}
 	}
 
 	@Override
