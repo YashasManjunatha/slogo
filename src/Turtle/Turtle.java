@@ -62,21 +62,21 @@ public class Turtle implements TurtleInterface {
 		if (degrees < 0) {
 			degrees = 360 + degrees;
 		}
-		
+
 		double prevX = currentX;
 		double prevY = currentY;
-		
+
 		double radians = Math.toRadians(degrees);
 
-		
 		turtle.setY(turtle.getY() - moveLength * Math.cos(radians));
 		currentY = currentY - moveLength * Math.cos(radians);
-		
+
 		turtle.setX(turtle.getX() + moveLength * Math.sin(radians));
 		currentX = currentX + moveLength * Math.sin(radians);
-		
+
 		if (penShowing)
-			pen.draw(prevX + image.getWidth()/2, prevY + image.getHeight()/2, currentX + image.getWidth()/2, currentY + image.getHeight()/2);
+			pen.draw(prevX + image.getWidth() / 2, prevY + image.getHeight() / 2, currentX + image.getWidth() / 2,
+					currentY + image.getHeight() / 2);
 
 		cropTurtle();
 		return moveLength;
@@ -171,17 +171,20 @@ public class Turtle implements TurtleInterface {
 		System.out.println("y + startingY = " + (y + currentY));
 		System.out.println("startingX" + currentX);
 		System.out.println("startingY" + currentY);
-		
+
 		if (penShowing)
 			pen.draw(currentX, currentY, currentX + x, currentY + y);
-		
+
 		turtle.setX(x + startingX);
 		turtle.setY(y + startingY);
 		currentX = x + currentX;
 		currentY = y + currentY;
-		
+
 		cropTurtle();
 	}
-	
+
+	public void setPenColor(String t1) {
+		pen.setColor(t1);
+	}
 
 }
