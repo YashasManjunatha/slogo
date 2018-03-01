@@ -7,14 +7,23 @@ import Turtle.Turtle;
 public class Repeat extends Command{
 	@Override
 	public double execute(List<CommandNode> children, Turtle t) {
-		double repeat = children.get(0).execute(t);
+		double numRepeat = children.get(0).execute(t);
 		double retVal = 0;
-		for (int x=0; x<repeat; x++) {
-			for (int i=1; i<children.size(); x++) {
-				retVal = children.get(i).execute(t);
-			}
+		CommandNode bracketNode = children.get(1);
+		for (int x=0; x<numRepeat; x++) {
+			retVal = bracketNode.execute(t);
 		}
 		return retVal;
+		
 	}
+//		double repeat = children.get(0).execute(t);
+//		double retVal = 0;
+//		for (int x=0; x<repeat; x++) {
+//			for (int i=1; i<children.size(); i++) {
+//				retVal = children.get(i).execute(t);
+//			}
+//		}
+//		return retVal;
+//	}
 
 }

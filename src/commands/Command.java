@@ -25,6 +25,7 @@ public class Command implements CommandObject{
 	}
 	
 	public double execute() {
+		System.out.println(superNode);
 		for (int x=0; x<superNode.getChildren().size(); x++) {
 			superNode.getChildren().get(x).execute(myTurtle);
 			System.out.println(superNode.getChildren().get(x).getCommand());

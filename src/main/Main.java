@@ -68,6 +68,7 @@ public class Main extends Application {
 		GUIProperties.put("imageButton", new double[] { 700, 405, 200, 15 });
 		GUIProperties.put("backgroundCombo", new double[] { 700, 435, 200, 15 });
 		GUIProperties.put("languageCombo", new double[] { 700, 465, 200, 15 });
+		GUIProperties.put("penCombo", new double[] { 700, 495, 200, 15 });
 		GUIProperties.put("runButton", new double[] { 640, 475, 35, 55 });
 
 		return GUIProperties;
@@ -88,7 +89,7 @@ public class Main extends Application {
 				"Change Background Color");
 		languageComboBox = new LanguageCombo(root, GUIProperties.get("languageCombo"), "Change Language");
 		language = ((LanguageCombo) languageComboBox).getLanguage();
-		//penColorComboBox = new PenCombo(root, turtleScreen, GUIProperties.get("penCombo"), "Change Pen Color");
+		penColorComboBox = new PenCombo(root, turtleList, GUIProperties.get("penCombo"), "Change Pen Color");
 
 	}
 
