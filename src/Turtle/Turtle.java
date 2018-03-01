@@ -169,7 +169,7 @@ public class Turtle implements TurtleInterface {
 	}
 
 	@Override
-	public void moveTo(double x, double y) {
+	public double moveTo(double x, double y) {
 
 		if (penShowing) {
 			pen.draw(this.getX() + startingX + image.getWidth()/2,
@@ -182,10 +182,13 @@ public class Turtle implements TurtleInterface {
 		turtle.setY(y + startingY);
 
 		cropTurtle();
+		
+		return Math.sqrt(x*x + y*y);
 	}
 
-	public void clearScreen() {
-		this.moveTo(0,0);
+	public double clearScreen() {
+		double dist = this.moveTo(0,0);
 		pen.emptyPen();
+		return dist;
 	}
 }
