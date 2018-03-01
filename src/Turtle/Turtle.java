@@ -168,6 +168,10 @@ public class Turtle implements TurtleInterface {
 	public ImageView getImage() {
 		return turtle;
 	}
+	
+	public void changePenColor (String color) {
+		pen.changeColor(color);
+	}
 
 	@Override
 	public void moveTo(double x, double y) {
