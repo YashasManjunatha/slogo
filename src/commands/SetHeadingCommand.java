@@ -12,7 +12,9 @@ public class SetHeadingCommand extends Command {
 	   public double execute(List<CommandNode> children, Turtle t){
 		   CommandNode child = children.get(0);
 		   step=child.execute(t);
-		   //t.turn(step); not implemented yet
+		   double currentHeading = t.getOrientation();
+		   double move =currentHeading-step;
+		   t.turn(move);
 		   return step;
 	   }
 

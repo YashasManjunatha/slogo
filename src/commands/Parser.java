@@ -1,13 +1,12 @@
 package commands;
 
 import java.io.FileInputStream;
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Scanner;
+
+import GUIBoxes.ErrorBox;
 
 public class Parser implements ParserObject{
 	
@@ -42,17 +41,23 @@ public class Parser implements ParserObject{
 		
 		if (commandText.equals("[")) {
 			int bracketCount = 1;
-			String toBeParsed;
-			while (bracketCount != 0 && scan.hasNext()) {
-				if ()
+			String toBeParsed = "";
+			String next;
+			while (bracketCount != 0) {
+				if (!scan.hasNext()) {
+					new ErrorBox("Missing Bracket(s)", commandText);
+				}
+				next = scan.next();
+				if (next.equals("]")) {
+					bracketCount--;
+					continue;
+				}
+				else {
+					toBeParsed += next;
+				}
 			}
-			String next = scan.next();
-			
-			while (!next.equals("]")) {
-				tobeparsed+=next;
-			}
-			List<CommandNode> bracketedCommands = new ArrayList<>();
-			return new Bracket (bracketedCommands);
+			Parser newParser = new Parser();
+			return newParser.parse(toBeParsed).getCommand();
 		}
 		
 		
