@@ -24,17 +24,22 @@ public class Parser implements ParserObject{
 		int paramsFilled = 0;
 		while (scan.hasNext() && paramsFilled < root.getNumberOfParameters()) {
 			String nextCommand = scan.next();
-			CommandNode currentChild = new CommandNode(generateCommandInstance(nextCommand, scan));
+			//CommandNode currentChild = new CommandNode(generateCommandInstance(nextCommand, scan));
+			CommandNode currentChild = generateCommandNode(nextCommand,scan);
+			System.out.println("parent " + root.getCommand() + " child " + currentChild.getCommand());
 			root.addChild(currentChild);
 			generateTree(currentChild, scan);
 			paramsFilled++;
 		}
+		for (CommandNode child: root.getChildren()) {
+			System.out.println("printing children: " + child.getCommand());
+		}
 	}
-
-	CommandObject generateCommandInstance(String commandText, Scanner scan) throws InvalidCommandException {
+	
+	CommandNode generateCommandNode(String commandText, Scanner scan) throws InvalidCommandException {
 		try {
 			double parsedDouble = Double.parseDouble(commandText);
-			return new ParsedDouble(parsedDouble);
+			return new CommandNode(new ParsedDouble(parsedDouble));
 		}
 		catch(NumberFormatException e) {	
 		}
@@ -53,11 +58,14 @@ public class Parser implements ParserObject{
 					continue;
 				}
 				else {
-					toBeParsed += next;
+					toBeParsed = toBeParsed + " " + next;
 				}
 			}
 			Parser newParser = new Parser();
-			return newParser.parse(toBeParsed).getCommand();
+			CommandNode bracketNode = newParser.parse(toBeParsed);
+//			System.out.println(toBeParsed);
+//			System.out.println("new children!!!!! : " + bracketNode.getChildren().get(0).getCommand());
+			return bracketNode;
 		}
 		
 		
@@ -83,8 +91,69 @@ public class Parser implements ParserObject{
 		catch(Exception e) {
 			throw new InvalidCommandException(commandText);
 		}
-		return generatedCommand;
+		return new CommandNode(generatedCommand);
 	}
+	
+	
+	
+
+//	CommandObject generateCommandInstance(String commandText, Scanner scan) throws InvalidCommandException {
+//		try {
+//			double parsedDouble = Double.parseDouble(commandText);
+//			return new ParsedDouble(parsedDouble);
+//		}
+//		catch(NumberFormatException e) {	
+//		}
+//		
+//		if (commandText.equals("[")) {
+//			int bracketCount = 1;
+//			String toBeParsed = "";
+//			String next;
+//			while (bracketCount != 0) {
+//				if (!scan.hasNext()) {
+//					new ErrorBox("Missing Bracket(s)", commandText);
+//				}
+//				next = scan.next();
+//				if (next.equals("]")) {
+//					bracketCount--;
+//					continue;
+//				}
+//				else {
+//					toBeParsed = toBeParsed + " " + next;
+//				}
+//			}
+//			Parser newParser = new Parser();
+//			CommandNode super2 = newParser.parse(toBeParsed);
+//			System.out.println(toBeParsed);
+//			System.out.println("new children!!!!! : " + super2.getChildren().get(0).getCommand());
+//			return super2.getCommand();
+//		}
+//		
+//		
+//		
+//		CommandObject generatedCommand;
+//		Properties command_properties = new Properties();
+//		try {
+//			FileInputStream input = new FileInputStream(PROPERTY_FILENAME);
+//			command_properties.load(input);
+//			Map<String, String> commandsToClasses = new HashMap<>();
+//			String [] commands;
+//			for (String className: command_properties.stringPropertyNames()) {
+//				commands = command_properties.getProperty(className).split("\\|");
+//				for (String command: commands) {
+//					commandsToClasses.put(command, className);
+//				}
+//			}
+//			String className = commandsToClasses.get(commandText);
+//			Class<?> clazz = Class.forName("commands." + className);		//find class associated with the command string
+//			Object obj = clazz.newInstance(); 
+//			generatedCommand = (CommandObject) obj;
+//		}
+//		catch(Exception e) {
+//			throw new InvalidCommandException(commandText);
+//		}
+//		return generatedCommand;
+//	}
 }
 
 
