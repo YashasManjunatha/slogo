@@ -45,20 +45,13 @@ public class Parser implements ParserObject{
 			Map<String, String> commandsToClasses = new HashMap<>();
 			String [] commands;
 			for (String className: command_properties.stringPropertyNames()) {
-				//System.out.println(command_properties.getProperty(className));
 				commands = command_properties.getProperty(className).split("\\|");
 				for (String command: commands) {
-					System.out.println(command + " " + className);
 					commandsToClasses.put(command, className);
-				//	commandsToClasses.put(command_properties.getProperty(className), className);
 				}
 			}
-			System.out.println(commandsToClasses.get(commandText));
-			
 			String className = commandsToClasses.get(commandText);
-			System.out.println(className);
 			Class<?> clazz = Class.forName("commands." + className);		//find class associated with the command string
-			System.out.println(clazz);
 			Object obj = clazz.newInstance(); 
 			generatedCommand = (CommandObject) obj;
 		}
