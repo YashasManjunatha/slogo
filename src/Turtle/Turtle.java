@@ -26,7 +26,6 @@ public class Turtle implements TurtleInterface {
 		screen = turtle_screen;
 		image = turtle_image;
 		initalizeTurtle();
-
 	}
 
 	private void initalizeTurtle() {
@@ -181,7 +180,7 @@ public class Turtle implements TurtleInterface {
 		System.out.println("startingY" + currentY);
 		
 		if (penShowing)
-			pen.draw(currentX, currentY, currentX + x, currentY + y);
+			pen.draw(currentX + image.getWidth()/2, currentY + image.getHeight()/2, currentX + x + image.getWidth()/2, currentY + y + image.getHeight()/2);
 		
 		turtle.setX(x + startingX);
 		turtle.setY(y + startingY);
