@@ -184,5 +184,8 @@ public class Turtle implements TurtleInterface {
 		cropTurtle();
 	}
 
-
+	public void clearScreen() {
+		this.moveTo(0,0);
+		pen.emptyPen();
+	}
 }
