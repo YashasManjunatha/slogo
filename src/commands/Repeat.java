@@ -5,6 +5,8 @@ import java.util.List;
 import Turtle.Turtle;
 
 public class Repeat extends Command{
+	private static int numParams = 2;
+
 	@Override
 	public double execute(List<CommandNode> children, Turtle t) {
 		double numRepeat = children.get(0).execute(t);
@@ -14,16 +16,10 @@ public class Repeat extends Command{
 			retVal = bracketNode.execute(t);
 		}
 		return retVal;
-		
 	}
-//		double repeat = children.get(0).execute(t);
-//		double retVal = 0;
-//		for (int x=0; x<repeat; x++) {
-//			for (int i=1; i<children.size(); i++) {
-//				retVal = children.get(i).execute(t);
-//			}
-//		}
-//		return retVal;
-//	}
-
+	
+	@Override
+	public int getNumberOfParameters() {
+		return numParams;
+	}
 }
