@@ -65,14 +65,16 @@ public class Turtle implements TurtleInterface {
 		double startX = turtle.getX();
 		double startY = turtle.getY();
 		
-		turtle.setY(turtle.getY() - moveLength * Math.cos(radians));
-		currentY = turtle.getY() - moveLength * Math.cos(radians);
+		System.out.println(startX + "       sarasaf     " + startY);
 		
-		turtle.setX(turtle.getX() + moveLength * Math.sin(radians));
+		currentY = turtle.getY() - moveLength * Math.cos(radians);
+		turtle.setY(turtle.getY() - moveLength * Math.cos(radians));
+		
 		currentX = turtle.getX() + moveLength * Math.sin(radians);
+		turtle.setX(turtle.getX() + moveLength * Math.sin(radians));
 		
 		if (penShowing)
-			pen.draw(startX, startY, currentX, currentY);
+			pen.draw(startX+image.getWidth()/2, startY+image.getHeight()/2, currentX+image.getWidth()/2, currentY+image.getHeight()/2);
 
 		cropTurtle();
 		return moveLength;
@@ -104,10 +106,14 @@ public class Turtle implements TurtleInterface {
 	@Override
 	public void setPenDown(boolean penDown) {
 
-		if (penShowing && !penDown)
-			screen.removeFromPane(pen.getPen());
-		if (!penShowing && penDown)
-			screen.addToPane(pen.getPen());
+		if (penShowing && !penDown) {
+			//screen.removeFromPane(pen.getPen());
+			penShowing = false;
+		}
+		if (!penShowing && penDown) {
+			//screen.addToPane(pen.getPen());
+			penShowing = true;
+		}
 	}
 
 	@Override
@@ -117,10 +123,14 @@ public class Turtle implements TurtleInterface {
 
 	@Override
 	public void setTurtleShowing(boolean should_be_showing) {
-		if (turtleShowing && !should_be_showing)
+		if (turtleShowing && !should_be_showing) {
 			screen.removeFromPane(turtle);
-		if (!turtleShowing && should_be_showing)
+			turtleShowing = false;
+		}
+		if (!turtleShowing && should_be_showing) {
 			screen.addToPane(turtle);
+			turtleShowing = true;
+		}
 	}
 
 	@Override
