@@ -17,10 +17,8 @@ public class Turtle implements TurtleInterface {
 	private boolean turtleShowing;
 	private Pen pen;
 	private boolean penShowing;
-	private static final double startingX = 300;
-	private static final double startingY = 187.5;
-	//private double currentX;
-	//private double currentY;
+	private double startingX;
+	private double startingY;
 
 	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
 		screen = turtle_screen;
@@ -30,6 +28,8 @@ public class Turtle implements TurtleInterface {
 
 	private void initalizeTurtle() {
 		turtle.setImage(image);
+		startingX = screen.getWidth() / 2 - image.getWidth() / 2;
+		startingY = screen.getHeight() / 2 - image.getHeight() / 2;
 		turtle.setX(startingX);
 		turtle.setY(startingY);
 		scaleTurtle();
@@ -155,7 +155,7 @@ public class Turtle implements TurtleInterface {
 
 		if (turtle.getY() + image.getHeight() > screen.getY() + 425) {
 			crop.setY(turtle.getY());
-			crop.setHeight(screen.getY() + 400 - (turtle.getY()));
+			crop.setHeight(screen.getY() + 450 - (turtle.getY()));
 		}
 		turtle.setClip(crop);
 	}
@@ -169,7 +169,7 @@ public class Turtle implements TurtleInterface {
 	}
 
 	@Override
-	public void moveTo(double x, double y) {
+	public double moveTo(double x, double y) {
 
 		if (penShowing) {
 			pen.draw(this.getX() + startingX + image.getWidth()/2,
@@ -182,7 +182,13 @@ public class Turtle implements TurtleInterface {
 		turtle.setY(y + startingY);
 
 		cropTurtle();
+		
+		return Math.sqrt(x*x + y*y);
 	}
 
-
+	public double clearScreen() {
+		double dist = this.moveTo(0,0);
+		pen.emptyPen();
+		return dist;
+	}
 }

@@ -68,7 +68,7 @@ public class ScreenBox {
 			try {
 				image = new Image(new FileInputStream(fileName));
 			} catch (FileNotFoundException e) {
-				e.printStackTrace();// CHANGE THIS LINE - MAKE ALERT BOX POP UP
+				new ErrorBox("Image Not Found", "Please Choose A Valid Image");
 			}
 			Turtle turtle = new Turtle(this, image);
 			turtleList.add(turtle);

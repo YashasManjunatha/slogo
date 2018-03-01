@@ -21,8 +21,8 @@ public class PenCombo extends GUIComboBox {
 	private ScreenBox mainTurtleScreen;
 	private static ArrayList<Turtle> thisTurtleList;
 
-	private final static ObservableList<String> options = FXCollections.observableArrayList("white", "black", "red",
-			"darkgreen", "floralwhite", "indianred");
+	private final static ObservableList<String> options = FXCollections.observableArrayList("White", "Black", "Red",
+			"Dark Green", "Blue", "Yellow", "Purple", "Orange");
 
 	public PenCombo(Group root, ArrayList<Turtle> turtleList, double[] properties, String title) {
 		super(root, properties, title);
@@ -36,7 +36,8 @@ public class PenCombo extends GUIComboBox {
 			@Override
 			public void changed(ObservableValue ov, String t, String t1) {
 				for (Turtle turt : thisTurtleList) {
-					turt.changePenColor(t1);
+					String[] colorList = t1.toLowerCase().split(" ");
+		        	turt.changePenColor(String.join("", colorList));
 				}
 
 			}
