@@ -9,9 +9,6 @@ public class PrintTree {
 		try {
 			superNode = myParser.parse(commands1);
 			superNode.printTree();
-			for (CommandNode child: superNode.getChildren()) {
-				System.out.println("hello" + child.getChildren());
-			}
 		}
 		catch(Exception e){
 			e.printStackTrace();

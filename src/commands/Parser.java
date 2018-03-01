@@ -11,6 +11,7 @@ import GUIBoxes.ErrorBox;
 public class Parser implements ParserObject{
 	
 	private static final String PROPERTY_FILENAME = "src/languages/English.properties";
+	private boolean bool;
 
 	@Override
 	public CommandNode parse(String text) throws InvalidCommandException{
@@ -23,10 +24,13 @@ public class Parser implements ParserObject{
 	private void generateTree(CommandNode root, Scanner scan) throws InvalidCommandException{
 		int paramsFilled = 0;
 		while (scan.hasNext() && paramsFilled < root.getNumberOfParameters()) {
+			bool = false;
 			String nextCommand = scan.next();
 			CommandNode currentChild = generateCommandNode(nextCommand,scan);
 			root.addChild(currentChild);
-			System.out.println("child command " + currentChild.getCommand());
+			if (bool) {
+				return;
+			}
 			generateTree(currentChild, scan);
 			paramsFilled++;
 		}
@@ -59,7 +63,7 @@ public class Parser implements ParserObject{
 			}
 			Parser newParser = new Parser();
 			CommandNode bracketNode = newParser.parse(toBeParsed);
-			System.out.println(toBeParsed);
+			bool = true;
 			return bracketNode;
 		}
 		
