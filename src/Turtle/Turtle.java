@@ -1,9 +1,12 @@
 package Turtle;
 
+import java.util.ArrayList;
+
 import GUIBoxes.ScreenBox;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import pen.Pen;
 
@@ -21,6 +24,9 @@ public class Turtle implements TurtleInterface {
 	private double orientation = 0;
 	private double xPos;
 	private double yPos;
+	private double prevXPos;
+	private double prevYPos;
+	private ArrayList<double[]> pathList = new ArrayList<>();
 
 	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
 		screen = turtle_screen;
@@ -29,7 +35,7 @@ public class Turtle implements TurtleInterface {
 	}
 
 	private void initalizeTurtle() {
-		//scaleImage();
+		// scaleImage();
 		turtleShowing = true;
 		xPos = startingX;
 		yPos = startingY;
@@ -39,7 +45,6 @@ public class Turtle implements TurtleInterface {
 
 	}
 
-
 	@Override
 	public double move(double moveLength) {
 		double degrees = this.getOrientation() % 360;
@@ -47,24 +52,39 @@ public class Turtle implements TurtleInterface {
 			degrees = 360 + degrees;
 		}
 
-		double prevX = this.getX() + startingX;
-		double prevY = this.getY() + startingY;
+		prevXPos = xPos;
+		prevYPos = yPos;
 
 		double radians = Math.toRadians(degrees);
 
 		xPos = xPos + moveLength * Math.sin(radians);
 		yPos = yPos - moveLength * Math.cos(radians);
 
+		addPath(prevXPos, prevYPos, xPos, yPos);
+
 		screen.updateBox();
-		
-		if (penShowing) {
-			pen.draw(prevX + image.getWidth() / 2, prevY + image.getHeight() / 2,
-					this.getX() + startingX + image.getWidth() / 2,
-					this.getY() + startingY + image.getHeight() / 2);
-		}
-		
+
+		System.out.println("prevXPos = " + prevXPos);
+		System.out.println("prevXPos = " + prevXPos);
+
+		// if (penShowing) {
+		// screen.draw(prevX + image.getWidth() / 2, prevY + image.getHeight() / 2,
+		// xPos + image.getWidth() / 2,
+		// yPos + startingY + image.getHeight() / 2);
+		// }
+
 		return moveLength;
 
+	}
+
+	private void addPath(double prevXPos, double prevYPos, double xPos, double yPos) {
+		System.out.println(prevXPos);
+		System.out.println(prevYPos);
+		System.out.println(xPos);
+		System.out.println(yPos);
+
+		double[] newPath = { prevXPos, prevYPos, xPos, yPos };
+		pathList.add(newPath);
 	}
 
 	@Override
@@ -81,6 +101,18 @@ public class Turtle implements TurtleInterface {
 		return xPos;
 	}
 
+	public ArrayList<double[]> getPaths() {
+		return pathList;
+	}
+
+	public double getPrevX() {
+		return prevXPos;
+	}
+
+	public double getPrevY() {
+		return prevYPos;
+	}
+
 	@Override
 	public double getY() {
 		return yPos;
@@ -88,18 +120,18 @@ public class Turtle implements TurtleInterface {
 
 	@Override
 	public double getOrientation() {
-		return orientation%360;
+		return orientation % 360;
 	}
 
 	@Override
 	public void setPenDown(boolean penDown) {
 
 		if (penShowing && !penDown) {
-			//screen.removeFromPane(pen.getPen());
+			// screen.removeFromPane(pen.getPen());
 			penShowing = false;
 		}
 		if (!penShowing && penDown) {
-			//screen.addToPane(pen.getPen());
+			// screen.addToPane(pen.getPen());
 			penShowing = true;
 		}
 	}
@@ -112,13 +144,12 @@ public class Turtle implements TurtleInterface {
 	@Override
 	public void setTurtleShowing(boolean should_be_showing) {
 		if (turtleShowing && !should_be_showing) {
-			screen.removeFromPane(turtle);
 			turtleShowing = false;
 		}
 		if (!turtleShowing && should_be_showing) {
-			screen.addToPane(turtle);
 			turtleShowing = true;
 		}
+		screen.updateBox();
 	}
 
 	@Override
@@ -126,37 +157,32 @@ public class Turtle implements TurtleInterface {
 		return turtleShowing;
 	}
 
-
 	public Image getImage() {
 		return image;
 	}
-	
-	public void changePenColor (String color) {
-		pen.changeColor(color);
+
+	public void changePenColor(Color color) {
+		screen.changePenColor(color);
 	}
 
 	@Override
 	public double moveTo(double x, double y) {
 
-		if (penShowing) {
-			pen.draw(this.getX() + startingX + image.getWidth()/2,
-					this.getY() + startingY + image.getHeight()/2,
-					x + startingX + image.getWidth()/2,
-					y + startingY + image.getHeight()/2);
-		}
-		
-		
-		
+
 		xPos = x;
 		yPos = y;
-
 		
-		return Math.sqrt(x*x + y*y);
+		addPath(prevXPos, prevYPos, xPos, yPos);
+
+		screen.updateBox();
+
+		return Math.sqrt(x * x + y * y);
 	}
 
 	public double clearScreen() {
-		double dist = this.moveTo(0,0);
+		double dist = this.moveTo(0, 0);
 		pen.emptyPen();
 		return dist;
 	}
+
 }
