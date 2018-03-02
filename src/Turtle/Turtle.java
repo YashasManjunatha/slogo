@@ -17,8 +17,8 @@ public class Turtle implements TurtleInterface {
 	private boolean turtleShowing;
 	private Pen pen;
 	private boolean penShowing;
-	private double startingX;
-	private double startingY;
+	private final static double startingX = 300.0;
+	private final static double startingY = 187.5;
 
 	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
 		screen = turtle_screen;
@@ -28,8 +28,7 @@ public class Turtle implements TurtleInterface {
 
 	private void initalizeTurtle() {
 		turtle.setImage(image);
-		startingX = screen.getWidth() / 2 - image.getWidth() / 2;
-		startingY = screen.getHeight() / 2 - image.getHeight() / 2;
+
 		turtle.setX(startingX);
 		turtle.setY(startingY);
 		scaleTurtle();

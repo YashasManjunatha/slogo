@@ -7,16 +7,16 @@ import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
 
-public class backgroundCombo extends GUIComboBox {
+public class BackgroundCombo extends GUIComboBox {
 	
-	private ScreenBox mainTurtleScreen;
+	private static ScreenBox mainTurtleScreen;
 
 	
 	private final static ObservableList<String> options = FXCollections.observableArrayList("White", "Black", "Red",
 			"Dark Green", "Blue", "Yellow", "Purple", "Orange");
 	
 
-	public backgroundCombo(Group root, ScreenBox turtleScreen, double[] properties, String title) {
+	public BackgroundCombo(Group root, ScreenBox turtleScreen, double[] properties, String title) {
 		super(root, properties, title);
 		mainTurtleScreen = turtleScreen;
 		getCombobox().setItems(options);
@@ -27,8 +27,10 @@ public class backgroundCombo extends GUIComboBox {
 	private void setupAction() {
 		getCombobox().valueProperty().addListener(new ChangeListener<String>() {
 	        @Override public void changed(ObservableValue ov, String t, String t1) { 
+	        	System.out.println(t1);
 	        	String[] colorList = t1.toLowerCase().split(" ");
-	        	mainTurtleScreen.changeColor(String.join("", colorList));
+	        	String color = String.join("", colorList);
+	        	mainTurtleScreen.changeColor(color);
 	    		getCombobox().setPromptText("Change Background Color");
 
 	        }    
