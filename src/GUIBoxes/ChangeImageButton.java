@@ -31,7 +31,7 @@ public class ChangeImageButton extends Buttons {
 				fileChooser.setTitle("Choose Turtle Image");
 				try {
 				String fileName = fileChooser.showOpenDialog(mainStage).getPath();
-				mainTurtleScreen.replaceImage(fileName, mainTurtleList);
+				mainTurtleScreen.replaceImage(fileName);
 				}catch (NullPointerException n) {
 					//do nothing
 				}

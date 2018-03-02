@@ -2,6 +2,7 @@ package GUIBoxes;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import Turtle.Turtle;
 import javafx.beans.value.ChangeListener;
@@ -10,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javafx.scene.Group;
+import javafx.scene.paint.Color;
 
 public class PenCombo extends GUIComboBox {
 
@@ -23,6 +25,23 @@ public class PenCombo extends GUIComboBox {
 
 	private final static ObservableList<String> options = FXCollections.observableArrayList("White", "Black", "Red",
 			"Dark Green", "Blue", "Yellow", "Purple", "Orange");
+	
+	private static final HashMap<String, Color> colorMap = createColorMap();
+
+	private static HashMap<String, Color> createColorMap() {
+		HashMap<String, Color> colorMap = new HashMap<>();
+		// first index = xPos, second = yPos, third = width, fourth = length
+		colorMap.put("White", Color.WHITE);
+		colorMap.put("Black", Color.BLACK);
+		colorMap.put("Red", Color.RED);
+		colorMap.put("Dark Green", Color.DARKGREEN);
+		colorMap.put("Blue", Color.BLUE);
+		colorMap.put("Yellow", Color.YELLOW);
+		colorMap.put("Purple", Color.PURPLE);
+		colorMap.put("Orange", Color.ORANGE);
+		
+		return colorMap;
+	}
 
 	public PenCombo(Group root, ArrayList<Turtle> turtleList, double[] properties, String title) {
 		super(root, properties, title);
@@ -36,8 +55,7 @@ public class PenCombo extends GUIComboBox {
 			@Override
 			public void changed(ObservableValue ov, String t, String t1) {
 				for (Turtle turt : thisTurtleList) {
-					String[] colorList = t1.toLowerCase().split(" ");
-		        	turt.changePenColor(String.join("", colorList));
+		        	turt.changePenColor(colorMap.get(t1));
 				}
 
 			}
