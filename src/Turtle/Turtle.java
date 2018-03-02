@@ -13,12 +13,14 @@ public class Turtle implements TurtleInterface {
 
 	private ScreenBox screen;
 	private Image image;
-	private ImageView turtle = new ImageView();
 	private boolean turtleShowing;
 	private Pen pen;
 	private boolean penShowing;
 	private final static double startingX = 300.0;
 	private final static double startingY = 187.5;
+	private double orientation = 0;
+	private double xPos;
+	private double yPos;
 
 	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
 		screen = turtle_screen;
@@ -27,29 +29,16 @@ public class Turtle implements TurtleInterface {
 	}
 
 	private void initalizeTurtle() {
-		turtle.setImage(image);
-
-		turtle.setX(startingX);
-		turtle.setY(startingY);
-		scaleTurtle();
+		//scaleImage();
 		turtleShowing = true;
-		screen.addToPane(turtle);
+		xPos = startingX;
+		yPos = startingY;
+		screen.addTurtleToCanvas(image, xPos, yPos);
 		pen = new Pen();
-		screen.addToPane(pen.getPen());
 		penShowing = true;
-		cropTurtle();
 
 	}
 
-	private void scaleTurtle() {
-		double imageRatio = image.getWidth() / image.getHeight();
-		System.out.println(imageRatio);
-		turtle.setFitHeight(50);
-		turtle.setFitWidth(50 * imageRatio);
-		turtle.setPreserveRatio(true);
-		System.out.println(turtle.getX());
-
-	}
 
 	@Override
 	public double move(double moveLength) {
@@ -63,40 +52,43 @@ public class Turtle implements TurtleInterface {
 
 		double radians = Math.toRadians(degrees);
 
-		turtle.setX(turtle.getX() + moveLength * Math.sin(radians));
-		turtle.setY(turtle.getY() - moveLength * Math.cos(radians));
+		xPos = xPos + moveLength * Math.sin(radians);
+		yPos = yPos - moveLength * Math.cos(radians);
 
+		screen.updateBox();
+		
 		if (penShowing) {
 			pen.draw(prevX + image.getWidth() / 2, prevY + image.getHeight() / 2,
 					this.getX() + startingX + image.getWidth() / 2,
 					this.getY() + startingY + image.getHeight() / 2);
 		}
 		
-		cropTurtle();
 		return moveLength;
 
 	}
 
 	@Override
 	public double turn(double degrees) {
-		turtle.setRotate(turtle.getRotate() + degrees);
-		cropTurtle();
+		orientation = orientation + degrees;
+
+		System.out.println(orientation);
+		screen.updateBox();
 		return degrees;
 	}
 
 	@Override
 	public double getX() {
-		return turtle.getX() - startingX;
+		return xPos;
 	}
 
 	@Override
 	public double getY() {
-		return turtle.getY() - startingY;
+		return yPos;
 	}
 
 	@Override
 	public double getOrientation() {
-		return turtle.getRotate();
+		return orientation%360;
 	}
 
 	@Override
@@ -134,33 +126,9 @@ public class Turtle implements TurtleInterface {
 		return turtleShowing;
 	}
 
-	public void cropTurtle() {
-		Rectangle crop = new Rectangle(turtle.getX(), turtle.getY(), image.getWidth(), image.getHeight());
 
-		if (turtle.getX() < screen.getX()) {
-			crop.setX(screen.getX());
-			crop.setWidth(image.getWidth() - screen.getX());
-		}
-
-		if (turtle.getX() + image.getWidth() > screen.getX() + 650) {
-			crop.setX(turtle.getX());
-			crop.setWidth(screen.getX() + 625 - (turtle.getX()));
-		}
-
-		if (turtle.getY() < screen.getY()) {
-			crop.setY(screen.getY());
-			crop.setHeight(image.getHeight() - screen.getY());
-		}
-
-		if (turtle.getY() + image.getHeight() > screen.getY() + 425) {
-			crop.setY(turtle.getY());
-			crop.setHeight(screen.getY() + 450 - (turtle.getY()));
-		}
-		turtle.setClip(crop);
-	}
-
-	public ImageView getImage() {
-		return turtle;
+	public Image getImage() {
+		return image;
 	}
 	
 	public void changePenColor (String color) {
@@ -177,10 +145,11 @@ public class Turtle implements TurtleInterface {
 					y + startingY + image.getHeight()/2);
 		}
 		
-		turtle.setX(x + startingX);
-		turtle.setY(y + startingY);
+		
+		
+		xPos = x;
+		yPos = y;
 
-		cropTurtle();
 		
 		return Math.sqrt(x*x + y*y);
 	}
