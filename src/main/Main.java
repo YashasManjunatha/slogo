@@ -12,7 +12,7 @@ import GUIBoxes.RunButton;
 import GUIBoxes.ScreenBox;
 import GUIBoxes.TextInputBox;
 import GUIBoxes.UserDefTable;
-import GUIBoxes.backgroundCombo;
+import GUIBoxes.BackgroundCombo;
 import GUIBoxes.LanguageCombo;
 import GUIBoxes.PenCombo;
 import Turtle.Turtle;
@@ -64,15 +64,17 @@ public class Main extends Application {
 		// first index = xPos, second = yPos, third = width, fourth = length
 		GUIProperties.put("turtleScreen", new double[] { 25, 25, 650, 425 });
 		GUIProperties.put("textInput", new double[] { 25, 475, 605, 110 });
+		
 		GUIProperties.put("varTable", new double[] { 700, 25, 200, 120 });
 		GUIProperties.put("funcTable", new double[] { 700, 150, 200, 120 });
-		GUIProperties.put("prevCommandBox", new double[] { 700, 275, 200, 125 });
 		
+		GUIProperties.put("prevCommandBox", new double[] { 700, 275, 200, 125 });
+
 		GUIProperties.put("backgroundCombo", new double[] { 700, 435, 200, 15 });
 		GUIProperties.put("languageCombo", new double[] { 700, 465, 200, 15 });
 		GUIProperties.put("penCombo", new double[] { 700, 495, 200, 15 });
-		
-		GUIProperties.put("imageButton", new double[] { 700, 405, 200, 15 });		
+
+		GUIProperties.put("imageButton", new double[] { 700, 405, 200, 15 });
 		GUIProperties.put("runButton", new double[] { 630, 475, 45, 55 });
 		GUIProperties.put("clearButton", new double[] { 630, 530, 45, 55 });
 
@@ -84,13 +86,14 @@ public class Main extends Application {
 		turtleList = new ArrayList<>();
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
 		setStage();
-		setupComboboxes();
 		setupGUIBoxes();
 		setupButtons();
+		setupComboboxes();
+
 	}
 
 	private void setupComboboxes() {
-		backgroundColorComboBox = new backgroundCombo(root, turtleScreen, GUIProperties.get("backgroundCombo"),
+		backgroundColorComboBox = new BackgroundCombo(root, turtleScreen, GUIProperties.get("backgroundCombo"),
 				"Change Background Color");
 		languageComboBox = new LanguageCombo(root, GUIProperties.get("languageCombo"), "Change Language");
 		language = ((LanguageCombo) languageComboBox).getLanguage();
@@ -112,11 +115,12 @@ public class Main extends Application {
 	}
 
 	private void setupButtons() {
-		runButton = new RunButton(root, languageComboBox, GUIProperties.get("runButton"), "Run", textInput, prevCommandBox, turtleList);
+		runButton = new RunButton(root, languageComboBox, GUIProperties.get("runButton"), "Run", textInput,
+				prevCommandBox, turtleList);
 
-		clearButton = new ClearButton(root, GUIProperties.get("clearButton"), "Clear", textInput, prevCommandBox, turtleList);
+		clearButton = new ClearButton(root, GUIProperties.get("clearButton"), "Clear", textInput, prevCommandBox,
+				turtleList);
 
-		
 		picButton = new ChangeImageButton(root, GUIProperties.get("imageButton"), "Change Turtle Image", turtleScreen,
 				stage, turtleList);
 
