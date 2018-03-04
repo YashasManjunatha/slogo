@@ -12,7 +12,8 @@ public class Parser implements ParserObject{
 	
 	private static final String PROPERTY_FILENAME = "src/languages/English.properties";
 	private boolean bool;
-	private Map<String, Double> variables = new HashMap<>();
+	public Map<String, Double> variables = new HashMap<>();
+	
 
 	@Override
 	public CommandNode parse(String text) throws InvalidCommandException{
