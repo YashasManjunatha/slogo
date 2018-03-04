@@ -98,12 +98,12 @@ public class Main extends Application {
 
 		textInput = new TextInputBox(root, GUIProperties.get("textInput"));
 		turtleScreen = new ScreenBox(root, GUIProperties.get("turtleScreen"), turtleList);
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream("images/turtle.png"), 0, 55, false, false);
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream("images/turtle.png"), 0, 55, true, false);
 		Turtle turtle = new Turtle(turtleScreen, image);
 		turtleList.add(turtle);		
 		new UserDefTable(root, GUIProperties.get("varTable"), "Variable");
 		new UserDefTable(root, GUIProperties.get("funcTable"), "Function");
-		prevCommandBox = new PrevCommandList(root, GUIProperties.get("prevCommandBox"), textInput);
+		prevCommandBox = new PrevCommandList(root, GUIProperties.get("prevCommandBox"), textInput, turtleList);
 
 	}
 
