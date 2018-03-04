@@ -17,11 +17,17 @@ import GUIBoxes.LanguageCombo;
 import GUIBoxes.PenCombo;
 import Turtle.Turtle;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
@@ -76,13 +82,32 @@ public class Main extends Application {
 	private void initialize() {
 		root = new Group();
 
-		
 		turtleList = new ArrayList<>();
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
 		setStage();
 		setupGUIBoxes();
 		setupButtons();
 		setupComboboxes();
+		setupTurtleCheckbox();
+		
+	}
+
+	private void setupTurtleCheckbox() {
+		VBox vbchecks = new VBox();
+		vbchecks.setSpacing(0);
+		vbchecks.setPadding(new Insets(0));
+		for (Turtle t : turtleList) {
+			final CheckBox cb = new CheckBox("turtle");
+			cb.selectedProperty().addListener(new ChangeListener<Boolean>() {
+				public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
+					System.out.println(cb.isSelected());
+				}
+			});
+			vbchecks.getChildren().add(cb);
+		}
+		ScrollPane scroll = new ScrollPane(vbchecks);
+		scroll.setMaxHeight(10);		
+		root.getChildren().add(scroll);
 		
 	}
 
@@ -98,9 +123,12 @@ public class Main extends Application {
 
 		textInput = new TextInputBox(root, GUIProperties.get("textInput"));
 		turtleScreen = new ScreenBox(root, GUIProperties.get("turtleScreen"), turtleList);
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream("images/turtle.png"), 0, 55, true, false);
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream("images/turtle.png"), 0, 55, true,
+				false);
 		Turtle turtle = new Turtle(turtleScreen, image);
-		turtleList.add(turtle);		
+
+		turtleList.add(turtle);
+
 		new UserDefTable(root, GUIProperties.get("varTable"), "Variable");
 		new UserDefTable(root, GUIProperties.get("funcTable"), "Function");
 		prevCommandBox = new PrevCommandList(root, GUIProperties.get("prevCommandBox"), textInput, turtleList);
