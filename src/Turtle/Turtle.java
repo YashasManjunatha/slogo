@@ -21,10 +21,10 @@ public class Turtle implements TurtleInterface {
 	private final static double startingX = 300.0;
 	private final static double startingY = 187.5;
 	private double orientation = 0;
-	private double xPos;
-	private double yPos;
-	private double prevXPos;
-	private double prevYPos;
+	private double xPos = startingX;
+	private double yPos = startingY;
+	private double prevXPos = startingX;
+	private double prevYPos = startingY;
 	private Map<double[], Color> pathList = new HashMap<>();
 
 	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
@@ -170,8 +170,8 @@ public class Turtle implements TurtleInterface {
 	@Override
 	public double moveTo(double x, double y) {
 
-		xPos = x;
-		yPos = y;
+		xPos = x + startingX;
+		yPos = y + startingY;
 
 		addPath(prevXPos, prevYPos, xPos, yPos);
 
