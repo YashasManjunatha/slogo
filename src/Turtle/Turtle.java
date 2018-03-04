@@ -1,13 +1,12 @@
 package Turtle;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import GUIBoxes.ScreenBox;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import pen.Pen;
 
 public class Turtle implements TurtleInterface {
@@ -26,7 +25,7 @@ public class Turtle implements TurtleInterface {
 	private double yPos;
 	private double prevXPos;
 	private double prevYPos;
-	private ArrayList<double[]> pathList = new ArrayList<>();
+	private Map<double[], Color> pathList = new HashMap<>();
 
 	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
 		screen = turtle_screen;
@@ -78,13 +77,16 @@ public class Turtle implements TurtleInterface {
 	}
 
 	private void addPath(double prevXPos, double prevYPos, double xPos, double yPos) {
+
 		System.out.println(prevXPos);
 		System.out.println(prevYPos);
 		System.out.println(xPos);
 		System.out.println(yPos);
-
-		double[] newPath = { prevXPos, prevYPos, xPos, yPos };
-		pathList.add(newPath);
+		System.out.println(pathList);
+		if (penShowing) {
+			double[] newPath = { prevXPos, prevYPos, xPos, yPos };
+			pathList.put(newPath, screen.getPenColor());
+		}
 	}
 
 	@Override
@@ -101,7 +103,7 @@ public class Turtle implements TurtleInterface {
 		return xPos;
 	}
 
-	public ArrayList<double[]> getPaths() {
+	public Map<double[], Color> getPaths() {
 		return pathList;
 	}
 
@@ -168,10 +170,9 @@ public class Turtle implements TurtleInterface {
 	@Override
 	public double moveTo(double x, double y) {
 
-
 		xPos = x;
 		yPos = y;
-		
+
 		addPath(prevXPos, prevYPos, xPos, yPos);
 
 		screen.updateBox();
@@ -180,8 +181,9 @@ public class Turtle implements TurtleInterface {
 	}
 
 	public double clearScreen() {
-		double dist = this.moveTo(0, 0);
-		pen.emptyPen();
+		double dist = this.moveTo(startingX, startingY);
+		pathList.clear();
+		screen.updateBox();
 		return dist;
 	}
 
