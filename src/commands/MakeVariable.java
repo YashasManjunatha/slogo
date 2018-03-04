@@ -18,7 +18,7 @@ public class MakeVariable extends Command{
 
 	@Override
 	public double execute(List<CommandNode> children, Turtle t){
-		Double myValue = children.get(1).execute(t);
+		Double myValue = children.get(0).execute(t);
 		myMap.put(myName, myValue);
 		return myValue;
 

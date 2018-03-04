@@ -76,11 +76,18 @@ public class Parser implements ParserObject{
 		}
 		
 		if (commandText.equals("make") || commandText.equals("set")) {
-			return new CommandNode(new MakeVariable(commandText, variableMap));
+			return new CommandNode(new MakeVariable(scan.next(), variableMap));
 		}
 		
 		if (commandText.startsWith(":")) {
-			return new CommandNode(new ParsedDouble(variableMap.get(commandText)));
+			try {
+				System.out.println(commandText);
+				return new CommandNode(new ParsedDouble(variableMap.get(commandText)));
+			}
+			catch(NullPointerException e) {
+//				new ErrorBox("Undefined Variable", commandText);
+				System.out.println("error hehe");
+			}
 			//return new CommandNode(new UserVariable(commandText, variableMap));
 		}
 		
