@@ -1,5 +1,9 @@
 package GUIBoxes;
 
+import java.util.ArrayList;
+
+import Turtle.Turtle;
+import commands.Command;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -13,11 +17,13 @@ public class PrevCommandList extends ListView {
 	private ListView<String> list;
 	private ObservableList<String> items = FXCollections.observableArrayList();
 	private static TextInputBox mainTextInput;
+	private static ArrayList<Turtle> mainTurtleList;
 
-	public PrevCommandList(Group root, double[] properties, TextInputBox textInput) {
+	public PrevCommandList(Group root, double[] properties, TextInputBox textInput, ArrayList<Turtle> turtleList) {
 		list = new ListView<>();
 		mainTextInput = textInput;
 		thisRoot = root;
+		mainTurtleList = turtleList;
 		setupList(properties[0], properties[1], properties[2], properties[3]);
 		root.getChildren().add(list);
 	}
@@ -34,8 +40,13 @@ public class PrevCommandList extends ListView {
 			public void handle(MouseEvent click) {
 
 				if (click.getClickCount() == 2) {
-					String currentItemSelected = list.getSelectionModel().getSelectedItem();
-					mainTextInput.setText(currentItemSelected);
+					for (Turtle t : mainTurtleList) {
+						String currentItemSelected = list.getSelectionModel().getSelectedItem();
+						mainTextInput.setText(currentItemSelected);
+						Command test = new Command(currentItemSelected, t);
+						test.execute();
+					}
+					
 				}
 			}
 		});

@@ -28,8 +28,7 @@ public class ScreenBox implements GUIBoxes {
 	private static StackPane stackPane;
 	private static ArrayList<Turtle> mainTurtleList;
 	private Color thisBackgroundColor;
-	private Color thisPenColor;
-
+	private Color thisPenColor = Color.BLACK;
 
 	public ScreenBox(Group root, double[] properties, ArrayList<Turtle> turtleList) {
 		turtleScreen = new Canvas();
@@ -65,7 +64,7 @@ public class ScreenBox implements GUIBoxes {
 		thisBackgroundColor = color;
 		updateBox();
 	}
-	
+
 	public void changePenColor(Color color) {
 		thisPenColor = color;
 		gc.setStroke(thisPenColor);
@@ -119,10 +118,8 @@ public class ScreenBox implements GUIBoxes {
 		gc.fillRect(0, 0, 650, 425);
 		for (Turtle t : mainTurtleList) {
 
-			if (t.getPenDown()) {
-				drawLine(t);
-			}
-			
+			drawLine(t);
+
 			gc.save();
 			rotate(gc, t.getOrientation(), t.getX() + t.getImage().getWidth() / 2,
 					t.getY() + t.getImage().getHeight() / 2);
@@ -133,13 +130,13 @@ public class ScreenBox implements GUIBoxes {
 		}
 
 	}
-	
-	
 
 	private void drawLine(Turtle t) {
-		for (double[] path : t.getPaths()) {
-			gc.strokeLine(path[0] + t.getImage().getWidth()/2, path[1] + t.getImage().getHeight()/2,
-					path[2] + t.getImage().getWidth()/2, path[3] + t.getImage().getHeight()/2);
+		System.out.println(t.getPaths());
+		for (double[] path : t.getPaths().keySet()) {
+			changePenColor((t.getPaths().get(path)));
+			gc.strokeLine(path[0] + t.getImage().getWidth() / 2, path[1] + t.getImage().getHeight() / 2,
+					path[2] + t.getImage().getWidth() / 2, path[3] + t.getImage().getHeight() / 2);
 		}
 
 	}
@@ -148,6 +145,9 @@ public class ScreenBox implements GUIBoxes {
 		Rotate r = new Rotate(angle, x, y);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
 	}
-
+	
+	public Color getPenColor() {
+		return thisPenColor;
+	}
 
 }
