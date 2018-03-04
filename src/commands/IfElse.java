@@ -4,6 +4,8 @@ import java.util.List;
 import Turtle.Turtle;
 
 public class IfElse extends Command {
+	
+	private int numberOfParameters = 3;
 
 	@Override
 	public double execute(List<CommandNode> children, Turtle t){
@@ -19,6 +21,11 @@ public class IfElse extends Command {
 		}
 		return retVal;
 		
+	}
+	
+	@Override
+	public int getNumberOfParameters() {
+		return numberOfParameters;
 	}
 
 }
