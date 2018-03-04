@@ -12,12 +12,17 @@ public class Parser implements ParserObject{
 	
 	private static final String PROPERTY_FILENAME = "src/languages/English.properties";
 	private boolean bool;
+<<<<<<< HEAD
 	private Map<String, Double> variableMap;
 	
 	
 	Parser(){
 		variableMap = new HashMap<>();
 	}
+=======
+	public Map<String, Double> variables = new HashMap<>();
+	
+>>>>>>> e4f704315d0e85d6decd552d3414c94465e8fab9
 
 	@Override
 	public CommandNode parse(String text) throws InvalidCommandException{
