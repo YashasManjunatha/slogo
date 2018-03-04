@@ -24,12 +24,14 @@ public class Parser implements ParserObject{
 	private void generateTree(CommandNode root, Scanner scan) throws InvalidCommandException{
 		int paramsFilled = 0;
 		while (scan.hasNext() && paramsFilled < root.getNumberOfParameters()) {
+			System.out.println(root.getCommand() + " filled: " + paramsFilled + " total: " + root.getNumberOfParameters());
 			bool = false;
 			String nextCommand = scan.next();
 			CommandNode currentChild = generateCommandNode(nextCommand,scan);
 			root.addChild(currentChild);
 			if (bool) {
-				return;
+				paramsFilled++;
+				continue;
 			}
 			generateTree(currentChild, scan);
 			paramsFilled++;
