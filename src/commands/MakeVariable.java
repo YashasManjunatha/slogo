@@ -20,8 +20,6 @@ public class MakeVariable extends Command{
 	public double execute(List<CommandNode> children, Turtle t){
 		Double myValue = children.get(0).execute(t);
 		myMap.put(myName, myValue);
-		System.out.println(myMap);
-		System.out.println("this sucks " + myName + " " + myMap.get(myName));
 		return myValue;
 
 	}

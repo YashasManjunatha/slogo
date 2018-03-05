@@ -30,7 +30,6 @@ public class Parser implements ParserObject{
 	private void generateTree(CommandNode root, Scanner scan) throws InvalidCommandException{
 		int paramsFilled = 0;
 		while (scan.hasNext() && paramsFilled < root.getNumberOfParameters()) {
-			System.out.println(root.getCommand() + " filled: " + paramsFilled + " total: " + root.getNumberOfParameters());
 			bool = false;
 			String nextCommand = scan.next();
 			CommandNode currentChild = generateCommandNode(nextCommand.toLowerCase(),scan);
@@ -78,13 +77,11 @@ public class Parser implements ParserObject{
 		if (commandText.equals("make") || commandText.equals("set")) {
 			String varName = scan.next();
 			CommandNode topNode = new CommandNode(new MakeVariable(varName, variableMap));
-			//topNode.addChild(new CommandNode(new ParsedDouble(variableMap.get(varName))));
 			return topNode;
 		}
 		
 		if (commandText.startsWith(":")) {
 			try {
-				System.out.println(commandText);
 				return new CommandNode(new UserVariable(commandText, variableMap));
 			}
 			catch(NullPointerException e) {

@@ -17,9 +17,6 @@ public class UserVariable extends Command{
 	
 	@Override
 	public double execute(List<CommandNode> children, Turtle t) {
-		System.out.println("heyyoooo "+ myMap.get(myName));
-		System.out.println(myMap);
-		System.out.println(myName);
 		return myMap.get(myName);
 	}
 	@Override
