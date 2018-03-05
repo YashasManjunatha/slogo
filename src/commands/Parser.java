@@ -79,11 +79,10 @@ public class Parser implements ParserObject{
 			return topNode;
 		}
 		if( commandText.equals("for") ) {
-			
-		CommandNode topNode=	 new CommandNode(new For(variableMap));
+			CommandNode topNode=	 new CommandNode(new For(variableMap));
 			return topNode;
-			
 		}
+		
 		if (commandText.startsWith(":")) {
 			try {
 				return new CommandNode(new UserVariable(commandText, variableMap));
@@ -117,5 +116,3 @@ public class Parser implements ParserObject{
 		return new CommandNode(generatedCommand);
 	}
 }
-
-
