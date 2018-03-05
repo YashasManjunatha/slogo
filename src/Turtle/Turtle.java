@@ -166,22 +166,31 @@ public class Turtle implements TurtleInterface {
 	public void changePenColor(Color color) {
 		screen.changePenColor(color);
 	}
+	
 
 	@Override
 	public double moveTo(double x, double y) {
+		
+		System.out.println(pathList);
 
+		prevXPos = xPos;
+		prevYPos = yPos;
 		xPos = x + startingX;
 		yPos = y + startingY;
 
 		addPath(prevXPos, prevYPos, xPos, yPos);
 
+		System.out.println(pathList);
+
+		
 		screen.updateBox();
 
 		return Math.sqrt(x * x + y * y);
 	}
 
 	public double clearScreen() {
-		double dist = this.moveTo(startingX, startingY);
+		double dist = this.moveTo(0, 0);
+		orientation = 0;
 		pathList.clear();
 		screen.updateBox();
 		return dist;

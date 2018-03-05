@@ -117,7 +117,6 @@ public class ScreenBox implements GUIBoxes {
 		gc.setFill(thisBackgroundColor);
 		gc.fillRect(0, 0, 650, 425);
 		for (Turtle t : mainTurtleList) {
-
 			drawLine(t);
 
 			gc.save();
@@ -132,7 +131,7 @@ public class ScreenBox implements GUIBoxes {
 	}
 
 	private void drawLine(Turtle t) {
-		System.out.println(t.getPaths());
+		//System.out.println(t.getPaths());
 		for (double[] path : t.getPaths().keySet()) {
 			changePenColor((t.getPaths().get(path)));
 			gc.strokeLine(path[0] + t.getImage().getWidth() / 2, path[1] + t.getImage().getHeight() / 2,
