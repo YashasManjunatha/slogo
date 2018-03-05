@@ -12,10 +12,14 @@ public class UserVariable extends Command{
 	
 	public UserVariable(String varName, Map<String, Double> variables) {
 		myMap = variables;
+		myName = varName;
 	}
 	
 	@Override
 	public double execute(List<CommandNode> children, Turtle t) {
+		System.out.println("heyyoooo "+ myMap.get(myName));
+		System.out.println(myMap);
+		System.out.println(myName);
 		return myMap.get(myName);
 	}
 	@Override

@@ -1,10 +1,14 @@
 package commands;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PrintTree {
 
 	public static void main(String[] args) {
-		Parser myParser = new Parser();
-		String commands1 = "Make :x 50";
+		Map<String, Double> test = new HashMap<>();
+		Parser myParser = new Parser(test);
+		String commands1 = "Make :x 50 bk :x";
 		CommandNode superNode;
 		try {
 			superNode = myParser.parse(commands1);
