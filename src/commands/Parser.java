@@ -49,7 +49,7 @@ public class Parser implements ParserObject{
 		}
 		catch(NumberFormatException e) {	
 		}
-		
+
 		if (commandText.equals("[")) {
 			int bracketCount = 1;
 			String toBeParsed = "";
@@ -61,11 +61,14 @@ public class Parser implements ParserObject{
 				next = scan.next();
 				if (next.equals("]")) {
 					bracketCount--;
-					continue;
+					if (bracketCount == 0) {
+						break;
+					}
 				}
-				else {
-					toBeParsed = toBeParsed + " " + next;
+				if (next.equals("[")) {
+					bracketCount++;
 				}
+				toBeParsed = toBeParsed + " " + next;
 			}
 			Parser newParser = new Parser(variableMap);
 			CommandNode bracketNode = newParser.parse(toBeParsed);
