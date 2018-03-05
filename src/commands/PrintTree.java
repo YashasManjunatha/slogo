@@ -8,7 +8,7 @@ public class PrintTree {
 	public static void main(String[] args) {
 		Map<String, Double> test = new HashMap<>();
 		Parser myParser = new Parser(test);
-		String commands1 = "Make :x 50 bk :x";
+		String commands1 = "for [ :x 1 5 1 ] [ fd 50 ]";
 		CommandNode superNode;
 		try {
 			superNode = myParser.parse(commands1);
