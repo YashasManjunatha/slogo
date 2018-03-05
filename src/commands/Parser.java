@@ -14,7 +14,6 @@ public class Parser implements ParserObject{
 	private boolean bool;
 	private Map<String, Double> variableMap;
 	
-	
 	Parser(Map<String, Double> variables){
 		variableMap = variables;
 	}
@@ -79,7 +78,12 @@ public class Parser implements ParserObject{
 			CommandNode topNode = new CommandNode(new MakeVariable(varName, variableMap));
 			return topNode;
 		}
-		
+		if( commandText.equals("for") ) {
+			
+		CommandNode topNode=	 new CommandNode(new For(variableMap));
+			return topNode;
+			
+		}
 		if (commandText.startsWith(":")) {
 			try {
 				return new CommandNode(new UserVariable(commandText, variableMap));
