@@ -36,10 +36,10 @@ public class RunButton extends Buttons {
 			mainPrevCommandBox.addText(mainTextInput.getText());
 			for (Turtle t : getThisTurtleList()) {
 				System.out.println(mainTextInput.getText());
-				if (!language.equals("English")) {
+				//if (!language.equals("English")) {
 					language = mainLanguageComboBox.getLanguage();
 					System.out.println("here "+ language + mainLanguageComboBox.getLanguage());
-				}
+			//	}
 				System.out.println("crap");
 				System.out.println("test  " + mainLanguageComboBox.getLanguage());
 				Command test = new Command(mainTextInput.getText(), t, variableMap, language);

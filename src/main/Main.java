@@ -40,7 +40,7 @@ public class Main extends Application {
 	private static String title;
 	private final static double SCREEN_HEIGHT = 600;
 	private final static double SCREEN_WIDTH = 1215;//915;
-	private static Stage stage;
+	private static Stage myStage;
 	private static TextInputBox textInput;
 	private static ScreenBox turtleScreen;
 	private static GUIComboBox languageComboBox;
