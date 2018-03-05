@@ -73,17 +73,6 @@ public class Parser implements ParserObject{
 			return bracketNode;
 		}
 		
-		if (commandText.equals("make") || commandText.equals("set")) {
-			String varName = scan.next();
-			CommandNode topNode = new CommandNode(new MakeVariable(varName, variableMap));
-			return topNode;
-		}
-		if( commandText.equals("for") ) {
-			
-		CommandNode topNode=	 new CommandNode(new For(variableMap));
-			return topNode;
-			
-		}
 		if (commandText.startsWith(":")) {
 			try {
 				return new CommandNode(new UserVariable(commandText, variableMap));
@@ -107,8 +96,11 @@ public class Parser implements ParserObject{
 				}
 			}
 			String className = commandsToClasses.get(commandText);
+			if (className.equals("For") || className.equals("MakeVariable")) {
+				return commandWithVariableMap(className, scan);
+			}
 			Class<?> clazz = Class.forName("commands." + className);		//find class associated with the command string
-			Object obj = clazz.newInstance(); 
+			Object obj = clazz.newInstance();
 			generatedCommand = (CommandObject) obj;
 		}
 		catch(Exception e) {
@@ -116,6 +108,13 @@ public class Parser implements ParserObject{
 		}
 		return new CommandNode(generatedCommand);
 	}
+	
+	private CommandNode commandWithVariableMap(String className, Scanner scan) {
+		if (className.equals("For")) {
+			return new CommandNode(new For(variableMap));
+		}
+		else {
+			return new CommandNode(new MakeVariable(scan.next(), variableMap));
+		}
+	}
 }
-
-
