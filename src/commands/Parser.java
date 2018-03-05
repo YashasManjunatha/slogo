@@ -10,12 +10,30 @@ import GUIBoxes.ErrorBox;
 
 public class Parser implements ParserObject{
 	
-	private static final String PROPERTY_FILENAME = "src/languages/English.properties";
+	private String myPropertyFile;// = "src/languages/English.properties";
 	private boolean bool;
 	private Map<String, Double> variableMap;
+	private String myLanguage;
 	
-	Parser(Map<String, Double> variables){
+	Parser(Map<String, Double> variables, String language){
 		variableMap = variables;
+		myLanguage = language;
+		myPropertyFile = getPropertyFile(myLanguage);
+		System.out.println(myLanguage);
+	}
+
+	private String getPropertyFile(String language) {
+		switch (language) {
+		case "English": return "src/languages/English.properties";
+		case "Chinese": return "src/languages/Chinese.properties";
+		case "French": return "src/languages/French.properties";
+		case "German": return "src/languages/German.properties";
+		case "Italian": return "src/languages/Italian.properties";
+		case "Portuguese": return "src/languages/Portuguese.properties";
+		case "Russian": return "src/languages/Russian.properties";
+		case "Spanish": return "src/languages/Spanish.properties";
+		}
+		return null;
 	}
 
 	@Override
@@ -70,7 +88,7 @@ public class Parser implements ParserObject{
 				}
 				toBeParsed = toBeParsed + " " + next;
 			}
-			Parser newParser = new Parser(variableMap);
+			Parser newParser = new Parser(variableMap, myLanguage);
 			CommandNode bracketNode = newParser.parse(toBeParsed);
 			bool = true;
 			return bracketNode;
@@ -88,7 +106,7 @@ public class Parser implements ParserObject{
 		CommandObject generatedCommand;
 		Properties command_properties = new Properties();
 		try {
-			FileInputStream input = new FileInputStream(PROPERTY_FILENAME);
+			FileInputStream input = new FileInputStream(myPropertyFile);
 			command_properties.load(input);
 			Map<String, String> commandsToClasses = new HashMap<>();
 			String [] commands;
