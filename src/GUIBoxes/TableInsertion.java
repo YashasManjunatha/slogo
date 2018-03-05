@@ -16,4 +16,10 @@ public class TableInsertion {
     public String getValue() {
     	return Value;
     }
+    
+
+	public void setValue(String newValue) {
+		Value = newValue;
+		
+	}
 }
