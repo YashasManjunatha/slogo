@@ -10,7 +10,7 @@ import GUIBoxes.ErrorBox;
 
 public class Parser implements ParserObject{
 	
-	private String myPropertyFile;// = "src/languages/English.properties";
+	private String myPropertyFile;
 	private boolean bool;
 	private Map<String, Double> variableMap;
 	private String myLanguage;
@@ -19,7 +19,6 @@ public class Parser implements ParserObject{
 		variableMap = variables;
 		myLanguage = language;
 		myPropertyFile = getPropertyFile(myLanguage);
-		System.out.println(myLanguage);
 	}
 
 	private String getPropertyFile(String language) {
