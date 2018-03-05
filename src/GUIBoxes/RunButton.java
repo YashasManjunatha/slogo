@@ -38,17 +38,16 @@ public class RunButton extends Buttons {
 				System.out.println(mainTextInput.getText());
 				if (!language.equals("English")) {
 					language = mainLanguageComboBox.getLanguage();
+					System.out.println("here "+ language + mainLanguageComboBox.getLanguage());
 				}
-
-				Command test = new Command(mainTextInput.getText(), t, variableMap);
+				System.out.println("crap");
+				System.out.println("test  " + mainLanguageComboBox.getLanguage());
+				Command test = new Command(mainTextInput.getText(), t, variableMap, language);
 				test.execute();
 			}
 			mainTextInput.clear();
 
 		});
-		
-		
-
 	}
 
 }

@@ -33,6 +33,7 @@ public class LanguageCombo extends GUIComboBox {
 	}
 	
 	public String getLanguage() {
+		System.out.println("get lang" +language);
 		return language;
 	}
 
