@@ -51,10 +51,12 @@ public class Main extends Application {
 	// Additional setup for the main menu
 	private Scene myScene;
 	private Group root;
+	private Map<String, Double> variableMap;
 	
 	@Override
 	public void start(Stage stage) {
 		myStage = stage;
+		variableMap = new HashMap<>();
 		initialize();
 	}
 
@@ -132,13 +134,13 @@ public class Main extends Application {
 
 		new UserDefTable(root, GUIProperties.get("varTable"), "Variable");
 		new UserDefTable(root, GUIProperties.get("funcTable"), "Function");
-		prevCommandBox = new PrevCommandList(root, GUIProperties.get("prevCommandBox"), textInput, turtleList);
+		prevCommandBox = new PrevCommandList(root, GUIProperties.get("prevCommandBox"), textInput, turtleList, variableMap);
 
 	}
 
 	private void setupButtons() {
 		new RunButton(root, languageComboBox, GUIProperties.get("runButton"), "Run", textInput, prevCommandBox,
-				turtleList);
+				turtleList, variableMap);
 
 		new ClearButton(root, GUIProperties.get("clearButton"), "Clear", textInput, prevCommandBox, turtleList);
 
