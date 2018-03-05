@@ -12,8 +12,11 @@ public class Parser implements ParserObject{
 	
 	private static final String PROPERTY_FILENAME = "src/languages/English.properties";
 	private boolean bool;
-	public Map<String, Double> variables = new HashMap<>();
+	private Map<String, Double> variableMap;
 	
+	Parser(Map<String, Double> variables){
+		variableMap = variables;
+	}
 
 	@Override
 	public CommandNode parse(String text) throws InvalidCommandException{
@@ -26,10 +29,9 @@ public class Parser implements ParserObject{
 	private void generateTree(CommandNode root, Scanner scan) throws InvalidCommandException{
 		int paramsFilled = 0;
 		while (scan.hasNext() && paramsFilled < root.getNumberOfParameters()) {
-			System.out.println(root.getCommand() + " filled: " + paramsFilled + " total: " + root.getNumberOfParameters());
 			bool = false;
 			String nextCommand = scan.next();
-			CommandNode currentChild = generateCommandNode(nextCommand,scan);
+			CommandNode currentChild = generateCommandNode(nextCommand.toLowerCase(),scan);
 			root.addChild(currentChild);
 			if (bool) {
 				paramsFilled++;
@@ -65,10 +67,19 @@ public class Parser implements ParserObject{
 					toBeParsed = toBeParsed + " " + next;
 				}
 			}
-			Parser newParser = new Parser();
+			Parser newParser = new Parser(variableMap);
 			CommandNode bracketNode = newParser.parse(toBeParsed);
 			bool = true;
 			return bracketNode;
+		}
+		
+		if (commandText.startsWith(":")) {
+			try {
+				return new CommandNode(new UserVariable(commandText, variableMap));
+			}
+			catch(NullPointerException e) {
+				new ErrorBox("Undefined Variable", commandText);
+			}
 		}
 		
 		CommandObject generatedCommand;
@@ -85,8 +96,11 @@ public class Parser implements ParserObject{
 				}
 			}
 			String className = commandsToClasses.get(commandText);
+			if (className.equals("For") || className.equals("MakeVariable")) {
+				return commandWithVariableMap(className, scan);
+			}
 			Class<?> clazz = Class.forName("commands." + className);		//find class associated with the command string
-			Object obj = clazz.newInstance(); 
+			Object obj = clazz.newInstance();
 			generatedCommand = (CommandObject) obj;
 		}
 		catch(Exception e) {
@@ -94,6 +108,13 @@ public class Parser implements ParserObject{
 		}
 		return new CommandNode(generatedCommand);
 	}
+	
+	private CommandNode commandWithVariableMap(String className, Scanner scan) {
+		if (className.equals("For")) {
+			return new CommandNode(new For(variableMap));
+		}
+		else {
+			return new CommandNode(new MakeVariable(scan.next(), variableMap));
+		}
+	}
 }
-
-

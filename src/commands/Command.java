@@ -1,6 +1,7 @@
 package commands;
 
 import java.util.List;
+import java.util.Map;
 
 import GUIBoxes.ErrorBox;
 import Turtle.Turtle;
@@ -10,8 +11,8 @@ public class Command implements CommandObject{
 	private CommandNode superNode;
 	private Turtle myTurtle;
 	
-	public Command(String text, Turtle turtle) {
-		myParser = new Parser();
+	public Command(String text, Turtle turtle, Map<String, Double> variables) {
+		myParser = new Parser(variables);
 		myTurtle = turtle;
 		try {
 			superNode = myParser.parse(text);
@@ -46,6 +47,11 @@ public class Command implements CommandObject{
 			retVal = child.execute(t);
 		}
 		return retVal;
+	}
+	@Override
+	public void setValue(double x) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

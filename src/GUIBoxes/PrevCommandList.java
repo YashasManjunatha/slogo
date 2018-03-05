@@ -1,6 +1,7 @@
 package GUIBoxes;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import Turtle.Turtle;
 import commands.Command;
@@ -18,14 +19,17 @@ public class PrevCommandList extends ListView {
 	private ObservableList<String> items = FXCollections.observableArrayList();
 	private static TextInputBox mainTextInput;
 	private static ArrayList<Turtle> mainTurtleList;
+	
+	private Map<String,Double> variableMap;
 
-	public PrevCommandList(Group root, double[] properties, TextInputBox textInput, ArrayList<Turtle> turtleList) {
+	public PrevCommandList(Group root, double[] properties, TextInputBox textInput, ArrayList<Turtle> turtleList, Map<String,Double> variables) {
 		list = new ListView<>();
 		mainTextInput = textInput;
 		thisRoot = root;
 		mainTurtleList = turtleList;
 		setupList(properties[0], properties[1], properties[2], properties[3]);
 		root.getChildren().add(list);
+		variableMap = variables;
 	}
 
 	private void setupList(double xPos, double yPos, double width, double height) {
@@ -43,7 +47,7 @@ public class PrevCommandList extends ListView {
 					for (Turtle t : mainTurtleList) {
 						String currentItemSelected = list.getSelectionModel().getSelectedItem();
 						mainTextInput.setText(currentItemSelected);
-						Command test = new Command(currentItemSelected, t);
+						Command test = new Command(currentItemSelected, t, variableMap);
 						test.execute();
 					}
 					
