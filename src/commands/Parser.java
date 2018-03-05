@@ -12,23 +12,12 @@ public class Parser implements ParserObject{
 	
 	private static final String PROPERTY_FILENAME = "src/languages/English.properties";
 	private boolean bool;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 0c2d404850ecb38dd39c462f4429e12608404ac7
 	private Map<String, Double> variableMap;
 	
 	
-	Parser(){
-		variableMap = new HashMap<>();
+	Parser(Map<String, Double> variables){
+		variableMap = variables;
 	}
-<<<<<<< HEAD
-=======
-	public Map<String, Double> variables = new HashMap<>();
-	
->>>>>>> e4f704315d0e85d6decd552d3414c94465e8fab9
-=======
->>>>>>> 0c2d404850ecb38dd39c462f4429e12608404ac7
 
 	@Override
 	public CommandNode parse(String text) throws InvalidCommandException{
@@ -41,7 +30,6 @@ public class Parser implements ParserObject{
 	private void generateTree(CommandNode root, Scanner scan) throws InvalidCommandException{
 		int paramsFilled = 0;
 		while (scan.hasNext() && paramsFilled < root.getNumberOfParameters()) {
-			System.out.println(root.getCommand() + " filled: " + paramsFilled + " total: " + root.getNumberOfParameters());
 			bool = false;
 			String nextCommand = scan.next();
 			CommandNode currentChild = generateCommandNode(nextCommand.toLowerCase(),scan);
@@ -80,26 +68,25 @@ public class Parser implements ParserObject{
 					toBeParsed = toBeParsed + " " + next;
 				}
 			}
-			Parser newParser = new Parser();
+			Parser newParser = new Parser(variableMap);
 			CommandNode bracketNode = newParser.parse(toBeParsed);
 			bool = true;
 			return bracketNode;
 		}
 		
 		if (commandText.equals("make") || commandText.equals("set")) {
-			return new CommandNode(new MakeVariable(scan.next(), variableMap));
+			String varName = scan.next();
+			CommandNode topNode = new CommandNode(new MakeVariable(varName, variableMap));
+			return topNode;
 		}
 		
 		if (commandText.startsWith(":")) {
 			try {
-				System.out.println(commandText);
-				return new CommandNode(new ParsedDouble(variableMap.get(commandText)));
+				return new CommandNode(new UserVariable(commandText, variableMap));
 			}
 			catch(NullPointerException e) {
-//				new ErrorBox("Undefined Variable", commandText);
-				System.out.println("error hehe");
+				new ErrorBox("Undefined Variable", commandText);
 			}
-			//return new CommandNode(new UserVariable(commandText, variableMap));
 		}
 		
 		CommandObject generatedCommand;

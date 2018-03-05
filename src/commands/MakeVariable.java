@@ -7,7 +7,7 @@ import Turtle.Turtle;
 
 public class MakeVariable extends Command{
 
-	private int numberOfParameters = 2;
+	private int numberOfParameters = 1;
 	private Map<String, Double> myMap;
 	private String myName;
 

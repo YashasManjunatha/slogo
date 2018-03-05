@@ -16,7 +16,7 @@ public class UserDefTable extends TableView implements GUIBoxes {
 	private final static int NAMECOLWIDTH = 65;
 	private final static int VALCOLWIDTH = 133;
 	private String tableType;
-
+	
 	public UserDefTable(Group root, double[] properties, String type) {
 		this.root = root;
 		tableType = type;
@@ -24,7 +24,6 @@ public class UserDefTable extends TableView implements GUIBoxes {
 		setupTableProperties(properties[0], properties[1], properties[2], properties[3]);
 		setupTableColumns();
 		root.getChildren().add(table);
-
 	}
 
 	private void setupTableColumns() {

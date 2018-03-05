@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import GUIBoxes.Buttons;
 import GUIBoxes.ChangeImageButton;
@@ -39,26 +40,28 @@ public class Main extends Application {
 	private static String title;
 	private final static double SCREEN_HEIGHT = 600;
 	private final static double SCREEN_WIDTH = 915;
-	private static Stage stage;
+	private static Stage myStage;
 	private static TextInputBox textInput;
 	private static ScreenBox turtleScreen;
 	private static GUIComboBox languageComboBox;
 	private static PrevCommandList prevCommandBox;
 	private static ArrayList<Turtle> turtleList;
-	private static final HashMap<String, double[]> GUIProperties = createMap();
+	private static final Map<String, double[]> GUIProperties = createMap();
 
 	// Additional setup for the main menu
 	private Scene myScene;
 	private Group root;
-
+	private Map<String, Double> variableMap;
+	
 	@Override
 	public void start(Stage stage) {
-		this.stage = stage;
+		myStage = stage;
+		variableMap = new HashMap<>();
 		initialize();
 	}
 
-	private static HashMap<String, double[]> createMap() {
-		HashMap<String, double[]> GUIProperties = new HashMap<>();
+	private static Map<String, double[]> createMap() {
+		Map<String, double[]> GUIProperties = new HashMap<>();
 		// first index = xPos, second = yPos, third = width, fourth = length
 		GUIProperties.put("turtleScreen", new double[] { 25, 25, 650, 425 });
 		GUIProperties.put("textInput", new double[] { 25, 475, 605, 110 });
@@ -131,26 +134,26 @@ public class Main extends Application {
 
 		new UserDefTable(root, GUIProperties.get("varTable"), "Variable");
 		new UserDefTable(root, GUIProperties.get("funcTable"), "Function");
-		prevCommandBox = new PrevCommandList(root, GUIProperties.get("prevCommandBox"), textInput, turtleList);
+		prevCommandBox = new PrevCommandList(root, GUIProperties.get("prevCommandBox"), textInput, turtleList, variableMap);
 
 	}
 
 	private void setupButtons() {
 		new RunButton(root, languageComboBox, GUIProperties.get("runButton"), "Run", textInput, prevCommandBox,
-				turtleList);
+				turtleList, variableMap);
 
 		new ClearButton(root, GUIProperties.get("clearButton"), "Clear", textInput, prevCommandBox, turtleList);
 
-		new ChangeImageButton(root, GUIProperties.get("imageButton"), "Change Turtle Image", turtleScreen, stage,
+		new ChangeImageButton(root, GUIProperties.get("imageButton"), "Change Turtle Image", turtleScreen, myStage,
 				turtleList);
 
 	}
 
 	private void setStage() {
-		stage.setScene(myScene);
-		stage.setTitle(title);
-		stage.show();
-		stage.setResizable(false);
+		myStage.setScene(myScene);
+		myStage.setTitle(title);
+		myStage.show();
+		myStage.setResizable(false);
 	}
 
 	public static void main(String[] args) {
