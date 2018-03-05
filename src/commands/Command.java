@@ -48,5 +48,10 @@ public class Command implements CommandObject{
 		}
 		return retVal;
 	}
+	@Override
+	public void setValue(double x) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

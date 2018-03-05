@@ -7,4 +7,5 @@ import Turtle.Turtle;
 public interface CommandObject {
 	double execute(List<CommandNode> children, Turtle t);
 	int getNumberOfParameters();
+	void setValue(double x);
 }

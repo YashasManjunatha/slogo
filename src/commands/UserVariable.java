@@ -24,4 +24,14 @@ public class UserVariable extends Command{
 		return numberOfParameters;
 	}
 	
+	@Override
+	public void setValue(double x) {
+		if(myMap.containsKey(myName)) {
+			double y =myMap.get(myName);
+			myMap.replace(myName,y,x);
+		}
+		else{
+			myMap.put(myName, x);
+		}
+	}
 }
