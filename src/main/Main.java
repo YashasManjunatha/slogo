@@ -89,8 +89,8 @@ public class Main extends Application {
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
 		setStage();
 		setupGUIBoxes();
-		setupButtons();
 		setupComboboxes();
+		setupButtons();
 		setupTurtleCheckbox();
 		
 	}
@@ -117,7 +117,6 @@ public class Main extends Application {
 	private void setupComboboxes() {
 		new BackgroundCombo(root, turtleScreen, GUIProperties.get("backgroundCombo"), "Change Background Color");
 		languageComboBox = new LanguageCombo(root, GUIProperties.get("languageCombo"), "Change Language");
-		((LanguageCombo) languageComboBox).getLanguage();
 		new PenCombo(root, turtleList, GUIProperties.get("penCombo"), "Change Pen Color");
 
 	}
