@@ -24,11 +24,13 @@ public class For extends Command{
 			double end = bracket1children.get(2).execute(t);
 			double increment = bracket1children.get(3).execute(t);
 			CommandNode bracketNode2 = children.get(1);
-			variable.getCommand().setValue(start);
+			CommandObject var =variable.getCommand();
+			var.setValue(start);
+			
 			
 			for(int i =(int) start; i<end; i=i+ (int) increment) {	
 			retVal =bracketNode2.execute(t);
-			variable.getCommand().setValue(i+1);
+			var.setValue(i+1);
 			}
 		return retVal;	
 		}

@@ -78,12 +78,18 @@ public class Parser implements ParserObject{
 			CommandNode topNode = new CommandNode(new MakeVariable(varName, variableMap));
 			return topNode;
 		}
-		if( commandText.equals("for") ) {
+		if( commandText.equals("for")) {
 			
 		CommandNode topNode=	 new CommandNode(new For(variableMap));
 			return topNode;
 			
 		}
+		if( commandText.equals("doTimes")) {
+			
+			CommandNode topNode=	 new CommandNode(new DoTimes(variableMap));
+				return topNode;
+				
+			}
 		if (commandText.startsWith(":")) {
 			try {
 				return new CommandNode(new UserVariable(commandText, variableMap));
