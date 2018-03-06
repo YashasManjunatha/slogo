@@ -11,8 +11,8 @@ public class Command implements CommandObject{
 	private CommandNode superNode;
 	private Turtle myTurtle;
 	
-	public Command(String text, Turtle turtle, Map<String, Double> variables, String language) {
-		myParser = new Parser(variables, language);
+	public Command(String text, Turtle turtle, Map<String, Double> variables, Map<String, Command> commands, String language) {
+		myParser = new Parser(variables, commands, language);
 		myTurtle = turtle;
 		try {
 			superNode = myParser.parse(text);

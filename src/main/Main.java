@@ -17,6 +17,7 @@ import GUIBoxes.BackgroundCombo;
 import GUIBoxes.LanguageCombo;
 import GUIBoxes.PenCombo;
 import Turtle.Turtle;
+import commands.Command;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -52,11 +53,13 @@ public class Main extends Application {
 	private Scene myScene;
 	private Group root;
 	private Map<String, Double> variableMap;
+	private Map<String, Command> commandMap;
 	
 	@Override
 	public void start(Stage stage) {
 		myStage = stage;
 		variableMap = new HashMap<>();
+		commandMap = new HashMap<>();
 		initialize();
 	}
 
@@ -139,7 +142,7 @@ public class Main extends Application {
 
 	private void setupButtons() {
 		new RunButton(root, languageComboBox, GUIProperties.get("runButton"), "Run", textInput, prevCommandBox,
-				turtleList, variableMap);
+				turtleList, variableMap, commandMap);
 
 		new ClearButton(root, GUIProperties.get("clearButton"), "Clear", textInput, prevCommandBox, turtleList);
 
