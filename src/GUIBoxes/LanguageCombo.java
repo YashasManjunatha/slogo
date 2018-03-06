@@ -12,7 +12,7 @@ public class LanguageCombo extends GUIComboBox {
 	private final static ObservableList<String> options = FXCollections.observableArrayList("Chinese", "English",
 			"French", "German", "Italian", "Portuguese", "Russian", "Spanish");
 
-	private static String language;
+	private static String language = "English";
 
 	public LanguageCombo(Group root, double[] properties, String text) {
 		super(root, properties, text);
@@ -26,6 +26,7 @@ public class LanguageCombo extends GUIComboBox {
 			@Override
 			public void changed(ObservableValue ov, String t, String t1) {
 				language = t1;
+				System.out.println(language);
 				System.out.println(t1);
 
 			}
@@ -33,6 +34,7 @@ public class LanguageCombo extends GUIComboBox {
 	}
 	
 	public String getLanguage() {
+		System.out.println("get lang" + language);
 		return language;
 	}
 

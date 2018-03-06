@@ -18,13 +18,13 @@ public class Turtle implements TurtleInterface {
 	private boolean turtleShowing;
 	private Pen pen;
 	private boolean penShowing;
-	private final static double startingX = 300.0;
-	private final static double startingY = 187.5;
+	private double startingX;
+	private double startingY;
 	private double orientation = 0;
-	private double xPos = startingX;
-	private double yPos = startingY;
-	private double prevXPos = startingX;
-	private double prevYPos = startingY;
+	private double xPos;
+	private double yPos;
+	private double prevXPos;
+	private double prevYPos;
 	private Map<double[], Color> pathList = new HashMap<>();
 
 	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
@@ -36,8 +36,12 @@ public class Turtle implements TurtleInterface {
 	private void initalizeTurtle() {
 		// scaleImage();
 		turtleShowing = true;
+		startingX = screen.getWidth()/2;
+		startingY = screen.getHeight()/2;
 		xPos = startingX;
 		yPos = startingY;
+		prevXPos = startingX;
+		prevYPos = startingY;
 		screen.addTurtleToCanvas(image, xPos, yPos);
 		pen = new Pen();
 		penShowing = true;
@@ -166,22 +170,31 @@ public class Turtle implements TurtleInterface {
 	public void changePenColor(Color color) {
 		screen.changePenColor(color);
 	}
+	
 
 	@Override
 	public double moveTo(double x, double y) {
+		
+		System.out.println(pathList);
 
+		prevXPos = xPos;
+		prevYPos = yPos;
 		xPos = x + startingX;
 		yPos = y + startingY;
 
 		addPath(prevXPos, prevYPos, xPos, yPos);
 
+		System.out.println(pathList);
+
+		
 		screen.updateBox();
 
 		return Math.sqrt(x * x + y * y);
 	}
 
 	public double clearScreen() {
-		double dist = this.moveTo(startingX, startingY);
+		double dist = this.moveTo(0, 0);
+		orientation = 0;
 		pathList.clear();
 		screen.updateBox();
 		return dist;

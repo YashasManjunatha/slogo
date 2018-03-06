@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -32,17 +33,20 @@ public class UserDefTable extends TableView implements GUIBoxes {
 		nameCol.setCellValueFactory(new PropertyValueFactory("VarName"));
 		nameCol.setMinWidth(NAMECOLWIDTH);
 		nameCol.setMaxWidth(NAMECOLWIDTH);
-//		nameCol.setResizable(false);
-//		nameCol.setCellFactory(TextFieldTableCell.<TableInsertion>forTableColumn());
-//		nameCol.setOnEditCommit((CellEditEvent<TableInsertion, String> t) -> ((TableInsertion)t.getTableView().getItems()
-//				.get(t.getTablePosition().getRow())).setFieldUsername(t.getNewValue()));
+		nameCol.setResizable(false);
 
-		TableColumn valCol = new TableColumn("Value");
+		TableColumn<TableInsertion, String> valCol = new TableColumn("Value");
 		valCol.setMinWidth(VALCOLWIDTH);
 		valCol.setResizable(false);
 		valCol.setEditable(true);
 
-		valCol.setCellValueFactory(new PropertyValueFactory<TableInsertion, String>("Value"));
+		valCol.setCellValueFactory(new PropertyValueFactory("Value"));
+
+		valCol.setCellFactory(TextFieldTableCell.<TableInsertion>forTableColumn());
+		valCol.setOnEditCommit((CellEditEvent<TableInsertion, String> t) -> {
+			((TableInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).setValue(t.getNewValue());
+		});
+
 		ObservableList<TableInsertion> data = FXCollections.observableArrayList(new TableInsertion("x", "90"));
 		table.setItems(data);
 		table.getColumns().addAll(nameCol, valCol);

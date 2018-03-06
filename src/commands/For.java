@@ -6,6 +6,7 @@ import java.util.Map;
 import Turtle.Turtle;
 
 public class For extends Command{
+
   private Map<String, Double> myMap;
   private static int numParams = 2;
   
@@ -23,6 +24,7 @@ public class For extends Command{
 			double start = bracket1children.get(1).execute(t);
 			double end = bracket1children.get(2).execute(t);
 			double increment = bracket1children.get(3).execute(t);
+			
 			CommandNode bracketNode2 = children.get(1);
 			CommandObject var =variable.getCommand();
 			var.setValue(start);
@@ -32,16 +34,11 @@ public class For extends Command{
 			retVal =bracketNode2.execute(t);
 			var.setValue(i+1);
 			}
-		return retVal;	
+		return retVal;
 		}
 		
-		@Override
+	@Override
 		public int getNumberOfParameters() {
 			return numParams;
 		}
-        
-		
-
-	
-
 }

@@ -17,6 +17,7 @@ import GUIBoxes.BackgroundCombo;
 import GUIBoxes.LanguageCombo;
 import GUIBoxes.PenCombo;
 import Turtle.Turtle;
+import commands.Command;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -39,7 +40,7 @@ public class Main extends Application {
 
 	private static String title;
 	private final static double SCREEN_HEIGHT = 600;
-	private final static double SCREEN_WIDTH = 915;
+	private final static double SCREEN_WIDTH = 1215;//915;
 	private static Stage myStage;
 	private static TextInputBox textInput;
 	private static ScreenBox turtleScreen;
@@ -52,11 +53,13 @@ public class Main extends Application {
 	private Scene myScene;
 	private Group root;
 	private Map<String, Double> variableMap;
+	private Map<String, Command> commandMap;
 	
 	@Override
 	public void start(Stage stage) {
 		myStage = stage;
 		variableMap = new HashMap<>();
+		commandMap = new HashMap<>();
 		initialize();
 	}
 
@@ -89,8 +92,8 @@ public class Main extends Application {
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
 		setStage();
 		setupGUIBoxes();
-		setupButtons();
 		setupComboboxes();
+		setupButtons();
 		setupTurtleCheckbox();
 		
 	}
@@ -117,7 +120,6 @@ public class Main extends Application {
 	private void setupComboboxes() {
 		new BackgroundCombo(root, turtleScreen, GUIProperties.get("backgroundCombo"), "Change Background Color");
 		languageComboBox = new LanguageCombo(root, GUIProperties.get("languageCombo"), "Change Language");
-		((LanguageCombo) languageComboBox).getLanguage();
 		new PenCombo(root, turtleList, GUIProperties.get("penCombo"), "Change Pen Color");
 
 	}
@@ -140,7 +142,7 @@ public class Main extends Application {
 
 	private void setupButtons() {
 		new RunButton(root, languageComboBox, GUIProperties.get("runButton"), "Run", textInput, prevCommandBox,
-				turtleList, variableMap);
+				turtleList, variableMap, commandMap);
 
 		new ClearButton(root, GUIProperties.get("clearButton"), "Clear", textInput, prevCommandBox, turtleList);
 
