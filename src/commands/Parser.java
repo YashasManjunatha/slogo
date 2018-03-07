@@ -52,9 +52,7 @@ public class Parser implements ParserObject{
 		while (scan.hasNext() && paramsFilled < root.getNumberOfParameters()) {
 			bool = false;
 			String nextCommand = scan.next();
-			System.out.println(nextCommand);
 			CommandNode currentChild = generateCommandNode(nextCommand.toLowerCase(),scan);
-			System.out.println("hi2");
 			root.addChild(currentChild);
 			if (bool) {
 				paramsFilled++;
@@ -114,15 +112,12 @@ public class Parser implements ParserObject{
 				}
 			}
 			String className = commandsToClasses.get(commandText);
-			System.out.println(commandText + " " + className);
 			if (className.equals("For") || className.equals("MakeVariable")) {
 				return commandWithVariableMap(className, scan);
 			}
 			if (className.equals("MakeUserInstruction")) {
-				System.out.println("okii");
 				return userCommand(scan);
 			}
-			System.out.println("wtf");
 			Class<?> clazz = Class.forName("commands." + className);		//find class associated with the command string
 			Object obj = clazz.newInstance();
 			generatedCommand = (CommandObject) obj;
@@ -160,14 +155,12 @@ public class Parser implements ParserObject{
 	}
 
 	private CommandNode userCommand(Scanner scan) {
-		System.out.println("check");
 		String name = scan.next();
 		scan.next(); // pass by initial bracket "["
 		List<String> variables = new ArrayList<>();
 		String next = scan.next();
 		while (!next.equals("]")) {
 			variables.add(next);
-			System.out.println(next);
 			next = scan.next();
 		}
 		next = scan.next();
@@ -177,7 +170,6 @@ public class Parser implements ParserObject{
 			next = scan.next();
 		}
 		commands += next;
-		System.out.println(commands);
 		CommandNode userCommand = new CommandNode(new MakeUserInstruction(variables, commands));
 		userCommandMap.put(name, (Command)userCommand.getCommand());
 		return userCommand;
