@@ -196,7 +196,6 @@ public class Parser implements ParserObject{
 			return new CommandNode(new For(variableMap));
 		}
 		else if (className.equals("DoTimes")){
-			System.out.println("Dotimes hereee");
 			return new CommandNode(new DoTimes(variableMap));
 		
 		}

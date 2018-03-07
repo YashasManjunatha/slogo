@@ -32,7 +32,11 @@ public class MakeUserInstruction extends Command{
 		}
 		return paramsInserted;
 	}
+	@Override 
+	public int getNumberOfParameters() {
+		return  myParameters.size();
 	
+	}
 //	public void setParamValue(String param, double value) {
 //		paramToValueMap.put(param, value);
 //	}
