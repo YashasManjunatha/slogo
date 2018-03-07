@@ -85,10 +85,18 @@ public class Parser implements ParserObject{
 			bool = true;
 			return userCommand;
 		}
+		
+		if (commandText.equals("make") || commandText.equals("set")) {
+			String varName = scan.next();
+			CommandNode topNode = new CommandNode(new MakeVariable(varName, variableMap));
+			return topNode;
+		}
+		
 		if (commandText.equals("[")) {
 			return generateBracketNode(commandText, scan);
 		}
 		
+
 		if (commandText.startsWith(":")) {
 			try {
 				return new CommandNode(new UserVariable(commandText, variableMap));
@@ -178,6 +186,11 @@ public class Parser implements ParserObject{
 	private CommandNode commandWithVariableMap(String className, Scanner scan) {
 		if (className.equals("For")) {
 			return new CommandNode(new For(variableMap));
+		}
+		else if (className.equals("DoTimes")){
+			System.out.println("Dotimes hereee");
+			return new CommandNode(new DoTimes(variableMap));
+		
 		}
 		else {
 			return new CommandNode(new MakeVariable(scan.next(), variableMap));
