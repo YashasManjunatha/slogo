@@ -1,11 +1,8 @@
 package commands;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MakeUserInstruction extends Command{
-	//private Map<String, Double> paramToValueMap;
 	private String myCommandText;
 	private List<String> myParameters;
 	public MakeUserInstruction(List<String> parameters, String commands) {
