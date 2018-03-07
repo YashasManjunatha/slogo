@@ -1,5 +1,9 @@
 package GUIBoxes;
 
+import java.util.ArrayList;
+import java.util.Map;
+
+import commands.Command;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
@@ -47,11 +51,11 @@ public class UserDefTable extends TableView implements GUIBoxes {
 		valCol.setCellFactory(TextFieldTableCell.<TableInsertion>forTableColumn());
 		valCol.setOnEditCommit((CellEditEvent<TableInsertion, String> t) -> {
 			((TableInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).setValue(t.getNewValue());
-			//System.out.println("ugyfcyvghbk");
+			
 		});
 
-		ObservableList<TableInsertion> data1 = FXCollections.observableArrayList(new TableInsertion("x", "90"), new TableInsertion("x", "180"));
-		table.setItems(data1);
+//		ObservableList<TableInsertion> data1 = FXCollections.observableArrayList(new TableInsertion("x", "90"), new TableInsertion("x", "180"));
+//		table.setItems(data1);
 
 		table.getColumns().addAll(nameCol, valCol);
 	}
@@ -67,6 +71,27 @@ public class UserDefTable extends TableView implements GUIBoxes {
 	public void updateBox() {
 //		root.getChildren().remove(table);
 //		root.getChildren().add(table);
+	}
+
+	public void updateVars(Map<String, Double> variableMap) {
+		ArrayList<TableInsertion> insertionList = new ArrayList<>();
+		for (String key : variableMap.keySet()) {
+			insertionList.add(new TableInsertion(key, variableMap.get(key) + ""));
+		}
+		ObservableList<TableInsertion> finalList = FXCollections.observableArrayList(insertionList);
+		table.setItems(finalList);
+		
+		
+	}
+
+	public void updateFuncs(Map<String, Command> userCommandMap) {
+		ArrayList<TableInsertion> insertionList = new ArrayList<>();
+		for (String key : userCommandMap.keySet()) {
+			insertionList.add(new TableInsertion(key, userCommandMap.get(key).toString()));
+		}
+		ObservableList<TableInsertion> finalList = FXCollections.observableArrayList(insertionList);
+		table.setItems(finalList);
+		
 	}
 
 }

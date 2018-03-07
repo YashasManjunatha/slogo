@@ -167,7 +167,7 @@ public class Main extends Application {
 
 	private void setupButtons() {
 		new RunButton(myPane, languageComboBox, GUIProperties.get("runButton"), "Run", textInput, prevCommandBox,
-				turtleList, variableMap, commandMap);
+				turtleList, variableMap, commandMap, varTable, funcTable);
 
 		new ClearButton(myPane, GUIProperties.get("clearButton"), "Clear", textInput, prevCommandBox, turtleList);
 
