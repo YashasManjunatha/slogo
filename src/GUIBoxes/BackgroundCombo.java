@@ -9,6 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Tab;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 
 public class BackgroundCombo extends GUIComboBox {
@@ -23,8 +25,8 @@ public class BackgroundCombo extends GUIComboBox {
 
 	
 
-	public BackgroundCombo(Group root, ScreenBox turtleScreen, double[] properties, String title) {
-		super(root, properties, title);
+	public BackgroundCombo(Pane pane, ScreenBox turtleScreen, double[] properties, String title) {
+		super(pane, properties, title);
 		mainTurtleScreen = turtleScreen;
 		getCombobox().setItems(options);
 		setupAction();

@@ -7,22 +7,23 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
+import javafx.scene.layout.Pane;
 
 public abstract class Buttons {
 	
-	private Group thisRoot;
+	private Pane thisPane;
 	private String buttonText;
 	private Button thisButton;
 	private static ArrayList<Turtle> thisTurtleList;
 	
-	public Buttons(Group root, double[] properties, String text, ArrayList<Turtle> turtleList) {
+	public Buttons(Pane pane, double[] properties, String text, ArrayList<Turtle> turtleList) {
 		setButton(new Button(text));
-		thisRoot = root;
+		thisPane = pane;
 		setThisTurtleList(turtleList);
 		setupProperties(properties[0], properties[1], properties[2], properties[3]);
 		setupAction();
-		root.getChildren().add(getButton());
-
+		thisPane.getChildren().add(thisButton);
 	}
 	
 

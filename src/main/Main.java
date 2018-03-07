@@ -23,15 +23,21 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -40,13 +46,15 @@ public class Main extends Application {
 
 	private static String title;
 	private final static double SCREEN_HEIGHT = 600;
-	private final static double SCREEN_WIDTH = 1215;//915;
+	private final static double SCREEN_WIDTH = 1215;// 915;
 	private static Stage myStage;
 	private static TextInputBox textInput;
 	private static ScreenBox turtleScreen;
 	private static GUIComboBox languageComboBox;
 	private static PrevCommandList prevCommandBox;
 	private static ArrayList<Turtle> turtleList;
+	private static UserDefTable varTable;
+	private static UserDefTable funcTable;
 	private static final Map<String, double[]> GUIProperties = createMap();
 
 	// Additional setup for the main menu
@@ -54,6 +62,10 @@ public class Main extends Application {
 	private Group root;
 	private Map<String, Double> variableMap;
 	private Map<String, Command> commandMap;
+	
+	private static TabPane tabPane;
+	private static Tab tab;
+	private static Pane myPane;
 	
 	@Override
 	public void start(Stage stage) {
@@ -87,15 +99,27 @@ public class Main extends Application {
 
 	private void initialize() {
 		root = new Group();
-
 		turtleList = new ArrayList<>();
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
 		setStage();
+		tabPane = new TabPane();
+		tab = new Tab();
+		myPane = new Pane();
+		myPane.setMinHeight(SCREEN_HEIGHT);
+		myPane.setMinWidth(SCREEN_WIDTH);
+
+
 		setupGUIBoxes();
 		setupComboboxes();
 		setupButtons();
 		setupTurtleCheckbox();
 		
+		tab.setContent(myPane);
+		
+		tabPane.getTabs().add(tab);
+		
+		root.getChildren().add(tabPane);
+
 	}
 
 	private void setupTurtleCheckbox() {
@@ -112,41 +136,42 @@ public class Main extends Application {
 			vbchecks.getChildren().add(cb);
 		}
 		ScrollPane scroll = new ScrollPane(vbchecks);
-		scroll.setMaxHeight(10);		
+		scroll.setMaxHeight(10);
 		root.getChildren().add(scroll);
-		
+
 	}
 
 	private void setupComboboxes() {
-		new BackgroundCombo(root, turtleScreen, GUIProperties.get("backgroundCombo"), "Change Background Color");
-		languageComboBox = new LanguageCombo(root, GUIProperties.get("languageCombo"), "Change Language");
-		new PenCombo(root, turtleList, GUIProperties.get("penCombo"), "Change Pen Color");
+		new BackgroundCombo(myPane, turtleScreen, GUIProperties.get("backgroundCombo"), "Change Background Color");
+		languageComboBox = new LanguageCombo(myPane, GUIProperties.get("languageCombo"), "Change Language");
+		new PenCombo(myPane, turtleList, GUIProperties.get("penCombo"), "Change Pen Color");
 
 	}
 
 	private void setupGUIBoxes() {
 
-		textInput = new TextInputBox(root, GUIProperties.get("textInput"));
-		turtleScreen = new ScreenBox(root, GUIProperties.get("turtleScreen"), turtleList);
+		textInput = new TextInputBox(myPane, GUIProperties.get("textInput"));
+		turtleScreen = new ScreenBox(myPane, GUIProperties.get("turtleScreen"), turtleList);
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream("images/turtle.png"), 0, 55, true,
 				false);
 		Turtle turtle = new Turtle(turtleScreen, image);
 
 		turtleList.add(turtle);
 
-		new UserDefTable(root, GUIProperties.get("varTable"), "Variable");
-		new UserDefTable(root, GUIProperties.get("funcTable"), "Function");
-		prevCommandBox = new PrevCommandList(root, GUIProperties.get("prevCommandBox"), textInput, turtleList, variableMap);
+		varTable = new UserDefTable(myPane, GUIProperties.get("varTable"), "Variable");
+		funcTable = new UserDefTable(myPane, GUIProperties.get("funcTable"), "Function");
+		prevCommandBox = new PrevCommandList(myPane, GUIProperties.get("prevCommandBox"), textInput, turtleList,
+				variableMap);
 
 	}
 
 	private void setupButtons() {
-		new RunButton(root, languageComboBox, GUIProperties.get("runButton"), "Run", textInput, prevCommandBox,
+		new RunButton(myPane, languageComboBox, GUIProperties.get("runButton"), "Run", textInput, prevCommandBox,
 				turtleList, variableMap, commandMap);
 
-		new ClearButton(root, GUIProperties.get("clearButton"), "Clear", textInput, prevCommandBox, turtleList);
+		new ClearButton(myPane, GUIProperties.get("clearButton"), "Clear", textInput, prevCommandBox, turtleList);
 
-		new ChangeImageButton(root, GUIProperties.get("imageButton"), "Change Turtle Image", turtleScreen, myStage,
+		new ChangeImageButton(myPane, GUIProperties.get("imageButton"), "Change Turtle Image", turtleScreen, myStage,
 				turtleList);
 
 	}

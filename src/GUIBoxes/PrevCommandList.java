@@ -10,11 +10,13 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 public class PrevCommandList extends ListView {
 
-	private static Group thisRoot;
+	private static Pane thisPane;
 	private ListView<String> list;
 	private ObservableList<String> items = FXCollections.observableArrayList();
 	private static TextInputBox mainTextInput;
@@ -22,13 +24,13 @@ public class PrevCommandList extends ListView {
 	
 	private Map<String,Double> variableMap;
 
-	public PrevCommandList(Group root, double[] properties, TextInputBox textInput, ArrayList<Turtle> turtleList, Map<String,Double> variables) {
+	public PrevCommandList(Pane pane, double[] properties, TextInputBox textInput, ArrayList<Turtle> turtleList, Map<String,Double> variables) {
 		list = new ListView<>();
 		mainTextInput = textInput;
-		thisRoot = root;
+		thisPane = pane;
 		mainTurtleList = turtleList;
 		setupList(properties[0], properties[1], properties[2], properties[3]);
-		root.getChildren().add(list);
+		thisPane.getChildren().add(list);
 		variableMap = variables;
 	}
 

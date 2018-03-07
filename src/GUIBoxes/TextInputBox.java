@@ -6,16 +6,18 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 public class TextInputBox implements GUIBoxes {
 
 	private TextArea textInput;
-	private static Group thisRoot;
+	private static Pane thisPane;
 
-	public TextInputBox(Group root, double[] properties) {
+	public TextInputBox(Pane pane, double[] properties) {
 		textInput = new TextArea();
+		thisPane = pane;
 		setupProperties(properties[0], properties[1], properties[2], properties[3]);
-		root.getChildren().add(textInput);
+		thisPane.getChildren().add(textInput);
 	}
 
 	private void setupProperties(double xPos, double yPos, double width, double height) {
@@ -36,11 +38,6 @@ public class TextInputBox implements GUIBoxes {
 		textInput.clear();
 	}
 
-	@Override
-	public void updateBox() {
-		thisRoot.getChildren().remove(textInput);
-		thisRoot.getChildren().add(textInput);
-	}
 
 	public Node getTextArea() {
 		return textInput;
@@ -48,6 +45,12 @@ public class TextInputBox implements GUIBoxes {
 
 	public void setText(String currentItemSelected) {
 		textInput.setText(currentItemSelected);		
+	}
+
+	@Override
+	public void updateBox() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

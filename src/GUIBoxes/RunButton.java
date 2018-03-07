@@ -9,6 +9,8 @@ import commands.Command;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.control.Tab;
+import javafx.scene.layout.Pane;
 
 public class RunButton extends Buttons {
 
@@ -20,9 +22,9 @@ public class RunButton extends Buttons {
 	private Map<String, Double> variableMap;
 	private Map<String, Command> userCommandMap;
 
-	public RunButton(Group root, GUIComboBox languageComboBox, double[] properties, String text, TextInputBox textInput,
+	public RunButton(Pane pane, GUIComboBox languageComboBox, double[] properties, String text, TextInputBox textInput,
 			PrevCommandList prevCommandBox, ArrayList<Turtle> turtleList, Map<String, Double> variables, Map<String, Command> commands) {
-		super(root, properties, text, turtleList);
+		super(pane, properties, text, turtleList);
 		mainLanguageComboBox = languageComboBox;
 		this.mainTextInput = textInput;
 		this.mainPrevCommandBox = prevCommandBox;

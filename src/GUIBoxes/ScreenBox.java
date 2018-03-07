@@ -9,6 +9,8 @@ import Turtle.Turtle;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,23 +22,24 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 
-public class ScreenBox implements GUIBoxes {
+public class ScreenBox implements GUIBoxes{
 
 	private Canvas turtleScreen;
-	private static Group thisRoot;
+	private static Pane thisPane;
 	private static GraphicsContext gc;
-	private static StackPane stackPane;
 	private static ArrayList<Turtle> mainTurtleList;
 	private Color thisBackgroundColor;
 	private Color thisPenColor = Color.BLACK;
+	
 
-	public ScreenBox(Group root, double[] properties, ArrayList<Turtle> turtleList) {
+	public ScreenBox(Pane pane, double[] properties, ArrayList<Turtle> turtleList) {
 		turtleScreen = new Canvas();
-		thisRoot = root;
+		thisPane = pane;
 		mainTurtleList = turtleList;
 		setupProperties(properties[0], properties[1], properties[2], properties[3]);
+		thisPane.getChildren().add(turtleScreen);
+		
 
-		root.getChildren().add(turtleScreen);
 	}
 
 	private void setupProperties(double xPos, double yPos, double width, double height) {
@@ -94,18 +97,21 @@ public class ScreenBox implements GUIBoxes {
 	public double getX() {
 		return turtleScreen.getLayoutX();
 	}
+	
+	public double getHeight() {
+		return turtleScreen.getHeight();
+	}
+	
+	public double getWidth() {
+		return turtleScreen.getWidth();
+	}
+
 
 	public double getY() {
 		return turtleScreen.getLayoutY();
 	}
 
-	public double getHeight() {
-		return turtleScreen.getHeight();
-	}
 
-	public double getWidth() {
-		return turtleScreen.getWidth();
-	}
 
 	public void addTurtleToCanvas(Image turtle, double xPos, double yPos) {
 		gc.drawImage(turtle, xPos, yPos);
@@ -147,6 +153,10 @@ public class ScreenBox implements GUIBoxes {
 	
 	public Color getPenColor() {
 		return thisPenColor;
+	}
+	
+	public Canvas getCanvas() {
+		return turtleScreen;
 	}
 
 }
