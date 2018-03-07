@@ -10,10 +10,19 @@ public class MakeUserInstruction extends Command{
 		myParameters = parameters;
 	}
 		
-	public String getInstructionText(List<String> paramValues) {
+//	public String getInstructionText(List<String> paramValues) {
+//		String paramsInserted = myCommandText;
+//		for (int x=0; x<paramValues.size(); x++) {
+//			paramsInserted = paramsInserted.replaceAll(myParameters.get(x), paramValues.get(x));
+//		}
+//		return paramsInserted;
+//	}
+	
+	public String getInstructionText(CommandNode parameters) {
 		String paramsInserted = myCommandText;
-		for (int x=0; x<paramValues.size(); x++) {
-			paramsInserted = paramsInserted.replaceAll(myParameters.get(x), paramValues.get(x));
+		List<CommandNode> paramChildren = parameters.getChildren();
+		for (int x=0; x<paramChildren.size(); x++) {
+			paramsInserted = paramsInserted.replaceAll(myParameters.get(x), ""+paramChildren.get(x).execute(paramChildren.get(x).getCommand().getTurtle()));
 		}
 		return paramsInserted;
 	}

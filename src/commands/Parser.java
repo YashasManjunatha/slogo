@@ -64,6 +64,7 @@ public class Parser implements ParserObject{
 	}
 	
 	CommandNode generateCommandNode(String commandText, Scanner scan) throws InvalidCommandException {
+		System.out.println(commandText);
 		try {
 			double parsedDouble = Double.parseDouble(commandText);
 			return new CommandNode(new ParsedDouble(parsedDouble));
@@ -72,16 +73,30 @@ public class Parser implements ParserObject{
 		}
 		
 		if (userCommandMap.containsKey(commandText)) {
+			System.out.println("map");
 			scan.next(); //bypass "[" for paramaters
 			String next = scan.next();
-			List<String> params = new ArrayList<>();
+			//List<String> params = new ArrayList<>();
+			String toBeParsed = "";
+			
+			/*
+			 * pass a commandNode to user instruction instead of ArrayList
+			 * make a toBeParsed string from one bracket to next
+			 * parse this and pass the command node
+			 * in make user instruction, execute each child to get the double to replace the param with
+			 */
 			while (!next.equals("]")) {
-				params.add(next);
+				//params.add(next);
+				toBeParsed = toBeParsed + next + " ";
 				next = scan.next();
 			}
+			Parser paramParser = new Parser(variableMap, userCommandMap, myLanguage);
+			CommandNode params = paramParser.parse(toBeParsed);
+			System.out.println("to be parsed: " + toBeParsed);
 			MakeUserInstruction userInstruction = (MakeUserInstruction) userCommandMap.get(commandText);
-			Parser newParser = new Parser(variableMap, userCommandMap, myLanguage);
-			CommandNode userCommand = newParser.parse(userInstruction.getInstructionText(params));
+			Parser userCommandParser = new Parser(variableMap, userCommandMap, myLanguage);
+			System.out.println(userInstruction.getInstructionText(params) + " "+ params);
+			CommandNode userCommand = userCommandParser.parse(userInstruction.getInstructionText(params));
 			bool = true;
 			return userCommand;
 		}
@@ -172,8 +187,20 @@ public class Parser implements ParserObject{
 			next = scan.next();
 		}
 		next = scan.next();
+		//System.out.println(next +" test  "+ scan.next());
 		String commands = "";
-		while (!next.equals("]")) {
+		int bracketCount = 0;
+//		while (!next.equals("]")) {
+		while (scan.hasNext()) {
+			if (next.equals("]")){
+				bracketCount--;
+				if (bracketCount == 0) {
+					break;
+				}
+			}
+			else if (next.equals("[")){
+				bracketCount++;
+			}
 			commands = commands + next + " ";
 			next = scan.next();
 		}
@@ -188,7 +215,6 @@ public class Parser implements ParserObject{
 			return new CommandNode(new For(variableMap));
 		}
 		else if (className.equals("DoTimes")){
-			System.out.println("Dotimes hereee");
 			return new CommandNode(new DoTimes(variableMap));
 		
 		}

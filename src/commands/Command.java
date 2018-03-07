@@ -37,7 +37,7 @@ public class Command implements CommandObject{
 		return (int) Double.POSITIVE_INFINITY;
 	}
 	
-	protected Turtle getTurtle() {
+	public Turtle getTurtle() {
 		return myTurtle;
 	}
 	@Override

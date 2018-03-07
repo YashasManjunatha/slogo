@@ -5,6 +5,7 @@ import Turtle.Turtle;
 
 public class If extends Command {
 
+	private int numberOfParameters = 2;
 	@Override
 	public double execute(List<CommandNode> children, Turtle t){
 		double num = children.get(0).execute(t);
@@ -17,6 +18,9 @@ public class If extends Command {
 		
 	}
 
-	
+	@Override
+	public int getNumberOfParameters() {
+		return numberOfParameters;
+	}
 
 }
