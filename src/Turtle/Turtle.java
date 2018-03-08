@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import GUIBoxes.ErrorBox;
@@ -25,12 +26,13 @@ public class Turtle implements TurtleInterface {
 	private double yPos;
 	private double prevXPos;
 	private double prevYPos;
-	private Map<double[], Color> pathList = new HashMap<>();
-	
-	private ArrayList<Double> orientationList = new ArrayList<>();
-	
-	private ArrayList<Image> imageList = new ArrayList<>();
+	private List<Double[]> pathList = new ArrayList<>();
 
+	private List<Color> penColorList = new ArrayList<>();
+
+	private List<Double> orientationList = new ArrayList<>();
+
+	private List<Image> imageList = new ArrayList<>();
 
 	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
 		screen = turtle_screen;
@@ -42,8 +44,8 @@ public class Turtle implements TurtleInterface {
 	private void initalizeTurtle() {
 		// scaleImage();
 		turtleShowing = true;
-		startingX = screen.getWidth()/2;
-		startingY = screen.getHeight()/2;
+		startingX = screen.getWidth() / 2;
+		startingY = screen.getHeight() / 2;
 		xPos = startingX;
 		yPos = startingY;
 		prevXPos = startingX;
@@ -52,6 +54,9 @@ public class Turtle implements TurtleInterface {
 		//pen = new Pen();
 		penShowing = true;
 		orientationList.add((double) 0);
+		Double[] firstPath = { startingX, startingY, startingX, startingY };
+		pathList.add(firstPath);
+		penColorList.add(Color.BLACK);
 
 	}
 
@@ -89,27 +94,38 @@ public class Turtle implements TurtleInterface {
 
 	private void addPath(double prevXPos, double prevYPos, double xPos, double yPos) {
 
+		System.out.println("PATHLIST = " + pathList);
+		System.out.println("ORIENTATION = " + orientationList);
+
 		System.out.println(prevXPos);
 		System.out.println(prevYPos);
 		System.out.println(xPos);
 		System.out.println(yPos);
 		System.out.println(pathList);
 		if (penShowing) {
-			double[] newPath = { prevXPos, prevYPos, xPos, yPos };
-			pathList.put(newPath, screen.getPenColor());
+			Double[] newPath = { prevXPos, prevYPos, xPos, yPos };
+			pathList.add(newPath);
+			penColorList.add(screen.getPenColor());
+			orientationList.add(orientation);
+
 		}
 	}
 
 	@Override
 	public double turn(double degrees) {
-		
-		orientationList.add(orientation);
-		
+
 		orientation = orientation + degrees;
 
-		System.out.println(orientation);
+		System.out.println("PATHLIST = " + pathList);
+		System.out.println("ORIENTATION = " + orientationList);
+
+		Double[] newPath = { prevXPos, prevYPos, xPos, yPos };
+		pathList.add(newPath);
+		penColorList.add(screen.getPenColor());
+		orientationList.add(orientation);
+
 		screen.updateBox();
-		
+
 		return degrees;
 	}
 
@@ -118,8 +134,12 @@ public class Turtle implements TurtleInterface {
 		return xPos;
 	}
 
-	public Map<double[], Color> getPaths() {
+	public List<Double[]> getPaths() {
 		return pathList;
+	}
+
+	public List<Color> getPenColors() {
+		return penColorList;
 	}
 
 	public double getPrevX() {
@@ -181,11 +201,10 @@ public class Turtle implements TurtleInterface {
 	public void changePenColor(Color color) {
 		screen.changePenColor(color);
 	}
-	
 
 	@Override
 	public double moveTo(double x, double y) {
-		
+
 		System.out.println(pathList);
 
 		prevXPos = xPos;
@@ -197,7 +216,6 @@ public class Turtle implements TurtleInterface {
 
 		System.out.println(pathList);
 
-		
 		screen.updateBox();
 
 		return Math.sqrt(x * x + y * y);
@@ -212,34 +230,41 @@ public class Turtle implements TurtleInterface {
 	}
 
 	public void changeImage(String fileName) {
-		
+
 		imageList.add(image);
-		
+
 		try {
 			image = new Image(new FileInputStream(fileName), 0, 50, true, false);
 			screen.updateBox();
 		} catch (FileNotFoundException e) {
 			new ErrorBox("Invalid Image", "Please Choose a Valid Image");
 		}
-		
-		
+
 	}
-	
+
 	public void redoMove() {
-		System.out.println(pathList);
-		if (!pathList.keySet().isEmpty()) {
-			double[] getKey = {prevXPos, prevYPos, xPos, yPos};
-			pathList.remove(getKey);
+
+		System.out.println("PATHLIST = " + pathList);
+		System.out.println("ORIENTATION = " + orientationList);
+
+		if (pathList.size() > 0) {
+			pathList.remove(pathList.get(pathList.size() - 1));
 			System.out.println("oList " + orientationList);
-			orientation = orientationList.get(orientationList.size()-1);
-			image = imageList.get(imageList.size()-1);
+			orientationList.remove(orientationList.size() - 1);
+			orientation = orientationList.get(orientationList.size() - 1);
+			xPos = pathList.get(pathList.size() - 1)[2];
+			yPos = pathList.get(pathList.size() - 1)[3];
+
 			screen.updateBox();
 		}
+
 		else {
 			xPos = startingX;
 			yPos = startingY;
 			orientation = 0;
 			screen.updateBox();
+
 		}
+
 	}
 }

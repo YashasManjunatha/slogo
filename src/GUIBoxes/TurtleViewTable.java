@@ -11,11 +11,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.Pane;
 
 public class TurtleViewTable extends TableView implements GUIBoxes{
 	private TableView table;
 	
-	private Group root;
+	private Pane thisPane;
 	private final static int ACTIVECOLWIDTH = 50;
 	private final static int IDCOLWIDTH = 25;
 	private final static int POSCOLWIDTH = 50;
@@ -23,13 +24,13 @@ public class TurtleViewTable extends TableView implements GUIBoxes{
 	private final static int PENCOLWIDTH = 60;
 	private List<Turtle> turtles;
 	
-	public TurtleViewTable(Group root, double[] properties, List<Turtle> turtles) {
-		this.root = root;
+	public TurtleViewTable(Pane pane, double[] properties, List<Turtle> turtles) {
+		thisPane = pane;
 		this.turtles = turtles;
 		table = new TableView<>();
 		setupTableProperties(properties[0], properties[1], properties[2], properties[3]);
 		setupTableColumns();
-		root.getChildren().add(table);
+		thisPane.getChildren().add(table);
 	}
 	
 	private void setupTableColumns() {
@@ -135,8 +136,8 @@ public class TurtleViewTable extends TableView implements GUIBoxes{
 	
 	@Override
 	public void updateBox() {
-		root.getChildren().remove(table);
-		root.getChildren().add(table);
+		thisPane.getChildren().remove(table);
+		thisPane.getChildren().add(table);
 	}
 
 }

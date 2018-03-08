@@ -29,6 +29,7 @@ public class Gui {
 	private ArrayList<Turtle> turtleList;
 	private UserDefTable varTable;
 	private UserDefTable funcTable;
+	private TurtleViewTable turtleTable;
 	private final Map<String, double[]> GUIProperties = createMap();
 
 	// Additional setup for the main menu
@@ -73,7 +74,7 @@ public class Gui {
 		
 		GUIProperties.put("redoMoveButton", new double[] { 50, 50, 45, 55 });
 		
-		GUIProperties.put("turtleList", new double[] {925, 30, 425, 500});
+		GUIProperties.put("turtleList", new double[] {925, 50, 425, 500});
 
 		
 
@@ -133,7 +134,7 @@ public class Gui {
 		prevCommandBox = new PrevCommandList(myPane, GUIProperties.get("prevCommandBox"), textInput, turtleList,
 				variableMap);
 		
-		new TurtleViewTable(root, GUIProperties.get("turtleList"), turtleList);
+		turtleTable = new TurtleViewTable(myPane, GUIProperties.get("turtleList"), turtleList);
 	
 
 
