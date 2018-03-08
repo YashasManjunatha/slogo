@@ -1,6 +1,7 @@
 package GUIBoxes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Turtle.Turtle;
 import javafx.event.ActionEvent;
@@ -15,9 +16,9 @@ public abstract class Buttons {
 	private Pane thisPane;
 	private String buttonText;
 	private Button thisButton;
-	private static ArrayList<Turtle> thisTurtleList;
+	private List<Turtle> thisTurtleList;
 	
-	public Buttons(Pane pane, double[] properties, String text, ArrayList<Turtle> turtleList) {
+	public Buttons(Pane pane, double[] properties, String text, List<Turtle> turtleList) {
 		setButton(new Button(text));
 		thisPane = pane;
 		setThisTurtleList(turtleList);
@@ -51,13 +52,13 @@ public abstract class Buttons {
 
 
 
-	protected static ArrayList<Turtle> getThisTurtleList() {
+	protected List<Turtle> getThisTurtleList() {
 		return thisTurtleList;
 	}
 
 
 
-	protected static void setThisTurtleList(ArrayList<Turtle> thisTurtleList) {
-		Buttons.thisTurtleList = thisTurtleList;
+	protected void setThisTurtleList(List<Turtle> turtleList) {
+		thisTurtleList = turtleList;
 	}
 }

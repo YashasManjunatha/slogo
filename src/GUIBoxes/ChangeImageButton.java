@@ -1,6 +1,7 @@
 package GUIBoxes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Turtle.Turtle;
 import javafx.event.ActionEvent;
@@ -15,10 +16,10 @@ public class ChangeImageButton extends Buttons {
 
 	private Stage mainStage;
 	private ScreenBox mainTurtleScreen;
-	private ArrayList<Turtle> mainTurtleList;
+	private List<Turtle> mainTurtleList;
 
 	public ChangeImageButton(Pane pane, double[] properties, String text, ScreenBox turtleScreen, Stage stage,
-			ArrayList<Turtle> turtleList) {
+			List<Turtle> turtleList) {
 		super(pane, properties, text, turtleList);
 		mainStage = stage;
 		mainTurtleScreen = turtleScreen;

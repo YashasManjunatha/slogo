@@ -1,6 +1,7 @@
 package GUIBoxes;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import commands.MakeUserInstruction;
 import commands.Command;
@@ -74,7 +75,7 @@ public class UserDefTable extends TableView implements GUIBoxes {
 	}
 
 	public void updateVars(Map<String, Double> variableMap) {
-		ArrayList<TableInsertion> insertionList = new ArrayList<>();
+		List<TableInsertion> insertionList = new ArrayList<>();
 		for (String key : variableMap.keySet()) {
 			insertionList.add(new TableInsertion(key, variableMap.get(key) + ""));
 		}
@@ -85,7 +86,7 @@ public class UserDefTable extends TableView implements GUIBoxes {
 	}
 
 	public void updateFuncs(Map<String, Command> userCommandMap) {
-		ArrayList<TableInsertion> insertionList = new ArrayList<>();
+		List<TableInsertion> insertionList = new ArrayList<>();
 		for (String key : userCommandMap.keySet()) {
 			MakeUserInstruction userCommand = (MakeUserInstruction) userCommandMap.get(key);
 			System.out.println("ojipij" +  userCommand.toString());

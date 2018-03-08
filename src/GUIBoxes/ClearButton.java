@@ -1,6 +1,7 @@
 package GUIBoxes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Turtle.Turtle;
 import commands.Command;
@@ -16,7 +17,7 @@ public class ClearButton extends Buttons {
 	private PrevCommandList mainPrevCommandBox;
 
 	public ClearButton(Pane pane, double[] properties, String text, TextInputBox textInput,
-			PrevCommandList prevCommandBox, ArrayList<Turtle> turtleList) {
+			PrevCommandList prevCommandBox, List<Turtle> turtleList) {
 		super(pane, properties, text, turtleList);
 		this.mainTextInput = textInput;
 		this.mainPrevCommandBox = prevCommandBox;

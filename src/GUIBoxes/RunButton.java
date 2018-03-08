@@ -2,6 +2,7 @@ package GUIBoxes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import Turtle.Turtle;
@@ -25,7 +26,7 @@ public class RunButton extends Buttons {
 	private Map<String, Command> userCommandMap;
 
 	public RunButton(Pane pane, GUIComboBox languageComboBox, double[] properties, String text, TextInputBox textInput,
-			PrevCommandList prevCommandBox, ArrayList<Turtle> turtleList, Map<String, Double> variables,
+			PrevCommandList prevCommandBox, List<Turtle> turtleList, Map<String, Double> variables,
 			Map<String, Command> commands, UserDefTable varTable, UserDefTable funcTable) {
 		super(pane, properties, text, turtleList);
 		mainLanguageComboBox = languageComboBox;

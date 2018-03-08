@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 
 import Turtle.Turtle;
 import javafx.scene.Node;
@@ -27,12 +28,12 @@ public class ScreenBox implements GUIBoxes{
 	private Canvas turtleScreen;
 	private Pane thisPane;
 	private GraphicsContext gc;
-	private ArrayList<Turtle> mainTurtleList;
+	private List<Turtle> mainTurtleList;
 	private Color thisBackgroundColor;
 	private Color thisPenColor = Color.BLACK;
 	
 
-	public ScreenBox(Pane pane, double[] properties, ArrayList<Turtle> turtleList) {
+	public ScreenBox(Pane pane, double[] properties, List<Turtle> turtleList) {
 		turtleScreen = new Canvas();
 		thisPane = pane;
 		mainTurtleList = turtleList;
