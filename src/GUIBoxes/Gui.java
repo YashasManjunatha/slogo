@@ -73,6 +73,10 @@ public class Gui {
 		GUIProperties.put("newTurtleButton", new double[] { 30, 30, 45, 55 });
 		
 		GUIProperties.put("redoMoveButton", new double[] { 50, 50, 45, 55 });
+		
+		GUIProperties.put("turtleList", new double[] {925, 30, 425, 500});
+
+		
 
 
 		return GUIProperties;
@@ -129,6 +133,10 @@ public class Gui {
 		funcTable = new UserDefTable(myPane, GUIProperties.get("funcTable"), "Function");
 		prevCommandBox = new PrevCommandList(myPane, GUIProperties.get("prevCommandBox"), textInput, turtleList,
 				variableMap);
+		
+		new TurtleViewTable(root, GUIProperties.get("turtleList"), turtleList);
+	
+
 
 	}
 
