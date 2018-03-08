@@ -5,6 +5,10 @@ import Turtle.Turtle;
 
 public class And extends Command{
 	private int numberOfParameters = 2;
+	
+	//public And() {
+	//	setNumParam(2)
+	//}
 
 	@Override
 	public double execute(List<CommandNode> children, Turtle t){

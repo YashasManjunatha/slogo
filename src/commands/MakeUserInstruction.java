@@ -17,9 +17,17 @@ public class MakeUserInstruction extends Command{
 		}
 		return paramsInserted;
 	}
+	@Override 
+	public int getNumberOfParameters() {
+		return  myParameters.size();
 	
+
+	}
+
+
 	@Override
 	public String toString() {
 		return myCommandText;
 	}
+
 }
