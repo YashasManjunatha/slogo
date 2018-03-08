@@ -6,7 +6,7 @@ import java.util.Map;
 import GUIBoxes.ErrorBox;
 import Turtle.Turtle;
 
-public class Command implements CommandObject{
+public class Command extends CommandObject{
 	private Parser myParser;
 	private CommandNode superNode;
 	private Turtle myTurtle;
@@ -36,7 +36,7 @@ public class Command implements CommandObject{
 	}
 
 	@Override
-	public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 		return (int) Double.POSITIVE_INFINITY;
 	}
 	
@@ -44,7 +44,7 @@ public class Command implements CommandObject{
 		return myTurtle;
 	}
 	@Override
-	public double execute(List<CommandNode> children, Turtle t) { //had to implement this because it's in the interface
+	double execute(List<CommandNode> children, Turtle t) { //had to implement this because it's in the interface
 		double retVal = 0;
 		for (CommandNode child: children) {
 			retVal = child.execute(t);

@@ -9,7 +9,7 @@ public class Home extends Command {
 	double step;
 	
 	  @Override
-	   public double execute(List<CommandNode> children, Turtle t){
+	   double execute(List<CommandNode> children, Turtle t){
 	       double x=t.getX();
 	       double y =t.getY();
 	       double s =x*x+y*y;
@@ -20,7 +20,7 @@ public class Home extends Command {
 	   }
 
 	   @Override
-		public int getNumberOfParameters() {
+	   int getNumberOfParameters() {
 			return numberOfParameters;
 		}
 

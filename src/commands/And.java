@@ -9,9 +9,9 @@ public class And extends Command{
 	//public And() {
 	//	setNumParam(2)
 	//}
-
+	
 	@Override
-	public double execute(List<CommandNode> children, Turtle t){
+	 double execute(List<CommandNode> children, Turtle t){
 		CommandNode child1 = children.get(0);
 		CommandNode child2 = children.get(1);
 		if(child1.execute(t)!=0 && child2.execute(t)!=0) return 1;
@@ -21,7 +21,7 @@ public class And extends Command{
 	}
 
 	@Override
-	public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 		return numberOfParameters;
 	}
 }

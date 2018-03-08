@@ -7,7 +7,7 @@ public class Forward extends Command{
      private int numberOfParameters = 1;
 
    @Override
-   public double execute(List<CommandNode> children, Turtle t){
+   double execute(List<CommandNode> children, Turtle t){
 	   CommandNode child = children.get(0);
 	   double step = child.execute(t);
 	   t.move(step);
@@ -15,7 +15,7 @@ public class Forward extends Command{
    }
 
    @Override
-	public int getNumberOfParameters() {
+   int getNumberOfParameters() {
 		return numberOfParameters;
 	}
 

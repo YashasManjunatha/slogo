@@ -8,7 +8,7 @@ public class IsShowing extends Command {
 	private int numberOfParameters = 0;
 
 	@Override
-	public double execute(List<CommandNode> children, Turtle t){
+	double execute(List<CommandNode> children, Turtle t){
 		if (t.getTurtleShowing()) return 1;
 		else { 
 			return 0;
@@ -16,7 +16,7 @@ public class IsShowing extends Command {
 	}
 
 	@Override
-	public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 		return numberOfParameters;
 	}
 
