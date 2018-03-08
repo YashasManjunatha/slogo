@@ -128,7 +128,7 @@ public class ScreenBox implements GUIBoxes{
 			List<Double[]> path = t.getPaths();
 			List<Color> colors = t.getPenColors();
 			System.out.println("DRAWING");
-			thisPenColor = colors.get(i);
+			changePenColor(colors.get(i));
 			gc.strokeLine(path.get(i)[0] + t.getImage().getWidth() / 2, path.get(i)[1] + t.getImage().getHeight() / 2,
 					path.get(i)[2] + t.getImage().getWidth() / 2, path.get(i)[3] + t.getImage().getHeight() / 2);
 		}
