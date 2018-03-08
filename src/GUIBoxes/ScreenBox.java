@@ -1,42 +1,33 @@
 package GUIBoxes;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.util.List;
 
 import Turtle.Turtle;
-import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.Group;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 
-public class ScreenBox implements GUIBoxes {
+public class ScreenBox implements GUIBoxes{
 
 	private Canvas turtleScreen;
-	private static Group thisRoot;
-	private static GraphicsContext gc;
-	private static StackPane stackPane;
-	private static ArrayList<Turtle> mainTurtleList;
+	private Pane thisPane;
+	private GraphicsContext gc;
+	private List<Turtle> mainTurtleList;
 	private Color thisBackgroundColor;
 	private Color thisPenColor = Color.BLACK;
+	
 
-	public ScreenBox(Group root, double[] properties, ArrayList<Turtle> turtleList) {
+	public ScreenBox(Pane pane, double[] properties, List<Turtle> turtleList) {
 		turtleScreen = new Canvas();
-		thisRoot = root;
+		thisPane = pane;
 		mainTurtleList = turtleList;
 		setupProperties(properties[0], properties[1], properties[2], properties[3]);
+		thisPane.getChildren().add(turtleScreen);
+		
 
-		root.getChildren().add(turtleScreen);
 	}
 
 	private void setupProperties(double xPos, double yPos, double width, double height) {
@@ -57,6 +48,7 @@ public class ScreenBox implements GUIBoxes {
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0, 0, 650, 425);
 		gc.setLineWidth(3);
+		updateBox();
 
 	}
 
@@ -71,43 +63,28 @@ public class ScreenBox implements GUIBoxes {
 
 	}
 
-	public void replaceImage(String fileName) {
-		for (Turtle t : mainTurtleList) {
-			// Point location = new Point();
-			// location.setLocation(t.getX(), t.getY());
-			// basically just set locations for the new image
-			mainTurtleList.remove(t);
-			System.out.println(fileName);
-			Image image = null;
-			try {
-				image = new Image(new FileInputStream(fileName), 0, 50, true, false);
-			} catch (FileNotFoundException e) {
-				new ErrorBox("Image Not Found", "Please Choose A Valid Image");
-			}
-			updateBox();
-			Turtle turtle = new Turtle(this, image);
-			mainTurtleList.add(turtle);
-		}
-
-	}
 
 	public double getX() {
 		return turtleScreen.getLayoutX();
 	}
+	
+	public double getHeight() {
+		return turtleScreen.getHeight();
+	}
+	
+	public double getWidth() {
+		return turtleScreen.getWidth();
+	}
+
 
 	public double getY() {
 		return turtleScreen.getLayoutY();
 	}
 
-	public double getHeight() {
-		return turtleScreen.getHeight();
-	}
 
-	public double getWidth() {
-		return turtleScreen.getWidth();
-	}
 
 	public void addTurtleToCanvas(Image turtle, double xPos, double yPos) {
+		System.out.println("drawing turtle to canvas");
 		gc.drawImage(turtle, xPos, yPos);
 
 	}
@@ -116,7 +93,9 @@ public class ScreenBox implements GUIBoxes {
 	public void updateBox() {
 		gc.setFill(thisBackgroundColor);
 		gc.fillRect(0, 0, 650, 425);
+		
 		for (Turtle t : mainTurtleList) {
+
 			drawLine(t);
 
 			gc.save();
@@ -131,11 +110,14 @@ public class ScreenBox implements GUIBoxes {
 	}
 
 	private void drawLine(Turtle t) {
-		//System.out.println(t.getPaths());
-		for (double[] path : t.getPaths().keySet()) {
-			changePenColor((t.getPaths().get(path)));
-			gc.strokeLine(path[0] + t.getImage().getWidth() / 2, path[1] + t.getImage().getHeight() / 2,
-					path[2] + t.getImage().getWidth() / 2, path[3] + t.getImage().getHeight() / 2);
+				
+		for (int i = 0; i < t.getPaths().size(); i++) {
+			List<Double[]> path = t.getPaths();
+			List<Color> colors = t.getPenColors();
+			System.out.println("DRAWING");
+			thisPenColor = colors.get(i);
+			gc.strokeLine(path.get(i)[0] + t.getImage().getWidth() / 2, path.get(i)[1] + t.getImage().getHeight() / 2,
+					path.get(i)[2] + t.getImage().getWidth() / 2, path.get(i)[3] + t.getImage().getHeight() / 2);
 		}
 
 	}
@@ -148,5 +130,11 @@ public class ScreenBox implements GUIBoxes {
 	public Color getPenColor() {
 		return thisPenColor;
 	}
+	
+	public Canvas getCanvas() {
+		return turtleScreen;
+	}
+
+	
 
 }

@@ -1,34 +1,33 @@
 package GUIBoxes;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import Turtle.Turtle;
-import commands.Command;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 public class PrevCommandList extends ListView {
 
-	private static Group thisRoot;
+	private Pane thisPane;
 	private ListView<String> list;
 	private ObservableList<String> items = FXCollections.observableArrayList();
-	private static TextInputBox mainTextInput;
-	private static ArrayList<Turtle> mainTurtleList;
+	private TextInputBox mainTextInput;
+	private List<Turtle> mainTurtleList;
 	
 	private Map<String,Double> variableMap;
 
-	public PrevCommandList(Group root, double[] properties, TextInputBox textInput, ArrayList<Turtle> turtleList, Map<String,Double> variables) {
+	public PrevCommandList(Pane pane, double[] properties, TextInputBox textInput, List<Turtle> turtleList, Map<String,Double> variables) {
 		list = new ListView<>();
 		mainTextInput = textInput;
-		thisRoot = root;
+		thisPane = pane;
 		mainTurtleList = turtleList;
 		setupList(properties[0], properties[1], properties[2], properties[3]);
-		root.getChildren().add(list);
+		thisPane.getChildren().add(list);
 		variableMap = variables;
 	}
 
@@ -47,8 +46,8 @@ public class PrevCommandList extends ListView {
 					for (Turtle t : mainTurtleList) {
 						String currentItemSelected = list.getSelectionModel().getSelectedItem();
 						mainTextInput.setText(currentItemSelected);
-						Command test = new Command(currentItemSelected, t, variableMap);
-						test.execute();
+						//Command test = new Command(currentItemSelected, t, variableMap);
+						//test.execute();
 					}
 					
 				}

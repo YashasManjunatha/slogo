@@ -12,11 +12,11 @@ public class ParsedDouble extends Command{
 		myDouble = parsedDouble;
 	}
 	@Override
-	public double execute(List<CommandNode> children, Turtle t) {
+	double execute(List<CommandNode> children, Turtle t) {
 		return myDouble;
 	}
 	@Override
-	public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 		return 0;
 	}
 	

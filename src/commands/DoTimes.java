@@ -1,19 +1,13 @@
 package commands;
 
 import java.util.List;
-import java.util.Map;
 
 import Turtle.Turtle;
 
 public class DoTimes extends Command{
-	private Map<String, Double> myMap;
 	private static int numParams = 2;
-
-	public DoTimes(Map<String, Double>variableMap){
-		myMap=variableMap;
-	}
 	@Override
-	public double execute(List<CommandNode> children, Turtle t){
+	double execute(List<CommandNode> children, Turtle t){
 
 		double retVal=0;
 
@@ -36,7 +30,7 @@ public class DoTimes extends Command{
 	}
 
 	@Override
-	public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 		return numParams;
 	}
 

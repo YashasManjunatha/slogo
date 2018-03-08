@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 import GUIBoxes.ErrorBox;
 
-public class Parser implements ParserObject{
+public class Parser extends ParserObject{
 	
 	private String myPropertyFile;
 	private boolean bool;
@@ -131,7 +131,7 @@ public class Parser implements ParserObject{
 				}
 			}
 			String className = commandsToClasses.get(commandText);
-			if (className.equals("For") || className.equals("MakeVariable")) {
+			if (className.equals("MakeVariable")) {
 				return commandWithVariableMap(className, scan);
 			}
 			if (className.equals("MakeUserInstruction")) {
@@ -205,15 +205,6 @@ public class Parser implements ParserObject{
 	}
 
 	private CommandNode commandWithVariableMap(String className, Scanner scan) {
-		if (className.equals("For")) {
-			return new CommandNode(new For(variableMap));
-		}
-		else if (className.equals("DoTimes")){
-			return new CommandNode(new DoTimes(variableMap));
-		
-		}
-		else {
-			return new CommandNode(new MakeVariable(scan.next(), variableMap));
-		}
+		return new CommandNode(new MakeVariable(scan.next(), variableMap));
 	}
 }

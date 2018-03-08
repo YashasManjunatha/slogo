@@ -1,8 +1,8 @@
 package GUIBoxes;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import Turtle.Turtle;
 import javafx.beans.value.ChangeListener;
@@ -10,24 +10,26 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javafx.scene.Group;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 public class PenCombo extends GUIComboBox {
 
-	public PenCombo(Group root, double[] properties, String text) {
-		super(root, properties, text);
-		// TODO Auto-generated constructor stub
-	}
-	
 	private ScreenBox mainTurtleScreen;
-	private static ArrayList<Turtle> thisTurtleList;
+	private List<Turtle> thisTurtleList;
 
 	private final static ObservableList<String> options = FXCollections.observableArrayList("White", "Black", "Red",
 			"Dark Green", "Blue", "Yellow", "Purple", "Orange");
 	
 	private static final HashMap<String, Color> colorMap = createColorMap();
 
+	public PenCombo(Pane pane, List<Turtle> turtleList, double[] properties, String title) {
+		super(pane, properties, title);
+		thisTurtleList = turtleList;
+		getCombobox().setItems(options);
+		setupAction();
+	}
+	
 	private static HashMap<String, Color> createColorMap() {
 		HashMap<String, Color> colorMap = new HashMap<>();
 		// first index = xPos, second = yPos, third = width, fourth = length
@@ -41,13 +43,6 @@ public class PenCombo extends GUIComboBox {
 		colorMap.put("Orange", Color.ORANGE);
 		
 		return colorMap;
-	}
-
-	public PenCombo(Group root, ArrayList<Turtle> turtleList, double[] properties, String title) {
-		super(root, properties, title);
-		thisTurtleList = turtleList;
-		getCombobox().setItems(options);
-		setupAction();
 	}
 
 	private void setupAction() {

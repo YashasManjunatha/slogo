@@ -6,12 +6,15 @@ import java.util.Map;
 import GUIBoxes.ErrorBox;
 import Turtle.Turtle;
 
-public class Command implements CommandObject{
+public class Command extends CommandObject{
 	private Parser myParser;
 	private CommandNode superNode;
 	private Turtle myTurtle;
+	private String myText;
 	
 	public Command(String text, Turtle turtle, Map<String, Double> variables, Map<String, Command> commands, String language) {
+		System.out.println("asdfosdfhoiasdhfoias" + text);
+		myText = text;
 		myParser = new Parser(variables, commands, language);
 		myTurtle = turtle;
 		try {
@@ -33,7 +36,7 @@ public class Command implements CommandObject{
 	}
 
 	@Override
-	public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 		return (int) Double.POSITIVE_INFINITY;
 	}
 	
@@ -41,7 +44,7 @@ public class Command implements CommandObject{
 		return myTurtle;
 	}
 	@Override
-	public double execute(List<CommandNode> children, Turtle t) { //had to implement this because it's in the interface
+	double execute(List<CommandNode> children, Turtle t) { //had to implement this because it's in the interface
 		double retVal = 0;
 		for (CommandNode child: children) {
 			retVal = child.execute(t);
@@ -52,6 +55,9 @@ public class Command implements CommandObject{
 	public void setValue(double x) {
 		// TODO Auto-generated method stub
 		
+	}
+	public String CommandtoString() {
+		return myText;
 	}
 
 }

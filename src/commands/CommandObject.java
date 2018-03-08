@@ -4,9 +4,8 @@ import java.util.List;
 
 import Turtle.Turtle;
 
-public interface CommandObject {
-	double execute(List<CommandNode> children, Turtle t);
-	int getNumberOfParameters();
-	void setValue(double x);
-	public Turtle getTurtle();
+public abstract class CommandObject {
+	abstract double execute(List<CommandNode> children, Turtle t);
+	abstract int getNumberOfParameters();
+	abstract void setValue(double x);
 }

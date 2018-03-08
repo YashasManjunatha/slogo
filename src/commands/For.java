@@ -1,20 +1,14 @@
 package commands;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import Turtle.Turtle;
 
 public class For extends Command{
 
-  private Map<String, Double> myMap;
   private static int numParams = 2;
   
- public For(Map<String, Double>variableMap){
-	 myMap=variableMap;
- }
 		@Override
-		public double execute(List<CommandNode> children, Turtle t){
+		double execute(List<CommandNode> children, Turtle t){
 			
 			double retVal=0;
 			CommandNode bracketNode1 = children.get(0);
@@ -38,7 +32,8 @@ public class For extends Command{
 		}
 		
 	@Override
-		public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 			return numParams;
 		}
+	
 }

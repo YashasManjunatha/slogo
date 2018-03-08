@@ -29,11 +29,7 @@ public class MakeUserInstruction extends Command{
 		if (myArguments == null) {
 			return 0;
 		}
-		String paramsInserted = myCommandText;
-		List<CommandNode> paramChildren = myArguments.getChildren();
-		for (int x=0; x<paramChildren.size(); x++) {
-			paramsInserted = paramsInserted.replaceAll(myParameters.get(x), ""+paramChildren.get(x).execute(t));
-		}
+		String paramsInserted = getInstructionText(myArguments, t);
 		Parser userCommandParser = new Parser(variableMap, userCommandMap, parserLanguage);
 		CommandNode userCommandNode = null;
 		try {
@@ -41,25 +37,25 @@ public class MakeUserInstruction extends Command{
 		} catch (InvalidCommandException e) {
 			new ErrorBox("Error in executing method", myCommandText);
 		}
-		userCommandNode.execute(t);
-		return 0;
+		return userCommandNode.execute(t);
 	}
 	
 	void setArguments(CommandNode arguments){
 		myArguments = arguments;
 	}
 	
-	public String getInstructionText(CommandNode parameters) {
+	public String getInstructionText(CommandNode parameters, Turtle t) {
 		String paramsInserted = myCommandText;
 		List<CommandNode> paramChildren = parameters.getChildren();
 		for (int x=0; x<paramChildren.size(); x++) {
-			paramsInserted = paramsInserted.replaceAll(myParameters.get(x), ""+paramChildren.get(x).execute(paramChildren.get(x).getCommand().getTurtle()));
+			paramsInserted = paramsInserted.replaceAll(myParameters.get(x), ""+paramChildren.get(x).execute(t));
 		}
 		return paramsInserted;
 	}
-	
+
 	@Override
 	public String toString() {
 		return myCommandText;
 	}
+
 }
