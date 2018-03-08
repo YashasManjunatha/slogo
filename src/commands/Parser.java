@@ -25,7 +25,16 @@ public class Parser extends ParserObject{
 		myPropertyFile = getPropertyFile(myLanguage);
 	}
 
-	private String getPropertyFile(String language) {
+	/*
+	 * reflection and stuff can be in different class****
+	 * properties file that has Class name to method --> this method returns the correct Command Node type
+	 * 	method.invoke()
+	 * make everything private that you can
+	 * 
+	 * document how the parameters are passed for user defined commands in README -- passed in brackets
+	 */
+	
+	private String getPropertyFile(String language) {	//string concatenation
 		switch (language) {
 		case "English": return "src/languages/English.properties";
 		case "Chinese": return "src/languages/Chinese.properties";
@@ -68,22 +77,24 @@ public class Parser extends ParserObject{
 			double parsedDouble = Double.parseDouble(commandText);
 			return new CommandNode(new ParsedDouble(parsedDouble));
 		}
-		catch(NumberFormatException e) {	
+		catch(NumberFormatException e) {	//add comment here
 		}
 		
 		if (userCommandMap.containsKey(commandText)) {
 			scan.next(); //bypass "[" for paramaters
 			String next = scan.next();
-			List<String> params = new ArrayList<>();
+			String toBeParsed = "";
+			
 			while (!next.equals("]")) {
-				params.add(next);
+				toBeParsed = toBeParsed + next + " ";
 				next = scan.next();
 			}
 			MakeUserInstruction userInstruction = (MakeUserInstruction) userCommandMap.get(commandText);
-			Parser newParser = new Parser(variableMap, userCommandMap, myLanguage);
-			CommandNode userCommand = newParser.parse(userInstruction.getInstructionText(params));
+			Parser paramParser = new Parser(variableMap, userCommandMap, myLanguage);
+			CommandNode params = paramParser.parse(toBeParsed);
+			userInstruction.setArguments(params);
 			bool = true;
-			return userCommand;
+			return new CommandNode (userInstruction);
 		}
 		
 		if (commandText.equals("make") || commandText.equals("set")) {
@@ -173,18 +184,27 @@ public class Parser extends ParserObject{
 		}
 		next = scan.next();
 		String commands = "";
-		while (!next.equals("]")) {
+		int bracketCount = 0;
+		while (scan.hasNext()) {
+			if (next.equals("]")){
+				bracketCount--;
+				if (bracketCount == 0) {
+					break;
+				}
+			}
+			else if (next.equals("[")){
+				bracketCount++;
+			}
 			commands = commands + next + " ";
 			next = scan.next();
 		}
 		commands += next;
-		CommandNode userCommand = new CommandNode(new MakeUserInstruction(variables, commands));
+		CommandNode userCommand = new CommandNode(new MakeUserInstruction(variables, commands, null, myLanguage, variableMap, userCommandMap));
 		userCommandMap.put(name, (Command)userCommand.getCommand());
 		return userCommand;
 	}
 
 	private CommandNode commandWithVariableMap(String className, Scanner scan) {
-			return new CommandNode(new MakeVariable(scan.next(), variableMap));
-		
+		return new CommandNode(new MakeVariable(scan.next(), variableMap));
 	}
 }
