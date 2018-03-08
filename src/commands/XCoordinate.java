@@ -8,13 +8,13 @@ public class XCoordinate extends Command{
 	private int numberOfParameters = 0;
 
 	@Override
-	public double execute(List<CommandNode> children, Turtle t){
+	double execute(List<CommandNode> children, Turtle t){
 		return t.getX();
 		
 	}
 
 	@Override
-	public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 		return numberOfParameters;
 	}
 }

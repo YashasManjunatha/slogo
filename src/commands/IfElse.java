@@ -8,7 +8,7 @@ public class IfElse extends Command {
 	private int numberOfParameters = 3;
 
 	@Override
-	public double execute(List<CommandNode> children, Turtle t){
+	double execute(List<CommandNode> children, Turtle t){
 		double num = children.get(0).execute(t);
 		double retVal = 0;
 		CommandNode bracketNode1 = children.get(1);
@@ -24,7 +24,7 @@ public class IfElse extends Command {
 	}
 	
 	@Override
-	public int getNumberOfParameters() {
+     int getNumberOfParameters() {
 		return numberOfParameters;
 	}
 

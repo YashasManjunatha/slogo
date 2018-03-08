@@ -11,7 +11,7 @@ public class SetPosition extends Command {
 	double dist;
 	
 	  @Override
-	   public double execute(List<CommandNode> children, Turtle t){
+	  double execute(List<CommandNode> children, Turtle t){
 		   CommandNode child1 = children.get(0);
 		   CommandNode child2 = children.get(1);
 		   x=child1.execute(t);
@@ -27,7 +27,7 @@ public class SetPosition extends Command {
 	   }
 
 	   @Override
-		public int getNumberOfParameters() {
+		int getNumberOfParameters() {
 			return numberOfParameters;
 		}
 }

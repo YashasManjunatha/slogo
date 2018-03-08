@@ -8,13 +8,13 @@ public class PenDown extends Command {
 	private double myReturn=1;
 
 	  @Override
-	  public double execute(List<CommandNode> children, Turtle t){
+	  double execute(List<CommandNode> children, Turtle t){
 		    t.setPenDown(true);
 			return myReturn;
 	  }
 
 	  @Override
-		public int getNumberOfParameters() {
+	   int getNumberOfParameters() {
 			return numberOfParameters;
 		}
 
