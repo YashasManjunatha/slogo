@@ -17,7 +17,7 @@ public class Main extends Application {
 	private final static Paint BACKGROUND = Color.ANTIQUEWHITE;
 
 	private String title;
-	private final static double SCREEN_HEIGHT = 600;
+	private final static double SCREEN_HEIGHT = 650;
 	private final static double SCREEN_WIDTH = 1365;//915;
 	private Stage myStage;
 

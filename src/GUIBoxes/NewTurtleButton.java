@@ -23,7 +23,7 @@ public class NewTurtleButton extends Buttons {
 
 	@Override
 	void setupAction() {
-		getButton().setOnAction((event) -> {
+		getButton().setOnAction(event -> {
 			Turtle turtle = new Turtle(mainTurtleScreen, new Image(
 					getClass().getClassLoader().getResourceAsStream("images/turtle.png"), 0, 55, true, false));
 
