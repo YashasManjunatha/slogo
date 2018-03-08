@@ -13,7 +13,9 @@ public class NotEqual  extends Command{
 		CommandNode child2 = children.get(1);
 		double x=child1.execute(t);
 		double y=child2.execute(t);
-		if(x!=y) return 1;
+		if(x!=y) {
+			return 1;
+		}
 		else {
 			return 0;
 		}

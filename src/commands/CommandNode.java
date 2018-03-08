@@ -11,7 +11,7 @@ public class CommandNode {
 	
 	CommandNode (CommandObject command){
 		myCommand = command;
-		myChildren = new ArrayList<CommandNode>();
+		myChildren = new ArrayList<>();
 	}
 	
 	List<CommandNode> getChildren(){

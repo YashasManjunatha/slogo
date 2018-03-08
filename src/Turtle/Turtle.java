@@ -14,8 +14,6 @@ import pen.Pen;
 
 public class Turtle implements TurtleInterface {
 
-	private final static double fixedImageHeight = 50;
-
 	private ScreenBox screen;
 	private Image image;
 	private boolean turtleShowing;
