@@ -73,11 +73,17 @@ public class Parser extends ParserObject{
 	}
 	
 	CommandNode generateCommandNode(String commandText, Scanner scan) throws InvalidCommandException {
+		System.out.println("******* ** *** * " + commandText);
 		try {
 			double parsedDouble = Double.parseDouble(commandText);
 			return new CommandNode(new ParsedDouble(parsedDouble));
 		}
 		catch(NumberFormatException e) {	//add comment here
+		}
+		
+		if (commandText.equals("#")) {
+			scan.nextLine();
+			return new CommandNode(new Comment());
 		}
 		
 		if (userCommandMap.containsKey(commandText)) {
