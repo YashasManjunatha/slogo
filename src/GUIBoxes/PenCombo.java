@@ -18,7 +18,7 @@ import javafx.scene.paint.Color;
 public class PenCombo extends GUIComboBox {
 
 	private ScreenBox mainTurtleScreen;
-	private static ArrayList<Turtle> thisTurtleList;
+	private ArrayList<Turtle> thisTurtleList;
 
 	private final static ObservableList<String> options = FXCollections.observableArrayList("White", "Black", "Red",
 			"Dark Green", "Blue", "Yellow", "Purple", "Orange");

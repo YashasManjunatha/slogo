@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 public class TextInputBox implements GUIBoxes {
 
 	private TextArea textInput;
-	private static Pane thisPane;
+	private Pane thisPane;
 
 	public TextInputBox(Pane pane, double[] properties) {
 		textInput = new TextArea();

@@ -2,7 +2,7 @@ package GUIBoxes;
 
 import java.util.ArrayList;
 import java.util.Map;
-
+import commands.MakeUserInstruction;
 import commands.Command;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +19,7 @@ public class UserDefTable extends TableView implements GUIBoxes {
 
 	private TableView table;
 
-	private static Pane thisPane;
+	private Pane thisPane;
 	private final static int NAMECOLWIDTH = 65;
 	private final static int VALCOLWIDTH = 133;
 	private String tableType;
@@ -87,7 +87,9 @@ public class UserDefTable extends TableView implements GUIBoxes {
 	public void updateFuncs(Map<String, Command> userCommandMap) {
 		ArrayList<TableInsertion> insertionList = new ArrayList<>();
 		for (String key : userCommandMap.keySet()) {
-			insertionList.add(new TableInsertion(key, userCommandMap.get(key).toString()));
+			MakeUserInstruction userCommand = (MakeUserInstruction) userCommandMap.get(key);
+			System.out.println("ojipij" +  userCommand.toString());
+			insertionList.add(new TableInsertion(key, userCommand.toString()));
 		}
 		ObservableList<TableInsertion> finalList = FXCollections.observableArrayList(insertionList);
 		table.setItems(finalList);

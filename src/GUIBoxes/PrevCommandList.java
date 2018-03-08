@@ -16,11 +16,11 @@ import javafx.scene.layout.Pane;
 
 public class PrevCommandList extends ListView {
 
-	private static Pane thisPane;
+	private Pane thisPane;
 	private ListView<String> list;
 	private ObservableList<String> items = FXCollections.observableArrayList();
-	private static TextInputBox mainTextInput;
-	private static ArrayList<Turtle> mainTurtleList;
+	private TextInputBox mainTextInput;
+	private ArrayList<Turtle> mainTurtleList;
 	
 	private Map<String,Double> variableMap;
 

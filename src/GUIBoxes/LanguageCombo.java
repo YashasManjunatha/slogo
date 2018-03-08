@@ -14,7 +14,7 @@ public class LanguageCombo extends GUIComboBox {
 	private final static ObservableList<String> options = FXCollections.observableArrayList("Chinese", "English",
 			"French", "German", "Italian", "Portuguese", "Russian", "Spanish");
 
-	private static String language = "English";
+	private String language = "English";
 
 	public LanguageCombo(Pane pane, double[] properties, String text) {
 		super(pane, properties, text);

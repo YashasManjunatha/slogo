@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 
 public class GUIComboBox implements GUIBoxes {
 
-	private static Pane thisPane;
+	private Pane thisPane;
 	private ComboBox<String> combobox;
 
 	private String boxText;

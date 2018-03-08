@@ -10,8 +10,11 @@ public class Command implements CommandObject{
 	private Parser myParser;
 	private CommandNode superNode;
 	private Turtle myTurtle;
+	private String myText;
 	
 	public Command(String text, Turtle turtle, Map<String, Double> variables, Map<String, Command> commands, String language) {
+		System.out.println("asdfosdfhoiasdhfoias" + text);
+		myText = text;
 		myParser = new Parser(variables, commands, language);
 		myTurtle = turtle;
 		try {
@@ -52,6 +55,9 @@ public class Command implements CommandObject{
 	public void setValue(double x) {
 		// TODO Auto-generated method stub
 		
+	}
+	public String CommandtoString() {
+		return myText;
 	}
 
 }

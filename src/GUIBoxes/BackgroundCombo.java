@@ -15,7 +15,7 @@ import javafx.scene.paint.Paint;
 
 public class BackgroundCombo extends GUIComboBox {
 	
-	private static ScreenBox mainTurtleScreen;
+	private ScreenBox mainTurtleScreen;
 
 	
 	private final static ObservableList<String> options = FXCollections.observableArrayList("White", "Black", "Red",

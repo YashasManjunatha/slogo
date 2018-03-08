@@ -25,9 +25,9 @@ import javafx.scene.transform.Rotate;
 public class ScreenBox implements GUIBoxes{
 
 	private Canvas turtleScreen;
-	private static Pane thisPane;
-	private static GraphicsContext gc;
-	private static ArrayList<Turtle> mainTurtleList;
+	private Pane thisPane;
+	private GraphicsContext gc;
+	private ArrayList<Turtle> mainTurtleList;
 	private Color thisBackgroundColor;
 	private Color thisPenColor = Color.BLACK;
 	
@@ -60,6 +60,7 @@ public class ScreenBox implements GUIBoxes{
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0, 0, 650, 425);
 		gc.setLineWidth(3);
+		updateBox();
 
 	}
 
@@ -74,25 +75,6 @@ public class ScreenBox implements GUIBoxes{
 
 	}
 
-	public void replaceImage(String fileName) {
-		for (Turtle t : mainTurtleList) {
-			// Point location = new Point();
-			// location.setLocation(t.getX(), t.getY());
-			// basically just set locations for the new image
-			mainTurtleList.remove(t);
-			System.out.println(fileName);
-			Image image = null;
-			try {
-				image = new Image(new FileInputStream(fileName), 0, 50, true, false);
-			} catch (FileNotFoundException e) {
-				new ErrorBox("Image Not Found", "Please Choose A Valid Image");
-			}
-			updateBox();
-			Turtle turtle = new Turtle(this, image);
-			mainTurtleList.add(turtle);
-		}
-
-	}
 
 	public double getX() {
 		return turtleScreen.getLayoutX();
@@ -114,6 +96,7 @@ public class ScreenBox implements GUIBoxes{
 
 
 	public void addTurtleToCanvas(Image turtle, double xPos, double yPos) {
+		System.out.println("drawing turtle to canvas");
 		gc.drawImage(turtle, xPos, yPos);
 
 	}
@@ -158,5 +141,7 @@ public class ScreenBox implements GUIBoxes{
 	public Canvas getCanvas() {
 		return turtleScreen;
 	}
+
+	
 
 }

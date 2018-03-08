@@ -12,8 +12,8 @@ import javafx.scene.layout.Pane;
 
 public class ClearButton extends Buttons {
 
-	private static TextInputBox mainTextInput;
-	private static PrevCommandList mainPrevCommandBox;
+	private TextInputBox mainTextInput;
+	private PrevCommandList mainPrevCommandBox;
 
 	public ClearButton(Pane pane, double[] properties, String text, TextInputBox textInput,
 			PrevCommandList prevCommandBox, ArrayList<Turtle> turtleList) {

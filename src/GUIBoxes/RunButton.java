@@ -14,12 +14,12 @@ import javafx.scene.layout.Pane;
 
 public class RunButton extends Buttons {
 
-	private static TextInputBox mainTextInput;
-	private static PrevCommandList mainPrevCommandBox;
-	private static GUIComboBox mainLanguageComboBox;
-	private static String language = "English";
-	private static UserDefTable mainVarTable;
-	private static UserDefTable mainFuncTable;
+	private TextInputBox mainTextInput;
+	private PrevCommandList mainPrevCommandBox;
+	private GUIComboBox mainLanguageComboBox;
+	private String language = "English";
+	private UserDefTable mainVarTable;
+	private UserDefTable mainFuncTable;
 
 	private Map<String, Double> variableMap;
 	private Map<String, Command> userCommandMap;
