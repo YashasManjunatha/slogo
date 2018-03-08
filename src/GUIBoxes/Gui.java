@@ -10,7 +10,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -75,7 +74,7 @@ public class Gui {
 		
 		GUIProperties.put("redoMoveButton", new double[] { 50, 50, 45, 55 });
 		
-		GUIProperties.put("turtleList", new double[] {925, 50, 425, 500});
+		GUIProperties.put("turtleList", new double[] {925, 50, 250, 500});
 
 		
 

@@ -1,17 +1,10 @@
-
 package GUIBoxes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import Turtle.Turtle;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class NewTurtleButton extends Buttons {
@@ -30,7 +23,7 @@ public class NewTurtleButton extends Buttons {
 
 	@Override
 	void setupAction() {
-		getButton().setOnAction((event) -> {
+		getButton().setOnAction(event -> {
 			Turtle turtle = new Turtle(mainTurtleScreen, new Image(
 					getClass().getClassLoader().getResourceAsStream("images/turtle.png"), 0, 55, true, false));
 

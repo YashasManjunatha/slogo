@@ -8,15 +8,17 @@ public class IsPenDown extends Command {
 	private int numberOfParameters = 0;
 
 	@Override
-	public double execute(List<CommandNode> children, Turtle t){
-		if (t.getPenDown()) return 1;
+	double execute(List<CommandNode> children, Turtle t){
+		if (t.getPenDown()) {
+		    return 1;
+		}
 		else { 
 			return 0;
 			} 	
 	}
 
 	@Override
-	public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 		return numberOfParameters;
 	}
 

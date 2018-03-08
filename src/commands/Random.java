@@ -9,7 +9,7 @@ public class Random extends Command {
 	private int numberOfParameters = 1;
 
 	@Override
-	public double execute(List<CommandNode> children, Turtle t){
+	double execute(List<CommandNode> children, Turtle t){
 		CommandNode child1 = children.get(0);
 		double x=child1.execute(t);
 		double rand = Math.round(Math.random()*(x-1));
@@ -18,7 +18,7 @@ public class Random extends Command {
 	}
 
 	@Override
-	public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 		return numberOfParameters;
 	}
 

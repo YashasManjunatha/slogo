@@ -1,16 +1,10 @@
 package GUIBoxes;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import Turtle.Turtle;
 import commands.Command;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 
 public class RunButton extends Buttons {
@@ -41,7 +35,7 @@ public class RunButton extends Buttons {
 	@Override
 	void setupAction() {
 
-		getButton().setOnAction((event) -> {
+		getButton().setOnAction(event -> {
 			System.out.println("before = " + variableMap);
 			mainPrevCommandBox.addText(mainTextInput.getText());
 			for (Turtle t : getThisTurtleList()) {

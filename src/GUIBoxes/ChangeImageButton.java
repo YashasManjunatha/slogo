@@ -1,13 +1,8 @@
 package GUIBoxes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import Turtle.Turtle;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -28,7 +23,7 @@ public class ChangeImageButton extends Buttons {
 
 	@Override
 	void setupAction() {
-		getButton().setOnAction((event) -> {
+		getButton().setOnAction(event -> {
 				System.out.println("fasdfas");
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.setTitle("Choose Turtle Image");

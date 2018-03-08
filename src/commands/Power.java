@@ -8,14 +8,14 @@ public class Power extends Command{
 	private int numberOfParameters = 2;
 	
 	@Override
-	public double execute(List<CommandNode> children, Turtle t){
+	double execute(List<CommandNode> children, Turtle t){
 		CommandNode base = children.get(0);
 		CommandNode exponent = children.get(1);
 		return Math.pow(base.execute(t), exponent.execute(t));
 	}
 
 	@Override
-	public int getNumberOfParameters() {
+    int getNumberOfParameters() {
 		return numberOfParameters;
 	}
 }

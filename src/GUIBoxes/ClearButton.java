@@ -1,14 +1,8 @@
 package GUIBoxes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import Turtle.Turtle;
-import commands.Command;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 
 public class ClearButton extends Buttons {
@@ -27,7 +21,7 @@ public class ClearButton extends Buttons {
 	@Override
 	void setupAction() {
 
-		getButton().setOnAction((event) -> {
+		getButton().setOnAction(event -> {
 			mainTextInput.clear();
 
 		});
