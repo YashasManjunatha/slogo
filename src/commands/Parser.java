@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 import GUIBoxes.ErrorBox;
 
-public class Parser implements ParserObject{
+public class Parser extends ParserObject{
 	
 	private String myPropertyFile;
 	private boolean bool;
