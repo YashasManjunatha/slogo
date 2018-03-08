@@ -12,6 +12,7 @@ import GUIBoxes.PrevCommandList;
 import GUIBoxes.RunButton;
 import GUIBoxes.ScreenBox;
 import GUIBoxes.TextInputBox;
+import GUIBoxes.TurtleViewTable;
 import GUIBoxes.UserDefTable;
 import GUIBoxes.BackgroundCombo;
 import GUIBoxes.LanguageCombo;
@@ -40,7 +41,7 @@ public class Main extends Application {
 
 	private static String title;
 	private final static double SCREEN_HEIGHT = 600;
-	private final static double SCREEN_WIDTH = 1215;//915;
+	private final static double SCREEN_WIDTH = 1365;//915;
 	private static Stage myStage;
 	private static TextInputBox textInput;
 	private static ScreenBox turtleScreen;
@@ -71,6 +72,7 @@ public class Main extends Application {
 
 		GUIProperties.put("varTable", new double[] { 700, 25, 200, 120 });
 		GUIProperties.put("funcTable", new double[] { 700, 150, 200, 120 });
+		GUIProperties.put("turtleList", new double[] {925, 25, 425, 500});
 
 		GUIProperties.put("prevCommandBox", new double[] { 700, 275, 200, 125 });
 
@@ -94,11 +96,11 @@ public class Main extends Application {
 		setupGUIBoxes();
 		setupComboboxes();
 		setupButtons();
-		setupTurtleCheckbox();
+		//setupTurtleCheckbox();
 		
 	}
 
-	private void setupTurtleCheckbox() {
+	/*private void setupTurtleCheckbox() {
 		VBox vbchecks = new VBox();
 		vbchecks.setSpacing(0);
 		vbchecks.setPadding(new Insets(0));
@@ -115,7 +117,7 @@ public class Main extends Application {
 		scroll.setMaxHeight(10);		
 		root.getChildren().add(scroll);
 		
-	}
+	}*/
 
 	private void setupComboboxes() {
 		new BackgroundCombo(root, turtleScreen, GUIProperties.get("backgroundCombo"), "Change Background Color");
@@ -137,7 +139,7 @@ public class Main extends Application {
 		new UserDefTable(root, GUIProperties.get("varTable"), "Variable");
 		new UserDefTable(root, GUIProperties.get("funcTable"), "Function");
 		prevCommandBox = new PrevCommandList(root, GUIProperties.get("prevCommandBox"), textInput, turtleList, variableMap);
-
+		new TurtleViewTable(root, GUIProperties.get("turtleList"), turtleList);
 	}
 
 	private void setupButtons() {
