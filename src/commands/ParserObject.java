@@ -1,7 +1,7 @@
 package commands;
 
-public interface ParserObject{
+public abstract class ParserObject{
 	
-	CommandNode parse(String text) throws InvalidCommandException;
+	abstract CommandNode parse(String text) throws InvalidCommandException;
 
 }
