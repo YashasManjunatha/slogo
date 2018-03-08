@@ -46,8 +46,6 @@ public class MakeUserInstruction extends Command{
 	}
 	
 	void setArguments(CommandNode arguments){
-//		MakeUserInstruction test = (MakeUserInstruction) arguments.getCommand();
-//		System.out.println(test.toString());
 		myArguments = arguments;
 	}
 	

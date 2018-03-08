@@ -32,10 +32,6 @@ public class Parser implements ParserObject{
 	 * make everything private that you can
 	 * 
 	 * document how the parameters are passed for user defined commands in README -- passed in brackets
-	 * 
-	 * for recursion:
-	 * don't add function to tree until execution starts
-	 * move reparsing part into execute method for user commands
 	 */
 	
 	private String getPropertyFile(String language) {	//string concatenation
@@ -77,7 +73,6 @@ public class Parser implements ParserObject{
 	}
 	
 	CommandNode generateCommandNode(String commandText, Scanner scan) throws InvalidCommandException {
-		System.out.println(commandText);
 		try {
 			double parsedDouble = Double.parseDouble(commandText);
 			return new CommandNode(new ParsedDouble(parsedDouble));
@@ -86,20 +81,11 @@ public class Parser implements ParserObject{
 		}
 		
 		if (userCommandMap.containsKey(commandText)) {
-			System.out.println("map");
 			scan.next(); //bypass "[" for paramaters
 			String next = scan.next();
-			//List<String> params = new ArrayList<>();
 			String toBeParsed = "";
 			
-			/*
-			 * pass a commandNode to user instruction instead of ArrayList
-			 * make a toBeParsed string from one bracket to next
-			 * parse this and pass the command node
-			 * in make user instruction, execute each child to get the double to replace the param with
-			 */
 			while (!next.equals("]")) {
-				//params.add(next);
 				toBeParsed = toBeParsed + next + " ";
 				next = scan.next();
 			}
@@ -109,13 +95,6 @@ public class Parser implements ParserObject{
 			userInstruction.setArguments(params);
 			bool = true;
 			return new CommandNode (userInstruction);
-//			System.out.println("to be parsed: " + toBeParsed);
-//			MakeUserInstruction userInstruction = (MakeUserInstruction) userCommandMap.get(commandText);
-//			Parser userCommandParser = new Parser(variableMap, userCommandMap, myLanguage);
-//			System.out.println(userInstruction.getInstructionText(params) + " "+ params);
-//			CommandNode userCommand = userCommandParser.parse(userInstruction.getInstructionText(params));
-//			bool = true;
-//			return userCommand;
 		}
 		
 		if (commandText.equals("make") || commandText.equals("set")) {
@@ -204,10 +183,8 @@ public class Parser implements ParserObject{
 			next = scan.next();
 		}
 		next = scan.next();
-		//System.out.println(next +" test  "+ scan.next());
 		String commands = "";
 		int bracketCount = 0;
-//		while (!next.equals("]")) {
 		while (scan.hasNext()) {
 			if (next.equals("]")){
 				bracketCount--;
