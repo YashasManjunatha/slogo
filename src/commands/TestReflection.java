@@ -1,6 +1,6 @@
 package commands;
 
-public class testReflection {
+public class TestReflection {
 
 	public static void main(String[] args) throws ClassNotFoundException {
 		Class<?> clazz = Class.forName("commands.CommandNode");

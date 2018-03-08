@@ -1,11 +1,7 @@
 package GUIBoxes;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 public class TextInputBox implements GUIBoxes {

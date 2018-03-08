@@ -11,16 +11,13 @@ import GUIBoxes.ErrorBox;
 import GUIBoxes.ScreenBox;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import pen.Pen;
 
 public class Turtle implements TurtleInterface {
-
-	private final static double fixedImageHeight = 50;
 
 	private ScreenBox screen;
 	private Image image;
 	private boolean turtleShowing;
-	private Pen pen;
+	//private Pen pen;
 	private boolean penShowing;
 	private double startingX;
 	private double startingY;
@@ -54,7 +51,7 @@ public class Turtle implements TurtleInterface {
 		prevXPos = startingX;
 		prevYPos = startingY;
 		screen.addTurtleToCanvas(image, xPos, yPos);
-		pen = new Pen();
+		//pen = new Pen();
 		penShowing = true;
 		orientationList.add((double) 0);
 		Double[] firstPath = { startingX, startingY, startingX, startingY };
@@ -270,5 +267,4 @@ public class Turtle implements TurtleInterface {
 		}
 
 	}
-
 }

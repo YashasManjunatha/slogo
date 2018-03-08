@@ -1,5 +1,4 @@
 package commands;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +13,7 @@ public class For extends Command{
 	 myMap=variableMap;
  }
 		@Override
-		public double execute(List<CommandNode> children, Turtle t){
+		double execute(List<CommandNode> children, Turtle t){
 			
 			double retVal=0;
 			CommandNode bracketNode1 = children.get(0);
@@ -38,7 +37,7 @@ public class For extends Command{
 		}
 		
 	@Override
-		public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 			return numParams;
 		}
 }

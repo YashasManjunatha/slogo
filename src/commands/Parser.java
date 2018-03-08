@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 import GUIBoxes.ErrorBox;
 
-public class Parser implements ParserObject{
+public class Parser extends ParserObject{
 	
 	private String myPropertyFile;
 	private boolean bool;
@@ -188,7 +188,6 @@ public class Parser implements ParserObject{
 			return new CommandNode(new For(variableMap));
 		}
 		else if (className.equals("DoTimes")){
-			System.out.println("Dotimes hereee");
 			return new CommandNode(new DoTimes(variableMap));
 		
 		}

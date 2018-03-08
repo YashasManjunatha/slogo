@@ -8,13 +8,13 @@ public class PenUp extends Command {
 	private double myReturn=0;
 	
 	  @Override
-	  public double execute(List<CommandNode> children, Turtle t){
+	  double execute(List<CommandNode> children, Turtle t){
 		    t.setPenDown(false);
 			return myReturn;
 	  }
 
 	  @Override
-		public int getNumberOfParameters() {
+	    int getNumberOfParameters() {
 			return numberOfParameters;
 		}
 

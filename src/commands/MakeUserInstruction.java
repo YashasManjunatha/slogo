@@ -17,9 +17,10 @@ public class MakeUserInstruction extends Command{
 		}
 		return paramsInserted;
 	}
-	
+
 	@Override
 	public String toString() {
 		return myCommandText;
 	}
+
 }

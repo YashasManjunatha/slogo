@@ -8,7 +8,7 @@ public class Repeat extends Command{
 	private static int numParams = 2;
 
 	@Override
-	public double execute(List<CommandNode> children, Turtle t) {
+	double execute(List<CommandNode> children, Turtle t) {
 		double numRepeat = children.get(0).execute(t);
 		double retVal = 0;
 		CommandNode bracketNode = children.get(1);
@@ -19,7 +19,7 @@ public class Repeat extends Command{
 	}
 	
 	@Override
-	public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 		return numParams;
 	}
 }
