@@ -1,17 +1,13 @@
 package GUIBoxes;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import Turtle.Turtle;
-import commands.Command;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
@@ -50,8 +46,8 @@ public class PrevCommandList extends ListView {
 					for (Turtle t : mainTurtleList) {
 						String currentItemSelected = list.getSelectionModel().getSelectedItem();
 						mainTextInput.setText(currentItemSelected);
-						Command test = new Command(currentItemSelected, t, variableMap);
-						test.execute();
+						//Command test = new Command(currentItemSelected, t, variableMap);
+						//test.execute();
 					}
 					
 				}
