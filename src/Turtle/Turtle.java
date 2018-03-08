@@ -14,8 +14,6 @@ import pen.Pen;
 
 public class Turtle implements TurtleInterface {
 
-	private final static double fixedImageHeight = 50;
-
 	private ScreenBox screen;
 	private Image image;
 	private boolean turtleShowing;
@@ -229,9 +227,7 @@ public class Turtle implements TurtleInterface {
 	}
 	
 	public void redoMove() {
-		
 		System.out.println(pathList);
-		
 		if (pathList.keySet().size() > 0) {
 			double[] getKey = {prevXPos, prevYPos, xPos, yPos};
 			pathList.remove(getKey);
@@ -240,16 +236,11 @@ public class Turtle implements TurtleInterface {
 			image = imageList.get(imageList.size()-1);
 			screen.updateBox();
 		}
-		
 		else {
 			xPos = startingX;
 			yPos = startingY;
 			orientation = 0;
 			screen.updateBox();
-
-			
 		}
-		
 	}
-
 }
