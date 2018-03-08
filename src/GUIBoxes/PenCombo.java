@@ -1,7 +1,6 @@
 package GUIBoxes;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,8 +10,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javafx.scene.Group;
-import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
