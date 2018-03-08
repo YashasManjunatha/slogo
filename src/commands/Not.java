@@ -9,7 +9,9 @@ public class Not extends Command{
 	@Override
 	double execute(List<CommandNode> children, Turtle t){
 		CommandNode child1 = children.get(0);
-		if(child1.execute(t)==0) return 1;
+		if(child1.execute(t)==0) {
+			return 1;
+		}
 		else {
 			return 0;
 		}

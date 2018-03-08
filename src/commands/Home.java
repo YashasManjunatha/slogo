@@ -13,7 +13,7 @@ public class Home extends Command {
 	       double x=t.getX();
 	       double y =t.getY();
 	       double s =x*x+y*y;
-		   double step=Math.round(Math.sqrt(s));
+	       step=Math.round(Math.sqrt(s));
 		   System.out.println(t.getPenDown());
 		   t.moveTo(0, 0);
 		   return step;
