@@ -74,7 +74,7 @@ public class Gui {
 		
 		GUIProperties.put("redoMoveButton", new double[] { 50, 50, 45, 55 });
 		
-		GUIProperties.put("turtleList", new double[] {925, 50, 425, 500});
+		GUIProperties.put("turtleList", new double[] {925, 50, 250, 500});
 
 		
 

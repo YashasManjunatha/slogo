@@ -18,7 +18,7 @@ public class Main extends Application {
 
 	private String title;
 	private final static double SCREEN_HEIGHT = 650;
-	private final static double SCREEN_WIDTH = 1365;//915;
+	private final static double SCREEN_WIDTH = 1215;//915;
 	private Stage myStage;
 
 	// private static final Map<String, double[]> GUIProperties = createMap();
