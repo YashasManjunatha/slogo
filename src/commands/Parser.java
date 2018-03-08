@@ -25,7 +25,20 @@ public class Parser implements ParserObject{
 		myPropertyFile = getPropertyFile(myLanguage);
 	}
 
-	private String getPropertyFile(String language) {
+	/*
+	 * reflection and stuff can be in different class****
+	 * properties file that has Class name to method --> this method returns the correct Command Node type
+	 * 	method.invoke()
+	 * make everything private that you can
+	 * 
+	 * document how the parameters are passed for user defined commands in README -- passed in brackets
+	 * 
+	 * for recursion:
+	 * don't add function to tree until execution starts
+	 * move reparsing part into execute method for user commands
+	 */
+	
+	private String getPropertyFile(String language) {	//string concatenation
 		switch (language) {
 		case "English": return "src/languages/English.properties";
 		case "Chinese": return "src/languages/Chinese.properties";
@@ -69,7 +82,7 @@ public class Parser implements ParserObject{
 			double parsedDouble = Double.parseDouble(commandText);
 			return new CommandNode(new ParsedDouble(parsedDouble));
 		}
-		catch(NumberFormatException e) {	
+		catch(NumberFormatException e) {	//add comment here
 		}
 		
 		if (userCommandMap.containsKey(commandText)) {
@@ -90,15 +103,19 @@ public class Parser implements ParserObject{
 				toBeParsed = toBeParsed + next + " ";
 				next = scan.next();
 			}
+			MakeUserInstruction userInstruction = (MakeUserInstruction) userCommandMap.get(commandText);
 			Parser paramParser = new Parser(variableMap, userCommandMap, myLanguage);
 			CommandNode params = paramParser.parse(toBeParsed);
-			System.out.println("to be parsed: " + toBeParsed);
-			MakeUserInstruction userInstruction = (MakeUserInstruction) userCommandMap.get(commandText);
-			Parser userCommandParser = new Parser(variableMap, userCommandMap, myLanguage);
-			System.out.println(userInstruction.getInstructionText(params) + " "+ params);
-			CommandNode userCommand = userCommandParser.parse(userInstruction.getInstructionText(params));
+			userInstruction.setArguments(params);
 			bool = true;
-			return userCommand;
+			return new CommandNode (userInstruction);
+//			System.out.println("to be parsed: " + toBeParsed);
+//			MakeUserInstruction userInstruction = (MakeUserInstruction) userCommandMap.get(commandText);
+//			Parser userCommandParser = new Parser(variableMap, userCommandMap, myLanguage);
+//			System.out.println(userInstruction.getInstructionText(params) + " "+ params);
+//			CommandNode userCommand = userCommandParser.parse(userInstruction.getInstructionText(params));
+//			bool = true;
+//			return userCommand;
 		}
 		
 		if (commandText.equals("make") || commandText.equals("set")) {
@@ -205,7 +222,7 @@ public class Parser implements ParserObject{
 			next = scan.next();
 		}
 		commands += next;
-		CommandNode userCommand = new CommandNode(new MakeUserInstruction(variables, commands));
+		CommandNode userCommand = new CommandNode(new MakeUserInstruction(variables, commands, null, myLanguage, variableMap, userCommandMap));
 		userCommandMap.put(name, (Command)userCommand.getCommand());
 		return userCommand;
 	}
