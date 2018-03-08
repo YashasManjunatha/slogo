@@ -13,6 +13,7 @@ import GUIBoxes.PrevCommandList;
 import GUIBoxes.RunButton;
 import GUIBoxes.ScreenBox;
 import GUIBoxes.TextInputBox;
+import GUIBoxes.TurtleViewTable;
 import GUIBoxes.UserDefTable;
 import GUIBoxes.BackgroundCombo;
 import GUIBoxes.LanguageCombo;
@@ -47,7 +48,7 @@ public class Main extends Application {
 
 	private static String title;
 	private final static double SCREEN_HEIGHT = 600;
-	private final static double SCREEN_WIDTH = 1215;// 915;
+	private final static double SCREEN_WIDTH = 1365;//915;
 	private static Stage myStage;
 
 	// private static final Map<String, double[]> GUIProperties = createMap();
