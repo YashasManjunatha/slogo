@@ -6,7 +6,7 @@ import Turtle.Turtle;
 public class If extends Command {
 
 	@Override
-	public double execute(List<CommandNode> children, Turtle t){
+	double execute(List<CommandNode> children, Turtle t){
 		double num = children.get(0).execute(t);
 		double retVal = 0;
 		CommandNode bracketNode = children.get(1);

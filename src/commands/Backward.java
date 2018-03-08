@@ -8,7 +8,7 @@ public class Backward extends Command{
      double step;
 
    @Override
-   public double execute(List<CommandNode> children, Turtle t){
+   double execute(List<CommandNode> children, Turtle t){
 	   CommandNode child = children.get(0);
 	   step = -1 * child.execute(t);
 	   t.move(step);
@@ -16,7 +16,7 @@ public class Backward extends Command{
    }
 
    @Override
-	public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 		return numberOfParameters;
 	}
 

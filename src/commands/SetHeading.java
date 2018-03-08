@@ -9,7 +9,7 @@ public class SetHeading extends Command {
 	double step;
 	
 	  @Override
-	   public double execute(List<CommandNode> children, Turtle t){
+	   double execute(List<CommandNode> children, Turtle t){
 		   CommandNode child = children.get(0);
 		   step=child.execute(t);
 		   double currentHeading = t.getOrientation();
@@ -19,7 +19,7 @@ public class SetHeading extends Command {
 	   }
 
 	   @Override
-		public int getNumberOfParameters() {
+	   int getNumberOfParameters() {
 			return numberOfParameters;
 		}
 }

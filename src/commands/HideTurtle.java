@@ -9,13 +9,13 @@ public class HideTurtle extends Command {
 	private int numberOfParameters = 0;
 
 	@Override
-	public double execute(List<CommandNode> children, Turtle t){
+	double execute(List<CommandNode> children, Turtle t){
 		t.setTurtleShowing(false);
 		return 0;
 	}
 
 	@Override
-	public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 		return numberOfParameters;
 	}
 
