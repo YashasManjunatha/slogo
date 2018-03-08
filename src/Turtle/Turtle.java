@@ -94,6 +94,8 @@ public class Turtle implements TurtleInterface {
 
 		System.out.println("PATHLIST = " + pathList);
 		System.out.println("ORIENTATION = " + orientationList);
+		System.out.println("PENCOLORS = " + penColorList);
+
 
 		System.out.println(prevXPos);
 		System.out.println(prevYPos);
@@ -116,6 +118,8 @@ public class Turtle implements TurtleInterface {
 
 		System.out.println("PATHLIST = " + pathList);
 		System.out.println("ORIENTATION = " + orientationList);
+		System.out.println("PENCOLORS = " + penColorList);
+
 
 		Double[] newPath = { prevXPos, prevYPos, xPos, yPos };
 		pathList.add(newPath);
