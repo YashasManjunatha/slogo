@@ -17,6 +17,10 @@ public class TableInsertion {
     	return Value;
     }
     
+    public void setVarName(String newVarName) {
+		VarName = newVarName;
+		
+	}
 
 	public void setValue(String newValue) {
 		Value = newValue;
