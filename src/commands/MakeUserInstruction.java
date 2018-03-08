@@ -37,7 +37,5 @@ public class MakeUserInstruction extends Command{
 		return  myParameters.size();
 	
 	}
-//	public void setParamValue(String param, double value) {
-//		paramToValueMap.put(param, value);
-//	}
+
 }
