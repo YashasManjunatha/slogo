@@ -1,9 +1,12 @@
 package Turtle;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import GUIBoxes.ErrorBox;
 import GUIBoxes.ScreenBox;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -26,10 +29,16 @@ public class Turtle implements TurtleInterface {
 	private double prevXPos;
 	private double prevYPos;
 	private Map<double[], Color> pathList = new HashMap<>();
+	
+	private ArrayList<Double> orientationList = new ArrayList<>();
+	
+	private ArrayList<Image> imageList = new ArrayList<>();
+
 
 	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
 		screen = turtle_screen;
 		image = turtle_image;
+		imageList.add(image);
 		initalizeTurtle();
 	}
 
@@ -45,6 +54,7 @@ public class Turtle implements TurtleInterface {
 		screen.addTurtleToCanvas(image, xPos, yPos);
 		pen = new Pen();
 		penShowing = true;
+		orientationList.add((double) 0);
 
 	}
 
@@ -95,10 +105,14 @@ public class Turtle implements TurtleInterface {
 
 	@Override
 	public double turn(double degrees) {
+		
+		orientationList.add(orientation);
+		
 		orientation = orientation + degrees;
 
 		System.out.println(orientation);
 		screen.updateBox();
+		
 		return degrees;
 	}
 
@@ -198,6 +212,44 @@ public class Turtle implements TurtleInterface {
 		pathList.clear();
 		screen.updateBox();
 		return dist;
+	}
+
+	public void changeImage(String fileName) {
+		
+		imageList.add(image);
+		
+		try {
+			image = new Image(new FileInputStream(fileName), 0, 50, true, false);
+			screen.updateBox();
+		} catch (FileNotFoundException e) {
+			new ErrorBox("Invalid Image", "Please Choose a Valid Image");
+		}
+		
+		
+	}
+	
+	public void redoMove() {
+		
+		System.out.println(pathList);
+		
+		if (pathList.keySet().size() > 0) {
+			double[] getKey = {prevXPos, prevYPos, xPos, yPos};
+			pathList.remove(getKey);
+			System.out.println("oList " + orientationList);
+			orientation = orientationList.get(orientationList.size()-1);
+			image = imageList.get(imageList.size()-1);
+			screen.updateBox();
+		}
+		
+		else {
+			xPos = startingX;
+			yPos = startingY;
+			orientation = 0;
+			screen.updateBox();
+
+			
+		}
+		
 	}
 
 }

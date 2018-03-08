@@ -6,20 +6,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 
 public class GUIComboBox implements GUIBoxes {
 
-	private static Group thisRoot;
+	private Pane thisPane;
 	private ComboBox<String> combobox;
 
 	private String boxText;
 
-	public GUIComboBox(Group root, double[] properties, String text) {
-		thisRoot = root;
+	public GUIComboBox(Pane pane, double[] properties, String text) {
+		thisPane = pane;
 		boxText = text;
 		setupProperties(properties[0], properties[1], properties[2], properties[3]);
-		root.getChildren().add(getCombobox());
+		thisPane.getChildren().add(combobox);
 	}
 
 	private void setupProperties(double xPos, double yPos, double width, double height) {
@@ -34,8 +35,8 @@ public class GUIComboBox implements GUIBoxes {
 
 	@Override
 	public void updateBox() {
-		thisRoot.getChildren().remove(getCombobox());
-		thisRoot.getChildren().add(getCombobox());
+		//thisRoot.getChildren().remove(getCombobox());
+		//thisRoot.getChildren().add(getCombobox());
 
 	}
 

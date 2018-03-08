@@ -6,16 +6,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Tab;
+import javafx.scene.layout.Pane;
 
 public class LanguageCombo extends GUIComboBox {
 
 	private final static ObservableList<String> options = FXCollections.observableArrayList("Chinese", "English",
 			"French", "German", "Italian", "Portuguese", "Russian", "Spanish");
 
-	private static String language = "English";
+	private String language = "English";
 
-	public LanguageCombo(Group root, double[] properties, String text) {
-		super(root, properties, text);
+	public LanguageCombo(Pane pane, double[] properties, String text) {
+		super(pane, properties, text);
 		getCombobox().setItems(options);
 		setupAction();
 

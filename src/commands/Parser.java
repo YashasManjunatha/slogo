@@ -72,7 +72,7 @@ public class Parser implements ParserObject{
 		}
 		
 		if (userCommandMap.containsKey(commandText)) {
-			scan.next(); //bypass "[" for params
+			scan.next(); //bypass "[" for paramaters
 			String next = scan.next();
 			List<String> params = new ArrayList<>();
 			while (!next.equals("]")) {
