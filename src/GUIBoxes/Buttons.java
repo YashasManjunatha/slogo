@@ -1,20 +1,14 @@
 package GUIBoxes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import Turtle.Turtle;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 
 public abstract class Buttons {
 	
 	private Pane thisPane;
-	private String buttonText;
 	private Button thisButton;
 	private List<Turtle> thisTurtleList;
 	

@@ -10,7 +10,7 @@ public class IsShowing extends Command {
 	@Override
 	double execute(List<CommandNode> children, Turtle t){
 		if (t.getTurtleShowing()) {
-			return 1;
+		    return 1;
 		}
 		else { 
 			return 0;
