@@ -9,7 +9,9 @@ public class IsPenDown extends Command {
 
 	@Override
 	double execute(List<CommandNode> children, Turtle t){
-		if (t.getPenDown()) return 1;
+		if (t.getPenDown()) {
+			return 1;
+		}
 		else { 
 			return 0;
 			} 	
