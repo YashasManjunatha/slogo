@@ -23,7 +23,7 @@ public class ChangeImageButton extends Buttons {
 
 	@Override
 	void setupAction() {
-		getButton().setOnAction((event) -> {
+		getButton().setOnAction(event -> {
 				System.out.println("fasdfas");
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.setTitle("Choose Turtle Image");

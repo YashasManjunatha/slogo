@@ -35,7 +35,7 @@ public class RunButton extends Buttons {
 	@Override
 	void setupAction() {
 
-		getButton().setOnAction((event) -> {
+		getButton().setOnAction(event -> {
 			System.out.println("before = " + variableMap);
 			mainPrevCommandBox.addText(mainTextInput.getText());
 			for (Turtle t : getThisTurtleList()) {

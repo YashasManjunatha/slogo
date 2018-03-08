@@ -21,7 +21,7 @@ public class ClearButton extends Buttons {
 	@Override
 	void setupAction() {
 
-		getButton().setOnAction((event) -> {
+		getButton().setOnAction(event -> {
 			mainTextInput.clear();
 
 		});
