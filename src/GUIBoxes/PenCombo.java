@@ -23,6 +23,13 @@ public class PenCombo extends GUIComboBox {
 	
 	private static final HashMap<String, Color> colorMap = createColorMap();
 
+	public PenCombo(Pane pane, List<Turtle> turtleList, double[] properties, String title) {
+		super(pane, properties, title);
+		thisTurtleList = turtleList;
+		getCombobox().setItems(options);
+		setupAction();
+	}
+	
 	private static HashMap<String, Color> createColorMap() {
 		HashMap<String, Color> colorMap = new HashMap<>();
 		// first index = xPos, second = yPos, third = width, fourth = length
@@ -36,13 +43,6 @@ public class PenCombo extends GUIComboBox {
 		colorMap.put("Orange", Color.ORANGE);
 		
 		return colorMap;
-	}
-
-	public PenCombo(Pane pane, List<Turtle> turtleList, double[] properties, String title) {
-		super(pane, properties, title);
-		thisTurtleList = turtleList;
-		getCombobox().setItems(options);
-		setupAction();
 	}
 
 	private void setupAction() {

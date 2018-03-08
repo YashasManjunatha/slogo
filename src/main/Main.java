@@ -14,20 +14,17 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	private static final Paint BACKGROUND = Color.ANTIQUEWHITE;
+	private final static Paint BACKGROUND = Color.ANTIQUEWHITE;
 
-	private static String title;
+	private String title;
 	private final static double SCREEN_HEIGHT = 600;
 	private final static double SCREEN_WIDTH = 1365;//915;
-	private static Stage myStage;
+	private Stage myStage;
 
 	// private static final Map<String, double[]> GUIProperties = createMap();
 
 	// Additional setup for the main menu
 	private Scene myScene;
-	private Group root;
-
-	private static TabPane tabPane;
 
 	@Override
 	public void start(Stage stage) {
@@ -36,10 +33,10 @@ public class Main extends Application {
 	}
 
 	private void initialize() {
-		root = new Group();
+		Group root = new Group();
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
 		setStage();
-		tabPane = new TabPane();
+		TabPane tabPane = new TabPane();
 
 		tabPane.getSelectionModel().selectedItemProperty().addListener(
 

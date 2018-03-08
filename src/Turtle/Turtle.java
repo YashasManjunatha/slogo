@@ -227,7 +227,7 @@ public class Turtle implements TurtleInterface {
 	
 	public void redoMove() {
 		System.out.println(pathList);
-		if (pathList.keySet().size() > 0) {
+		if (!pathList.keySet().isEmpty()) {
 			double[] getKey = {prevXPos, prevYPos, xPos, yPos};
 			pathList.remove(getKey);
 			System.out.println("oList " + orientationList);
