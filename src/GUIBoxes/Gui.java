@@ -112,7 +112,6 @@ public class Gui {
 
 	private void setupComboboxes() {
 		new BackgroundCombo(myPane, turtleScreen, GUIProperties.get("backgroundCombo"), "Change Background Color");
-		languageComboBox = new LanguageCombo(myPane, GUIProperties.get("languageCombo"), "Change Language");
 		new PenCombo(myPane, turtleList, GUIProperties.get("penCombo"), "Change Pen Color");
 
 	}
@@ -131,8 +130,10 @@ public class Gui {
 
 		varTable = new UserDefTable(myPane, GUIProperties.get("varTable"), "Variable");
 		funcTable = new UserDefTable(myPane, GUIProperties.get("funcTable"), "Function");
+		languageComboBox = new LanguageCombo(myPane, GUIProperties.get("languageCombo"), "Change Language");
+
 		prevCommandBox = new PrevCommandList(myPane, GUIProperties.get("prevCommandBox"), textInput, turtleList,
-				variableMap);
+				variableMap, commandMap, languageComboBox);
 		
 		turtleTable = new TurtleViewTable(myPane, GUIProperties.get("turtleList"), turtleList);
 	
