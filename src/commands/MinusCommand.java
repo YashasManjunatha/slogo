@@ -8,7 +8,7 @@ public class MinusCommand extends Command {
 	private int numberOfParameters = 1;
 
 	@Override
-	public double execute(List<CommandNode> children, Turtle t){
+	double execute(List<CommandNode> children, Turtle t){
 		CommandNode child1 = children.get(0);
 		
 		double x=-1*child1.execute(t);
@@ -17,7 +17,7 @@ public class MinusCommand extends Command {
 	}
 
 	@Override
-	public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 		return numberOfParameters;
 	}
 }

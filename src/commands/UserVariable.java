@@ -16,11 +16,11 @@ public class UserVariable extends Command{
 	}
 	
 	@Override
-	public double execute(List<CommandNode> children, Turtle t) {
+	double execute(List<CommandNode> children, Turtle t) {
 		return myMap.get(myName);
 	}
 	@Override
-	public int getNumberOfParameters() {
+	int getNumberOfParameters() {
 		return numberOfParameters;
 	}
 	
