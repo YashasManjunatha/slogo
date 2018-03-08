@@ -1,45 +1,15 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import GUIBoxes.Buttons;
-import GUIBoxes.ChangeImageButton;
-import GUIBoxes.ClearButton;
-import GUIBoxes.GUIComboBox;
 import GUIBoxes.Gui;
-import GUIBoxes.PrevCommandList;
-import GUIBoxes.RunButton;
-import GUIBoxes.ScreenBox;
-import GUIBoxes.TextInputBox;
-import GUIBoxes.TurtleViewTable;
-import GUIBoxes.UserDefTable;
-import GUIBoxes.BackgroundCombo;
-import GUIBoxes.LanguageCombo;
-import GUIBoxes.PenCombo;
-import Turtle.Turtle;
-import commands.Command;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Main extends Application {
