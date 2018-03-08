@@ -1,17 +1,11 @@
 package commands;
 
 import java.util.List;
-import java.util.Map;
 
 import Turtle.Turtle;
 
 public class DoTimes extends Command{
-	private Map<String, Double> myMap;
 	private static int numParams = 2;
-
-	public DoTimes(Map<String, Double>variableMap){
-		myMap=variableMap;
-	}
 	@Override
 	double execute(List<CommandNode> children, Turtle t){
 

@@ -1,17 +1,12 @@
 package commands;
 import java.util.List;
-import java.util.Map;
 
 import Turtle.Turtle;
 
 public class For extends Command{
 
-  private Map<String, Double> myMap;
   private static int numParams = 2;
   
- public For(Map<String, Double>variableMap){
-	 myMap=variableMap;
- }
 		@Override
 		double execute(List<CommandNode> children, Turtle t){
 			
@@ -40,4 +35,5 @@ public class For extends Command{
 	int getNumberOfParameters() {
 			return numParams;
 		}
+	
 }
