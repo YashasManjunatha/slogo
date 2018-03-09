@@ -1,6 +1,7 @@
 package commands;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.io.BufferedReader;
@@ -51,7 +52,9 @@ public class SaveCurrentStates {
 		}
 	}
 	public ArrayList<Map> importFile(String fileName) {
+		myVariables.clear();
 		ArrayList<Map> maps = new ArrayList<>();
+		Map<String, String> commands = new HashMap<>();
 		try {
 			File f = new File(fileName);
 			BufferedReader b = new BufferedReader(new FileReader(f));
@@ -63,13 +66,15 @@ public class SaveCurrentStates {
 					myVariables.put(list[0], value);
 				}
 				else {
-					
+					commands.put(list[0], list[1]);	
 				}
 			}
 		}
 		catch(Exception e) {
 			
 		}
+		maps.add(myVariables);
+		maps.add(commands);
 		return maps;
 	}
 	
