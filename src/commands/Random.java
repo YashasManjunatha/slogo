@@ -4,10 +4,17 @@ import java.util.List;
 
 import Turtle.Turtle;
 
+/**
+ * Implements functionality for Random Command
+ *
+ */
 public class Random extends Command {
 
 	private int numberOfParameters = 1;
 
+	/* (non-Javadoc)
+	 * @see commands.Command#execute(java.util.List, Turtle.Turtle)
+	 */
 	@Override
 	double execute(List<CommandNode> children, Turtle t){
 		CommandNode child1 = children.get(0);
@@ -17,6 +24,9 @@ public class Random extends Command {
 		return rand;
 	}
 
+	/* (non-Javadoc)
+	 * @see commands.Command#getNumberOfParameters()
+	 */
 	@Override
 	int getNumberOfParameters() {
 		return numberOfParameters;

@@ -16,6 +16,9 @@ public class MakeVariable extends Command{
 		myName = name;
 	}
 
+	/* (non-Javadoc)
+	 * @see commands.Command#execute(java.util.List, Turtle.Turtle)
+	 */
 	@Override
 	double execute(List<CommandNode> children, Turtle t){
 		Double myValue = children.get(0).execute(t);
@@ -24,6 +27,9 @@ public class MakeVariable extends Command{
 
 	}
 
+	/* (non-Javadoc)
+	 * @see commands.Command#getNumberOfParameters()
+	 */
 	@Override
 	int getNumberOfParameters() {
 		return numberOfParameters;

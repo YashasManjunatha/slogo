@@ -15,15 +15,24 @@ public class UserVariable extends Command{
 		myName = varName;
 	}
 	
+	/* (non-Javadoc)
+	 * @see commands.Command#execute(java.util.List, Turtle.Turtle)
+	 */
 	@Override
 	double execute(List<CommandNode> children, Turtle t) {
 		return myMap.get(myName);
 	}
+	/* (non-Javadoc)
+	 * @see commands.Command#getNumberOfParameters()
+	 */
 	@Override
 	int getNumberOfParameters() {
 		return numberOfParameters;
 	}
 	
+	/* (non-Javadoc)
+	 * @see commands.Command#setValue(double)
+	 */
 	@Override
 	public void setValue(double x) {
 		if(myMap.containsKey(myName)) {

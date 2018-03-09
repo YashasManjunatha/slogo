@@ -24,6 +24,9 @@ public class MakeUserInstruction extends Command{
 		userCommandMap = commandMap;
 	}
 
+	/* (non-Javadoc)
+	 * @see commands.Command#execute(java.util.List, Turtle.Turtle)
+	 */
 	@Override
 	public double execute(List<CommandNode> children, Turtle t) {
 		if (myArguments == null) {
@@ -53,6 +56,9 @@ public class MakeUserInstruction extends Command{
 		return paramsInserted;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return myCommandText;
