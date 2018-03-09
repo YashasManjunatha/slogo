@@ -73,7 +73,8 @@ public class Turtle implements TurtleInterface {
 		xPos = xPos + moveLength * Math.sin(radians);
 		yPos = yPos - moveLength * Math.cos(radians);
 
-		addPath(prevXPos, prevYPos, xPos, yPos);
+		
+		checkOffScreenAndDraw();
 
 		screen.updateBox();
 
@@ -88,6 +89,46 @@ public class Turtle implements TurtleInterface {
 
 		return moveLength;
 
+	}
+	
+	private void checkOffScreenAndDraw() {
+		boolean offScreen = false;
+		double orgXPos = xPos, orgYPos = yPos;
+		double tempXPos = prevXPos, tempYPos = prevYPos;
+		if (yPos < 0) {
+			offScreen = true;
+			while (yPos < 0) {
+				yPos += screen.getHeight();
+				tempYPos = tempYPos + screen.getHeight();
+			}
+		}
+		if (yPos > screen.getHeight()) {
+			offScreen = true;
+			while(yPos > screen.getHeight()) {
+				yPos -= screen.getHeight();
+				tempYPos = tempYPos - screen.getHeight();
+			}
+		}
+		if (xPos < 0) {
+			offScreen = true;
+			while (xPos < 0) {
+				xPos += screen.getWidth();
+				tempXPos += screen.getWidth();
+			}
+		}
+		if (xPos > screen.getWidth()) {
+			offScreen = true;
+			while (xPos > screen.getWidth()) {
+				xPos -= screen.getWidth();
+				tempXPos -= screen.getWidth();
+			}
+		}
+		if (!offScreen) {
+			addPath(prevXPos, prevYPos, xPos, yPos);
+		} else {
+			addPath(prevXPos, prevYPos, orgXPos, orgYPos);
+			addPath(tempXPos, tempYPos, xPos, yPos);
+		}
 	}
 
 	private void addPath(double prevXPos, double prevYPos, double xPos, double yPos) {
@@ -214,7 +255,7 @@ public class Turtle implements TurtleInterface {
 		xPos = x + startingX;
 		yPos = y + startingY;
 
-		addPath(prevXPos, prevYPos, xPos, yPos);
+		checkOffScreenAndDraw();
 
 		System.out.println(pathList);
 
@@ -249,7 +290,7 @@ public class Turtle implements TurtleInterface {
 		System.out.println("PATHLIST = " + pathList);
 		System.out.println("ORIENTATION = " + orientationList);
 
-		if (pathList.size() > 0) {
+		if (!pathList.isEmpty()) {
 			pathList.remove(pathList.get(pathList.size() - 1));
 			System.out.println("oList " + orientationList);
 			orientationList.remove(orientationList.size() - 1);
