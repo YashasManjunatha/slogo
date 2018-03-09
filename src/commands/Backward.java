@@ -12,7 +12,7 @@ public class Backward extends Command{
 	   CommandNode child = children.get(0);
 	   step = -1 * child.execute(t);
 	   t.move(step);
-	   return step;
+	   return -1*step;
    }
 
    @Override
