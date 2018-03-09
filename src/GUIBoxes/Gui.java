@@ -3,6 +3,7 @@ package GUIBoxes;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import Turtle.Turtle;
 import commands.Command;
@@ -31,13 +32,17 @@ public class Gui {
 	private UserDefTable funcTable;
 	private TurtleViewTable turtleTable;
 	private final Map<String, double[]> GUIProperties = createMap();
+	
+	public static final String DEFAULT_RESOURCES = "GUIBoxes/resources/ViewLocations";
+	
+	private ResourceBundle myResources;
 
 	// Additional setup for the main menu
 	private Group root;
 	private Stage myStage;
 	private Map<String, Double> variableMap;
 	private Map<String, Command> commandMap;
-	private static Pane myPane;
+	private Pane myPane;
 
 	
 	public Gui(Group root, Stage stage) {
@@ -52,9 +57,40 @@ public class Gui {
 		initializeGUI();
 	}
 	
-	private static Map<String, double[]> createMap() {
+	private double[] readResourceFile(String s) {
+		return new double[] {Double.parseDouble(myResources.getString(s).split(",")[0]),
+				Double.parseDouble(myResources.getString(s).split(",")[1]),
+				Double.parseDouble(myResources.getString(s).split(",")[2]),
+				Double.parseDouble(myResources.getString(s).split(",")[3])};
+	}
+	
+	private Map<String, double[]> createMap() {
+		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
 		Map<String, double[]> GUIProperties = new HashMap<>();
 		// first index = xPos, second = yPos, third = width, fourth = length
+		
+		GUIProperties.put("turtleScreen", readResourceFile("turtleScreen"));
+		GUIProperties.put("textInput", readResourceFile("textInput"));
+
+		GUIProperties.put("varTable", readResourceFile("varTable"));
+		GUIProperties.put("funcTable", readResourceFile("funcTable"));
+
+		GUIProperties.put("prevCommandBox", readResourceFile("prevCommandBox"));
+
+		GUIProperties.put("backgroundCombo", readResourceFile("backgroundCombo"));
+		GUIProperties.put("languageCombo", readResourceFile("languageCombo"));
+		GUIProperties.put("penCombo", readResourceFile("penCombo"));
+
+		GUIProperties.put("imageButton", readResourceFile("imageButton"));
+		GUIProperties.put("runButton", readResourceFile("runButton"));
+		GUIProperties.put("clearButton", readResourceFile("clearButton"));
+		GUIProperties.put("newTurtleButton", readResourceFile("newTurtleButton"));
+		
+		GUIProperties.put("redoMoveButton", readResourceFile("redoMoveButton"));
+		
+		GUIProperties.put("turtleList", readResourceFile("turtleList"));
+		
+		/*
 		GUIProperties.put("turtleScreen", new double[] { 25, 25, 650, 425 });
 		GUIProperties.put("textInput", new double[] { 25, 475, 605, 110 });
 
@@ -75,7 +111,7 @@ public class Gui {
 		GUIProperties.put("redoMoveButton", new double[] { 50, 50, 45, 55 });
 		
 		GUIProperties.put("turtleList", new double[] {925, 50, 250, 500});
-
+		*/
 		
 
 
@@ -87,11 +123,11 @@ public class Gui {
 		setupGUIBoxes();
 		setupComboboxes();
 		setupButtons();
-		setupTurtleCheckbox();
+		//setupTurtleCheckbox();
 		
 	}
 	
-	private void setupTurtleCheckbox() {
+	/*private void setupTurtleCheckbox() {
 		VBox vbchecks = new VBox();
 		vbchecks.setSpacing(0);
 		vbchecks.setPadding(new Insets(0));
@@ -108,7 +144,7 @@ public class Gui {
 		scroll.setMaxHeight(10);
 		root.getChildren().add(scroll);
 
-	}
+	}*/
 
 	private void setupComboboxes() {
 		new BackgroundCombo(myPane, turtleScreen, GUIProperties.get("backgroundCombo"), "Change Background Color");
