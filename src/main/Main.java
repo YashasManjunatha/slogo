@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.paint.Color;
@@ -18,8 +19,11 @@ public class Main extends Application {
 
 	private String title;
 	private final static double SCREEN_HEIGHT = 650;
-	private final static double SCREEN_WIDTH = 1215;//915;
+	private final static double SCREEN_WIDTH = 1215;// 915;
 	private Stage myStage;
+	private int workSpaceNum = 1;
+	private Group root;
+	private TabPane tabPane;
 
 	// private static final Map<String, double[]> GUIProperties = createMap();
 
@@ -33,10 +37,10 @@ public class Main extends Application {
 	}
 
 	private void initialize() {
-		Group root = new Group();
+		root = new Group();
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
 		setStage();
-		TabPane tabPane = new TabPane();
+		tabPane = new TabPane();
 
 		tabPane.getSelectionModel().selectedItemProperty().addListener(
 
@@ -47,21 +51,37 @@ public class Main extends Application {
 					}
 				});
 
-		Tab tab1 = new Tab();
-		Gui first = new Gui(root, myStage);
+		setupNewTabButton();
 
-		tab1.setContent(first.getPane());
+		Tab firstTab = new Tab("Workspace " + workSpaceNum);
+		workSpaceNum += 1;
+		Gui firstGui = new Gui(root, myStage);
 
-		tabPane.getTabs().add(tab1);
-
-		Tab tab2 = new Tab();
-		Gui second = new Gui(root, myStage);
-
-		tab2.setContent(second.getPane());
-
-		tabPane.getTabs().add(tab2);
+		firstTab.setContent(firstGui.getPane());
+		tabPane.getTabs().add(firstTab);
+		tabPane.getSelectionModel().select(firstTab);
 
 		root.getChildren().add(tabPane);
+
+	}
+
+	private void setupNewTabButton() {
+		Tab newTabButton = new Tab();
+		Button newTab = new Button("New Tab");
+		
+		newTab.setOnAction(event -> {
+			Tab nextTab = new Tab("Workspace " + workSpaceNum);
+			workSpaceNum += 1;
+			Gui nextGui = new Gui(root, myStage);
+			nextTab.setContent(nextGui.getPane());
+			tabPane.getTabs().add(nextTab);
+			tabPane.getSelectionModel().select(nextTab);
+		});
+
+		newTabButton.setGraphic(newTab);
+		newTabButton.setClosable(false);
+
+		tabPane.getTabs().add(newTabButton);
 
 	}
 

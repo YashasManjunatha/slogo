@@ -68,11 +68,11 @@ public class Gui {
 		GUIProperties.put("penCombo", new double[] { 700, 495, 200, 15 });
 
 		GUIProperties.put("imageButton", new double[] { 700, 405, 200, 15 });
-		GUIProperties.put("runButton", new double[] { 630, 475, 45, 55 });
-		GUIProperties.put("clearButton", new double[] { 630, 530, 45, 55 });
+		GUIProperties.put("runButton", new double[] { 630, 475, 45, 40 });
+		GUIProperties.put("redoMoveButton", new double[] { 630, 515, 45, 35 });
+		GUIProperties.put("clearButton", new double[] { 630, 550, 45, 35 });
 		GUIProperties.put("newTurtleButton", new double[] { 30, 30, 45, 55 });
 		
-		GUIProperties.put("redoMoveButton", new double[] { 50, 50, 45, 55 });
 		
 		GUIProperties.put("turtleList", new double[] {925, 50, 250, 500});
 
@@ -87,29 +87,9 @@ public class Gui {
 		setupGUIBoxes();
 		setupComboboxes();
 		setupButtons();
-		setupTurtleCheckbox();
 		
 	}
 	
-	private void setupTurtleCheckbox() {
-		VBox vbchecks = new VBox();
-		vbchecks.setSpacing(0);
-		vbchecks.setPadding(new Insets(0));
-		for (Turtle t : turtleList) {
-			final CheckBox cb = new CheckBox("turtle");
-			cb.selectedProperty().addListener(new ChangeListener<Boolean>() {
-				public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
-					System.out.println(cb.isSelected());
-				}
-			});
-			vbchecks.getChildren().add(cb);
-		}
-		ScrollPane scroll = new ScrollPane(vbchecks);
-		scroll.setMaxHeight(10);
-		root.getChildren().add(scroll);
-
-	}
-
 	private void setupComboboxes() {
 		new BackgroundCombo(myPane, turtleScreen, GUIProperties.get("backgroundCombo"), "Change Background Color");
 		new PenCombo(myPane, turtleList, GUIProperties.get("penCombo"), "Change Pen Color");
@@ -153,7 +133,7 @@ public class Gui {
 		new NewTurtleButton(myPane, GUIProperties.get("newTurtleButton"), "New Turtle", turtleScreen, myStage,
 				turtleList);
 		
-		new RedoMoveButton(myPane, GUIProperties.get("redoMoveButton"), "Redo Move", turtleScreen, myStage,
+		new RedoMoveButton(myPane, GUIProperties.get("redoMoveButton"), "Undo", turtleScreen, myStage,
 				turtleList);
 
 	}
