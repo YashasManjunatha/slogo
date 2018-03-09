@@ -40,7 +40,7 @@ public class Command extends CommandObject{
 		return (int) Double.POSITIVE_INFINITY;
 	}
 	
-	protected Turtle getTurtle() {
+	public Turtle getTurtle() {
 		return myTurtle;
 	}
 	@Override

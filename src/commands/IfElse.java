@@ -3,10 +3,17 @@ package commands;
 import java.util.List;
 import Turtle.Turtle;
 
+/**
+ * Implements functionality for IfElse Command
+ *
+ */
 public class IfElse extends Command {
 	
 	private int numberOfParameters = 3;
 
+	/* (non-Javadoc)
+	 * @see commands.Command#execute(java.util.List, Turtle.Turtle)
+	 */
 	@Override
 	double execute(List<CommandNode> children, Turtle t){
 		double retVal = 0;
@@ -22,6 +29,9 @@ public class IfElse extends Command {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see commands.Command#getNumberOfParameters()
+	 */
 	@Override
      int getNumberOfParameters() {
 		return numberOfParameters;

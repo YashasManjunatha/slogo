@@ -5,29 +5,23 @@ import java.util.List;
 import Turtle.Turtle;
 
 /**
- * Implements functionality for Parsing Double
+ * Implements functionality for Comments
  *
  */
-public class ParsedDouble extends Command{
-	private double myDouble;
-	
-	public ParsedDouble(double parsedDouble) {
-		System.out.println("PARSED DOUBLE: " + parsedDouble);
-		myDouble = parsedDouble;
-	}
+public class Comment extends Command{
+	private int numberOfParameters = 0;
 	/* (non-Javadoc)
 	 * @see commands.Command#execute(java.util.List, Turtle.Turtle)
 	 */
 	@Override
 	double execute(List<CommandNode> children, Turtle t) {
-		return myDouble;
+		return 0;
 	}
 	/* (non-Javadoc)
 	 * @see commands.Command#getNumberOfParameters()
 	 */
 	@Override
 	int getNumberOfParameters() {
-		return 0;
+		return numberOfParameters;
 	}
-	
 }
