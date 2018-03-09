@@ -39,7 +39,7 @@ public class RunButton extends Buttons {
 			System.out.println("before = " + variableMap);
 			mainPrevCommandBox.addText(mainTextInput.getText());
 			for (Turtle t : getThisTurtleList()) {
-
+				
 				language = ((LanguageCombo) mainLanguageComboBox).getLanguage();
 				Command test = new Command(mainTextInput.getText(), t, variableMap, userCommandMap, language);
 				test.execute();

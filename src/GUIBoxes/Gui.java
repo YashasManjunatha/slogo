@@ -140,7 +140,7 @@ public class Gui {
 
 		System.out.println(turtleList);
 
-		varTable = new UserDefTable(myPane, GUIProperties.get("varTable"), "Variable");
+		varTable = new UserDefTable(myPane, GUIProperties.get("varTable"), "Variable", variableMap);
 		funcTable = new UserDefTable(myPane, GUIProperties.get("funcTable"), "Function");
 		languageComboBox = new LanguageCombo(myPane, GUIProperties.get("languageCombo"), "Change Language");
 

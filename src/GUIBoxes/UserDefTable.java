@@ -23,6 +23,18 @@ public class UserDefTable extends TableView implements GUIBoxes {
 	private final static int VALCOLWIDTH = 133;
 	private String tableType;
 	
+	private Map<String, Double> mainVariableMap;
+	
+	public UserDefTable(Pane pane, double[] properties, String type, Map<String, Double> variableMap) {
+		thisPane = pane;
+		tableType = type;
+		table = new TableView<>();
+		setupTableProperties(properties[0], properties[1], properties[2], properties[3]);
+		setupTableColumns();
+		thisPane.getChildren().add(table);
+		mainVariableMap = variableMap;
+	}
+
 	public UserDefTable(Pane pane, double[] properties, String type) {
 		thisPane = pane;
 		tableType = type;
@@ -49,7 +61,13 @@ public class UserDefTable extends TableView implements GUIBoxes {
 
 		valCol.setCellFactory(TextFieldTableCell.<TableInsertion>forTableColumn());
 		valCol.setOnEditCommit((CellEditEvent<TableInsertion, String> t) -> {
+			System.out.println("HI " + ((TableInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).getValue());
 			((TableInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).setValue(t.getNewValue());
+			
+			
+			System.out.println(valCol.getTableView().getItems().size());
+			
+			System.out.println(nameCol.getCellData(0));
 			
 		});
 
