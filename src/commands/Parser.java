@@ -57,21 +57,16 @@ public class Parser extends ParserObject{
 		catch(NumberFormatException e) {
 			//proceed
 		}
-
 		if (commandText.equals("#")) {
 			scan.nextLine();
 			return new CommandNode(new Comment());
 		}
-
 		if (userCommandMap.containsKey(commandText)) {
 			return generateUserCommandNode(commandText);
 		}
-
 		if (commandText.equals("[")) {
 			return generateBracketNode(commandText);
 		}
-
-
 		if (commandText.startsWith(":")) {
 			try {
 				return new CommandNode(new UserVariable(commandText, variableMap));
