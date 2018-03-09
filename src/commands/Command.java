@@ -6,6 +6,7 @@ import java.util.Map;
 import GUIBoxes.ErrorBox;
 import Turtle.Turtle;
 
+
 public class Command extends CommandObject{
 	private Parser myParser;
 	private CommandNode superNode;
@@ -17,6 +18,7 @@ public class Command extends CommandObject{
 		myText = text;
 		myParser = new Parser(variables, commands, language);
 		myTurtle = turtle;
+		SaveCurrentStates s = new SaveCurrentStates(variables,commands);
 		try {
 			superNode = myParser.parse(text);
 		}
