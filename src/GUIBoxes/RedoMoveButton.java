@@ -25,7 +25,7 @@ public class RedoMoveButton extends Buttons {
 	void setupAction() {
 		getButton().setOnAction((event) -> {
 			for (Turtle t : mainTurtleList) {
-				t.redoMove();
+				t.undoMove();
 			}
 
 		});

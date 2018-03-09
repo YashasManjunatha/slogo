@@ -1,5 +1,6 @@
 package GUIBoxes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Turtle.Turtle;
@@ -92,7 +93,7 @@ public class TurtleViewTable extends TableView implements GUIBoxes{
 			((TurtleListInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).setHeading(Double.parseDouble(t.getNewValue()));
 		});
 		
-		TableColumn<TurtleListInsertion, Boolean> penUpCol = new TableColumn("Pen Up");
+		TableColumn<TurtleListInsertion, Boolean> penUpCol = new TableColumn("Pen Down");
 		penUpCol.setCellValueFactory(f -> f.getValue().isPenActive());
 		penUpCol.setCellFactory(tc -> new CheckBoxTableCell<>());
 		setupBooleanColumn(penUpCol, PENCOLWIDTH);
@@ -119,9 +120,9 @@ public class TurtleViewTable extends TableView implements GUIBoxes{
 			((TurtleListInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPenThickness(Double.parseDouble(t.getNewValue()));
 		});
 		
-		ObservableList<TurtleListInsertion> data = FXCollections.observableArrayList(new TurtleListInsertion(true, 1, turtles.get(0).getX(), turtles.get(0).getY(), turtles.get(0).getOrientation(), turtles.get(0).getPenDown(), "TEMP", 0.0));
+		//ObservableList<TurtleListInsertion> data = FXCollections.observableArrayList(new TurtleListInsertion(true, 1, turtles.get(0).getX(), turtles.get(0).getY(), turtles.get(0).getOrientation(), turtles.get(0).getPenDown(), "TEMP", 0.0));
 				
-		table.setItems(data);
+		//table.setItems(data);
 		table.getColumns().addAll(activeCol, idCol, xposCol, yposCol, headingCol, penUpCol, penColorCol, penThickCol);
 	
 		
@@ -138,8 +139,19 @@ public class TurtleViewTable extends TableView implements GUIBoxes{
 	
 	@Override
 	public void updateBox() {
-		thisPane.getChildren().remove(table);
-		thisPane.getChildren().add(table);
+		//thisPane.getChildren().remove(table);
+		//thisPane.getChildren().add(table);
+	}
+	
+	public void updateTurtles(List<Turtle> tlist) {
+		List<TurtleListInsertion> insertionList = new ArrayList<>();
+		for (Turtle t : tlist) {
+			insertionList.add(new TurtleListInsertion(t.getActive(), t.getID(), t.getX(), t.getY(), t.getOrientation(), t.getPenDown(), "Black", 0.0));
+		}
+		ObservableList<TurtleListInsertion> finalList = FXCollections.observableArrayList(insertionList);
+		table.setItems(finalList);
+		
+		
 	}
 
 }

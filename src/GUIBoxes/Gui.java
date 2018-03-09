@@ -153,7 +153,7 @@ public class Gui {
 
 	private void setupButtons() {
 		new RunButton(myPane, languageComboBox, GUIProperties.get("runButton"), "Run", textInput, prevCommandBox,
-				turtleList, variableMap, commandMap, varTable, funcTable);
+				turtleList, variableMap, commandMap, varTable, funcTable, turtleTable);
 
 		new ClearButton(myPane, GUIProperties.get("clearButton"), "Clear", textInput, prevCommandBox, turtleList);
 
