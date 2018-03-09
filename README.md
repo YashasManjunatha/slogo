@@ -30,4 +30,4 @@ A development environment that helps users write SLogo programs.
 
 ### Extra Features
 
-## Impressions of the Project
+### Impressions of the Project
