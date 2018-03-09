@@ -18,18 +18,20 @@ public class RunButton extends Buttons {
 
 	private Map<String, Double> variableMap;
 	private Map<String, Command> userCommandMap;
+	private TurtleViewTable mainTurtleTable;
 
 	public RunButton(Pane pane, GUIComboBox languageComboBox, double[] properties, String text, TextInputBox textInput,
 			PrevCommandList prevCommandBox, List<Turtle> turtleList, Map<String, Double> variables,
-			Map<String, Command> commands, UserDefTable varTable, UserDefTable funcTable) {
+			Map<String, Command> commands, UserDefTable varTable, UserDefTable funcTable, TurtleViewTable turtleTable) {
 		super(pane, properties, text, turtleList);
 		mainLanguageComboBox = languageComboBox;
 		this.mainTextInput = textInput;
 		this.mainPrevCommandBox = prevCommandBox;
 		variableMap = variables;
 		userCommandMap = commands;
-		mainVarTable = varTable;
-		mainFuncTable = funcTable;
+		mainVarTable = (VariableTable) varTable;
+		mainFuncTable = (CommandTable) funcTable;
+		mainTurtleTable = turtleTable;
 	}
 
 	@Override
@@ -45,11 +47,12 @@ public class RunButton extends Buttons {
 				test.execute();
 
 			}
-			
 			mainVarTable.updateVars(variableMap);
 			mainFuncTable.updateFuncs(userCommandMap);
+			mainTurtleTable.updateValues();
 
 			mainTextInput.clear();
+			
 
 		});
 	}

@@ -12,13 +12,15 @@ public class NewTurtleButton extends Buttons {
 	private Stage mainStage;
 	private ScreenBox mainTurtleScreen;
 	private List<Turtle> mainTurtleList;
+	private TurtleViewTable mainTurtleTable;
 
 	public NewTurtleButton(Pane pane, double[] properties, String text, ScreenBox turtleScreen, Stage stage,
-			List<Turtle> turtleList) {
+			List<Turtle> turtleList, TurtleViewTable turtleTable) {
 		super(pane, properties, text, turtleList);
 		mainStage = stage;
 		mainTurtleScreen = turtleScreen;
 		mainTurtleList = turtleList;
+		mainTurtleTable = turtleTable;
 	}
 
 	@Override
@@ -28,6 +30,7 @@ public class NewTurtleButton extends Buttons {
 					getClass().getClassLoader().getResourceAsStream("images/turtle.png"), 0, 55, true, false));
 
 			mainTurtleList.add(turtle);
+			mainTurtleTable.addTurtle();
 
 		});
 	}

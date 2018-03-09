@@ -140,8 +140,8 @@ public class Gui {
 
 		System.out.println(turtleList);
 
-		varTable = new UserDefTable(myPane, GUIProperties.get("varTable"), "Variable", variableMap);
-		funcTable = new UserDefTable(myPane, GUIProperties.get("funcTable"), "Function");
+		varTable = new VariableTable(myPane, GUIProperties.get("varTable"), "Variable", variableMap);
+		funcTable = new CommandTable(myPane, GUIProperties.get("funcTable"), "Function");
 		languageComboBox = new LanguageCombo(myPane, GUIProperties.get("languageCombo"), "Change Language");
 
 		prevCommandBox = new PrevCommandList(myPane, GUIProperties.get("prevCommandBox"), textInput, turtleList,
@@ -153,7 +153,7 @@ public class Gui {
 
 	private void setupButtons() {
 		new RunButton(myPane, languageComboBox, GUIProperties.get("runButton"), "Run", textInput, prevCommandBox,
-				turtleList, variableMap, commandMap, varTable, funcTable);
+				turtleList, variableMap, commandMap, varTable, funcTable, turtleTable);
 
 		new ClearButton(myPane, GUIProperties.get("clearButton"), "Clear", textInput, prevCommandBox, turtleList);
 
@@ -161,7 +161,7 @@ public class Gui {
 				turtleList);
 
 		new NewTurtleButton(myPane, GUIProperties.get("newTurtleButton"), "New Turtle", turtleScreen, myStage,
-				turtleList);
+				turtleList, turtleTable);
 
 		new RedoMoveButton(myPane, GUIProperties.get("redoMoveButton"), "Undo", turtleScreen, myStage, turtleList);
 

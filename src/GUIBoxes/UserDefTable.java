@@ -14,7 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Pane;
 
-public class UserDefTable extends TableView implements GUIBoxes {
+public class UserDefTable implements GUIBoxes {
 
 	private TableView table;
 
@@ -22,67 +22,23 @@ public class UserDefTable extends TableView implements GUIBoxes {
 	private final static int NAMECOLWIDTH = 65;
 	private final static int VALCOLWIDTH = 133;
 	private String tableType;
-	
-	private Map<String, Double> mainVariableMap;
-	
-	public UserDefTable(Pane pane, double[] properties, String type, Map<String, Double> variableMap) {
-		thisPane = pane;
-		tableType = type;
-		table = new TableView<>();
-		setupTableProperties(properties[0], properties[1], properties[2], properties[3]);
-		setupTableColumns();
-		thisPane.getChildren().add(table);
-		mainVariableMap = variableMap;
-	}
-
+		
 	public UserDefTable(Pane pane, double[] properties, String type) {
 		thisPane = pane;
-		tableType = type;
-		table = new TableView<>();
+		setTableType(type);
+		setTable(new TableView<>());
 		setupTableProperties(properties[0], properties[1], properties[2], properties[3]);
-		setupTableColumns();
-		thisPane.getChildren().add(table);
+		thisPane.getChildren().add(getTable());
 	}
 
-	private void setupTableColumns() {
-		table.setEditable(true);
-		TableColumn<TableInsertion, String> nameCol = new TableColumn(tableType);
-		nameCol.setCellValueFactory(new PropertyValueFactory("VarName"));
-		nameCol.setMinWidth(NAMECOLWIDTH);
-		nameCol.setMaxWidth(NAMECOLWIDTH);
-		nameCol.setResizable(false);
-
-		TableColumn<TableInsertion, String> valCol = new TableColumn("Value");
-		valCol.setMinWidth(VALCOLWIDTH);
-		valCol.setResizable(false);
-		valCol.setEditable(true);
-
-		valCol.setCellValueFactory(new PropertyValueFactory("Value"));
-
-		valCol.setCellFactory(TextFieldTableCell.<TableInsertion>forTableColumn());
-		valCol.setOnEditCommit((CellEditEvent<TableInsertion, String> t) -> {
-			System.out.println("HI " + ((TableInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).getValue());
-			((TableInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).setValue(t.getNewValue());
-			
-			
-			System.out.println(valCol.getTableView().getItems().size());
-			
-			System.out.println(nameCol.getCellData(0));
-			
-		});
-
-//		ObservableList<TableInsertion> data1 = FXCollections.observableArrayList(new TableInsertion("x", "90"), new TableInsertion("x", "180"));
-//		table.setItems(data1);
-
-		table.getColumns().addAll(nameCol, valCol);
-	}
+	
 
 	private void setupTableProperties(double xPos, double yPos, double width, double height) {
-		table.setEditable(false);
-		table.setLayoutX(xPos);
-		table.setLayoutY(yPos);
-		table.setMaxWidth(width);
-		table.setMaxHeight(height);
+		getTable().setEditable(false);
+		getTable().setLayoutX(xPos);
+		getTable().setLayoutY(yPos);
+		getTable().setMaxWidth(width);
+		getTable().setMaxHeight(height);
 	}
 
 	public void updateBox() {
@@ -96,9 +52,31 @@ public class UserDefTable extends TableView implements GUIBoxes {
 			insertionList.add(new TableInsertion(key, variableMap.get(key) + ""));
 		}
 		ObservableList<TableInsertion> finalList = FXCollections.observableArrayList(insertionList);
-		table.setItems(finalList);
+		getTable().setItems(finalList);
 		
+	}
+	
+	private void setupTableColumns() {
+		getTable().setEditable(true);
+		TableColumn<TableInsertion, String> nameCol = new TableColumn(getTableType());
+		nameCol.setCellValueFactory(new PropertyValueFactory("VarName"));
+		nameCol.setMinWidth(NAMECOLWIDTH);
+		nameCol.setMaxWidth(NAMECOLWIDTH);
+		nameCol.setResizable(false);
+
+		TableColumn<TableInsertion, String> valCol = new TableColumn("Value");
+		valCol.setMinWidth(VALCOLWIDTH);
+		valCol.setResizable(false);
+		valCol.setEditable(true);
+
+		valCol.setCellValueFactory(new PropertyValueFactory("Value"));
+
 		
+
+//		ObservableList<TableInsertion> data1 = FXCollections.observableArrayList(new TableInsertion("x", "90"), new TableInsertion("x", "180"));
+//		table.setItems(data1);
+
+		getTable().getColumns().addAll(nameCol, valCol);
 	}
 
 	public void updateFuncs(Map<String, Command> userCommandMap) {
@@ -109,8 +87,24 @@ public class UserDefTable extends TableView implements GUIBoxes {
 			insertionList.add(new TableInsertion(key, userCommand.toString()));
 		}
 		ObservableList<TableInsertion> finalList = FXCollections.observableArrayList(insertionList);
-		table.setItems(finalList);
+		getTable().setItems(finalList);
 		
+	}
+
+	public TableView getTable() {
+		return table;
+	}
+
+	public void setTable(TableView table) {
+		this.table = table;
+	}
+
+	public String getTableType() {
+		return tableType;
+	}
+
+	public void setTableType(String tableType) {
+		this.tableType = tableType;
 	}
 
 }

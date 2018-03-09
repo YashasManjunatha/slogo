@@ -26,8 +26,11 @@ public class Turtle implements TurtleInterface {
 	private double orientation = 0;
 	private double xPos;
 	private double yPos;
+	private double xPosRelative;
+	private double yPosRelative;
 	private double prevXPos;
 	private double prevYPos;
+	private double penThickness;
 	private List<Double[]> pathList = new ArrayList<>();
 
 	private List<Color> penColorList = new ArrayList<>();
@@ -60,6 +63,7 @@ public class Turtle implements TurtleInterface {
 		yPos = startingY;
 		prevXPos = startingX;
 		prevYPos = startingY;
+		penThickness = 3.0;
 		screen.addTurtleToCanvas(image, xPos, yPos);
 		//pen = new Pen();
 		penShowing = true;
@@ -87,6 +91,9 @@ public class Turtle implements TurtleInterface {
 
 		xPos = xPos + moveLength * Math.sin(radians);
 		yPos = yPos - moveLength * Math.cos(radians);
+		
+		xPosRelative = xPosRelative + moveLength * Math.sin(radians);
+		yPosRelative = yPosRelative + moveLength * Math.cos(radians);
 
 		
 		checkOffScreenAndDraw();
@@ -207,6 +214,10 @@ public class Turtle implements TurtleInterface {
 	public double getX() {
 		return xPos;
 	}
+	
+	public double getRelativeX() {
+		return xPosRelative;
+	}
 
 	/**
 	 * @return the path list of the pen
@@ -242,6 +253,10 @@ public class Turtle implements TurtleInterface {
 	@Override
 	public double getY() {
 		return yPos;
+	}
+	
+	public double getRelativeY() {
+		return yPosRelative;
 	}
 
 	/* (non-Javadoc)
@@ -391,5 +406,15 @@ public class Turtle implements TurtleInterface {
 
 		}
 
+	}
+
+	public double getPenThickness() {
+		
+		return penThickness;
+	}
+
+	public void updateOnScreen() {
+		screen.updateBox();
+		
 	}
 }
