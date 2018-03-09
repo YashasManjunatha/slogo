@@ -4,11 +4,18 @@ import java.util.List;
 
 import Turtle.Turtle;
 
+/**
+ * Implements functionality for Home Command
+ *
+ */
 public class Home extends Command {
 	private int numberOfParameters = 0;
 	double step;
 	
-	  @Override
+	  /* (non-Javadoc)
+	 * @see commands.Command#execute(java.util.List, Turtle.Turtle)
+	 */
+	@Override
 	   double execute(List<CommandNode> children, Turtle t){
 	       double x=t.getX();
 	       double y =t.getY();
@@ -19,7 +26,10 @@ public class Home extends Command {
 		   return step;
 	   }
 
-	   @Override
+	   /* (non-Javadoc)
+	 * @see commands.Command#getNumberOfParameters()
+	 */
+	@Override
 	   int getNumberOfParameters() {
 			return numberOfParameters;
 		}

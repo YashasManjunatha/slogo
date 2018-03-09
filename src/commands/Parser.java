@@ -1,119 +1,72 @@
 package commands;
 
-import java.io.FileInputStream;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Scanner;
 
 import GUIBoxes.ErrorBox;
 
 public class Parser extends ParserObject{
 	
-	private String myPropertyFile;
-	private boolean bool;
+	private boolean newSuperNodeAdded; //need this to indicate if a super node has been added, otherwise all following nodes will be added to same leaf
 	private Map<String, Double> variableMap;
 	private Map<String, Command> userCommandMap;
 	private String myLanguage;
+	private CommandToClassPropertyHandler commandHandler;
+	private ClassToMethodPropertyHandler methodHandler;
+	private Scanner scan;
 	
 	Parser(Map<String, Double> variables, Map<String, Command> commands, String language){
 		variableMap = variables;
 		userCommandMap = commands;
 		myLanguage = language;
-		myPropertyFile = getPropertyFile(myLanguage);
+		commandHandler = new CommandToClassPropertyHandler(language);
+		methodHandler = new ClassToMethodPropertyHandler();
 	}
-
-	/*
-	 * reflection and stuff can be in different class****
-	 * properties file that has Class name to method --> this method returns the correct Command Node type
-	 * 	method.invoke()
-	 * make everything private that you can
-	 * 
-	 * document how the parameters are passed for user defined commands in README -- passed in brackets
-	 */
-	
-	private String getPropertyFile(String language) {	//string concatenation
-		switch (language) {
-		case "English": return "src/languages/English.properties";
-		case "Chinese": return "src/languages/Chinese.properties";
-		case "French": return "src/languages/French.properties";
-		case "German": return "src/languages/German.properties";
-		case "Italian": return "src/languages/Italian.properties";
-		case "Portuguese": return "src/languages/Portuguese.properties";
-		case "Russian": return "src/languages/Russian.properties";
-		case "Spanish": return "src/languages/Spanish.properties";
-		}
-		return null;
-	}
-
 	@Override
 	public CommandNode parse(String text) throws InvalidCommandException{
 		CommandNode superNode = new CommandNode(new Command());
-		Scanner scan = new Scanner(text);
-		generateTree(superNode, scan);
+		scan = new Scanner(text);
+		generateTree(superNode);
 		return superNode;
 	}
-	
-	private void generateTree(CommandNode root, Scanner scan) throws InvalidCommandException{
+
+	private void generateTree(CommandNode root) throws InvalidCommandException{
 		int paramsFilled = 0;
 		while (scan.hasNext() && paramsFilled < root.getNumberOfParameters()) {
-			bool = false;
+			newSuperNodeAdded = false;
 			String nextCommand = scan.next();
-			CommandNode currentChild = generateCommandNode(nextCommand.toLowerCase(),scan);
+			CommandNode currentChild = generateCommandNode(nextCommand.toLowerCase());
 			root.addChild(currentChild);
-			if (bool) {
+			if (newSuperNodeAdded) {
 				paramsFilled++;
 				continue;
 			}
-			generateTree(currentChild, scan);
+			generateTree(currentChild);
 			paramsFilled++;
 		}
 	}
-	
-	CommandNode generateCommandNode(String commandText, Scanner scan) throws InvalidCommandException {
-		System.out.println("******* ** *** * " + commandText);
+
+	private CommandNode generateCommandNode(String commandText) throws InvalidCommandException {
 		try {
 			double parsedDouble = Double.parseDouble(commandText);
 			return new CommandNode(new ParsedDouble(parsedDouble));
 		}
-		catch(NumberFormatException e) {	//add comment here
+		catch(NumberFormatException e) {
+			//proceed
 		}
-		
 		if (commandText.equals("#")) {
 			scan.nextLine();
 			return new CommandNode(new Comment());
 		}
-		
 		if (userCommandMap.containsKey(commandText)) {
-			scan.next(); //bypass "[" for paramaters
-			String next = scan.next();
-			String toBeParsed = "";
-			
-			while (!next.equals("]")) {
-				toBeParsed = toBeParsed + next + " ";
-				next = scan.next();
-			}
-			MakeUserInstruction userInstruction = (MakeUserInstruction) userCommandMap.get(commandText);
-			Parser paramParser = new Parser(variableMap, userCommandMap, myLanguage);
-			CommandNode params = paramParser.parse(toBeParsed);
-			userInstruction.setArguments(params);
-			bool = true;
-			return new CommandNode (userInstruction);
+			return generateUserCommandNode(commandText);
 		}
-		
-		if (commandText.equals("make") || commandText.equals("set")) {
-			String varName = scan.next();
-			CommandNode topNode = new CommandNode(new MakeVariable(varName, variableMap));
-			return topNode;
-		}
-		
 		if (commandText.equals("[")) {
-			return generateBracketNode(commandText, scan);
+			return generateBracketNode(commandText);
 		}
-		
-
 		if (commandText.startsWith(":")) {
 			try {
 				return new CommandNode(new UserVariable(commandText, variableMap));
@@ -122,38 +75,38 @@ public class Parser extends ParserObject{
 				new ErrorBox("Undefined Variable", commandText);
 			}
 		}
-		
-		CommandObject generatedCommand;
-		Properties command_properties = new Properties();
+		String className = commandHandler.getClassName(commandText);
+		Method m = methodHandler.getGenerateMethod(this, className);
 		try {
-			FileInputStream input = new FileInputStream(myPropertyFile);
-			command_properties.load(input);
-			Map<String, String> commandsToClasses = new HashMap<>();
-			String [] commands;
-			for (String className: command_properties.stringPropertyNames()) {
-				commands = command_properties.getProperty(className).split("\\|");
-				for (String command: commands) {
-					commandsToClasses.put(command, className);
-				}
-			}
-			String className = commandsToClasses.get(commandText);
-			if (className.equals("MakeVariable")) {
-				return commandWithVariableMap(className, scan);
-			}
-			if (className.equals("MakeUserInstruction")) {
-				return userCommand(scan);
-			}
-			Class<?> clazz = Class.forName("commands." + className);		//find class associated with the command string
-			Object obj = clazz.newInstance();
-			generatedCommand = (CommandObject) obj;
+			return (CommandNode) m.invoke(this, className);
+		} catch (Exception e) {
+			new ErrorBox("Error Generating Comamnd", className);
 		}
-		catch(Exception e) {
-			throw new InvalidCommandException(commandText);
-		}
-		return new CommandNode(generatedCommand);
+		return null;
 	}
-	
-	private CommandNode generateBracketNode(String commandText, Scanner scan) throws InvalidCommandException{
+
+	private CommandNode generateUserCommandNode(String commandText) {
+		scan.next(); //bypass "[" for paramaters
+		String next = scan.next();
+		String toBeParsed = "";
+
+		while (!next.equals("]")) {
+			toBeParsed = toBeParsed + next + " ";
+			next = scan.next();
+		}
+		MakeUserInstruction userInstruction = (MakeUserInstruction) userCommandMap.get(commandText);
+		Parser paramParser = new Parser(variableMap, userCommandMap, myLanguage);
+		try {
+			CommandNode params = paramParser.parse(toBeParsed);
+			userInstruction.setArguments(params);
+		}catch(InvalidCommandException e) {
+			new ErrorBox("Error in User Defined Command", commandText);
+		}
+		newSuperNodeAdded = true;
+		return new CommandNode (userInstruction);
+	}
+
+	private CommandNode generateBracketNode(String commandText) throws InvalidCommandException{
 		int bracketCount = 1;
 		String toBeParsed = "";
 		String next;
@@ -175,11 +128,17 @@ public class Parser extends ParserObject{
 		}
 		Parser newParser = new Parser(variableMap, userCommandMap, myLanguage);
 		CommandNode bracketNode = newParser.parse(toBeParsed);
-		bool = true;
+		newSuperNodeAdded = true;
 		return bracketNode;
 	}
+	
+	private CommandNode generateNoConstructorCommand(String className) {
+		Object classInstance = commandHandler.getClassInstance(className);
+		CommandObject generatedCommand = (CommandObject) classInstance;
+		return new CommandNode(generatedCommand);
+	}
 
-	private CommandNode userCommand(Scanner scan) {
+	private CommandNode generateUserCommand(String className) {
 		String name = scan.next();
 		scan.next(); // pass by initial bracket "["
 		List<String> variables = new ArrayList<>();
@@ -210,7 +169,7 @@ public class Parser extends ParserObject{
 		return userCommand;
 	}
 
-	private CommandNode commandWithVariableMap(String className, Scanner scan) {
+	private CommandNode generateVariableMapCommand(String className) {
 		return new CommandNode(new MakeVariable(scan.next(), variableMap));
 	}
 }
