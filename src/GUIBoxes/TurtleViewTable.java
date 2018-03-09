@@ -123,6 +123,8 @@ public class TurtleViewTable extends TableView implements GUIBoxes{
 				
 		table.setItems(data);
 		table.getColumns().addAll(activeCol, idCol, xposCol, yposCol, headingCol, penUpCol, penColorCol, penThickCol);
+	
+		
 	}
 
 	
