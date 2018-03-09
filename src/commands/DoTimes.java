@@ -4,8 +4,15 @@ import java.util.List;
 
 import Turtle.Turtle;
 
+/**
+ * Implements functionality for DoTimes Command
+ *
+ */
 public class DoTimes extends Command{
 	private static int numParams = 2;
+	/* (non-Javadoc)
+	 * @see commands.Command#execute(java.util.List, Turtle.Turtle)
+	 */
 	@Override
 	double execute(List<CommandNode> children, Turtle t){
 
@@ -29,6 +36,9 @@ public class DoTimes extends Command{
 		return retVal;	
 	}
 
+	/* (non-Javadoc)
+	 * @see commands.Command#getNumberOfParameters()
+	 */
 	@Override
 	int getNumberOfParameters() {
 		return numParams;

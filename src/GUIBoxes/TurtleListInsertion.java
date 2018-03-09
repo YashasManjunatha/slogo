@@ -5,6 +5,12 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * Object for the table of turtles for GUI.
+ * Dictates the vaules for each entry in the table.
+ * Provides methods to set and get the values in the table.
+ *
+ */
 public class TurtleListInsertion {
 	private BooleanProperty active = new SimpleBooleanProperty();
 	private StringProperty id = new SimpleStringProperty();
@@ -15,6 +21,17 @@ public class TurtleListInsertion {
 	private StringProperty pen_color = new SimpleStringProperty();
 	private StringProperty pen_thickness = new SimpleStringProperty();
 	
+	/**
+	 * Inserts a new data entry.
+	 * @param active boolean whether turtle is active
+	 * @param id id of turtle
+	 * @param xpos x position of turtle
+	 * @param ypos y position of turtle
+	 * @param heading heading of turtle
+	 * @param pen whether pen is up for turtle
+	 * @param pen_color pen color for turtle
+	 * @param pen_thickness pen thickness for turtle
+	 */
 	public TurtleListInsertion(boolean active, int id, double xpos, double ypos, double heading, boolean pen, 
 			String pen_color, double pen_thickness) {
 		this.setActive(active);

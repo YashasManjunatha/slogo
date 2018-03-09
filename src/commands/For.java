@@ -3,10 +3,17 @@ import java.util.List;
 
 import Turtle.Turtle;
 
+/**
+ * Implements functionality for For Command
+ *
+ */
 public class For extends Command{
 
   private static int numParams = 2;
   
+		/* (non-Javadoc)
+		 * @see commands.Command#execute(java.util.List, Turtle.Turtle)
+		 */
 		@Override
 		double execute(List<CommandNode> children, Turtle t){
 			
@@ -29,6 +36,9 @@ public class For extends Command{
 		return retVal;
 		}
 		
+	/* (non-Javadoc)
+	 * @see commands.Command#getNumberOfParameters()
+	 */
 	@Override
 	int getNumberOfParameters() {
 			return numParams;

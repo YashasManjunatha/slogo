@@ -13,6 +13,10 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Pane;
 
+/**
+ * Displays Table of Turtles in GUI
+ *
+ */
 public class TurtleViewTable extends TableView implements GUIBoxes{
 	private TableView table;
 	
