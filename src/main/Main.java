@@ -46,7 +46,8 @@ public class Main extends Application {
 	}
 
 	/**
-	 * initializes the group and scene. Creates a tabpane which is used for multiple workspaces
+	 * initializes the group and scene. Creates a tabpane which is used for multiple
+	 * workspaces
 	 */
 	private void initialize() {
 		root = new Group();
@@ -63,6 +64,8 @@ public class Main extends Application {
 					}
 				});
 
+		setupHelpButton();
+
 		setupNewTabButton();
 
 		Tab firstTab = new Tab("Workspace " + workSpaceNum);
@@ -77,6 +80,32 @@ public class Main extends Application {
 
 	}
 
+	/**
+	 * The first tab is changed to a help button. When pressed, two tabs of commands
+	 * are opened in the local machine's default browser
+	 */
+	private void setupHelpButton() {
+		Tab newTabButton = new Tab();
+		Button newTab = new Button("Press for Help");
+
+		newTab.setOnAction(event -> {
+			getHostServices()
+					.showDocument("https://www2.cs.duke.edu/courses/compsci308/current/assign/03_slogo/commands.php");
+			getHostServices().showDocument(
+					"https://www2.cs.duke.edu/courses/compsci308/current/assign/03_slogo/commands2_J2W.php");
+		});
+
+		newTabButton.setGraphic(newTab);
+		newTabButton.setClosable(false);
+
+		tabPane.getTabs().add(newTabButton);
+
+	}
+
+	/**
+	 * the second tab is changed into a new tab button, which creates a new tab upon
+	 * press
+	 */
 	private void setupNewTabButton() {
 		Tab newTabButton = new Tab();
 		Button newTab = new Button("New Tab");
@@ -97,6 +126,9 @@ public class Main extends Application {
 
 	}
 
+	/**
+	 * sets up stage
+	 */
 	private void setStage() {
 		myStage.setScene(myScene);
 		myStage.setTitle(title);
