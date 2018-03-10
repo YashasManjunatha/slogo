@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Turtle.Turtle;
-
+/**
+ * It is a Object that is used as a node in the tree that parser makes from
+ * the inputed text in the Command window
+ */
 public class CommandNode {
 	private List<CommandNode> myChildren;
 	private CommandObject myCommand;
