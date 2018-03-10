@@ -33,9 +33,7 @@ public class Turtle implements TurtleInterface {
 	private double prevXPos;
 	private double prevYPos;
 	private double penThickness;
-	
-	private boolean isActive = true;
-	
+		
 	private List<Double[]> pathList = new ArrayList<>();
 
 	private List<Color> penColorList = new ArrayList<>();
@@ -409,12 +407,23 @@ public class Turtle implements TurtleInterface {
 	}
 	
 	public boolean isActive() {
-		return isActive;
+		return active;
 	}
 	
 	public List<Turtle> getTurtleFriends() {
 		return screen.getTurtleFriends();
 	}
-			
+		
+	public void setActive() {
+		active = true;
+	}
+	
+	public void setInactive() {
+		active = false;
+	}
+	
+	public void updateTurtle() {
+		screen.updateBox();
+	}
 	
 }
