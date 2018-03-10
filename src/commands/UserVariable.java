@@ -33,7 +33,7 @@ public class UserVariable extends Command{
 	/* (non-Javadoc)
 	 * @see commands.Command#setValue(double)
 	 */
-	@Override
+	//@Override
 	public void setValue(double x) {
 		if(myMap.containsKey(myName)) {
 			double y =myMap.get(myName);

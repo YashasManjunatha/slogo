@@ -7,6 +7,14 @@ import java.util.Map;
 import java.util.Scanner;
 
 import GUIBoxes.ErrorBox;
+/**
+ * This class handles all of the parsing of the text entered by the user
+ * Once the run button is pressed, a new Command object is created which creates a Parser and calls parse on the text it was given
+ * The parser generates an expression tree of CommandObjects corresponding to the input
+ * The tree is then executed from the bottom up 
+ * @author milestodzo
+ *
+ */
 
 public class Parser extends ParserObject{
 	
@@ -25,14 +33,24 @@ public class Parser extends ParserObject{
 		commandHandler = new CommandToClassPropertyHandler(language);
 		methodHandler = new ClassToMethodPropertyHandler();
 	}
+	/**
+	 * Creates initial superNode, instantiates Scanner, calls generateTree to build expression tree for text
+	 * @param text: The text to be parsed
+	 * @return CommandNode that is the root of the expression tree for the text
+	 */
 	@Override
-	public CommandNode parse(String text) throws InvalidCommandException{
+	CommandNode parse(String text) throws InvalidCommandException{
 		CommandNode superNode = new CommandNode(new Command());
 		scan = new Scanner(text);
 		generateTree(superNode);
 		return superNode;
 	}
-
+	/**
+	 * Generates expression tree by giving each command as many children as it has parameters
+	 * Builds recursively
+	 * @param root
+	 * @throws InvalidCommandException
+	 */
 	private void generateTree(CommandNode root) throws InvalidCommandException{
 		int paramsFilled = 0;
 		while (scan.hasNext() && paramsFilled < root.getNumberOfParameters()) {
@@ -48,7 +66,13 @@ public class Parser extends ParserObject{
 			paramsFilled++;
 		}
 	}
-
+	/**
+	 * If a special symbol is read, the specific CommandObject is generated and put in the CommandNode
+	 * Otherwise, reflection is used to first determine the class which the text corresponds to and then the generate method which the class corresponds to
+	 * @param commandText
+	 * @return CommandNode with CommandObject value of the commandText
+	 * @throws InvalidCommandException
+	 */
 	private CommandNode generateCommandNode(String commandText) throws InvalidCommandException {
 		try {
 			double parsedDouble = Double.parseDouble(commandText);
@@ -84,7 +108,12 @@ public class Parser extends ParserObject{
 		}
 		return null;
 	}
-
+	/**
+	 * Used to generate the CommandNode for user defined commands.
+	 * The tree for the command is not actually built until it is time to execute the method (helpful for recursion). The parameters are parsed to form a tree and they are passed as the arguments into the command.
+	 * @param commandText
+	 * @return
+	 */
 	private CommandNode generateUserCommandNode(String commandText) {
 		scan.next(); //bypass "[" for paramaters
 		String next = scan.next();
@@ -105,7 +134,12 @@ public class Parser extends ParserObject{
 		newSuperNodeAdded = true;
 		return new CommandNode (userInstruction);
 	}
-
+	/**
+	 * When a bracket is seen parse all of its contents to form a tree from it which is then added to the bigger tree. This makes loops easy since the same tree can just be re-executed
+	 * @param commandText
+	 * @return
+	 * @throws InvalidCommandException
+	 */
 	private CommandNode generateBracketNode(String commandText) throws InvalidCommandException{
 		int bracketCount = 1;
 		String toBeParsed = "";
@@ -131,13 +165,21 @@ public class Parser extends ParserObject{
 		newSuperNodeAdded = true;
 		return bracketNode;
 	}
-	
+	/**
+	 * From the classNameToMethod.properties file, this method is found for commands which have no constructor
+	 * @param className
+	 * @return
+	 */
 	private CommandNode generateNoConstructorCommand(String className) {
 		Object classInstance = commandHandler.getClassInstance(className);
 		CommandObject generatedCommand = (CommandObject) classInstance;
 		return new CommandNode(generatedCommand);
 	}
-
+	/**
+	 * From the classNameToMethod.properties file, this method is invoked for instances of MakeUserInstruction
+	 * @param className
+	 * @return
+	 */
 	private CommandNode generateUserCommand(String className) {
 		String name = scan.next();
 		scan.next(); // pass by initial bracket "["
@@ -165,10 +207,14 @@ public class Parser extends ParserObject{
 		}
 		commands += next;
 		CommandNode userCommand = new CommandNode(new MakeUserInstruction(variables, commands, null, myLanguage, variableMap, userCommandMap));
-		userCommandMap.put(name, (Command)userCommand.getCommand());
+		userCommandMap.put(name.toLowerCase(), (Command)userCommand.getCommand());
 		return userCommand;
 	}
-
+	/**
+	 * From the classNameToMethod.properties file, this method is found commands which need access to the variableMap
+	 * @param className
+	 * @return
+	 */
 	private CommandNode generateVariableMapCommand(String className) {
 		return new CommandNode(new MakeVariable(scan.next(), variableMap));
 	}

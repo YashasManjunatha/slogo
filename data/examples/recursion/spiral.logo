@@ -1,11 +1,11 @@
 to spiral [ :len ]
 [
-  if less? :len 200
+  if lessp :len 200
   [
     fd :len
     rt 89
-    spiral + :len 3
+    spiral [sum :len 3 ]
   ]
 ]
 
-spiral 10
+spiral [ 10 ]

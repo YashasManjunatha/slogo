@@ -5,6 +5,12 @@ import java.util.Map;
 
 import Turtle.Turtle;
 
+/**
+ * This class handles the creation of user defined variables.
+ * @author milestodzo
+ *
+ */
+
 public class MakeVariable extends Command{
 
 	private int numberOfParameters = 1;

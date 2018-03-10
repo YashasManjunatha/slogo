@@ -5,7 +5,11 @@ import java.util.Map;
 
 import GUIBoxes.ErrorBox;
 import Turtle.Turtle;
-
+/**
+ * This class handles the creation and execution of user defined commands.
+ * @author milestodzo
+ *
+ */
 public class MakeUserInstruction extends Command{
 	private String myCommandText;
 	private List<String> myParameters;
