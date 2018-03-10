@@ -9,8 +9,7 @@ public class ID extends Command{
 
 	@Override
 	double execute(List<CommandNode> children, Turtle t){
-		double x=0;//t.getID();
-		return x;
+		return t.getID();	
 	}
 
 	@Override
