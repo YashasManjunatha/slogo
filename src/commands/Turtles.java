@@ -4,9 +4,12 @@ import java.util.List;
 
 import Turtle.Turtle;
 
-
+/**
+ * Implements functionality for TURTLES command, returns total number of turtles
+ *
+ */
 public class Turtles extends Command {
-	private int numberOfParameters = 0;
+	private final int numberOfParameters = 0;
 
 	@Override
 	double execute(List<CommandNode> children, Turtle t){

@@ -1,14 +1,18 @@
 package commands;
 import java.util.List;
 import Turtle.Turtle;
-
+/**
+ * Implements functionality for SetPenColor Command
+ *
+ */
 public class SetPenColor extends Command {
-private int numberOfParameters = 1;
+private final int numberOfParameters = 1;
 
 	
 	  @Override
 	   double execute(List<CommandNode> children, Turtle t){
-	       double index = children.get(0).execute(t);
+	       int index =(int) children.get(0).execute(t);
+	       t.changePenColorIndex(index);
 	       //action here: set color of the pen o that represented by index
 		   return index;
 	   }

@@ -8,7 +8,7 @@ import Turtle.Turtle;
  *
  */
 public class Product extends Command {
-	private int numberOfParameters = 2;
+	private final int numberOfParameters = 2;
 
 	  /* (non-Javadoc)
 	 * @see commands.Command#execute(java.util.List, Turtle.Turtle)

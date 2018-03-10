@@ -5,7 +5,7 @@ import java.util.List;
 import Turtle.Turtle;
 
 public class GetShape extends Command{
-	private int numberOfParameters = 0;
+	private final int numberOfParameters = 0;
 
 	@Override
 	double execute(List<CommandNode> children, Turtle t){

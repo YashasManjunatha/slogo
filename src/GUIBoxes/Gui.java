@@ -143,8 +143,8 @@ public class Gui {
 		GUIProperties.put("turnRightButton", readResourceFile("turnRightButton"));
 		GUIProperties.put("turnLeftButton", readResourceFile("turnLeftButton"));
 		
-		GUIProperties.put("saveButton", readResourceFile("saveButton"));
-		GUIProperties.put("importButton", readResourceFile("importButton"));
+//		GUIProperties.put("saveButton", readResourceFile("saveButton"));
+//		GUIProperties.put("importButton", readResourceFile("importButton"));
 
 
 		return GUIProperties;

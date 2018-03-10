@@ -9,7 +9,7 @@ import Turtle.Turtle;
  *
  */
 public class Repeat extends Command{
-	private static int numParams = 2;
+	private final int numParams = 2;
 
 	/* (non-Javadoc)
 	 * @see commands.Command#execute(java.util.List, Turtle.Turtle)

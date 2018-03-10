@@ -7,7 +7,10 @@ import java.util.Map;
 import java.util.Scanner;
 
 import GUIBoxes.ErrorBox;
-
+/**
+ * This is Parser that handles parsing of commands from strings into CommandNodes
+ *It makes a tree
+ */
 public class Parser extends ParserObject{
 	
 	private boolean newSuperNodeAdded; //need this to indicate if a super node has been added, otherwise all following nodes will be added to same leaf

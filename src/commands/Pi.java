@@ -9,7 +9,7 @@ import Turtle.Turtle;
  *
  */
 public class Pi extends Command{
-	private int numberOfParameters = 0;
+	private final int numberOfParameters = 0;
     double retVal = Math.PI;
     
 	/* (non-Javadoc)

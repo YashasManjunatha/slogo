@@ -8,7 +8,7 @@ import Turtle.Turtle;
  *
  */
 public class PenDown extends Command {
-	private int numberOfParameters = 0;
+	private final int numberOfParameters = 0;
 	private double myReturn=1;
 
 	  /* (non-Javadoc)
