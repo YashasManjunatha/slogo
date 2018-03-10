@@ -434,4 +434,8 @@ public class Turtle implements TurtleInterface {
 		}
 	}
 	
+	public void setID(int newID) {
+		id = newID;
+	}
+	
 }

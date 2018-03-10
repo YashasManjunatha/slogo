@@ -49,6 +49,8 @@ public class Gui {
 	private static final String MOVEBACKLABEL = "Move Back";
 	private static final String TURNRIGHTLABEL = "Turn\nRight";
 	private static final String TURNLEFTLABEL = "Turn\nLeft";
+	private static final String SAVELABEL = "Save Variables";
+	private static final String IMPORTLABEL = "Load Variables";
 	private final Map<String, double[]> GUIProperties = createMap();
 
 	private TextInputBox textInput;
@@ -140,6 +142,10 @@ public class Gui {
 		GUIProperties.put("moveBackButton", readResourceFile("moveBackButton"));
 		GUIProperties.put("turnRightButton", readResourceFile("turnRightButton"));
 		GUIProperties.put("turnLeftButton", readResourceFile("turnLeftButton"));
+		
+		GUIProperties.put("saveButton", readResourceFile("saveButton"));
+		GUIProperties.put("importButton", readResourceFile("importButton"));
+
 
 		return GUIProperties;
 	}
@@ -218,7 +224,10 @@ public class Gui {
 
 		new MoveButton(myPane, GUIProperties.get("turnLeftButton"), TURNLEFTLABEL, turtleList, languageComboBox,
 				turtleTable, TURNLEFTCOMMAND);
+		
+		new SaveButton(myPane, GUIProperties.get("saveButton"), SAVELABEL,  turtleList, variableMap, commandMap);
 
+		new ImportButton(myPane, GUIProperties.get("turnLeftButton"), SAVELABEL,  turtleList, variableMap, commandMap, myStage, varTable, funcTable);
 	}
 
 	/**
