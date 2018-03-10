@@ -3,9 +3,13 @@ package commands;
 import java.util.List;
 
 import Turtle.Turtle;
-
+/**
+ * We did not actually implement this on the front end since we did not know
+ * what the shape means in this sense, but the command is made if it needs to be
+ * updated in the future
+ */
 public class SetShape extends Command {
-	private int numberOfParameters = 1;
+	private final int numberOfParameters = 1;
 
 	
 	  @Override

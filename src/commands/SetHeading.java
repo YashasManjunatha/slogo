@@ -6,10 +6,10 @@ import Turtle.Turtle;
 
 /**
  * Implements functionality for SetHeading Command
- *
+ *  Stefani Vukajlovic
  */
 public class SetHeading extends Command {
-	private int numberOfParameters = 1;
+	private final int numberOfParameters = 1;
 	double step;
 	
 	  /* (non-Javadoc)

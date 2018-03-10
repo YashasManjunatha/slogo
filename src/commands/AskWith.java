@@ -6,7 +6,7 @@ import java.util.List;
 import Turtle.Turtle;
 
 public class AskWith extends Command{
-private static int numParams = 2;
+private final static int numParams = 2;
 
 	
 	@Override

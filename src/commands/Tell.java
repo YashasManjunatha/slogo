@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import Turtle.Turtle;
 
-
+/**
+ * Implements functionality for Tell Command
+ *
+ */
 public class Tell extends Command{
 
-	private static int numParams = 1;
+	private final static int numParams = 1;
 
 
 	@Override

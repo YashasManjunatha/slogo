@@ -8,7 +8,7 @@ import Turtle.Turtle;
  *
  */
 public class Right extends Command {
-	private int numberOfParameters = 1;
+	private final int numberOfParameters = 1;
 	double step=0;
 	
 	  /* (non-Javadoc)

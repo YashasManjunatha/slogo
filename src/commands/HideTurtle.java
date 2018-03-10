@@ -10,7 +10,7 @@ import Turtle.Turtle;
  */
 public class HideTurtle extends Command {
 
-	private int numberOfParameters = 0;
+	private final int numberOfParameters = 0;
 
 	/* (non-Javadoc)
 	 * @see commands.Command#execute(java.util.List, Turtle.Turtle)
