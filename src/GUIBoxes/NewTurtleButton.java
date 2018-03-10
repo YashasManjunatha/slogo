@@ -55,7 +55,7 @@ public class NewTurtleButton extends Buttons {
 			turtle.setID(idIterator);
 			idIterator += 1;
 			getThisTurtleList().add(turtle);
-			mainTurtleTable.addTurtle();
+			mainTurtleTable.addTurtle(turtle);
 
 		});
 	}
