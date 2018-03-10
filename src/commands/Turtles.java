@@ -10,8 +10,7 @@ public class Turtles extends Command {
 
 	@Override
 	double execute(List<CommandNode> children, Turtle t){
-		double x=0;//total number of turtles
-		return x;
+	
 	}
 
 	@Override

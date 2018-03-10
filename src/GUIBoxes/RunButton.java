@@ -19,7 +19,7 @@ public class RunButton extends Buttons {
 
 	private Map<String, Double> variableMap;
 	private Map<String, Command> userCommandMap;
-	private TurtleViewTable mainTurtleTable;
+	
 
 	public RunButton(Pane pane, GUIComboBox languageComboBox, double[] properties, String text, TextInputBox textInput,
 			PrevCommandList prevCommandBox, List<Turtle> turtleList, Map<String, Double> variables,
