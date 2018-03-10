@@ -210,6 +210,14 @@ public class Turtle implements TurtleInterface {
 	public double getX() {
 		return xPos;
 	}
+	
+	public double getStartingX() {
+		return startingX;
+	}
+	
+	public double getStartingY() {
+		return startingY;
+	}
 
 	/**
 	 * @return the path list of the pen
