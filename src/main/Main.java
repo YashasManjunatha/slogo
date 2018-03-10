@@ -13,6 +13,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
+/**
+ * Main class where Tabs are created
+ * 
+ * @author Calvin Ma
+ *
+ */
 public class Main extends Application {
 
 	private final static Paint BACKGROUND = Color.ANTIQUEWHITE;
@@ -30,12 +36,18 @@ public class Main extends Application {
 	// Additional setup for the main menu
 	private Scene myScene;
 
+	/**
+	 * initalizes the stage
+	 */
 	@Override
 	public void start(Stage stage) {
 		myStage = stage;
 		initialize();
 	}
 
+	/**
+	 * initializes the group and scene. Creates a tabpane which is used for multiple workspaces
+	 */
 	private void initialize() {
 		root = new Group();
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
@@ -68,7 +80,7 @@ public class Main extends Application {
 	private void setupNewTabButton() {
 		Tab newTabButton = new Tab();
 		Button newTab = new Button("New Tab");
-		
+
 		newTab.setOnAction(event -> {
 			Tab nextTab = new Tab("Workspace " + workSpaceNum);
 			workSpaceNum += 1;

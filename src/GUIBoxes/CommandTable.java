@@ -89,6 +89,10 @@ public class CommandTable extends UserDefTable {
 		getTable().setMaxHeight(height);
 		setupAction();
 	}
+	
+	/**
+	 * tried to setup clicking on row in tableview but was unsuccessful
+	 */
 
 	private void setupAction() {
 		
@@ -102,12 +106,6 @@ public class CommandTable extends UserDefTable {
 			});
 		
 	}
-
-	/**
-	 * when this function is called, the value column (the commands that variables
-	 * are defined as) will update based on the commandMap that contains the
-	 * variable with its corresponding command/commands
-	 */
 
 
 }

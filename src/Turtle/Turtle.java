@@ -42,8 +42,8 @@ public class Turtle implements TurtleInterface {
 
 	private List<Image> imageList = new ArrayList<>();
 
-	private Color[] penColors = { Color.WHITE, Color.BLACK, Color.RED, Color.DARKGREEN, Color.BLUE, Color.YELLOW, Color.PURPLE,
-			Color.ORANGE};
+	private Color[] penColors = { Color.WHITE, Color.BLACK, Color.RED, Color.DARKGREEN, Color.BLUE, Color.YELLOW,
+			Color.PURPLE, Color.ORANGE };
 
 	/**
 	 * Creates and Initialized a new Turtle
@@ -81,7 +81,7 @@ public class Turtle implements TurtleInterface {
 		screen.addTurtleToCanvas(image, xPos, yPos);
 		// pen = new Pen();
 		penShowing = true;
-		
+
 		orientationList.add((double) 0);
 		Double[] firstPath = { startingX, startingY, startingX, startingY };
 		pathList.add(firstPath);
@@ -219,10 +219,11 @@ public class Turtle implements TurtleInterface {
 	public double getRelativeX() {
 		return xPosRelative % screen.getWidth();
 	}
+
 	public double getStartingX() {
 		return startingX;
 	}
-	
+
 	public double getStartingY() {
 		return startingY;
 	}
@@ -349,7 +350,7 @@ public class Turtle implements TurtleInterface {
 	public void changePenColor(Color color) {
 		screen.changePenColor(color);
 	}
-	
+
 	public void changePenColorIndex(int index) {
 		try {
 			screen.changePenColor(penColors[index]);
@@ -357,7 +358,6 @@ public class Turtle implements TurtleInterface {
 			new ErrorBox("Color Index out of Bounds", "Please Choose a Number Between 0 and 7");
 		}
 	}
-	
 
 	/*
 	 * (non-Javadoc)
@@ -433,63 +433,91 @@ public class Turtle implements TurtleInterface {
 	public void undoMove() {
 
 		try {
-		if (!pathList.isEmpty()) {
-			pathList.remove(pathList.get(pathList.size() - 1));
-			orientationList.remove(orientationList.size() - 1);
-			orientation = orientationList.get(orientationList.size() - 1);
-			xPos = pathList.get(pathList.size() - 1)[2];
-			yPos = pathList.get(pathList.size() - 1)[3];
+			if (!pathList.isEmpty()) {
+				pathList.remove(pathList.get(pathList.size() - 1));
+				orientationList.remove(orientationList.size() - 1);
+				orientation = orientationList.get(orientationList.size() - 1);
+				xPos = pathList.get(pathList.size() - 1)[2];
+				yPos = pathList.get(pathList.size() - 1)[3];
 
-			screen.updateBox();
-		}
+				screen.updateBox();
+			}
 
-		else {
-			xPos = startingX;
-			yPos = startingY;
-			orientation = 0;
-			screen.updateBox();
+			else {
+				xPos = startingX;
+				yPos = startingY;
+				orientation = 0;
+				screen.updateBox();
 
-		}
-		}catch (Exception e){
+			}
+		} catch (Exception e) {
 			new ErrorBox("No More Previous Commands", "Please Stop Pressing Undo");
 		}
 
 	}
 
+	/**
+	 * 
+	 * @return returns pen thickness
+	 */
 	public double getPenThickness() {
 
 		return penThickness;
 	}
 
+	/**
+	 * sets the thickness of the pen to index
+	 * 
+	 * @param index
+	 */
 	public void setPenThickness(double index) {
 		penThickness = index;
 	}
 
+	/**
+	 * calls screen.updateBox which refreshes the screen
+	 */
 	public void updateOnScreen() {
 		screen.updateBox();
 
 	}
 
+	/**
+	 * 
+	 * @return returns whether the turtle is active
+	 */
 	public boolean isActive() {
 		return active;
 	}
 
+	/**
+	 * 
+	 * @return returns list of current turtles
+	 */
 	public List<Turtle> getTurtleFriends() {
 		return screen.getTurtleFriends();
 	}
 
+	/**
+	 * sets current turtle to active
+	 */
 	public void setActive() {
 		active = true;
 	}
 
+	/**
+	 * sets current turtle to inactive
+	 */
 	public void setInactive() {
 		active = false;
 	}
 
-	public void updateTurtle() {
-		screen.updateBox();
-	}
-
+	/**
+	 * adds a new turtle to the screen
+	 * 
+	 * @param x
+	 *            - number of turtles that will be added
+	 */
 	public void addFriends(Double x) {
 		for (int i = 0; i < x; i++) {
 			Turtle newTurtle = new Turtle(screen, image);
@@ -498,6 +526,10 @@ public class Turtle implements TurtleInterface {
 		}
 	}
 
+	/**
+	 * sets ID of current turtle
+	 * @param newID
+	 */
 	public void setID(int newID) {
 		id = newID;
 	}
