@@ -3,6 +3,12 @@ package GUIBoxes;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 
+/**
+ * Superclass for the various types of GUI objects that are comboboxes
+ * 
+ * @author Calvin Ma
+ *
+ */
 public class GUIComboBox {
 
 	private Pane thisPane;
@@ -10,6 +16,17 @@ public class GUIComboBox {
 
 	private String boxText;
 
+	/**
+	 * Constructor for the GUI boxes
+	 * 
+	 * @param pane
+	 *            - needed so that when a combobox is finished initializing, we
+	 *            can add to the Pane
+	 * @param properties
+	 *            - properties needed to setup the combobox, like positions
+	 * @param text
+	 *            - label of the combobox if applicable - usually prompt text
+	 */
 	public GUIComboBox(Pane pane, double[] properties, String text) {
 		thisPane = pane;
 		boxText = text;

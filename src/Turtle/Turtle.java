@@ -412,4 +412,9 @@ public class Turtle implements TurtleInterface {
 		return isActive;
 	}
 	
+	public List<Turtle> getTurtleFriends() {
+		return screen.getTurtleFriends();
+	}
+			
+	
 }
