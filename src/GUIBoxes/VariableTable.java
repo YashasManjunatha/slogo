@@ -22,8 +22,7 @@ public class VariableTable extends UserDefTable {
 	private final static int VALCOLWIDTH = 133;
 	private final static String VARCOLUMNLABEL = "VarName";
 	private final static String VALCOLUMNLABEL = "Value";
-	
-	
+
 	/**
 	 * Constructor for variable table - check superclass for unspecified parameters
 	 * 
@@ -43,7 +42,8 @@ public class VariableTable extends UserDefTable {
 	}
 
 	/**
-	 * sets up the column properties of the table
+	 * sets up the column properties of the table. Also sets up the edit properties
+	 * of each the value cells.
 	 */
 	private void setupTableColumns() {
 		getTable().setEditable(true);
@@ -61,6 +61,7 @@ public class VariableTable extends UserDefTable {
 		valCol.setCellValueFactory(new PropertyValueFactory(VALCOLUMNLABEL));
 
 		valCol.setCellFactory(TextFieldTableCell.<TableInsertion>forTableColumn());
+
 		valCol.setOnEditCommit((CellEditEvent<TableInsertion, String> t) -> {
 			System.out.println("HI "
 					+ ((TableInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).getValue());

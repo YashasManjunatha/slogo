@@ -22,7 +22,6 @@ public class RunButton extends Buttons {
 	private String language = "English";
 	private UserDefTable mainVarTable;
 	private UserDefTable mainFuncTable;
-	private TurtleViewTable mainTurtleTable;
 
 	private Map<String, Double> variableMap;
 	private Map<String, Command> userCommandMap;

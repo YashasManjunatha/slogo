@@ -83,6 +83,10 @@ public class ScreenBox implements GUIBoxes {
 		thisBackgroundColor = color;
 		updateBox();
 	}
+	
+	public List<Turtle> getTurtleFriends() {
+		return mainTurtleList;
+	}
 
 	/**
 	 * changes the color of the pen
