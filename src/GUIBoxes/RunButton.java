@@ -88,7 +88,7 @@ public class RunButton extends Buttons {
 
 			}
 			mainVarTable.updateVars(variableMap);
-			mainFuncTable.updateFuncs(userCommandMap);
+			mainFuncTable.updateCommandFuncs(userCommandMap);
 			mainTurtleTable.updateValues();
 
 			mainTextInput.clear();
