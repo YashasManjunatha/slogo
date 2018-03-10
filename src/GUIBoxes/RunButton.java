@@ -38,13 +38,14 @@ public class RunButton extends Buttons {
 	void setupAction() {
 
 		getButton().setOnAction(event -> {
-			System.out.println("before = " + variableMap);
 			mainPrevCommandBox.addText(mainTextInput.getText());
 			for (Turtle t : getThisTurtleList()) {
-				
-				language = ((LanguageCombo) mainLanguageComboBox).getLanguage();
-				Command test = new Command(mainTextInput.getText(), t, variableMap, userCommandMap, language);
-				test.execute();
+
+				if (t.isActive()) {
+					language = ((LanguageCombo) mainLanguageComboBox).getLanguage();
+					Command test = new Command(mainTextInput.getText(), t, variableMap, userCommandMap, language);
+					test.execute();
+				}
 
 			}
 			mainVarTable.updateVars(variableMap);
@@ -52,7 +53,6 @@ public class RunButton extends Buttons {
 			mainTurtleTable.updateValues();
 
 			mainTextInput.clear();
-			
 
 		});
 	}

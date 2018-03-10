@@ -1,6 +1,5 @@
 package GUIBoxes;
 
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class PenCombo extends GUIComboBox {
 
 	private final static ObservableList<String> options = FXCollections.observableArrayList("White", "Black", "Red",
 			"Dark Green", "Blue", "Yellow", "Purple", "Orange");
-	
+
 	private static final HashMap<String, Color> colorMap = createColorMap();
 
 	public PenCombo(Pane pane, List<Turtle> turtleList, double[] properties, String title) {
@@ -29,7 +28,7 @@ public class PenCombo extends GUIComboBox {
 		getCombobox().setItems(options);
 		setupAction();
 	}
-	
+
 	private static HashMap<String, Color> createColorMap() {
 		HashMap<String, Color> colorMap = new HashMap<>();
 		// first index = xPos, second = yPos, third = width, fourth = length
@@ -41,7 +40,7 @@ public class PenCombo extends GUIComboBox {
 		colorMap.put("Yellow", Color.YELLOW);
 		colorMap.put("Purple", Color.PURPLE);
 		colorMap.put("Orange", Color.ORANGE);
-		
+
 		return colorMap;
 	}
 
@@ -50,7 +49,9 @@ public class PenCombo extends GUIComboBox {
 			@Override
 			public void changed(ObservableValue ov, String t, String t1) {
 				for (Turtle turt : thisTurtleList) {
-		        	turt.changePenColor(colorMap.get(t1));
+					if (turt.isActive()) {
+						turt.changePenColor(colorMap.get(t1));
+					}
 				}
 
 			}

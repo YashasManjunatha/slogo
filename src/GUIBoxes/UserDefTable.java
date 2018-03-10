@@ -14,7 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Pane;
 
-public class UserDefTable implements GUIBoxes {
+public class UserDefTable {
 
 	private TableView table;
 
@@ -41,11 +41,6 @@ public class UserDefTable implements GUIBoxes {
 		getTable().setMaxHeight(height);
 	}
 
-	public void updateBox() {
-//		root.getChildren().remove(table);
-//		root.getChildren().add(table);
-	}
-
 	public void updateVars(Map<String, Double> variableMap) {
 		List<TableInsertion> insertionList = new ArrayList<>();
 		for (String key : variableMap.keySet()) {
@@ -56,34 +51,11 @@ public class UserDefTable implements GUIBoxes {
 		
 	}
 	
-	private void setupTableColumns() {
-		getTable().setEditable(true);
-		TableColumn<TableInsertion, String> nameCol = new TableColumn(getTableType());
-		nameCol.setCellValueFactory(new PropertyValueFactory("VarName"));
-		nameCol.setMinWidth(NAMECOLWIDTH);
-		nameCol.setMaxWidth(NAMECOLWIDTH);
-		nameCol.setResizable(false);
-
-		TableColumn<TableInsertion, String> valCol = new TableColumn("Value");
-		valCol.setMinWidth(VALCOLWIDTH);
-		valCol.setResizable(false);
-		valCol.setEditable(true);
-
-		valCol.setCellValueFactory(new PropertyValueFactory("Value"));
-
-		
-
-//		ObservableList<TableInsertion> data1 = FXCollections.observableArrayList(new TableInsertion("x", "90"), new TableInsertion("x", "180"));
-//		table.setItems(data1);
-
-		getTable().getColumns().addAll(nameCol, valCol);
-	}
 
 	public void updateFuncs(Map<String, Command> userCommandMap) {
 		List<TableInsertion> insertionList = new ArrayList<>();
 		for (String key : userCommandMap.keySet()) {
 			MakeUserInstruction userCommand = (MakeUserInstruction) userCommandMap.get(key);
-			System.out.println("ojipij" +  userCommand.toString());
 			insertionList.add(new TableInsertion(key, userCommand.toString()));
 		}
 		ObservableList<TableInsertion> finalList = FXCollections.observableArrayList(insertionList);

@@ -20,12 +20,14 @@ public class PrevCommandList extends ListView {
 	private TextInputBox mainTextInput;
 	private List<Turtle> mainTurtleList;
 	private LanguageCombo mainLanguageComboBox;
+	private TurtleViewTable mainTurtleTable;
 
 	private Map<String, Double> variableMap;
 	private Map<String, Command> commandMap;
 
 	public PrevCommandList(Pane pane, double[] properties, TextInputBox textInput, List<Turtle> turtleList,
-			Map<String, Double> variables, Map<String, Command> commands, GUIComboBox languageComboBox) {
+			Map<String, Double> variables, Map<String, Command> commands, GUIComboBox languageComboBox,
+			TurtleViewTable turtleTable) {
 		list = new ListView<>();
 		mainTextInput = textInput;
 		thisPane = pane;
@@ -35,6 +37,7 @@ public class PrevCommandList extends ListView {
 		variableMap = variables;
 		commandMap = commands;
 		mainLanguageComboBox = (LanguageCombo) languageComboBox;
+		mainTurtleTable = turtleTable;
 	}
 
 	private void setupList(double xPos, double yPos, double width, double height) {
@@ -50,15 +53,20 @@ public class PrevCommandList extends ListView {
 
 				if (click.getClickCount() == 2) {
 					for (Turtle t : mainTurtleList) {
-						String currentItemSelected = list.getSelectionModel().getSelectedItem();
-						mainTextInput.setText(currentItemSelected);
-						Command test = new Command(currentItemSelected, t, variableMap, commandMap,
-								mainLanguageComboBox.getLanguage());
-						test.execute();
+						if (t.isActive()) {
+							String currentItemSelected = list.getSelectionModel().getSelectedItem();
+							mainTextInput.setText(currentItemSelected);
+							Command test = new Command(currentItemSelected, t, variableMap, commandMap,
+									mainLanguageComboBox.getLanguage());
+							test.execute();
+						}
 					}
 
 				}
+
+				mainTurtleTable.updateValues();
 			}
+
 		});
 	}
 

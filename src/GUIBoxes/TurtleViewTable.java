@@ -13,7 +13,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Pane;
 
-public class TurtleViewTable extends TableView implements GUIBoxes{
+public class TurtleViewTable extends TableView{
 	private TableView table;
 	
 	private Pane thisPane;
@@ -136,12 +136,6 @@ public class TurtleViewTable extends TableView implements GUIBoxes{
 		table.setMaxHeight(height);
 	}
 	
-	@Override
-	public void updateBox() {
-		thisPane.getChildren().remove(table);
-		thisPane.getChildren().add(table);
-	}
-
 	public void addTurtle() {
 		
 		data.add(new TurtleListInsertion(true, iteratingID, 0.0, 0.0, 0.0, true, "TEMP", 3.0));
@@ -154,7 +148,6 @@ public class TurtleViewTable extends TableView implements GUIBoxes{
 	public void updateValues() {
 		
 		data.clear();
-		System.out.println("UPDATING");
 		iteratingID = 1;
 		for (Turtle t : turtles) {
 			TurtleListInsertion newInsertion = new TurtleListInsertion(true, iteratingID, t.getRelativeX(), t.getRelativeY(), t.getOrientation(), t.getPenDown(), "TEMP", t.getPenThickness());

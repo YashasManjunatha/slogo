@@ -16,6 +16,8 @@ public class CommandTable extends UserDefTable {
 
 	private final static int NAMECOLWIDTH = 65;
 	private final static int VALCOLWIDTH = 133;
+	private final static String VARCOLUMNLABEL = "VarName";
+	private final static String VALCOLUMNLABEL = "Value";
 	
 	public CommandTable(Pane pane, double[] properties, String type) {
 		super(pane, properties, type);
@@ -29,13 +31,13 @@ public class CommandTable extends UserDefTable {
 	private void setupTableColumns() {
 		getTable().setEditable(true);
 		TableColumn<TableInsertion, String> nameCol = new TableColumn(getTableType());
-		nameCol.setCellValueFactory(new PropertyValueFactory("VarName"));
+		nameCol.setCellValueFactory(new PropertyValueFactory(VARCOLUMNLABEL));
 		nameCol.setMinWidth(NAMECOLWIDTH);
 		nameCol.setMaxWidth(NAMECOLWIDTH);
 		nameCol.setResizable(false);
 
-		TableColumn<TableInsertion, String> valCol = new TableColumn("Value");
-		valCol.setCellValueFactory(new PropertyValueFactory("Value"));
+		TableColumn<TableInsertion, String> valCol = new TableColumn(VALCOLUMNLABEL);
+		valCol.setCellValueFactory(new PropertyValueFactory(VALCOLUMNLABEL));
 		valCol.setMinWidth(VALCOLWIDTH);
 		valCol.setResizable(false);
 		valCol.setEditable(false);
@@ -57,10 +59,8 @@ public class CommandTable extends UserDefTable {
 
 	public void updateFuncs(Map<String, Command> userCommandMap) {
 		List<TableInsertion> insertionList = new ArrayList<>();
-		System.out.println("ASDFOAUSHOFIASHDOIH");
 		for (String key : userCommandMap.keySet()) {
 			MakeUserInstruction userCommand = (MakeUserInstruction) userCommandMap.get(key);
-			System.out.println("ojipij" +  userCommand.toString());
 			insertionList.add(new TableInsertion(key, userCommand.toString()));
 		}
 		ObservableList<TableInsertion> finalList = FXCollections.observableArrayList(insertionList);
