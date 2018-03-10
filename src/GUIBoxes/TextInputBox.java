@@ -4,7 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 
-public class TextInputBox implements GUIBoxes {
+public class TextInputBox {
 
 	private TextArea textInput;
 	private Pane thisPane;
@@ -43,10 +43,5 @@ public class TextInputBox implements GUIBoxes {
 		textInput.setText(currentItemSelected);		
 	}
 
-	@Override
-	public void updateBox() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

@@ -3,7 +3,7 @@ package GUIBoxes;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 
-public class GUIComboBox implements GUIBoxes {
+public class GUIComboBox {
 
 	private Pane thisPane;
 	private ComboBox<String> combobox;
@@ -24,13 +24,6 @@ public class GUIComboBox implements GUIBoxes {
 		getCombobox().setLayoutY(yPos);
 		getCombobox().setMinWidth(width);
 		getCombobox().setMinHeight(height);
-
-	}
-
-	@Override
-	public void updateBox() {
-		//thisRoot.getChildren().remove(getCombobox());
-		//thisRoot.getChildren().add(getCombobox());
 
 	}
 

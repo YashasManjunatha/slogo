@@ -28,8 +28,14 @@ public class Turtle implements TurtleInterface {
 	private double orientation = 0;
 	private double xPos;
 	private double yPos;
+	private double xPosRelative;
+	private double yPosRelative;
 	private double prevXPos;
 	private double prevYPos;
+	private double penThickness;
+	
+	private boolean isActive = true;
+	
 	private List<Double[]> pathList = new ArrayList<>();
 
 	private List<Color> penColorList = new ArrayList<>();
@@ -63,6 +69,7 @@ public class Turtle implements TurtleInterface {
 		yPos = startingY;
 		prevXPos = startingX;
 		prevYPos = startingY;
+		penThickness = 3.0;
 		screen.addTurtleToCanvas(image, xPos, yPos);
 		//pen = new Pen();
 		penShowing = true;
@@ -90,20 +97,14 @@ public class Turtle implements TurtleInterface {
 
 		xPos = xPos + moveLength * Math.sin(radians);
 		yPos = yPos - moveLength * Math.cos(radians);
+		
+		xPosRelative = xPosRelative + moveLength * Math.sin(radians);
+		yPosRelative = yPosRelative + moveLength * Math.cos(radians);
 
 		
 		checkOffScreenAndDraw();
 
 		screen.updateBox();
-
-		System.out.println("prevXPos = " + prevXPos);
-		System.out.println("prevXPos = " + prevXPos);
-
-		// if (penShowing) {
-		// screen.draw(prevX + image.getWidth() / 2, prevY + image.getHeight() / 2,
-		// xPos + image.getWidth() / 2,
-		// yPos + startingY + image.getHeight() / 2);
-		// }
 
 		return moveLength;
 
@@ -161,16 +162,6 @@ public class Turtle implements TurtleInterface {
 	 */
 	private void addPath(double prevXPos, double prevYPos, double xPos, double yPos) {
 
-		System.out.println("PATHLIST = " + pathList);
-		System.out.println("ORIENTATION = " + orientationList);
-		System.out.println("PENCOLORS = " + penColorList);
-
-
-		System.out.println(prevXPos);
-		System.out.println(prevYPos);
-		System.out.println(xPos);
-		System.out.println(yPos);
-		System.out.println(pathList);
 		if (penShowing) {
 			Double[] newPath = { prevXPos, prevYPos, xPos, yPos };
 			pathList.add(newPath);
@@ -188,11 +179,6 @@ public class Turtle implements TurtleInterface {
 
 		orientation = orientation + degrees;
 
-		System.out.println("PATHLIST = " + pathList);
-		System.out.println("ORIENTATION = " + orientationList);
-		System.out.println("PENCOLORS = " + penColorList);
-
-
 		Double[] newPath = { prevXPos, prevYPos, xPos, yPos };
 		pathList.add(newPath);
 		penColorList.add(screen.getPenColor());
@@ -209,6 +195,10 @@ public class Turtle implements TurtleInterface {
 	@Override
 	public double getX() {
 		return xPos;
+	}
+	
+	public double getRelativeX() {
+		return xPosRelative%screen.getWidth();
 	}
 
 	/**
@@ -245,6 +235,10 @@ public class Turtle implements TurtleInterface {
 	@Override
 	public double getY() {
 		return yPos;
+	}
+	
+	public double getRelativeY() {
+		return yPosRelative%screen.getHeight();
 	}
 
 	/* (non-Javadoc)
@@ -322,16 +316,12 @@ public class Turtle implements TurtleInterface {
 	@Override
 	public double moveTo(double x, double y) {
 
-		System.out.println(pathList);
-
 		prevXPos = xPos;
 		prevYPos = yPos;
 		xPos = x + startingX;
 		yPos = y + startingY;
 
 		checkOffScreenAndDraw();
-
-		System.out.println(pathList);
 
 		screen.updateBox();
 
@@ -344,6 +334,8 @@ public class Turtle implements TurtleInterface {
 	 */
 	public double clearScreen() {
 		double dist = this.moveTo(0, 0);
+		xPos = startingX;
+		yPos = startingY;
 		orientation = 0;
 		pathList.clear();
 		screen.updateBox();
@@ -386,12 +378,8 @@ public class Turtle implements TurtleInterface {
 	 */
 	public void undoMove() {
 
-		System.out.println("PATHLIST = " + pathList);
-		System.out.println("ORIENTATION = " + orientationList);
-
 		if (!pathList.isEmpty()) {
 			pathList.remove(pathList.get(pathList.size() - 1));
-			System.out.println("oList " + orientationList);
 			orientationList.remove(orientationList.size() - 1);
 			orientation = orientationList.get(orientationList.size() - 1);
 			xPos = pathList.get(pathList.size() - 1)[2];
@@ -409,4 +397,19 @@ public class Turtle implements TurtleInterface {
 		}
 
 	}
+
+	public double getPenThickness() {
+		
+		return penThickness;
+	}
+
+	public void updateOnScreen() {
+		screen.updateBox();
+		
+	}
+	
+	public boolean isActive() {
+		return isActive;
+	}
+	
 }
