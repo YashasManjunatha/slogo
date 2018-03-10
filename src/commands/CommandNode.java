@@ -9,7 +9,7 @@ import Turtle.Turtle;
  * Each holds the a CommandObject and a List<CommandNode> that are its children (the command's parameters)
  * @author milestodzo
  *
- */
+*/
 public class CommandNode {
 	private List<CommandNode> myChildren;
 	private CommandObject myCommand;

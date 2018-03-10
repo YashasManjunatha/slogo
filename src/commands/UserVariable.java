@@ -1,12 +1,16 @@
+
 package commands;
 
 import java.util.List;
 import java.util.Map;
 
 import Turtle.Turtle;
-
+/**
+ * Implements functionality for making user defined variables
+ *
+ */
 public class UserVariable extends Command{
-	private int numberOfParameters = 0;
+	private final int numberOfParameters = 0;
 	private Map<String, Double> myMap;
 	private String myName;
 	

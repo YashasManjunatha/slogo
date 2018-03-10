@@ -21,6 +21,7 @@ public class Command extends CommandObject{
 		myText = text;
 		myParser = new Parser(variables, commands, language);
 		myTurtle = turtle;
+		SaveCurrentStates s = new SaveCurrentStates(variables,commands);
 		try {
 			superNode = myParser.parse(text);
 		}
@@ -28,7 +29,7 @@ public class Command extends CommandObject{
 			new ErrorBox("Invalid Command", "Please Write a Valid Command");
 		}
 	}
-   
+	
 	public Command() {
 	}
 	/**

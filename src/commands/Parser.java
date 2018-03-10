@@ -15,7 +15,6 @@ import GUIBoxes.ErrorBox;
  * @author milestodzo
  *
  */
-
 public class Parser extends ParserObject{
 	
 	private boolean newSuperNodeAdded; //need this to indicate if a super node has been added, otherwise all following nodes will be added to same leaf

@@ -8,17 +8,20 @@ import Turtle.Turtle;
  *
  */
 public class Forward extends Command{
-     private int numberOfParameters = 1;
-
+     private final int numberOfParameters = 1;
+      double step =0;
    /* (non-Javadoc)
  * @see commands.Command#execute(java.util.List, Turtle.Turtle)
  */
 @Override
    double execute(List<CommandNode> children, Turtle t){
+	
+	if(t.isActive()) {
 	   CommandNode child = children.get(0);
 	   double step = child.execute(t);
 	   System.out.println(t);
 	   t.move(step);
+	}
 	   return step;
    }
 

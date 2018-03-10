@@ -16,18 +16,24 @@ import javafx.scene.paint.Color;
  */
 public class Turtle implements TurtleInterface {
 
+	private boolean active;
+	private int id = 1;
 	private ScreenBox screen;
 	private Image image;
 	private boolean turtleShowing;
-	//private Pen pen;
+	// private Pen pen;
 	private boolean penShowing;
 	private double startingX;
 	private double startingY;
 	private double orientation = 0;
 	private double xPos;
 	private double yPos;
+	private double xPosRelative;
+	private double yPosRelative;
 	private double prevXPos;
 	private double prevYPos;
+	private double penThickness;
+
 	private List<Double[]> pathList = new ArrayList<>();
 
 	private List<Color> penColorList = new ArrayList<>();
@@ -36,10 +42,16 @@ public class Turtle implements TurtleInterface {
 
 	private List<Image> imageList = new ArrayList<>();
 
+	private Color[] penColors = { Color.WHITE, Color.BLACK, Color.RED, Color.DARKGREEN, Color.BLUE, Color.YELLOW,
+			Color.PURPLE, Color.ORANGE };
+
 	/**
 	 * Creates and Initialized a new Turtle
-	 * @param turtle_screen the screen the turtle is displayed
-	 * @param turtle_image image used for the turtle
+	 * 
+	 * @param turtle_screen
+	 *            the screen the turtle is displayed
+	 * @param turtle_image
+	 *            image used for the turtle
 	 */
 	public Turtle(ScreenBox turtle_screen, Image turtle_image) {
 		screen = turtle_screen;
@@ -48,11 +60,16 @@ public class Turtle implements TurtleInterface {
 		initalizeTurtle();
 	}
 
+	public Turtle() {
+
+	}
+
 	/**
 	 * Initializes the turtle
 	 */
 	private void initalizeTurtle() {
 		// scaleImage();
+		active = true;
 		turtleShowing = true;
 		startingX = screen.getWidth() / 2;
 		startingY = screen.getHeight() / 2;
@@ -60,9 +77,11 @@ public class Turtle implements TurtleInterface {
 		yPos = startingY;
 		prevXPos = startingX;
 		prevYPos = startingY;
+		penThickness = 3.0;
 		screen.addTurtleToCanvas(image, xPos, yPos);
-		//pen = new Pen();
+		// pen = new Pen();
 		penShowing = true;
+
 		orientationList.add((double) 0);
 		Double[] firstPath = { startingX, startingY, startingX, startingY };
 		pathList.add(firstPath);
@@ -70,7 +89,9 @@ public class Turtle implements TurtleInterface {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see Turtle.TurtleInterface#move(double)
 	 */
 	@Override
@@ -88,24 +109,17 @@ public class Turtle implements TurtleInterface {
 		xPos = xPos + moveLength * Math.sin(radians);
 		yPos = yPos - moveLength * Math.cos(radians);
 
-		
+		xPosRelative = xPosRelative + moveLength * Math.sin(radians);
+		yPosRelative = yPosRelative + moveLength * Math.cos(radians);
+
 		checkOffScreenAndDraw();
 
 		screen.updateBox();
 
-		System.out.println("prevXPos = " + prevXPos);
-		System.out.println("prevXPos = " + prevXPos);
-
-		// if (penShowing) {
-		// screen.draw(prevX + image.getWidth() / 2, prevY + image.getHeight() / 2,
-		// xPos + image.getWidth() / 2,
-		// yPos + startingY + image.getHeight() / 2);
-		// }
-
 		return moveLength;
 
 	}
-	
+
 	/**
 	 * Makes screen toroidal
 	 */
@@ -122,7 +136,7 @@ public class Turtle implements TurtleInterface {
 		}
 		if (yPos > screen.getHeight()) {
 			offScreen = true;
-			while(yPos > screen.getHeight()) {
+			while (yPos > screen.getHeight()) {
 				yPos -= screen.getHeight();
 				tempYPos = tempYPos - screen.getHeight();
 			}
@@ -151,23 +165,18 @@ public class Turtle implements TurtleInterface {
 
 	/**
 	 * Draws a path using the pen
-	 * @param prevXPos previous x position
-	 * @param prevYPos previous y position
-	 * @param xPos current x position
-	 * @param yPos current y position
+	 * 
+	 * @param prevXPos
+	 *            previous x position
+	 * @param prevYPos
+	 *            previous y position
+	 * @param xPos
+	 *            current x position
+	 * @param yPos
+	 *            current y position
 	 */
 	private void addPath(double prevXPos, double prevYPos, double xPos, double yPos) {
 
-		System.out.println("PATHLIST = " + pathList);
-		System.out.println("ORIENTATION = " + orientationList);
-		System.out.println("PENCOLORS = " + penColorList);
-
-
-		System.out.println(prevXPos);
-		System.out.println(prevYPos);
-		System.out.println(xPos);
-		System.out.println(yPos);
-		System.out.println(pathList);
 		if (penShowing) {
 			Double[] newPath = { prevXPos, prevYPos, xPos, yPos };
 			pathList.add(newPath);
@@ -177,18 +186,15 @@ public class Turtle implements TurtleInterface {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see Turtle.TurtleInterface#turn(double)
 	 */
 	@Override
 	public double turn(double degrees) {
 
 		orientation = orientation + degrees;
-
-		System.out.println("PATHLIST = " + pathList);
-		System.out.println("ORIENTATION = " + orientationList);
-		System.out.println("PENCOLORS = " + penColorList);
-
 
 		Double[] newPath = { prevXPos, prevYPos, xPos, yPos };
 		pathList.add(newPath);
@@ -200,12 +206,26 @@ public class Turtle implements TurtleInterface {
 		return degrees;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see Turtle.TurtleInterface#getX()
 	 */
 	@Override
 	public double getX() {
 		return xPos;
+	}
+
+	public double getRelativeX() {
+		return xPosRelative % screen.getWidth();
+	}
+
+	public double getStartingX() {
+		return startingX;
+	}
+
+	public double getStartingY() {
+		return startingY;
 	}
 
 	/**
@@ -236,7 +256,9 @@ public class Turtle implements TurtleInterface {
 		return prevYPos;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see Turtle.TurtleInterface#getY()
 	 */
 	@Override
@@ -244,7 +266,13 @@ public class Turtle implements TurtleInterface {
 		return yPos;
 	}
 
-	/* (non-Javadoc)
+	public double getRelativeY() {
+		return yPosRelative % screen.getHeight();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see Turtle.TurtleInterface#getOrientation()
 	 */
 	@Override
@@ -252,7 +280,9 @@ public class Turtle implements TurtleInterface {
 		return orientation % 360;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see Turtle.TurtleInterface#setPenDown(boolean)
 	 */
 	@Override
@@ -268,7 +298,9 @@ public class Turtle implements TurtleInterface {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see Turtle.TurtleInterface#getPenDown()
 	 */
 	@Override
@@ -276,7 +308,9 @@ public class Turtle implements TurtleInterface {
 		return penShowing;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see Turtle.TurtleInterface#setTurtleShowing(boolean)
 	 */
 	@Override
@@ -290,7 +324,9 @@ public class Turtle implements TurtleInterface {
 		screen.updateBox();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see Turtle.TurtleInterface#getTurtleShowing()
 	 */
 	@Override
@@ -307,19 +343,29 @@ public class Turtle implements TurtleInterface {
 
 	/**
 	 * Changes the pen color
-	 * @param color new pen color
+	 * 
+	 * @param color
+	 *            new pen color
 	 */
 	public void changePenColor(Color color) {
 		screen.changePenColor(color);
 	}
 
-	/* (non-Javadoc)
+	public void changePenColorIndex(int index) {
+		try {
+			screen.changePenColor(penColors[index]);
+		} catch (Exception e) {
+			new ErrorBox("Color Index out of Bounds", "Please Choose a Number Between 0 and 7");
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see Turtle.TurtleInterface#moveTo(double, double)
 	 */
 	@Override
 	public double moveTo(double x, double y) {
-
-		System.out.println(pathList);
 
 		prevXPos = xPos;
 		prevYPos = yPos;
@@ -328,8 +374,6 @@ public class Turtle implements TurtleInterface {
 
 		checkOffScreenAndDraw();
 
-		System.out.println(pathList);
-
 		screen.updateBox();
 
 		return Math.sqrt(x * x + y * y);
@@ -337,10 +381,13 @@ public class Turtle implements TurtleInterface {
 
 	/**
 	 * Clears the pen and returns turtle to home
+	 * 
 	 * @return distance moved
 	 */
 	public double clearScreen() {
 		double dist = this.moveTo(0, 0);
+		xPos = startingX;
+		yPos = startingY;
 		orientation = 0;
 		pathList.clear();
 		screen.updateBox();
@@ -349,7 +396,9 @@ public class Turtle implements TurtleInterface {
 
 	/**
 	 * Changes the image of the turtle
-	 * @param fileName new file to be used for image
+	 * 
+	 * @param fileName
+	 *            new file to be used for image
 	 */
 	public void changeImage(String fileName) {
 
@@ -365,31 +414,129 @@ public class Turtle implements TurtleInterface {
 	}
 
 	/**
+	 * @return the turtle's id
+	 */
+	public int getID() {
+		return this.id;
+	}
+
+	/**
+	 * @return whether the turtle is active
+	 */
+	public boolean getActive() {
+		return this.active;
+	}
+
+	/**
 	 * Undoes a move
 	 */
-	public void redoMove() {
+	public void undoMove() {
 
-		System.out.println("PATHLIST = " + pathList);
-		System.out.println("ORIENTATION = " + orientationList);
+		try {
+			if (!pathList.isEmpty()) {
+				pathList.remove(pathList.get(pathList.size() - 1));
+				orientationList.remove(orientationList.size() - 1);
+				orientation = orientationList.get(orientationList.size() - 1);
+				xPos = pathList.get(pathList.size() - 1)[2];
+				yPos = pathList.get(pathList.size() - 1)[3];
 
-		if (!pathList.isEmpty()) {
-			pathList.remove(pathList.get(pathList.size() - 1));
-			System.out.println("oList " + orientationList);
-			orientationList.remove(orientationList.size() - 1);
-			orientation = orientationList.get(orientationList.size() - 1);
-			xPos = pathList.get(pathList.size() - 1)[2];
-			yPos = pathList.get(pathList.size() - 1)[3];
+				screen.updateBox();
+			}
 
-			screen.updateBox();
-		}
+			else {
+				xPos = startingX;
+				yPos = startingY;
+				orientation = 0;
+				screen.updateBox();
 
-		else {
-			xPos = startingX;
-			yPos = startingY;
-			orientation = 0;
-			screen.updateBox();
-
+			}
+		} catch (Exception e) {
+			new ErrorBox("No More Previous Commands", "Please Stop Pressing Undo");
 		}
 
 	}
+
+	/**
+	 * 
+	 * @return returns pen thickness
+	 */
+	public double getPenThickness() {
+
+		return penThickness;
+	}
+
+	/**
+	 * sets the thickness of the pen to index
+	 * 
+	 * @param index
+	 */
+	public void setPenThickness(double index) {
+		penThickness = index;
+	}
+
+	/**
+	 * calls screen.updateBox which refreshes the screen
+	 */
+	public void updateOnScreen() {
+		screen.updateBox();
+
+	}
+
+	/**
+	 * 
+	 * @return returns whether the turtle is active
+	 */
+	public boolean isActive() {
+		return active;
+	}
+
+	/**
+	 * 
+	 * @return returns list of current turtles
+	 */
+	public List<Turtle> getTurtleFriends() {
+		return screen.getTurtleFriends();
+	}
+	
+	public void setActiveBoolean (boolean b) {
+		active = b;
+		screen.updateBox();
+	}
+
+	/**
+	 * sets current turtle to active
+	 */
+	public void setActive() {
+		active = true;
+	}
+
+	/**
+	 * sets current turtle to inactive
+	 */
+	public void setInactive() {
+		active = false;
+	}
+
+	/**
+	 * adds a new turtle to the screen
+	 * 
+	 * @param x
+	 *            - number of turtles that will be added
+	 */
+	public void addFriends(Double x) {
+		for (int i = 0; i < x; i++) {
+			Turtle newTurtle = new Turtle(screen, image);
+			newTurtle.setID(screen.getTurtleFriends().size() + 1);
+			screen.getTurtleFriends().add(newTurtle);
+		}
+	}
+
+	/**
+	 * sets ID of current turtle
+	 * @param newID
+	 */
+	public void setID(int newID) {
+		id = newID;
+	}
+
 }

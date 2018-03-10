@@ -1,8 +1,12 @@
 package commands;
 
 import java.util.List;
-import java.util.Map;
 
+import java.util.Map;
+/**
+ * Implements functionality for Make Command
+ *
+ */
 import Turtle.Turtle;
 
 /**
@@ -13,7 +17,7 @@ import Turtle.Turtle;
 
 public class MakeVariable extends Command{
 
-	private int numberOfParameters = 1;
+	private final int numberOfParameters = 1;
 	private Map<String, Double> myMap;
 	private String myName;
 
