@@ -48,9 +48,7 @@ public class BackgroundCombo extends GUIComboBox {
 	private void setupAction() {
 		getCombobox().valueProperty().addListener(new ChangeListener<String>() {
 	        @Override public void changed(ObservableValue ov, String t, String t1) { 
-	        	System.out.println(t1);
 	        	mainTurtleScreen.changeBackgroundColor(colorMap.get(t1));
-	    		getCombobox().setPromptText("Change Background Color");
 
 	        }    
 	    });

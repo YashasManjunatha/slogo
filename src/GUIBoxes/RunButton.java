@@ -15,39 +15,43 @@ public class RunButton extends Buttons {
 	private String language = "English";
 	private UserDefTable mainVarTable;
 	private UserDefTable mainFuncTable;
+	private TurtleViewTable mainTurtleTable;
 
 	private Map<String, Double> variableMap;
 	private Map<String, Command> userCommandMap;
+	private TurtleViewTable mainTurtleTable;
 
 	public RunButton(Pane pane, GUIComboBox languageComboBox, double[] properties, String text, TextInputBox textInput,
 			PrevCommandList prevCommandBox, List<Turtle> turtleList, Map<String, Double> variables,
-			Map<String, Command> commands, UserDefTable varTable, UserDefTable funcTable) {
+			Map<String, Command> commands, UserDefTable varTable, UserDefTable funcTable, TurtleViewTable turtleTable) {
 		super(pane, properties, text, turtleList);
 		mainLanguageComboBox = languageComboBox;
 		this.mainTextInput = textInput;
 		this.mainPrevCommandBox = prevCommandBox;
 		variableMap = variables;
 		userCommandMap = commands;
-		mainVarTable = varTable;
-		mainFuncTable = funcTable;
+		mainVarTable = (VariableTable) varTable;
+		mainFuncTable = (CommandTable) funcTable;
+		mainTurtleTable = turtleTable;
 	}
 
 	@Override
 	void setupAction() {
 
 		getButton().setOnAction(event -> {
-			System.out.println("before = " + variableMap);
 			mainPrevCommandBox.addText(mainTextInput.getText());
 			for (Turtle t : getThisTurtleList()) {
-				
-				language = ((LanguageCombo) mainLanguageComboBox).getLanguage();
-				Command test = new Command(mainTextInput.getText(), t, variableMap, userCommandMap, language);
-				test.execute();
+
+				if (t.isActive()) {
+					language = ((LanguageCombo) mainLanguageComboBox).getLanguage();
+					Command test = new Command(mainTextInput.getText(), t, variableMap, userCommandMap, language);
+					test.execute();
+				}
 
 			}
-			
 			mainVarTable.updateVars(variableMap);
 			mainFuncTable.updateFuncs(userCommandMap);
+			mainTurtleTable.updateValues();
 
 			mainTextInput.clear();
 

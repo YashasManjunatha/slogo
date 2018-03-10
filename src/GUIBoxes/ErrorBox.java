@@ -9,6 +9,9 @@ import javafx.scene.control.Alert.AlertType;
  *
  */
 public class ErrorBox {
+	
+	private static final String ERRORDIALOG = "Error Dialog";
+	
 	/**
 	 * Creates new Error Box and displays it to the user.
 	 * @param error_type General Error Type
@@ -16,7 +19,7 @@ public class ErrorBox {
 	 */
 	public ErrorBox (String error_type, String error_msg) {
 		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Error Dialog");
+		alert.setTitle(ERRORDIALOG);
 		alert.setHeaderText(error_type);
 		alert.setContentText(error_msg);
 

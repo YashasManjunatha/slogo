@@ -12,6 +12,7 @@ public class ChangeImageButton extends Buttons {
 	private Stage mainStage;
 	private ScreenBox mainTurtleScreen;
 	private List<Turtle> mainTurtleList;
+	private final static String FILECHOOSERLABEL = "Choose Turtle Image";
 
 	public ChangeImageButton(Pane pane, double[] properties, String text, ScreenBox turtleScreen, Stage stage,
 			List<Turtle> turtleList) {
@@ -24,14 +25,15 @@ public class ChangeImageButton extends Buttons {
 	@Override
 	void setupAction() {
 		getButton().setOnAction(event -> {
-				System.out.println("fasdfas");
 				FileChooser fileChooser = new FileChooser();
-				fileChooser.setTitle("Choose Turtle Image");
+				fileChooser.setTitle(FILECHOOSERLABEL);
 				try {
 				String fileName = fileChooser.showOpenDialog(mainStage).getPath();
 				
 				for (Turtle t : mainTurtleList) {
+					if (t.isActive()) {
 					t.changeImage(fileName);
+					}
 				}
 				
 				}catch (NullPointerException n) {

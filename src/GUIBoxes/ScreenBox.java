@@ -5,7 +5,10 @@ import java.util.List;
 import Turtle.Turtle;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
@@ -84,7 +87,6 @@ public class ScreenBox implements GUIBoxes{
 
 
 	public void addTurtleToCanvas(Image turtle, double xPos, double yPos) {
-		System.out.println("drawing turtle to canvas");
 		gc.drawImage(turtle, xPos, yPos);
 
 	}
@@ -94,19 +96,44 @@ public class ScreenBox implements GUIBoxes{
 		gc.setFill(thisBackgroundColor);
 		gc.fillRect(0, 0, 650, 425);
 		
+		
+		
 		for (Turtle t : mainTurtleList) {
 
 			drawLine(t);
+			
+			
+			Image i = t.getImage();
+			ImageView iv = new ImageView(i);
+			iv.setOpacity(50);
 
 			gc.save();
 			rotate(gc, t.getOrientation(), t.getX() + t.getImage().getWidth() / 2,
 					t.getY() + t.getImage().getHeight() / 2);
 			if (t.getTurtleShowing()) {
-				addTurtleToCanvas(t.getImage(), t.getX(), t.getY());
+				if (t.isActive()) {
+					addTurtleToCanvas(t.getImage(), t.getX(), t.getY());
+				}
+				else {
+					addTranspTurtleToCanvas(t.getImage(), t.getX(), t.getY());
+				}
 			}
+			
+			
+			
 			gc.restore();
 		}
 
+	}
+
+	private void addTranspTurtleToCanvas(Image image, double x, double y) {
+		
+		gc.setGlobalAlpha(0.4);
+				
+		gc.drawImage(image, x, y);
+		
+		gc.setGlobalAlpha(1);
+		
 	}
 
 	private void drawLine(Turtle t) {
@@ -114,7 +141,6 @@ public class ScreenBox implements GUIBoxes{
 		for (int i = 0; i < t.getPaths().size(); i++) {
 			List<Double[]> path = t.getPaths();
 			List<Color> colors = t.getPenColors();
-			System.out.println("DRAWING");
 			changePenColor(colors.get(i));
 			gc.strokeLine(path.get(i)[0] + t.getImage().getWidth() / 2, path.get(i)[1] + t.getImage().getHeight() / 2,
 					path.get(i)[2] + t.getImage().getWidth() / 2, path.get(i)[3] + t.getImage().getHeight() / 2);
