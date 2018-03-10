@@ -2,9 +2,13 @@ package commands;
 
 import java.util.List;
 import Turtle.Turtle;
-
+/**
+ * It is not implemented in the front end but the commands is made in case we
+ * wanted to update it in the future
+ *
+ */
 public class SetPalette extends Command{
-	private int numberOfParameters = 4;
+	private  final int numberOfParameters = 4;
 
 	
 	  @Override

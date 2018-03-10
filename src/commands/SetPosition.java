@@ -9,7 +9,7 @@ import Turtle.Turtle;
  *
  */
 public class SetPosition extends Command {
-	private int numberOfParameters = 2;
+	private final int numberOfParameters = 2;
 	double x;
 	double y;
 	double dist=0;

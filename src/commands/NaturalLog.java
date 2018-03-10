@@ -9,7 +9,7 @@ import Turtle.Turtle;
  *
  */
 public class NaturalLog extends Command{
-	private int numberOfParameters = 1;
+	private final int numberOfParameters = 1;
 	
 	/* (non-Javadoc)
 	 * @see commands.Command#execute(java.util.List, Turtle.Turtle)

@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Implements functionality for loading in the variables/commands from a file
+ *
+ */
 public class ImportData {
 	Map<String, Double> myVariables = new HashMap<>();
 	Map<String, String> commands = new HashMap<>();

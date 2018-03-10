@@ -5,10 +5,10 @@ import Turtle.Turtle;
 
 /**
  * Implements functionality for And Command
- *
+ *         Stefani Vukajlovic
  */
 public class And extends Command{
-	private int numberOfParameters = 2;
+	private final int numberOfParameters = 2;
 	
 	//public And() {
 	//	setNumParam(2)

@@ -9,7 +9,7 @@ import Turtle.Turtle;
  */
 public class IfElse extends Command {
 	
-	private int numberOfParameters = 3;
+	private final int numberOfParameters = 3;
 
 	/* (non-Javadoc)
 	 * @see commands.Command#execute(java.util.List, Turtle.Turtle)

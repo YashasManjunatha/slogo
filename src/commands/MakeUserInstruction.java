@@ -5,7 +5,10 @@ import java.util.Map;
 
 import GUIBoxes.ErrorBox;
 import Turtle.Turtle;
-
+/**
+ * Implements functionality for TO Command
+ *
+ */
 public class MakeUserInstruction extends Command{
 	private String myCommandText;
 	private List<String> myParameters;

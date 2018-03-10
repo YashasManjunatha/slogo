@@ -8,7 +8,7 @@ import Turtle.Turtle;
  *
  */
 public class PenUp extends Command {
-	private int numberOfParameters = 0;
+	private final int numberOfParameters = 0;
 	private double myReturn=0;
 	
 	  /* (non-Javadoc)

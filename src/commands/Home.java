@@ -9,7 +9,7 @@ import Turtle.Turtle;
  *
  */
 public class Home extends Command {
-	private int numberOfParameters = 0;
+	private final int numberOfParameters = 0;
 	double step;
 	
 	  /* (non-Javadoc)

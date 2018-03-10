@@ -139,7 +139,7 @@ public class TurtleViewTable extends TableView{
 	
 	public void addTurtle() {
 		
-		data.add(new TurtleListInsertion(true, iteratingID, 0.0, 0.0, 0.0, true, "TEMP", 3.0));
+		data.add(new TurtleListInsertion(true, iteratingID, 0.0, 0.0, 0.0, true, "Black", 3.0));
 		System.out.println("iteratingID = " + iteratingID);
 		iteratingID += 1;
 		table.setItems(data);
@@ -151,10 +151,16 @@ public class TurtleViewTable extends TableView{
 		data.clear();
 		iteratingID = 1;
 		for (Turtle t : turtles) {
-			TurtleListInsertion newInsertion = new TurtleListInsertion(true, iteratingID, t.getRelativeX(), t.getRelativeY(), t.getOrientation(), t.getPenDown(), "TEMP", t.getPenThickness());
+			TurtleListInsertion newInsertion = new TurtleListInsertion(t.getActive(), iteratingID, t.getRelativeX(), t.getRelativeY(), t.getOrientation(), t.getPenDown(), "Black", t.getPenThickness());
 			iteratingID += 1;
 			data.add(newInsertion);
 			t.updateOnScreen();
+
+	/*public void updateValues() {
+		List<TurtleListInsertion> insertionList = new ArrayList<>();
+		for (Turtle t : turtles) {
+			insertionList.add(new TurtleListInsertion(t, t.getActive(), t.getID(), t.getX(), t.getY(), t.getOrientation(), t.getPenDown(), "Black", 0.0));
+*/
 		}
 		
 		table.setItems(data);				
