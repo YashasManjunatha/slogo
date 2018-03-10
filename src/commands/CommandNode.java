@@ -5,9 +5,11 @@ import java.util.List;
 
 import Turtle.Turtle;
 /**
- * It is a Object that is used as a node in the tree that parser makes from
- * the inputed text in the Command window
- */
+ * The CommandNode object is what makes up the expression tree
+ * Each holds the a CommandObject and a List<CommandNode> that are its children (the command's parameters)
+ * @author milestodzo
+ *
+*/
 public class CommandNode {
 	private List<CommandNode> myChildren;
 	private CommandObject myCommand;
@@ -16,41 +18,37 @@ public class CommandNode {
 		myCommand = command;
 		myChildren = new ArrayList<>();
 	}
-	
+	/**
+	 * @return myChildren
+	 */
 	List<CommandNode> getChildren(){
 		return myChildren;
 	}
-	
+	/**
+	 * @param child
+	 */
 	void addChild(CommandNode child) {
 		myChildren.add(child);
 	}
-	
+	/**
+	 * @return myCommand
+	 */
 	CommandObject getCommand() {
 		return myCommand;
 	}
+	/**
+	 * @return Command's number of parameters
+	 */
 	int getNumberOfParameters() {
 		return this.getCommand().getNumberOfParameters();
 	}
+	/**
+	 * Calls execute on the node's command
+	 * Calling the node's execute from the Command class rather than the CommandObject's enabled us to pass the turtle more easily
+	 * @param t
+	 * @return value returned by executing
+	 */
 	double execute(Turtle t) {
 		return this.getCommand().execute(this.getChildren(), t);
-	}
-	void printTree() {
-		System.out.println(this.getCommand());
-		for (int x=0; x<this.getChildren().size(); x++) {
-			System.out.println("First");
-			System.out.println("parent: "+ this.getCommand());
-			System.out.println(this.getChildren().get(x).getCommand());
-			for (int y=0; y<this.getChildren().get(x).getChildren().size(); y++) {
-				System.out.println("Second");
-				System.out.println("parent: "+ this.getChildren().get(x).getCommand());
-				System.out.println(this.getChildren().get(x).getChildren().get(y).getCommand());
-				for (int j=0; j<this.getChildren().get(x).getChildren().get(y).getChildren().size(); j++) {
-					System.out.println("third");
-					System.out.println("parent: "+ this.getChildren().get(x).getChildren().get(y).getCommand());
-					System.out.println(this.getChildren().get(x).getChildren().get(y).getChildren().get(j).getCommand());
-				}
-				
-			}
-		}
 	}
 }

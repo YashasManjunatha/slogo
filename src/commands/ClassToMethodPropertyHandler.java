@@ -6,17 +6,26 @@ import java.util.Properties;
 
 import GUIBoxes.ErrorBox;
 
+/**
+ * This class controls the classNameToMethod.properties file which indicates which method should be invoked for each particular class in order to create and instance of that command.
+ * @author milestodzo
+ *
+ */
+
 public class ClassToMethodPropertyHandler {
 	private static String classPath = "src/generateCommandMethods/classNameToMethod.properties";
-	
+	/**
+	 * Returns the method to generate the command for the particular class name
+	 * @param parser
+	 * @param className
+	 * @return Method to be invoked to generate command
+	 */
 	Method getGenerateMethod(Parser parser, String className) {
 		Properties classToMethodProps = new Properties();
 		try {
 			FileInputStream input = new FileInputStream(classPath);
 			classToMethodProps.load(input);
-			// method = obj.getClass().getMethod(methodName, param1.class, param2.class;
 			String methodName = classToMethodProps.getProperty(className);
-			System.out.println(methodName);
 			Method m = parser.getClass().getDeclaredMethod(methodName, className.getClass());
 			return m;
 		}

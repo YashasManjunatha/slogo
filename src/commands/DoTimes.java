@@ -25,7 +25,7 @@ public class DoTimes extends Command{
 		double limit = bracket1children.get(1).execute(t);
 
 		CommandNode bracketNode2 = children.get(1);
-		CommandObject var =variable.getCommand();
+		UserVariable var = (UserVariable) variable.getCommand();
 		var.setValue(1);
 
 		for(int i=1; i<=limit; i++) {	

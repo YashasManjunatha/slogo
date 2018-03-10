@@ -26,7 +26,7 @@ public class For extends Command{
 			double increment = bracket1children.get(3).execute(t);
 			
 			CommandNode bracketNode2 = children.get(1);
-			CommandObject var =bracket1children.get(0).getCommand();
+			UserVariable var = (UserVariable) bracket1children.get(0).getCommand();
 			var.setValue(start);
 			
 			for(int i =(int) start; i<end; i=i+ (int) increment) {	

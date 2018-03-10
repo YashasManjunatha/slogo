@@ -6,8 +6,8 @@ import java.util.Map;
 import GUIBoxes.ErrorBox;
 import Turtle.Turtle;
 /**
- * Implements functionality for TO Command
- *
+ * This class handles the creation and execution of user defined commands.
+ * @author milestodzo
  */
 public class MakeUserInstruction extends Command{
 	private String myCommandText;
