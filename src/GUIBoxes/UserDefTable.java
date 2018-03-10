@@ -92,7 +92,19 @@ public class UserDefTable {
 	 * @param userCommandMap
 	 *            - map that maps a user defined command with its function
 	 */
-	public void updateFuncs(Map<String, Command> userCommandMap) {
+	
+
+	public void updateStringFuncs(Map<String, String> userCommandMap) {
+		List<TableInsertion> insertionList = new ArrayList<>();
+		for (String key : userCommandMap.keySet()) {
+			insertionList.add(new TableInsertion(key, userCommandMap.get(key)));
+		}
+		ObservableList<TableInsertion> finalList = FXCollections.observableArrayList(insertionList);
+		getTable().setItems(finalList);
+
+	}
+	
+	public void updateCommandFuncs(Map<String, Command> userCommandMap) {
 		List<TableInsertion> insertionList = new ArrayList<>();
 		for (String key : userCommandMap.keySet()) {
 			MakeUserInstruction userCommand = (MakeUserInstruction) userCommandMap.get(key);

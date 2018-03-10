@@ -1,18 +1,19 @@
 package GUIBoxes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import Turtle.Turtle;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Group;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Pane;
+import javafx.util.Callback;
 
 public class TurtleViewTable extends TableView{
 	private TableView table;
@@ -36,27 +37,22 @@ public class TurtleViewTable extends TableView{
 		thisPane.getChildren().add(table);
 	}
 	
-	private void setupTableColumns() {
-		table.setEditable(true);
-		
-		TableColumn<TurtleListInsertion, Boolean> activeCol = new TableColumn("Active");
+	private void setupActiveCol(TableColumn<TurtleListInsertion, Boolean> activeCol) {
 		activeCol.setCellValueFactory(f -> f.getValue().isActive());
 		activeCol.setCellFactory(tc -> new CheckBoxTableCell<>());
 		activeCol.setMaxWidth(ACTIVECOLWIDTH);
 		activeCol.setMinWidth(ACTIVECOLWIDTH);
 		activeCol.setResizable(false);
-		activeCol.setEditable(true);
-		activeCol.setOnEditCommit((CellEditEvent<TurtleListInsertion, Boolean> t) -> {
-			((TurtleListInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).setActive(t.getNewValue());
-		});
-		
-		TableColumn<TurtleListInsertion, String> idCol = new TableColumn("ID");
+	}
+	
+	private void setupIdCol(TableColumn<TurtleListInsertion, String> idCol) {
 		idCol.setCellValueFactory(f -> f.getValue().getId());
 		idCol.setMaxWidth(IDCOLWIDTH);
 		idCol.setMinWidth(IDCOLWIDTH);
 		idCol.setResizable(false);
-		
-		TableColumn<TurtleListInsertion, String> xposCol = new TableColumn("X");
+	}
+	
+	private void setupXposCol(TableColumn<TurtleListInsertion, String> xposCol) {
 		xposCol.setCellValueFactory(f -> f.getValue().getXpos());
 		xposCol.setMinWidth(POSCOLWIDTH);
 		xposCol.setMaxWidth(POSCOLWIDTH);
@@ -66,8 +62,9 @@ public class TurtleViewTable extends TableView{
 		xposCol.setOnEditCommit((CellEditEvent<TurtleListInsertion, String> t) -> {
 			((TurtleListInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).setXpos(Double.parseDouble(t.getNewValue()));
 		});
-		
-		TableColumn<TurtleListInsertion, String> yposCol = new TableColumn("Y");
+	}
+	
+	private void setupYposCol(TableColumn<TurtleListInsertion, String> yposCol) {
 		yposCol.setCellValueFactory(f -> f.getValue().getYpos());
 		yposCol.setMinWidth(POSCOLWIDTH);
 		yposCol.setMaxWidth(POSCOLWIDTH);
@@ -77,8 +74,9 @@ public class TurtleViewTable extends TableView{
 		yposCol.setOnEditCommit((CellEditEvent<TurtleListInsertion, String> t) -> {
 			((TurtleListInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).setYpos(Double.parseDouble(t.getNewValue()));
 		});
-		
-		TableColumn<TurtleListInsertion, String> headingCol = new TableColumn("Heading");
+	}
+	
+	private void setupHeadingCol(TableColumn<TurtleListInsertion, String> headingCol) {
 		headingCol.setCellValueFactory(f -> f.getValue().getHeading());
 		headingCol.setMinWidth(HEADINGCOLWIDTH);
 		headingCol.setMaxWidth(HEADINGCOLWIDTH);
@@ -88,19 +86,32 @@ public class TurtleViewTable extends TableView{
 		headingCol.setOnEditCommit((CellEditEvent<TurtleListInsertion, String> t) -> {
 			((TurtleListInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).setHeading(Double.parseDouble(t.getNewValue()));
 		});
+	}
+	
+	private void setupPenUpCol(TableColumn<TurtleListInsertion, Boolean> penUpCol) {
+		penUpCol.setCellValueFactory(
+				new Callback<CellDataFeatures<TurtleListInsertion,Boolean>,ObservableValue<Boolean>>()
+				{
+				    //This callback tell the cell how to bind the data model 'Registered' property to
+				    //the cell, itself.
+				    @Override
+				    public ObservableValue<Boolean> call(CellDataFeatures<TurtleListInsertion, Boolean> param)
+				    {   
+				        return param.getValue().isPenActive();
+				    }   
+				});
 		
-		TableColumn<TurtleListInsertion, Boolean> penUpCol = new TableColumn("Pen Down");
-		penUpCol.setCellValueFactory(f -> f.getValue().isPenActive());
+		//penUpCol.setCellValueFactory(f -> f.getValue().isPenActive());
+
+		penUpCol.setCellFactory( CheckBoxTableCell.forTableColumn(penUpCol) );
+		
 		penUpCol.setCellFactory(tc -> new CheckBoxTableCell<>());
 		penUpCol.setMaxWidth(PENCOLWIDTH);
 		penUpCol.setMinWidth(PENCOLWIDTH);
 		penUpCol.setResizable(false);
-		penUpCol.setEditable(true);
-		penUpCol.setOnEditCommit((CellEditEvent<TurtleListInsertion, Boolean> t) -> {
-			((TurtleListInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPenActive(t.getNewValue());
-		});
-		
-		TableColumn<TurtleListInsertion, String> penColorCol = new TableColumn("Color");
+	}
+	
+	private void setupPenColor(TableColumn<TurtleListInsertion, String> penColorCol) {
 		penColorCol.setCellValueFactory(f -> f.getValue().getPenColor());
 		penColorCol.setMinWidth(PENCOLWIDTH);
 		penColorCol.setMaxWidth(PENCOLWIDTH);
@@ -110,8 +121,9 @@ public class TurtleViewTable extends TableView{
 		penColorCol.setOnEditCommit((CellEditEvent<TurtleListInsertion, String> t) -> {
 			((TurtleListInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPenColor(t.getNewValue());
 		});
-		
-		TableColumn<TurtleListInsertion, String> penThickCol = new TableColumn("Thickness");
+	}
+	
+	private void setupPenThickCol(TableColumn<TurtleListInsertion, String> penThickCol) {
 		penThickCol.setCellValueFactory(f -> f.getValue().getPenThickness());
 		penThickCol.setMinWidth(HEADINGCOLWIDTH);
 		penThickCol.setMaxWidth(HEADINGCOLWIDTH);
@@ -121,8 +133,37 @@ public class TurtleViewTable extends TableView{
 		penThickCol.setOnEditCommit((CellEditEvent<TurtleListInsertion, String> t) -> {
 			((TurtleListInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPenThickness(Double.parseDouble(t.getNewValue()));
 		});
+	}
+	
+	private void setupTableColumns() {
+		table.setEditable(true);
 		
-		data = FXCollections.observableArrayList(new TurtleListInsertion(true, iteratingID, turtles.get(0).getRelativeX(), turtles.get(0).getRelativeY(), turtles.get(0).getOrientation(), turtles.get(0).getPenDown(), "TEMP", 3.0));
+		TableColumn<TurtleListInsertion, Boolean> activeCol = new TableColumn("Active");
+		setupActiveCol(activeCol);
+		
+		TableColumn<TurtleListInsertion, String> idCol = new TableColumn("ID");
+		setupIdCol(idCol);
+		
+		
+		TableColumn<TurtleListInsertion, String> xposCol = new TableColumn("X");
+		setupXposCol(xposCol);
+		
+		TableColumn<TurtleListInsertion, String> yposCol = new TableColumn("Y");
+		setupYposCol(yposCol);
+		
+		TableColumn<TurtleListInsertion, String> headingCol = new TableColumn("Heading");
+		setupHeadingCol(headingCol);
+		
+		TableColumn<TurtleListInsertion, Boolean> penUpCol = new TableColumn("Pen Down");
+		setupPenUpCol(penUpCol);
+		
+		TableColumn<TurtleListInsertion, String> penColorCol = new TableColumn("Color");
+		setupPenColor(penColorCol);
+		
+		TableColumn<TurtleListInsertion, String> penThickCol = new TableColumn("Thickness");
+		setupPenThickCol(penThickCol);
+		
+		data = FXCollections.observableArrayList(new TurtleListInsertion(turtles.get(0), true, iteratingID, turtles.get(0).getRelativeX(), turtles.get(0).getRelativeY(), turtles.get(0).getOrientation(), turtles.get(0).getPenDown(), "Black", 3.0));
 		iteratingID += 1;
 		table.setItems(data);
 		table.getColumns().addAll(activeCol, idCol, xposCol, yposCol, headingCol, penUpCol, penColorCol, penThickCol);
@@ -137,9 +178,9 @@ public class TurtleViewTable extends TableView{
 		table.setMaxHeight(height);
 	}
 	
-	public void addTurtle() {
+	public void addTurtle(Turtle t) {
 		
-		data.add(new TurtleListInsertion(true, iteratingID, 0.0, 0.0, 0.0, true, "TEMP", 3.0));
+		data.add(new TurtleListInsertion(t, t.getActive(), iteratingID, 0.0, 0.0, 0.0, true, "Black", 3.0));
 		System.out.println("iteratingID = " + iteratingID);
 		iteratingID += 1;
 		table.setItems(data);
@@ -151,10 +192,16 @@ public class TurtleViewTable extends TableView{
 		data.clear();
 		iteratingID = 1;
 		for (Turtle t : turtles) {
-			TurtleListInsertion newInsertion = new TurtleListInsertion(true, iteratingID, t.getRelativeX(), t.getRelativeY(), t.getOrientation(), t.getPenDown(), "TEMP", t.getPenThickness());
+			TurtleListInsertion newInsertion = new TurtleListInsertion(t, t.getActive(), iteratingID, t.getRelativeX(), t.getRelativeY(), t.getOrientation(), t.getPenDown(), "Black", t.getPenThickness());
 			iteratingID += 1;
 			data.add(newInsertion);
 			t.updateOnScreen();
+
+	/*public void updateValues() {
+		List<TurtleListInsertion> insertionList = new ArrayList<>();
+		for (Turtle t : turtles) {
+			insertionList.add(new TurtleListInsertion(t, t.getActive(), t.getID(), t.getX(), t.getY(), t.getOrientation(), t.getPenDown(), "Black", 0.0));
+*/
 		}
 		
 		table.setItems(data);				
