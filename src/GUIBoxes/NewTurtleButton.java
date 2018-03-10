@@ -19,6 +19,7 @@ public class NewTurtleButton extends Buttons {
 	private ScreenBox mainTurtleScreen;
 	private TurtleViewTable mainTurtleTable;
 	private final static String DEFAULTIMAGE = "images/turtle.png";
+	private int idIterator = 2;
 
 	/**
 	 * Constructor for new turtle button - check button superclass for unspecificed
@@ -51,7 +52,8 @@ public class NewTurtleButton extends Buttons {
 		getButton().setOnAction(event -> {
 			Turtle turtle = new Turtle(mainTurtleScreen,
 					new Image(getClass().getClassLoader().getResourceAsStream(DEFAULTIMAGE), 0, 55, true, false));
-
+			turtle.setID(idIterator);
+			idIterator += 1;
 			getThisTurtleList().add(turtle);
 			mainTurtleTable.addTurtle();
 
