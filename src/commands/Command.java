@@ -5,7 +5,10 @@ import java.util.Map;
 
 import GUIBoxes.ErrorBox;
 import Turtle.Turtle;
-
+/**
+ * This is a super class for all commands. It is the interface between front and backend.
+ *The Front end makes this object when the some text is run in the Command Window
+ */
 
 public class Command extends CommandObject{
 	private Parser myParser;
