@@ -53,7 +53,9 @@ public class Turtle implements TurtleInterface {
 		imageList.add(image);
 		initalizeTurtle();
 	}
+	public Turtle() {
 
+	}
 	/**
 	 * Initializes the turtle
 	 */
@@ -424,6 +426,12 @@ public class Turtle implements TurtleInterface {
 	
 	public void updateTurtle() {
 		screen.updateBox();
+	}
+	public void addFriends(Double x) {
+		for(int i=0; i<x; i++) {
+			Turtle newTurtle = new Turtle(screen, image);
+			screen.getTurtleFriends().add(newTurtle);
+		}
 	}
 	
 }

@@ -25,7 +25,7 @@ public class RunButton extends Buttons {
 
 	private Map<String, Double> variableMap;
 	private Map<String, Command> userCommandMap;
-	
+	private TurtleViewTable mainTurtleTable;
 
 	/**
 	 * Constructor for run button - see button superclass for unspecified parameters
