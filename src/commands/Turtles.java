@@ -10,7 +10,7 @@ public class Turtles extends Command {
 
 	@Override
 	double execute(List<CommandNode> children, Turtle t){
-	
+	return t.getTurtleFriends().size();
 	}
 
 	@Override
