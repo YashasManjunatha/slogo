@@ -200,6 +200,13 @@ public class Turtle implements TurtleInterface {
 	public double getRelativeX() {
 		return xPosRelative%screen.getWidth();
 	}
+	public double getStartingX() {
+		return startingX;
+	}
+	
+	public double getStartingY() {
+		return startingY;
+	}
 
 	/**
 	 * @return the path list of the pen

@@ -155,6 +155,12 @@ public class TurtleViewTable extends TableView{
 			iteratingID += 1;
 			data.add(newInsertion);
 			t.updateOnScreen();
+/*
+	public void updateTurtles(List<Turtle> tlist) {
+		List<TurtleListInsertion> insertionList = new ArrayList<>();
+		for (Turtle t : tlist) {
+			insertionList.add(new TurtleListInsertion(t, t.getActive(), t.getID(), t.getX(), t.getY(), t.getOrientation(), t.getPenDown(), "Black", 0.0));
+*/
 		}
 		
 		table.setItems(data);				
