@@ -70,7 +70,7 @@ public class TurtleListInsertion {
 	
 	public void setActive(boolean active) {
 		this.active.set(active);
-		t.setTurtleShowing(active);
+		t.setActiveBoolean(active);
 	}
 
 	public StringProperty getId() {
