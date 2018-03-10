@@ -475,6 +475,7 @@ public class Turtle implements TurtleInterface {
 	
 	public void setActiveBoolean (boolean b) {
 		active = b;
+		screen.updateBox();
 	}
 
 	public void setActive() {
