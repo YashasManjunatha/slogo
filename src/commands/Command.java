@@ -26,7 +26,7 @@ public class Command extends CommandObject{
 			new ErrorBox("Invalid Command", "Please Write a Valid Command");
 		}
 	}
-   
+	
 	public Command() {
 	}
 	

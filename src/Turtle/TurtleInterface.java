@@ -5,7 +5,7 @@ package Turtle;
  * Allows the back end commands to alter the state of the turtle and it's properties.
  *
  */
-interface TurtleInterface {
+public interface TurtleInterface {
 
 	/**
 	 * Moves turtle in the y direction a certain length.

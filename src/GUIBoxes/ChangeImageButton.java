@@ -7,41 +7,64 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+/**
+ * Button that allows the user to change the image of the active turtles
+ * 
+ * @author Calvin Ma
+ *
+ */
 public class ChangeImageButton extends Buttons {
 
 	private Stage mainStage;
 	private ScreenBox mainTurtleScreen;
-	private List<Turtle> mainTurtleList;
+	private final static String FILECHOOSERLABEL = "Choose Turtle Image";
 
-	public ChangeImageButton(Pane pane, double[] properties, String text, ScreenBox turtleScreen, Stage stage,
-			List<Turtle> turtleList) {
+	/**
+	 * Constructor for this change image button
+	 * 
+	 * @param pane
+	 *            - needs the pane to fulfill superclass constructor
+	 * @param properties
+	 *            - properties to fulfill superclass constructor
+	 * @param text
+	 *            - button name to fulfill superclass constructor
+	 * @param stage
+	 *            - needs the stage in order to show a dialog box to choose image
+	 *            from
+	 * @param turtleList
+	 *            - needs turtleList
+	 */
+	public ChangeImageButton(Pane pane, double[] properties, String text, Stage stage, List<Turtle> turtleList) {
 		super(pane, properties, text, turtleList);
 		mainStage = stage;
-		mainTurtleScreen = turtleScreen;
-		mainTurtleList = turtleList;
 	}
 
+	/**
+	 * setups the action for the button - on press, the button opens a dialog box
+	 * where the user can choose an image from the local machine. Then, all the
+	 * active turtles have their image changed to the selected image. If an
+	 * exception is caught, error box is created.
+	 */
 	@Override
 	void setupAction() {
 		getButton().setOnAction(event -> {
-				System.out.println("fasdfas");
-				FileChooser fileChooser = new FileChooser();
-				fileChooser.setTitle("Choose Turtle Image");
-				try {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle(FILECHOOSERLABEL);
+			try {
 				String fileName = fileChooser.showOpenDialog(mainStage).getPath();
-				
-				for (Turtle t : mainTurtleList) {
-					t.changeImage(fileName);
-				}
-				
-				}catch (NullPointerException n) {
-					//do nothing, error is "sent" to turtle to deal with
+
+				for (Turtle t : getThisTurtleList()) {
+					if (t.isActive()) {
+						t.changeImage(fileName);
+					}
 				}
 
-			
+			} catch (Exception e) {
+				new ErrorBox("Invalid Image", "Please Select Valid Image");
+			}
 
 		});
 
-}
+	}
 
 }
