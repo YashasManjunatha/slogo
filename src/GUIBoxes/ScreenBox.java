@@ -83,7 +83,11 @@ public class ScreenBox implements GUIBoxes {
 		thisBackgroundColor = color;
 		updateBox();
 	}
-	
+
+	/**
+	 * gets the list of turtles
+	 * @return - returns list of current turtles
+	 */
 	public List<Turtle> getTurtleFriends() {
 		return mainTurtleList;
 	}

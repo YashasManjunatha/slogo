@@ -20,8 +20,8 @@ public class GUIComboBox {
 	 * Constructor for the GUI boxes
 	 * 
 	 * @param pane
-	 *            - needed so that when a combobox is finished initializing, we
-	 *            can add to the Pane
+	 *            - needed so that when a combobox is finished initializing, we can
+	 *            add to the Pane
 	 * @param properties
 	 *            - properties needed to setup the combobox, like positions
 	 * @param text
@@ -34,6 +34,13 @@ public class GUIComboBox {
 		thisPane.getChildren().add(combobox);
 	}
 
+	/**
+	 * Sets up properties for a Combobox
+	 * @param xPos - x position of combobox
+	 * @param yPos - y position of combobox
+	 * @param width - width of combobox
+	 * @param height - height of combobox
+	 */
 	private void setupProperties(double xPos, double yPos, double width, double height) {
 		combobox = new ComboBox<>();
 		getCombobox().setPromptText(boxText);

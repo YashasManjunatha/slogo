@@ -8,8 +8,11 @@ import commands.Command;
 import commands.MakeUserInstruction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 /**
@@ -84,13 +87,25 @@ public class CommandTable extends UserDefTable {
 		getTable().setLayoutY(yPos);
 		getTable().setMaxWidth(width);
 		getTable().setMaxHeight(height);
+		setupAction();
 	}
-
+	
 	/**
-	 * when this function is called, the value column (the commands that variables
-	 * are defined as) will update based on the commandMap that contains the
-	 * variable with its corresponding command/commands
+	 * tried to setup clicking on row in tableview but was unsuccessful
 	 */
+
+	private void setupAction() {
+		
+		getTable().setOnMousePressed(new EventHandler<MouseEvent>() {
+			   @Override 
+			   public void handle(MouseEvent ee) {
+			      if (ee.isPrimaryButtonDown() && ee.getClickCount() == 2) {
+			         System.out.println(getTable().getSelectionModel().getSelectedItem());                   
+			      }
+			   }
+			});
+		
+	}
 
 
 }

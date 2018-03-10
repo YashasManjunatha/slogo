@@ -87,28 +87,36 @@ public class UserDefTable {
 	}
 
 	/**
-	 * updates the table based on usercommandmap
-	 * 
+	 * when this function is called, the value column (the commands that variables
+	 * are defined as) will update based on the commandMap that contains the
+	 * variable with its corresponding command/commands
 	 * @param userCommandMap
-	 *            - map that maps a user defined command with its function
+	 *            - map that maps a user defined command with its function. this map
+	 *            is string to Command
 	 */
-	
-
-	public void updateStringFuncs(Map<String, String> userCommandMap) {
-		List<TableInsertion> insertionList = new ArrayList<>();
-		for (String key : userCommandMap.keySet()) {
-			insertionList.add(new TableInsertion(key, userCommandMap.get(key)));
-		}
-		ObservableList<TableInsertion> finalList = FXCollections.observableArrayList(insertionList);
-		getTable().setItems(finalList);
-
-	}
-	
 	public void updateCommandFuncs(Map<String, Command> userCommandMap) {
 		List<TableInsertion> insertionList = new ArrayList<>();
 		for (String key : userCommandMap.keySet()) {
 			MakeUserInstruction userCommand = (MakeUserInstruction) userCommandMap.get(key);
 			insertionList.add(new TableInsertion(key, userCommand.toString()));
+		}
+		ObservableList<TableInsertion> finalList = FXCollections.observableArrayList(insertionList);
+		getTable().setItems(finalList);
+
+	}
+
+	/**
+	 * updates the table based on usercommandmap
+	 * 
+	 * @param userCommandMap
+	 *            - map that maps a user defined command with its function. this map
+	 *            is string to string
+	 */
+
+	public void updateStringFuncs(Map<String, String> userCommandMap) {
+		List<TableInsertion> insertionList = new ArrayList<>();
+		for (String key : userCommandMap.keySet()) {
+			insertionList.add(new TableInsertion(key, userCommandMap.get(key)));
 		}
 		ObservableList<TableInsertion> finalList = FXCollections.observableArrayList(insertionList);
 		getTable().setItems(finalList);
@@ -145,6 +153,7 @@ public class UserDefTable {
 
 	/**
 	 * protected method that allows subclasses to set the table string
+	 * 
 	 * @param tableType
 	 */
 	protected void setTableType(String tableType) {

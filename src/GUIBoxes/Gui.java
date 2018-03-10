@@ -44,7 +44,7 @@ public class Gui {
 	private static final String CLEARBUTTONLABEL = "Clear";
 	private static final String CHANGEIMAGELABEL = "Change Turtle Image";
 	private static final String NEWTURTLELABEL = "New Turtle";
-	private static final String REDOMOVELABEL = "Undo";
+	private static final String REDOMOVELABEL = "Undo Last\nCommand";
 	private static final String MOVEFORWARDLABEL = "Move Forward";
 	private static final String MOVEBACKLABEL = "Move Back";
 	private static final String TURNRIGHTLABEL = "Turn\nRight";
