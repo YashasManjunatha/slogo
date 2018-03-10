@@ -472,6 +472,10 @@ public class Turtle implements TurtleInterface {
 	public List<Turtle> getTurtleFriends() {
 		return screen.getTurtleFriends();
 	}
+	
+	public void setActiveBoolean (boolean b) {
+		active = b;
+	}
 
 	public void setActive() {
 		active = true;
