@@ -73,6 +73,7 @@ public class Turtle implements TurtleInterface {
 		screen.addTurtleToCanvas(image, xPos, yPos);
 		//pen = new Pen();
 		penShowing = true;
+		
 		orientationList.add((double) 0);
 		Double[] firstPath = { startingX, startingY, startingX, startingY };
 		pathList.add(firstPath);
@@ -378,6 +379,7 @@ public class Turtle implements TurtleInterface {
 	 */
 	public void undoMove() {
 
+		try {
 		if (!pathList.isEmpty()) {
 			pathList.remove(pathList.get(pathList.size() - 1));
 			orientationList.remove(orientationList.size() - 1);
@@ -394,6 +396,9 @@ public class Turtle implements TurtleInterface {
 			orientation = 0;
 			screen.updateBox();
 
+		}
+		}catch (Exception e){
+			new ErrorBox("No More Previous Commands", "Please Stop Pressing Undo");
 		}
 
 	}

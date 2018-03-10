@@ -70,6 +70,7 @@ public class UserDefTable {
 		getTable().setMaxHeight(height);
 	}
 
+
 	/**
 	 * function that updates the table based on a variablemap
 	 * 
