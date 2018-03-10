@@ -426,4 +426,8 @@ public class Turtle implements TurtleInterface {
 		screen.updateBox();
 	}
 	
+	public void setID(int newID) {
+		id = newID;
+	}
+	
 }

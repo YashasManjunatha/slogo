@@ -91,15 +91,6 @@ public class CommandTable extends UserDefTable {
 	 * are defined as) will update based on the commandMap that contains the
 	 * variable with its corresponding command/commands
 	 */
-	public void updateFuncs(Map<String, Command> userCommandMap) {
-		List<TableInsertion> insertionList = new ArrayList<>();
-		for (String key : userCommandMap.keySet()) {
-			MakeUserInstruction userCommand = (MakeUserInstruction) userCommandMap.get(key);
-			insertionList.add(new TableInsertion(key, userCommand.toString()));
-		}
-		ObservableList<TableInsertion> finalList = FXCollections.observableArrayList(insertionList);
-		getTable().setItems(finalList);
 
-	}
 
 }
