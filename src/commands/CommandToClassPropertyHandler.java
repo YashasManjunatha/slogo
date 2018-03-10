@@ -1,5 +1,8 @@
 package commands;
-
+/**
+ * This class reads the command properties from the file, it does it for all languages
+ *
+ */
 import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;

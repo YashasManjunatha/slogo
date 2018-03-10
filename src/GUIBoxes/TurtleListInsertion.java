@@ -5,6 +5,8 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 
 /**
  * Object for the table of turtles for GUI.
@@ -13,7 +15,7 @@ import javafx.beans.property.StringProperty;
  *
  */
 public class TurtleListInsertion {
-	//private Turtle t;
+	private Turtle t;
 	private BooleanProperty active = new SimpleBooleanProperty();
 	private StringProperty id = new SimpleStringProperty();
 	private StringProperty xpos = new SimpleStringProperty();
@@ -34,17 +36,32 @@ public class TurtleListInsertion {
 	 * @param pen_color pen color for turtle
 	 * @param pen_thickness pen thickness for turtle
 	 */
-	public TurtleListInsertion(/*Turtle t, */boolean active, int id, double xpos, double ypos, double heading, boolean pen, 
+	public TurtleListInsertion(Turtle t, boolean active, int id, double xpos, double ypos, double heading, boolean pen, 
 			String pen_color, double pen_thickness) {
-		//this.t = t;
-		this.setActive(active);
+		this.t = t;
+		this.active.set(active);
 		this.setId(id);
-		this.setXpos(xpos);
-		this.setYpos(ypos);
-		this.setHeading(heading);
-		this.setPenActive(pen);
+		this.xpos.set(Double.toString(xpos));
+		this.ypos.set(Double.toString(ypos));
+		this.heading.set(Double.toString(heading));
+		this.pen_status.set(pen);
 		this.setPenColor(pen_color);
 		this.setPenThickness(pen_thickness);
+		
+		this.pen_status.addListener(new ChangeListener<Boolean>() {
+		    @Override
+		    public void changed(ObservableValue<? extends Boolean> obs, Boolean wasSelected, Boolean isSelected) {
+		        setPenActive(isSelected);
+		    }
+		});
+		
+		this.active.addListener(new ChangeListener<Boolean>() {
+		    @Override
+		    public void changed(ObservableValue<? extends Boolean> obs, Boolean wasSelected, Boolean isSelected) {
+		    		setActive(isSelected);
+		    }
+		});
+		
 	}
 	
 	public BooleanProperty isActive() {
@@ -53,7 +70,7 @@ public class TurtleListInsertion {
 	
 	public void setActive(boolean active) {
 		this.active.set(active);
-		//t.setTurtleShowing(active);
+		t.setTurtleShowing(active);
 	}
 
 	public StringProperty getId() {
@@ -70,6 +87,7 @@ public class TurtleListInsertion {
 
 	public void setXpos(double xpos) {
 		this.xpos.set(Double.toString(xpos));
+		t.moveTo(xpos, t.getRelativeY());
 		//t.moveTo(xpos-t.getStartingX(),t.getY()-t.getStartingY());
 	}
 
@@ -79,6 +97,7 @@ public class TurtleListInsertion {
 
 	public void setYpos(double ypos) {
 		this.ypos.set(Double.toString(ypos));
+		t.moveTo(t.getRelativeX(), -1*ypos);
 		//t.moveTo(t.getX()-t.getStartingX(),ypos-t.getStartingY());
 	}
 
@@ -88,16 +107,16 @@ public class TurtleListInsertion {
 
 	public void setHeading(double heading) {
 		this.heading.set(Double.toString(heading));
-		//t.turn(heading-t.getOrientation());
+		t.turn(heading-t.getOrientation());
 	}
 
 	public BooleanProperty isPenActive() {
 		return pen_status;
 	}
 
-	public void setPenActive(boolean pen_status) {
+	public void setPenActive(Boolean pen_status) {
 		this.pen_status.set(pen_status);
-		//t.setPenDown(pen_status);
+		t.setPenDown(pen_status);
 	}
 
 	public StringProperty getPenColor() {
