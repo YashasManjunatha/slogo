@@ -16,6 +16,8 @@ import javafx.scene.paint.Color;
  */
 public class Turtle implements TurtleInterface {
 
+	private boolean active;
+	private int id = 1;
 	private ScreenBox screen;
 	private Image image;
 	private boolean turtleShowing;
@@ -59,6 +61,7 @@ public class Turtle implements TurtleInterface {
 	 */
 	private void initalizeTurtle() {
 		// scaleImage();
+		active = true;
 		turtleShowing = true;
 		startingX = screen.getWidth() / 2;
 		startingY = screen.getHeight() / 2;
@@ -355,11 +358,25 @@ public class Turtle implements TurtleInterface {
 		}
 
 	}
+	
+	/**
+	 * @return the turtle's id
+	 */
+	public int getID() {
+		return this.id;
+	}
+	
+	/**
+	 * @return whether the turtle is active
+	 */
+	public boolean getActive() {
+		return this.active;
+	}
 
 	/**
 	 * Undoes a move
 	 */
-	public void redoMove() {
+	public void undoMove() {
 
 		if (!pathList.isEmpty()) {
 			pathList.remove(pathList.get(pathList.size() - 1));

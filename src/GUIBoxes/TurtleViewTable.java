@@ -1,5 +1,6 @@
 package GUIBoxes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Turtle.Turtle;
@@ -88,7 +89,7 @@ public class TurtleViewTable extends TableView{
 			((TurtleListInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).setHeading(Double.parseDouble(t.getNewValue()));
 		});
 		
-		TableColumn<TurtleListInsertion, Boolean> penUpCol = new TableColumn("Pen Up");
+		TableColumn<TurtleListInsertion, Boolean> penUpCol = new TableColumn("Pen Down");
 		penUpCol.setCellValueFactory(f -> f.getValue().isPenActive());
 		penUpCol.setCellFactory(tc -> new CheckBoxTableCell<>());
 		penUpCol.setMaxWidth(PENCOLWIDTH);
