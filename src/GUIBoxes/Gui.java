@@ -18,6 +18,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Gui class that holds all of the GUI objects. This class puts them all into a
+ * single pane, which is then added to a tab in the main class. This is mainly
+ * used for creating multiple workspaces
+ * 
+ * @author Calvin Ma
+ *
+ */
 public class Gui {
 
 	private final static double SCREEN_HEIGHT = 600;
@@ -62,6 +70,13 @@ public class Gui {
 	private Map<String, Command> commandMap;
 	private Pane myPane;
 
+	/**
+	 * Constructor for GUI - takes in the root and stage that everything is
+	 * connected to and initialized instance variables
+	 * 
+	 * @param root
+	 * @param stage
+	 */
 	public Gui(Group root, Stage stage) {
 		variableMap = new HashMap<>();
 		commandMap = new HashMap<>();
@@ -74,13 +89,26 @@ public class Gui {
 		initializeGUI();
 	}
 
-	private double[] readResourceFile(String s) {
-		return new double[] { Double.parseDouble(myResources.getString(s).split(",")[0]),
-				Double.parseDouble(myResources.getString(s).split(",")[1]),
-				Double.parseDouble(myResources.getString(s).split(",")[2]),
-				Double.parseDouble(myResources.getString(s).split(",")[3]) };
+	/**
+	 * Determines how the resource file is read in
+	 * 
+	 * @param s
+	 *            - gets a line within the resouce file
+	 * @return - returns a double array contains parsed property values
+	 */
+	private double[] readResourceFile(String line) {
+		return new double[] { Double.parseDouble(myResources.getString(line).split(",")[0]),
+				Double.parseDouble(myResources.getString(line).split(",")[1]),
+				Double.parseDouble(myResources.getString(line).split(",")[2]),
+				Double.parseDouble(myResources.getString(line).split(",")[3]) };
 	}
 
+	/**
+	 * initializes a map that maps a string, which is the label for each GUI object,
+	 * and it's corresponding properties
+	 * 
+	 * @return - a map for the rest of the class to use
+	 */
 	private Map<String, double[]> createMap() {
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
 		Map<String, double[]> GUIProperties = new HashMap<>();
@@ -115,6 +143,9 @@ public class Gui {
 		return GUIProperties;
 	}
 
+	/**
+	 * calls methods used to setup all of the GUI objects
+	 */
 	public void initializeGUI() {
 
 		setupGUIBoxes();
@@ -122,13 +153,19 @@ public class Gui {
 		setupButtons();
 	}
 
+	/**
+	 * sets up comboboxes in the GUI
+	 */
 	private void setupComboboxes() {
 
 		new BackgroundCombo(myPane, turtleScreen, GUIProperties.get("backgroundCombo"), BACKGROUNDCOMBOLABEL);
-		new PenCombo(myPane, turtleList, GUIProperties.get("penCombo"), PENCOMBOLABEL);
+		new PenColorCombo(myPane, turtleList, GUIProperties.get("penCombo"), PENCOMBOLABEL);
 
 	}
 
+	/**
+	 * sets up various types of boxes in the GUI
+	 */
 	private void setupGUIBoxes() {
 
 		textInput = new TextInputBox(myPane, GUIProperties.get("textInput"));
@@ -152,6 +189,9 @@ public class Gui {
 
 	}
 
+	/**
+	 * sets up the button in the GUI
+	 */
 	private void setupButtons() {
 		new RunButton(myPane, languageComboBox, GUIProperties.get("runButton"), RUNBUTTONLABEL, textInput,
 				prevCommandBox, turtleList, variableMap, commandMap, varTable, funcTable, turtleTable);
@@ -159,14 +199,12 @@ public class Gui {
 		new ClearButton(myPane, GUIProperties.get("clearButton"), CLEARBUTTONLABEL, textInput, prevCommandBox,
 				turtleList);
 
-		new ChangeImageButton(myPane, GUIProperties.get("imageButton"), CHANGEIMAGELABEL, turtleScreen, myStage,
-				turtleList);
+		new ChangeImageButton(myPane, GUIProperties.get("imageButton"), CHANGEIMAGELABEL, myStage, turtleList);
 
-		new NewTurtleButton(myPane, GUIProperties.get("newTurtleButton"), NEWTURTLELABEL, turtleScreen, myStage,
-				turtleList, turtleTable);
+		new NewTurtleButton(myPane, GUIProperties.get("newTurtleButton"), NEWTURTLELABEL, turtleScreen, turtleList,
+				turtleTable);
 
-		new RedoMoveButton(myPane, GUIProperties.get("redoMoveButton"), REDOMOVELABEL, turtleScreen, myStage,
-				turtleList);
+		new RedoMoveButton(myPane, GUIProperties.get("redoMoveButton"), REDOMOVELABEL, turtleList);
 
 		new MoveButton(myPane, GUIProperties.get("moveForwardButton"), MOVEFORWARDLABEL, turtleList, languageComboBox,
 				turtleTable, MOVEFORWARDCOMMAND);
@@ -182,6 +220,11 @@ public class Gui {
 
 	}
 
+	/**
+	 * returns the pane of the class, which is where all of the objects live
+	 * 
+	 * @return - pane of the class
+	 */
 	public Pane getPane() {
 		return myPane;
 	}
