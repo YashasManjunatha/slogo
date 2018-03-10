@@ -227,7 +227,7 @@ public class Gui {
 		
 		new SaveButton(myPane, GUIProperties.get("saveButton"), SAVELABEL,  turtleList, variableMap, commandMap);
 
-		new ImportButton(myPane, GUIProperties.get("turnLeftButton"), SAVELABEL,  turtleList, variableMap, commandMap, myStage, varTable, funcTable);
+		new ImportButton(myPane, GUIProperties.get("importButton"), IMPORTLABEL,  turtleList, variableMap, commandMap, myStage, varTable, funcTable);
 	}
 
 	/**
