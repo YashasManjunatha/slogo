@@ -28,7 +28,7 @@
 * Turtle "moves itself" instead of the backend directly altering the x and y values. The backend simply gives a double and then the
   turtle determines what the next location it will be at is. 
 
-###Assumptions to Simplify/Resolve Ambiguities
+### Assumptions to Simplify/Resolve Ambiguities
 * We passed all turtles into the backend Command object instead of just active turtles like we had initially. This made it so that the
   backend determines how to operate on the turtle, given the turtle's external API, instead of the frontend. This gives the backend more
   flexibility of what turtle's to operate on. It also allows for more flexibility and extensibility within the backend since it has more
