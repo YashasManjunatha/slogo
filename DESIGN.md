@@ -1,64 +1,35 @@
 # Slogo Team 09
 
-A development environment that helps users write SLogo programs.
+## Slogo Design Discussion
 
-**Date Started:** February 15, 2018
-
-**Date Finished:** March 9, 2018
-
-**Number of Hours:** Around 25 hours for each person.
-
-## Project Information
-### Team Members:
-* Stefani Vukajlovic (sv116) - Back End Commands
-* Miles Todzo (mt256) - Back End Parser
-* Yashas Manjunatha (ym101) - Front End Turtle and GUI
-* Calvin Ma (cm298) - Front End Turtle and GUI
-
-### Resources Used
-
-### Important Files
-* [Main.java](https://coursework.cs.duke.edu/CompSci308_2018Spring/slogo_team09/blob/master/src/main/Main.java) in package "main" is used to start the application.
-* [Turtle.java](https://coursework.cs.duke.edu/CompSci308_2018Spring/slogo_team09/blob/master/src/Turtle/Turtle.java) implements the Front End external interface and creates Turtle objects to be displayed and manipulated and implements the interations with the turtle.
-* [Parser.java](https://coursework.cs.duke.edu/CompSci308_2018Spring/slogo_team09/blob/master/src/commands/Parser.java) implements the parsing of commands.
-
-### Resources Used
-* JavaFX Documentation on Oracle Website
-* To Start Project: None
-* To Test Project and Associated Error: We were given some example commands to run from Professor Duvall, we used to text our functionality. In terms of errors - we had to check for invalid commands and invalid files in various places. The invalid commands is checked within the parser, and the invalid files is checked whenever a file uploaded from the local machine is uploaded and used. 
-* Data or Resource Files: For the properties of the GUI Objects, a properties file was created that included the x position, y position, width and height of each GUI Object. Properties files for languages was also used for the various languages which acted as a translator. 
-
-### Information about Program
-* Front End Designs, Assumptions, Simplifications: Our frontend is built based around a pane, which is put into a tab for a tab pane. Within this generic Pane contains all of the GUI Objects. As such, various GUI Objects need to interact with each other, which is why many of our GUI Objects have so many parameters. Despite this, I feel as our classes are still relatively well encapusalted, as we minimized the amount of setters the best we would. Also, all of our instance variables are private and are never remotely accessed except through protected methods within a class hierarchy. The foundation of our frontend is the Turtle API (Interface and Class). The turtle contains a lot of information and each turtle tells the screen what to draw. For colors, the pallete idea seemed weird and unncessary, so we stuck with our default colors which can still be chosen by the user. This may inhibit flexibility for the colors, but it leads to less possility of error. How the frontend was able to controller the properties of the turtles and pens was also quite vague - to account for this, we just had a tableview with all these qualities associated with the respective turtle, giving the user maximum flexibility. 
+### High-Level Design Goals
+* Create a development environment that helps users write SLogo programs that is extendable and adds functionality as defined by 
+  the programming language.
+* Create External and Interal APIs for the frontend and backend. The backend should be able to use the frontend API and visa versa.
+* Have a flexible Turtle object that can have additional methods to support different movements and functionality and a backend that 
+  can support added Command objects for new commands.
 
 
-### Design Assumptions
-* Some of our assumtions include that in order to run some commands that already use user defined variables or commands, those need to be processed separately in the parser before the running of the commands that use them. So for example in order to make following code work properly:
+### How to Add New Features
+* Adding new features depends on what you want to add. If you want to add a new command, you just need to create a new class for the
+  corresponding command. Then, you could either call the external API of the turtle if you want to do any movement actions on the 
+  future. Otherwise, you could do any arithmetic you want, as long as it returns a single double value. If you want to add a new feature 
+  onto the Gui, you would have to write a class for it and then create a new instance of it in the Gui class. Within the constructor, you 
+  would have to add the other GUIObjects that you want the new object to interact with. It's also important to include the pane as part of
+  the constructor, since the object will have to add itself to the pane. This means the new object that you want to use either has to extend
+  a "Node" type or the new object you add is a "Node". 
 
-```java
-# put a bunch of turtles 100 units away from the center
-tell \[ 1 2 3 4 5 6 7 8 9 10 \]
-st pu
-rt \* / 360 turtles id
-fd 100
+### Major Design Choices
+* Implementation of Factory Pattern in the back end for the implementation od command objects. This implementation allowed for easier 
+  extentions of commands. 
+* Turtle as an interface between front and backend
+* Turtle movement will be kept in the frontend, in addition to the user-defined variables and user-defined functions. The maps of 
+  user-defined things will be passed to the backend to update. 
+* Turtle "moves itself" instead of the backend directly altering the x and y values. The backend simply gives a double and then the
+  turtle determines what the next location it will be at is. 
 
-```
-
-First we need to run:
-
-```java
-# put a bunch of turtles 100 units away from the center
-tell \[ 1 2 3 4 5 6 7 8 9 10 \]
-```
-
-* And then when that is finished parsing we can type in the rest and it will work perfectly. This is due to the way we visualized the parser and how we implemented it as a result.
-
-### Known Bugs
-* toroidal works, but doesn't seem to be fully effective with very larger numbers where the turtle has to wrap around the screen many times
-* the change of image occasionally messes up because of the change of dimension for the pictures
-
-### Extra Features
-* There were no obvious extra features that weren't included in the advanced implementation
-
-### Impressions of the Project
-* This project was really interesting to work on. We were able to implement the design pattern we learned about, however, maybe it would have been easier to implement more lambdas in the code if we learned about it before the start of the project and if we spent a little bit more time going over it in the class, but otherwise we only have good impressions. 
+###Assumptions to Simplify/Resolve Ambiguities
+* We passed all turtles into the backend Command object instead of just active turtles like we had initially. This made it so that the
+  backend determines how to operate on the turtle, given the turtle's external API, instead of the frontend. This gives the backend more
+  flexibility of what turtle's to operate on. It also allows for more flexibility and extensibility within the backend since it has more
+  control over the turtle and how the turtle responds as part of a command. 
