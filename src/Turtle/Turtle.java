@@ -119,7 +119,16 @@ public class Turtle implements TurtleInterface {
 		return moveLength;
 
 	}
-
+    void setX(double x) {
+    	xPos = x;
+    }
+    void setY(double y) {
+    	yPos =y;
+    }
+    void setO(double or) {
+    	orientation =or;
+    }
+    
 	/**
 	 * Makes screen toroidal
 	 */
@@ -530,7 +539,20 @@ public class Turtle implements TurtleInterface {
 			screen.getTurtleFriends().add(newTurtle);
 		}
 	}
-
+    public void addTurtle() {
+    	Turtle newTurtle = new Turtle(screen, image);
+    	newTurtle.setID(id);
+    	
+    	newTurtle.setActive();
+    	newTurtle.setX(this.xPos);
+    	newTurtle.setY(this.yPos);
+    	newTurtle.setO(this.orientation);
+    	screen.getStampList().add(newTurtle);
+    	screen.updateBox();
+    }
+    public double clearStamps() {
+        return screen.clearStamps();
+    }
 	/**
 	 * sets ID of current turtle
 	 * @param newID

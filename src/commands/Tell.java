@@ -15,7 +15,7 @@ public class Tell extends Command{
 
 	@Override
 	double execute(List<CommandNode> children, Turtle t) {
-		System.out.println("Do you see me?");
+		
 		double retVal = 0;
 		CommandNode bracketNode1 = children.get(0);
 		List<CommandNode> bracket1children = bracketNode1.getChildren();
@@ -26,16 +26,13 @@ public class Tell extends Command{
 			IDs.add((int) bracket1children.get(i).execute(t));
 		}
 		int id =t.getID();
-		System.out.println(id);
-		if(id==2) {
-			System.out.println("I am in tell command right here yup");
-		}
+		
 		if(IDs.contains(id) && !t.isActive()) { 
 			t.setActive();
 		}
 		if(!IDs.contains(id) && t.isActive() ) {
 			t.setInactive();
-			System.out.println("I am in tell command ");
+			
 		}
 		if(id==t.getTurtleFriends().size()) {
 			for(double ids : IDs) {
