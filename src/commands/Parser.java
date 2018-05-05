@@ -16,6 +16,10 @@ import GUIBoxes.ErrorBox;
  *
  */
 public class Parser extends ParserObject{
+	private static String endBracket = "]";
+	private static String startBracket = "[";
+	private static String colonOperator = ":";
+	private static String commentHash = "#";
 	
 	private boolean newSuperNodeAdded; //need this to indicate if a super node has been added, otherwise all following nodes will be added to same leaf
 	private Map<String, Double> variableMap;
@@ -80,17 +84,17 @@ public class Parser extends ParserObject{
 		catch(NumberFormatException e) {
 			//proceed
 		}
-		if (commandText.equals("#")) {
+		if (commandText.equals(commentHash)) {
 			scan.nextLine();
 			return new CommandNode(new Comment());
 		}
 		if (userCommandMap.containsKey(commandText)) {
 			return generateUserCommandNode(commandText);
 		}
-		if (commandText.equals("[")) {
+		if (commandText.equals(startBracket)) {
 			return generateBracketNode(commandText);
 		}
-		if (commandText.startsWith(":")) {
+		if (commandText.startsWith(colonOperator)) {
 			try {
 				return new CommandNode(new UserVariable(commandText, variableMap));
 			}
@@ -118,7 +122,7 @@ public class Parser extends ParserObject{
 		String next = scan.next();
 		String toBeParsed = "";
 
-		while (!next.equals("]")) {
+		while (!next.equals(endBracket)) {
 			toBeParsed = toBeParsed + next + " ";
 			next = scan.next();
 		}
@@ -148,13 +152,13 @@ public class Parser extends ParserObject{
 				new ErrorBox("Missing Bracket(s)", commandText);
 			}
 			next = scan.next();
-			if (next.equals("]")) {
+			if (next.equals(endBracket)) {
 				bracketCount--;
 				if (bracketCount == 0) {
 					break;
 				}
 			}
-			if (next.equals("[")) {
+			if (next.equals(startBracket)) {
 				bracketCount++;
 			}
 			toBeParsed = toBeParsed + " " + next;
@@ -184,7 +188,7 @@ public class Parser extends ParserObject{
 		scan.next(); // pass by initial bracket "["
 		List<String> variables = new ArrayList<>();
 		String next = scan.next();
-		while (!next.equals("]")) {
+		while (!next.equals(endBracket)) {
 			variables.add(next);
 			next = scan.next();
 		}
@@ -192,13 +196,13 @@ public class Parser extends ParserObject{
 		String commands = "";
 		int bracketCount = 0;
 		while (scan.hasNext()) {
-			if (next.equals("]")){
+			if (next.equals(endBracket)){
 				bracketCount--;
 				if (bracketCount == 0) {
 					break;
 				}
 			}
-			else if (next.equals("[")){
+			else if (next.equals(startBracket)){
 				bracketCount++;
 			}
 			commands = commands + next + " ";
