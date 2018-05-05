@@ -62,6 +62,7 @@ public class Gui {
 	private UserDefTable varTable;
 	private UserDefTable funcTable;
 	private TurtleViewTable turtleTable;
+	private TurtleImageViewer imageViewer;
 
 	public static final String DEFAULT_RESOURCES = "GUIBoxes/resources/ViewLocations";
 
@@ -147,6 +148,8 @@ public class Gui {
 		GUIProperties.put("saveButton", readResourceFile("saveButton"));
 		GUIProperties.put("importButton", readResourceFile("importButton"));
 
+		GUIProperties.put("imageViewer", readResourceFile("imageViewer"));
+
 		return GUIProperties;
 	}
 
@@ -184,7 +187,7 @@ public class Gui {
 		turtleList.add(turtle);
 
 		System.out.println(turtleList);
-		
+
 		varTable = new VariableTable(myPane, GUIProperties.get("varTable"), VARTABLELABEL, variableMap);
 		funcTable = new CommandTable(myPane, GUIProperties.get("funcTable"), VARTABLELABEL);
 		languageComboBox = new LanguageCombo(myPane, GUIProperties.get("languageCombo"), LANGUAGECOMBOLABEL);
@@ -193,6 +196,9 @@ public class Gui {
 
 		prevCommandBox = new PrevCommandList(myPane, GUIProperties.get("prevCommandBox"), textInput, turtleList,
 				variableMap, commandMap, languageComboBox, turtleTable);
+
+		
+		imageViewer = new TurtleImageViewer(myPane, GUIProperties.get("imageViewer"), turtleList, myStage);
 
 	}
 
@@ -206,18 +212,16 @@ public class Gui {
 		new ClearButton(myPane, GUIProperties.get("clearButton"), CLEARBUTTONLABEL, textInput, prevCommandBox,
 				turtleList);
 
-		new ChangeImageButton(myPane, GUIProperties.get("imageButton"), CHANGEIMAGELABEL, myStage, turtleList);
+		new ChangeImageButton(myPane, GUIProperties.get("imageButton"), CHANGEIMAGELABEL, myStage, turtleList,
+				imageViewer);
 
 		new NewTurtleButton(myPane, GUIProperties.get("newTurtleButton"), NEWTURTLELABEL, turtleScreen, turtleList,
-				turtleTable);
+				turtleTable, imageViewer);
 
 		new RedoMoveButton(myPane, GUIProperties.get("redoMoveButton"), REDOMOVELABEL, turtleList);
 
-		
-		
-		//MoveButtonFactory moveButtonFact = new MoveButtonFactory();
-		
-		
+		// MoveButtonFactory moveButtonFact = new MoveButtonFactory();
+
 		new MoveButton(myPane, GUIProperties.get("moveForwardButton"), MOVEFORWARDLABEL, turtleList, languageComboBox,
 				turtleTable, MOVEFORWARDCOMMAND);
 

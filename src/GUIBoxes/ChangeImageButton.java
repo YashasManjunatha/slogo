@@ -18,6 +18,7 @@ public class ChangeImageButton extends Buttons {
 	private Stage mainStage;
 	private ScreenBox mainTurtleScreen;
 	private final static String FILECHOOSERLABEL = "Choose Turtle Image";
+	private TurtleImageViewer imageViewer;
 
 	/**
 	 * Constructor for this change image button
@@ -33,10 +34,12 @@ public class ChangeImageButton extends Buttons {
 	 *            from
 	 * @param turtleList
 	 *            - needs turtleList
+	 * @param imageViewer 
 	 */
-	public ChangeImageButton(Pane pane, double[] properties, String text, Stage stage, List<Turtle> turtleList) {
+	public ChangeImageButton(Pane pane, double[] properties, String text, Stage stage, List<Turtle> turtleList, TurtleImageViewer imageViewer) {
 		super(pane, properties, text, turtleList);
 		mainStage = stage;
+		this.imageViewer = imageViewer;
 	}
 
 	/**
@@ -56,6 +59,7 @@ public class ChangeImageButton extends Buttons {
 				for (Turtle t : getThisTurtleList()) {
 					if (t.isActive()) {
 						t.changeImage(fileName);
+						imageViewer.refreshView();
 					}
 				}
 

@@ -23,7 +23,7 @@ public class Main extends Application {
 
 	private String title;
 	private final static double SCREEN_HEIGHT = 650;
-	private final static double SCREEN_WIDTH = 1215;// 915;
+	private final static double SCREEN_WIDTH = 1300;// 915;
 	private Stage myStage;
 	private int workSpaceNum = 1;
 	private Group root;

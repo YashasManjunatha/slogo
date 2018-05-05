@@ -20,6 +20,7 @@ public class NewTurtleButton extends Buttons {
 	private TurtleViewTable mainTurtleTable;
 	private final static String DEFAULTIMAGE = "images/turtle.png";
 	private int idIterator = 2;
+	private TurtleImageViewer imageViewer;
 
 	/**
 	 * Constructor for new turtle button - check button superclass for unspecificed
@@ -34,12 +35,14 @@ public class NewTurtleButton extends Buttons {
 	 * @param turtleTable
 	 *            - when new turtle is created, a new row needs to be added to the
 	 *            turtleTable
+	 * @param imageViewer 
 	 */
 	public NewTurtleButton(Pane pane, double[] properties, String text, ScreenBox turtleScreen, List<Turtle> turtleList,
-			TurtleViewTable turtleTable) {
+			TurtleViewTable turtleTable, TurtleImageViewer imageViewer) {
 		super(pane, properties, text, turtleList);
 		mainTurtleScreen = turtleScreen;
 		mainTurtleTable = turtleTable;
+		this.imageViewer = imageViewer;
 	}
 
 	/**
@@ -56,6 +59,7 @@ public class NewTurtleButton extends Buttons {
 			idIterator += 1;
 			getThisTurtleList().add(turtle);
 			mainTurtleTable.addTurtle(turtle);
+			imageViewer.refreshView();
 
 		});
 	}
