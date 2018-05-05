@@ -84,7 +84,7 @@ public class ImportButton extends Buttons {
 
 			} catch (Exception e) {
 				new ErrorBox("Invalid File", "Please Select Valid Import File");
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 
 		});

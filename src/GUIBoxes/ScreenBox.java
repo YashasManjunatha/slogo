@@ -86,6 +86,7 @@ public class ScreenBox implements GUIBoxes {
 
 	/**
 	 * gets the list of turtles
+	 * 
 	 * @return - returns list of current turtles
 	 */
 	public List<Turtle> getTurtleFriends() {

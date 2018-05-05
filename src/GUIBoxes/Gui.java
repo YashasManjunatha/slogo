@@ -184,9 +184,9 @@ public class Gui {
 		turtleList.add(turtle);
 
 		System.out.println(turtleList);
-
+		
 		varTable = new VariableTable(myPane, GUIProperties.get("varTable"), VARTABLELABEL, variableMap);
-		funcTable = new CommandTable(myPane, GUIProperties.get("funcTable"), FUNCTABLELABEL);
+		funcTable = new CommandTable(myPane, GUIProperties.get("funcTable"), VARTABLELABEL);
 		languageComboBox = new LanguageCombo(myPane, GUIProperties.get("languageCombo"), LANGUAGECOMBOLABEL);
 
 		turtleTable = new TurtleViewTable(myPane, GUIProperties.get("turtleList"), turtleList);
@@ -213,6 +213,11 @@ public class Gui {
 
 		new RedoMoveButton(myPane, GUIProperties.get("redoMoveButton"), REDOMOVELABEL, turtleList);
 
+		
+		
+		//MoveButtonFactory moveButtonFact = new MoveButtonFactory();
+		
+		
 		new MoveButton(myPane, GUIProperties.get("moveForwardButton"), MOVEFORWARDLABEL, turtleList, languageComboBox,
 				turtleTable, MOVEFORWARDCOMMAND);
 
@@ -241,7 +246,4 @@ public class Gui {
 		return myPane;
 	}
 
-	public void tellTurtles(List<Double> ids) {
-
-	}
 }

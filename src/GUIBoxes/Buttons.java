@@ -14,10 +14,10 @@ import javafx.scene.layout.Pane;
  *
  */
 
-public abstract class Buttons {
+public abstract class Buttons extends Button{
 
 	private Pane thisPane;
-	private Button thisButton;
+	//private Button thisButton;
 	private List<Turtle> thisTurtleList;
 
 	/**
@@ -36,12 +36,13 @@ public abstract class Buttons {
 	 *            have an effect on all of the turtles
 	 */
 	public Buttons(Pane pane, double[] properties, String text, List<Turtle> turtleList) {
-		setButton(new Button(text));
+//		setButton(new Button(text));
+		this.setText(text);
 		thisPane = pane;
 		setThisTurtleList(turtleList);
 		setupProperties(properties[0], properties[1], properties[2], properties[3]);
 		setupAction();
-		thisPane.getChildren().add(thisButton);
+		thisPane.getChildren().add(this);
 	}
 
 	/**
@@ -76,7 +77,7 @@ public abstract class Buttons {
 	 * @return
 	 */
 	protected Button getButton() {
-		return thisButton;
+		return this;
 	}
 
 	/**
@@ -86,9 +87,9 @@ public abstract class Buttons {
 	 * @param runButton
 	 *            - returns an altered button to corresponding class
 	 */
-	protected void setButton(Button runButton) {
-		this.thisButton = runButton;
-	}
+//	protected void setButton(Button runButton) {
+//		this = runButton;
+//	}
 
 	/**
 	 * protected method for the subclasses to get the list in this superclass

@@ -19,6 +19,8 @@ public class MoveButton extends Buttons {
 	private GUIComboBox mainLanguageComboBox;
 	private TurtleViewTable mainTurtleTable;
 	private String moveCommand;
+	private final Map<String, Double> varMap = new HashMap<>();
+	private final Map<String, Command> commMap = new HashMap<>();
 
 	/**
 	 * Constructor for the move button - for parameters needed for super, check
@@ -50,12 +52,10 @@ public class MoveButton extends Buttons {
 	 * in the turtle doing a command. command is determined in the Gui class
 	 */
 	@Override
-	void setupAction() {
+	public void setupAction() {
 		getButton().setOnAction(event -> {
 			for (Turtle t : getThisTurtleList()) {
 				if (t.isActive()) {
-					Map<String, Double> varMap = new HashMap<>();
-					Map<String, Command> commMap = new HashMap<>();
 					Command test = new Command(moveCommand, t, varMap, commMap,
 							((LanguageCombo) mainLanguageComboBox).getLanguage());
 					test.execute();

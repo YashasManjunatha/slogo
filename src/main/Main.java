@@ -2,8 +2,6 @@ package main;
 
 import GUIBoxes.Gui;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -55,15 +53,8 @@ public class Main extends Application {
 		setStage();
 		tabPane = new TabPane();
 
-		tabPane.getSelectionModel().selectedItemProperty().addListener(
-
-				new ChangeListener<Tab>() {
-					@Override
-					public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
-						System.out.println("Tab Selection changed");
-					}
-				});
-
+		
+		
 		setupHelpButton();
 
 		setupNewTabButton();
@@ -86,6 +77,7 @@ public class Main extends Application {
 	 */
 	private void setupHelpButton() {
 		Tab newTabButton = new Tab();
+
 		Button newTab = new Button("Press for Help");
 
 		newTab.setOnAction(event -> {
@@ -108,6 +100,7 @@ public class Main extends Application {
 	 */
 	private void setupNewTabButton() {
 		Tab newTabButton = new Tab();
+				
 		Button newTab = new Button("New Tab");
 
 		newTab.setOnAction(event -> {
