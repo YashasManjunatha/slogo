@@ -43,6 +43,7 @@ public class Parser extends ParserObject{
 	 */
 	@Override
 	CommandNode parse(String text) throws InvalidCommandException{
+	    System.out.println(text);
 		CommandNode superNode = new CommandNode(new Command());
 		scan = new Scanner(text);
 		generateTree(superNode);
@@ -103,7 +104,9 @@ public class Parser extends ParserObject{
 			}
 		}
 		String className = commandHandler.getClassName(commandText);
+		System.out.println("class name " + className);
 		Method m = methodHandler.getGenerateMethod(this, className);
+		System.out.println("method "+ m);
 		try {
 			return (CommandNode) m.invoke(this, className);
 		} catch (Exception e) {
