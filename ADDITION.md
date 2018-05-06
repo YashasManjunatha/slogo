@@ -13,7 +13,7 @@ I will need to add and update quite a few files because first I will have to cre
 ### Review: after completing the feature:
 how long did it take you to complete this new feature?
 
-It took me an hour and a half to two hours to implement this new feature. This was due to a number of reasons including unfamiliarity with code, thought of a better way to incorporate the feature into the existing features, difficulty with implementation in Java working with TableView, CellValueFactory, CellEditEvent, and Observable objects. 
+It took me an hour and a half to two hours to implement this new feature. This was due to a number of reasons including unfamiliarity with code, thought of a better way to incorporate the feature into the existing features, difficulty with implementation in Java working with TableView, CellValueFactory, CellEditEvent, and Observable objects. To use this new front end extension feature, users can view the image associated with each turtle in the workspace (whether they are active or not) in the table view on the right hand side of the workspace. To change the image of just that turtle, users only need to DOUBLE click on that image and a file chooser pops up to allow the user to pick a new image for the turtle. The turtle's image is immediately updated in the workspace view, but to update it in the turtle list/table view the user needs to commit an action (like pressing the move forward button directly below the turtle list/table view). This is a direct result of a design decision made during the project to have this list/table update immediately after any command is executed.
 
 how many files did you need to add or update? Why?
 
