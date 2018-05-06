@@ -157,7 +157,6 @@ public class ScreenBox implements GUIBoxes {
 	 */
 	public void addTurtleToCanvas(Image image, double xPos, double yPos) {
 		gc.drawImage(image, xPos, yPos);
-		
 
 	}
 
@@ -174,6 +173,14 @@ public class ScreenBox implements GUIBoxes {
 		for (Turtle t : mainTurtleList) {
 
 			drawLine(t);
+		
+			for (ImageView i: t.getStampMap().keySet()) {
+			    rotate(gc, t.getStampMap().get(i),i.getX() + i.getImage().getWidth() / 2,
+					i.getY() + i.getImage().getHeight() / 2);
+			    addTurtleToCanvas(i.getImage(), i.getX(), i.getY());
+			}
+			System.out.println("box updated to have stamps");
+			
 
 			Image i = t.getImage();
 			ImageView iv = new ImageView(i);
@@ -274,6 +281,7 @@ public class ScreenBox implements GUIBoxes {
 	 *            - y position of image
 	 */
 	private void rotate(GraphicsContext gc, double angle, double x, double y) {
+	    System.out.println("X: "+x+ " Y: "+y+" angle: "+angle);
 		Rotate r = new Rotate(angle, x, y);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
 	}

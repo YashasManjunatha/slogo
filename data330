@@ -1,0 +1,2 @@
+spiral = [ if lessp :len 200 [ fd :len rt 89 spiral [ sum :len 3 ] ] ]
+miles = [ fd :x ]

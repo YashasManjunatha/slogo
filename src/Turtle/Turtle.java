@@ -3,11 +3,14 @@ package Turtle;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import GUIBoxes.ErrorBox;
 import GUIBoxes.ScreenBox;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 /**
@@ -34,6 +37,7 @@ public class Turtle implements TurtleInterface {
 	private double prevYPos;
 	private double penThickness;
 
+	private Map<ImageView, Double> stampList = new HashMap<>();
 	private List<Double[]> pathList = new ArrayList<>();
 
 	private List<Color> penColorList = new ArrayList<>();
@@ -561,4 +565,22 @@ public class Turtle implements TurtleInterface {
 		id = newID;
 	}
 
+	public void stamp() {
+	    double xPos = this.getX();
+	    double yPos = this.getY();
+	    screen.addTurtleToCanvas(this.getImage(), xPos, yPos);
+	    ImageView stampImageView = new ImageView(this.getImage());
+	    stampImageView.setX(xPos);
+	    stampImageView.setY(yPos);
+	    stampList.put(stampImageView, this.getOrientation());
+	}
+	
+	public Map<ImageView, Double> getStampMap(){
+	    return this.stampList;
+	}
+	
+	public void removeStamps() {
+	    this.stampList.clear();
+	    screen.updateBox();
+	}
 }
