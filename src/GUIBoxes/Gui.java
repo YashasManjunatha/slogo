@@ -189,7 +189,7 @@ public class Gui {
 		funcTable = new CommandTable(myPane, GUIProperties.get("funcTable"), FUNCTABLELABEL);
 		languageComboBox = new LanguageCombo(myPane, GUIProperties.get("languageCombo"), LANGUAGECOMBOLABEL);
 
-		turtleTable = new TurtleViewTable(myPane, GUIProperties.get("turtleList"), turtleList);
+		turtleTable = new TurtleViewTable(myStage, myPane, GUIProperties.get("turtleList"), turtleList);
 
 		prevCommandBox = new PrevCommandList(myPane, GUIProperties.get("prevCommandBox"), textInput, turtleList,
 				variableMap, commandMap, languageComboBox, turtleTable);

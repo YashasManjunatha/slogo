@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.image.ImageView;
 
 /**
  * Object for the table of turtles for GUI.
@@ -18,6 +19,7 @@ public class TurtleListInsertion {
 	private Turtle t;
 	private BooleanProperty active = new SimpleBooleanProperty();
 	private StringProperty id = new SimpleStringProperty();
+	private ImageView image;
 	private StringProperty xpos = new SimpleStringProperty();
 	private StringProperty ypos = new SimpleStringProperty();
 	private StringProperty heading = new SimpleStringProperty();
@@ -41,6 +43,7 @@ public class TurtleListInsertion {
 		this.t = t;
 		this.active.set(active);
 		this.setId(id);
+		this.image = new ImageView(t.getImage());
 		this.xpos.set(Double.toString(xpos));
 		this.ypos.set(Double.toString(ypos));
 		this.heading.set(Double.toString(heading));
@@ -63,6 +66,15 @@ public class TurtleListInsertion {
 		});
 		
 	}
+	
+    public void setImage(String value) {
+    	t.changeImage(value);
+        image = new ImageView(t.getImage());
+    }
+
+    public ImageView getImage() {
+        return image;
+    }
 	
 	public BooleanProperty isActive() {
 		return active;

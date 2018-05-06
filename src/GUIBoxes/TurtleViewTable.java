@@ -11,24 +11,32 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class TurtleViewTable extends TableView{
 	private TableView table;
 	
+	private Stage mainStage;
 	private Pane thisPane;
 	private final static int ACTIVECOLWIDTH = 50;
 	private final static int IDCOLWIDTH = 25;
 	private final static int POSCOLWIDTH = 50;
 	private final static int HEADINGCOLWIDTH = 75;
 	private final static int PENCOLWIDTH = 60;
+	private final static int ROWHEIGHT = 120;
+	private final static String FILECHOOSERLABEL = "Choose Turtle Image";
 	private List<Turtle> turtles;
 	private int iteratingID = 1;
 	private ObservableList<TurtleListInsertion> data;
 	
-	public TurtleViewTable(Pane pane, double[] properties, List<Turtle> turtles) {
+	public TurtleViewTable(Stage stage, Pane pane, double[] properties, List<Turtle> turtles) {
+		this.mainStage = stage;
 		thisPane = pane;
 		this.turtles = turtles;
 		table = new TableView<>();
@@ -50,6 +58,23 @@ public class TurtleViewTable extends TableView{
 		idCol.setMaxWidth(IDCOLWIDTH);
 		idCol.setMinWidth(IDCOLWIDTH);
 		idCol.setResizable(false);
+	}
+	
+	private void setupImageCol(TableColumn<TurtleListInsertion, ImageView> turtleImageCol) {
+		turtleImageCol.setCellValueFactory(new PropertyValueFactory<TurtleListInsertion, ImageView>("image"));
+		turtleImageCol.setPrefWidth(60);
+
+		turtleImageCol.setEditable(true);
+		turtleImageCol.setOnEditStart((CellEditEvent<TurtleListInsertion, ImageView> t) -> {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle(FILECHOOSERLABEL);
+			try {
+				String fileName = fileChooser.showOpenDialog(mainStage).getPath();
+				((TurtleListInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow())).setImage(fileName);
+			} catch (Exception e) {
+				new ErrorBox("Invalid Image", "Please Select Valid Image");
+			}
+		});
 	}
 	
 	private void setupXposCol(TableColumn<TurtleListInsertion, String> xposCol) {
@@ -144,6 +169,8 @@ public class TurtleViewTable extends TableView{
 		TableColumn<TurtleListInsertion, String> idCol = new TableColumn("ID");
 		setupIdCol(idCol);
 		
+		TableColumn<TurtleListInsertion, ImageView> turtleImageCol = new TableColumn("Image");
+		setupImageCol(turtleImageCol);
 		
 		TableColumn<TurtleListInsertion, String> xposCol = new TableColumn("X");
 		setupXposCol(xposCol);
@@ -166,7 +193,7 @@ public class TurtleViewTable extends TableView{
 		data = FXCollections.observableArrayList(new TurtleListInsertion(turtles.get(0), true, iteratingID, turtles.get(0).getRelativeX(), turtles.get(0).getRelativeY(), turtles.get(0).getOrientation(), turtles.get(0).getPenDown(), "Black", 3.0));
 		iteratingID += 1;
 		table.setItems(data);
-		table.getColumns().addAll(activeCol, idCol, xposCol, yposCol, headingCol, penUpCol, penColorCol, penThickCol);
+		table.getColumns().addAll(activeCol, idCol, turtleImageCol, xposCol, yposCol, headingCol, penUpCol, penColorCol, penThickCol);
 	}
 
 	
@@ -176,6 +203,7 @@ public class TurtleViewTable extends TableView{
 		table.setLayoutY(yPos);
 		table.setMaxWidth(width);
 		table.setMaxHeight(height);
+		table.setFixedCellSize(ROWHEIGHT);
 	}
 	
 	public void addTurtle(Turtle t) {
