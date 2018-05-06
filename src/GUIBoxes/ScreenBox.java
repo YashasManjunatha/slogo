@@ -204,9 +204,7 @@ public class ScreenBox implements GUIBoxes {
 			rotate(gc, t.getOrientation(), t.getX() + t.getImage().getWidth() / 2,
 					t.getY() + t.getImage().getHeight() / 2);
 				
-					addTurtleToCanvas(t.getImage(), t.getX(), t.getY());
-				
-			
+					addTurtleToCanvas(t.getImage(), t.getX(), t.getY());		
 
 			gc.restore();
 		
