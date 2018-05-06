@@ -1,5 +1,6 @@
 package GUIBoxes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Turtle.Turtle;
@@ -25,6 +26,7 @@ public class ScreenBox implements GUIBoxes {
 	private Pane thisPane;
 	private GraphicsContext gc;
 	private List<Turtle> mainTurtleList;
+	private List<Turtle> stampList = new ArrayList<>();
 	private Color thisBackgroundColor;
 	private Color thisPenColor = Color.BLACK;
 
@@ -91,6 +93,9 @@ public class ScreenBox implements GUIBoxes {
 	public List<Turtle> getTurtleFriends() {
 		return mainTurtleList;
 	}
+	public List<Turtle> getStampList(){
+		return stampList;
+	}
 
 	/**
 	 * changes the color of the pen
@@ -152,7 +157,6 @@ public class ScreenBox implements GUIBoxes {
 	 */
 	public void addTurtleToCanvas(Image image, double xPos, double yPos) {
 		gc.drawImage(image, xPos, yPos);
-		System.out.println("gc draw called");
 
 	}
 
@@ -162,9 +166,10 @@ public class ScreenBox implements GUIBoxes {
 	 */
 	@Override
 	public void updateBox() {
+	
 		gc.setFill(thisBackgroundColor);
 		gc.fillRect(0, 0, 650, 425);
-
+		addStamps();
 		for (Turtle t : mainTurtleList) {
 
 			drawLine(t);
@@ -195,6 +200,34 @@ public class ScreenBox implements GUIBoxes {
 			gc.restore();
 		}
 
+	}
+	public void addStamps() {
+		if(stampList.size()!=0) {
+		for(Turtle t : stampList) {
+			Image i = t.getImage();
+			ImageView iv = new ImageView(i);
+			iv.setOpacity(50);
+			gc.save();
+			rotate(gc, t.getOrientation(), t.getX() + t.getImage().getWidth() / 2,
+					t.getY() + t.getImage().getHeight() / 2);
+				
+					addTurtleToCanvas(t.getImage(), t.getX(), t.getY());
+				
+			
+
+			gc.restore();
+		
+		 }
+		}
+	}
+	public double clearStamps() {
+		if(stampList.size()!=0) {
+		stampList.clear();
+		gc.save();
+		return 1;
+		
+		}
+		else { return 0;    }
 	}
 
 	/**
